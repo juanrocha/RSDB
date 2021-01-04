@@ -1,0 +1,36 @@
+name: "RSDB"
+navbar:
+  title: "Regime Shifts DataBase 2.0"
+  type: default
+  left:
+    - text: "Regime shifts"
+      href: regime_shifts.html
+    - text: "Cases"
+      href: cases.html
+    - text: "Resources"
+      href: resources.html
+      menu:
+        - text: "Datasets"
+          href: data.html
+        - text: "Publications"
+          href: pubs.html
+        - text: "Presentations"
+          href: presentations.html
+    - text: "Contribute"
+      href: contribute.html
+    - text: "About"
+      href: about.html
+  right:
+    - icon: fab fa-github fa-lg
+      href: https://github.com/juanrocha/RSDB
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    include:
+      after_body: footer.html
+    css: styles.css
+
+authors:
+  "Juan Rocha":
+    href: https://www.juanrocha.se

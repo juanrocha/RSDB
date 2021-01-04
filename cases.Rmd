@@ -1,0 +1,5 @@
+---
+title: "Case studies"
+---
+
+There are two types of case studies: basic case study provides a reference and a few categorical variables that summarizes a case; detailed case study offers additional narrative information about what happened. The latter follow a similar structure to generic regime shifts and are often reviewed by an expert on the case.

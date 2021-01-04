@@ -1,0 +1,52 @@
+---
+title: "Publications"
+---
+
+The regime shifts database has been used in a wide range of academic and non-academic outputs, from barchelors thesis, policy documents, to international assessments. Below a chronological list of publications that when available offer links to the dataset used, code, and pdf files. If we are missing a contribution, please let us know to add it to the list.
+
+### 2020
+
+- Cooper, Gregory S, Simon Willcock, and John A Dearing. 2020. “Regime Shifts Occur Disproportionately Faster in Larger Ecosystems.” Nature Communications 11 (1): 5. [doi:10.1038/s41467-020-15029-x](https://doi.org/10.1038/s41467-020-15029-x).
+
+### 2019
+- Rocha, Juan, Matilda Baraibar, Lisa Deutsch, Ariane de Bremond, Jordan S Oestreicher, Florencia Rositano, and Cecilia Gelabert. 2019. “Toward Understanding the Dynamics of Land Change in Latin America: Potential Utility of a Resilience Approach for Building Archetypes of Land-Systems Change.” Ecology and Society 24 (1): art17. [doi:10.5751/ES-10349-240117](https://doi.org10.5751/ES-10349-240117).
+
+### 2018
+- Rocha, Juan C, Garry Peterson, Orjan Bodin, and Simon Levin. 2018. “Cascading Regime Shifts Within and Across Scales.” Science 362 (6421). American Association for the Advancement of Science: 1379–83. [doi:10.1126/science.aat7850](https://doi.org/10.1126/science.aat7850).
+
+- Biggs, Reinette, Garry Peterson, and Juan Rocha. 2018. “The Regime Shifts Database: a Framework for Analyzing Regime Shifts in Social-Ecological Systems.” Ecology and Society 23 (3): art9. [doi:10.5751/ES-10264-230309](https://doi.org10.5751/ES-10264-230309).
+
+### 2017
+
+
+### 2016
+
+### 2015
+
+- Rocha, J, J Yletyinen, R Biggs, T Blenckner, and G Peterson. 2015. “Marine Regime Shifts: Drivers and Impacts on Ecosystems Services.” Philosophical Transactions of the Royal Society B, no. 370: 20130273. [doi:10.1098/rstb.2013.0273](https://doi.org/10.1098/rstb.2013.0273).
+
+- Rocha, Juan Carlos, and Robin Wikström. 2015. “Detecting Potential Impacts on Ecosystem Services Related to Ecological Regime Shifts – a Matter of Wording.” In Regime Shifts in the Anthropocene, PhD Thesis chapter. Stockholm Resilience Centre, Stockholm University.
+
+- Rocha, Juan Carlos, Garry D Peterson, and Reinette Biggs. 2015. “Regime Shifts in the Anthropocene: Drivers, Risks, and Resilience.” Edited by Richard K F Unsworth. PLoS ONE 10 (8). Public Library of Science: e0134639. [doi:10.1371/journal.pone.0134639](https://doi.org/10.1371/journal.pone.0134639).
+
+- Rocha, Juan Carlos. 2015. “Regime Shifts in the Anthropocene.” **PhD Thesis**. Stockholm Resilience Centre, Stockholm University.
+
+### 2012
+
+- de Boer, F.W. 2012. "Social-Ecological Traps and Agricultural Involution". **BSc Thesis**. University College Utrecht, The Netherlands and Stockholm Resilience Centre, Sweden.
+
+- Hammond, C. 2012. "Impacts of Agriculturally-driven Regime Shifts on 
+Ecosystem Services and Human Well-being". **MSc thesis**. Stockholm Resilience Centre, Stockholm University, Sweden.
+
+- Tshimpanga, J.M. 2012. "A regime shift analysis of poverty traps in sub-Saharan Africa: Identifying key feedbacks and leverage points for change". **MSc thesis**. Uppsala University, Sweden.
+
+- Ospina, Daniel. 2012. “Is Cropland-Dominance in Landscapes an Alternate Social-Ecological Regime?.” **MSc thesis**. Stockholm Resilience Centre, Stockholm University, Sweden.
+
+### 2011
+
+- Sadauskis, R. 2011. "Building resilience to climate-driven regime shifts". **MSc thesis**. Stockholm Resilience Centre, Stockholm University, Sweden. [PDF]() | [Supp. Mat]()
+
+
+### 2010
+
+- Rocha, Juan Carlos. 2010. “The Domino Effect: a Network Analysis of Regime Shifts Drivers and Causal Pathways.” **MSc Thesis**. Stockholm Resilience Centre, Stockholm University.

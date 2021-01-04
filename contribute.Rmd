@@ -1,0 +1,23 @@
+---
+title: "How to contribute"
+---
+
+The usefulness and ....
+
+- [ ] Intro text on how to contribute, what to contribute (spelling check, adding a ref, adding a case, or a full regime shift), and why
+- [ ] Discuss forum: add comments?
+- [ ] Fill out forms? a google form that can be reinported and turn into a list.
+- [ ] Github instructions for advanced contributors.
+- [ ] Page with acknowledgements
+
+
+We warmly welcome all contributions to the database! Please use the links below to contribute an example of a generic type of regime shift, a specific case study of a particular regime shift, or to suggest a potential regime shift or case study for future inclusion.
+
+## Add Regime Shift
+These are generic descriptions of types of regime shifts that have been observed at multiple locations or case studies (e.g. eutrophication). They can also include unique large scale subcontinental or global regime shifts (e.g. collapse of the Greenland ice sheet). We suggest filling out the description offline using the Regime Shift Template, and then copying and pasting the details into the online form.
+
+## Add Case Study
+These are specific examples of regime shifts in particular places or case studies (e.g. eutrophication in the Baltic Sea). We suggest filling out the description offline using the Case Study Template, and then copying and pasting the details into the online form.
+
+## Suggest a Regime Shift or Case Study
+Please let us know if you have suggestions for potential regime shifts or case studies to be included – e.g. if you are unable to write them up yourself, or are unsure if they fit. You are also welcome to contact us with questions at info@regimeshifts.org.

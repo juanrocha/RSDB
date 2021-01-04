@@ -1,0 +1,22 @@
+---
+title: "Presentations"
+---
+
+## Videos
+
+### Impacts of agriculturally-driven regime shifts
+
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/jjZJT9KIKKA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+MSc Thesis presentation by Christine Hammond
+
+### Global drivers of regime shifts
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/mhqVuHUuOc8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+Juan Rocha presents preliminary results of his PhD work
+
+## Posters
+
+- Biggs, R., G.D. Peterson, C. Hammond, R. Sadauskis, J. Rocha and M. Giusti. 2011. Regime Shifts in Ecosystem Services. Poster presentation at the Resilience 2011: Resilience, Innovation and Sustainability International Science and Policy Conference. 11-16 March 2011, Tempe, Arizona, USA. [**Received Best Poster Award**] [PDF](assets/Regime_Shifts_Database_Poster_Arizona_FINAL.pdf)
+
+- Biggs R, GD Peterson, C Hammond, R Sadauskis, J Rocha, J Musumbu, D Ospina. 2012. Regime Shifts in Ecosystem Services. Poster presentation at the Planet under Pressure: New Knowledge towards Solutions Conference. 25-29 March 2012, London, UK. [PDF](assets/Regime_Shifts_Database_Poster_PuP_FINAL_A4.pdf)

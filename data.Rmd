@@ -1,0 +1,33 @@
+---
+title: "Datasets"
+---
+
+## Regime shift database
+
+Download the `csv` files with the current version of the database:
+
+### 1. Regime shifts records  [`csv`]() | [`xls`]() 
+
+- **Brief description of the dataset or resource**: This file contains the records for all "general types" of regime shifts contained in this database. See the next file for specific "case studies".
+- **Area or region to which the resource applies**: Local – global
+- **Time period to which the resource applies**: Variable
+
+### 2. Case study records [`csv`]() | [`xls`]() 
+
+
+- **Brief description of the dataset or resource**: This file contains the records for all "case studies" of regime shifts contained in this database. See the previous entry to download the "general types" of regime shifts contained in this database.
+- **Area or region to which the resource applies**: Local – global
+- **Time period to which the resource applies**: Variable
+
+#### Contact person & contact details
+
+- [Dr Reinette (Oonsie) Biggs](mailto:oonsie.biggs@stockholmresilience.su.se)
+- [Dr Juan Rocha](mailto:juan.rocha@su.se)
+
+
+#### Conditions of use & citation details
+The database is available for academic and educational use. Please site the database as follows:
+Regime Shifts Database. Developed by the Stockholm Resilience Centre, Stockholm University, Sweden. Available online: [www.regimeshifts.org](https://www.regimeshifts.org).
+
+
+

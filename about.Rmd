@@ -1,0 +1,11 @@
+---
+title: "About the Regime Shifts Database"
+---
+
+The Regime Shifts DataBase is an initiative led by the [Stockholm Resilience Centre](https://www.stockholmresilience.org) to review and synthesize examples of different types of regime shifts that have been documented in social-ecological systems. The database focuses specifically on regime shifts that have large impacts on ecosystem services and  human well-being. The aim is to provide a high-quality, descriptive, open-source information resource for students, lecturers, ecosystem managers and researchers. The database has been used for international assessments such as the Convention for Biological Diversity (CBD), Intergovernmental Platform on Biodiversity and Ecosystem Services (IPBES), and the Arctic Resilience Assessment (ARA).
+
+The information in the database is based on assessment and synthesis of the literature, and the description of each regime shift is reviewed by an expert prior to publishing it online wherever possible. The information is intended to provide a general descriptive overview of different regime shifts and point to resources for more detailed information. 
+
+Learn more at:
+
+Biggs, Reinette, Garry Peterson, and Juan Rocha. 2018. **The Regime Shifts Database: a Framework for Analyzing Regime Shifts in Social-Ecological Systems.** Ecology and Society 23 (3): art9. [doi:10.5751/ES-10264-230309](https://www.ecologyandsociety.org/vol23/iss3/art9/).

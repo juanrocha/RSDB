@@ -1,0 +1,15 @@
+---
+title: "Regime shifts"
+---
+<div class="alert alert-dismissible alert-warning">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4 class="alert-heading">Warning!</h4>
+  <p class="mb-0">The original regime shifts database is available at [www.regimeshifts.org](https://www.regimeshifts.org). This website is a development version were we experiment with features to add, delete, or to improve continuous development, and facilitate external contributions.</p>
+</div>
+
+
+
+Regime shifts are large, persistent changes in the structure and function of social-ecological systems, with substantive impacts on the suite of ecosystem services provided by these systems. Better understanding of regime shifts is important as they may have substantial impacts on human economies, societies and well-being, and are often difficult to anticipate and costly to reverse.
+
+> The Regime Shifts DataBase provides examples of different types of regime shifts that have been documented in social-ecological systems. The database focuses specifically on regime shifts that have large impacts on ecosystem services and human well-being.
+
