@@ -1,4 +1,14 @@
 .Rproj.user
 .Rhistory
+.Rapp.history
 .RData
 .Ruserdata
+_site/
+.DS_Store
+*.Rda
+*.png
+*.pdf
+site_libs
+*.html
+*.csv
+.gitignore
