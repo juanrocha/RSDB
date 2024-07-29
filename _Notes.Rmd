@@ -1,0 +1,30 @@
+---
+title: "Notes"
+author: "Juan Rocha"
+output: html_document
+---
+
+
+**240729**
+- CLDs functions created: perhaps add legend and caption to figure
+- update the RS template to include CLD and RS analysis
+- clean up github
+
+**240726**
+- Generic regime shifts files created: the RS analysis and CLDs need to be added manually, it does not exist as downloadable files from RSDB.
+- Map not working, notice that for RS where there is no CS, the map is empty
+- RS: create a map that highlight the biomes where it can occur, and showcases the case studies where it has already occurred, coloured by evidence type, or a time line, or something like that.
+- I webscrapped the RSDB to recover the RS analysis text for both regime shifts and detailed case studies. Not all have the same level of detail, many miss the table summaries for drivers and impacts on ES. 
+
+**231008**:
+- The skeleton of the website is up and running. Created with script 00 and then filled content manually for front end pages
+- A script that takes the current database of case studies has been created 99-case_studies.R that automatically creates Rmd documents, one per case study with the right content and formatting. One could do kniting rmarkdown with parameters, but it will only create the html variants, not the raw Rmd. I need the raw Rmd so in the future it's easy to update each as new literature is published. 
+
+TODOs:
+
+~~1. Do the same for generic regime shifts~~
+2. Update interactive maps with links to the case studies.
+~~3. Implement a routine to bring pictures automatically, without importing files. If all pics are CC, they should be available with a link from the internet. So no need to have the original files on the folder. If necessary later you can download, but key to have the links and pics immersed in the text.~~
+~~4. Use the CLDs raw data to create interactive networks.~~
+
+
