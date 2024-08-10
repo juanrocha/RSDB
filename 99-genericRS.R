@@ -3,12 +3,28 @@ library(tidyverse)
 library(tictoc)
 library(fs)
 
-dat <- read_csv("assets/generic_types_RSDB_new.csv") |> 
+
+## For cleaning old versions
+fls <- dir_ls()
+
+fls |> str_subset(pattern = "^rs") |> 
+    file_delete()
+
+
+rs_dat <- read_csv("assets/generic_types_RSDB_new.csv") |> 
     janitor::clean_names()
 
-# x <- dat$id[params$i]
-# rs <- dat |> filter(id== x)
-# knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+# correct Monsoon, not moonson
+rs_dat <- rs_dat |> 
+    mutate(regime_shift_name = case_when(
+        regime_shift_name == "Moonson" ~ "Indian summer monsoon",
+        regime_shift_name == "Floating plants" ~ "Submerged to floating plants", 
+        .default = regime_shift_name
+    )) |> # the following should be CS of floating plants
+    filter(regime_shift_name != "Invasive floating to invasive submerged plant dominance")
+
+## change name so the rest of the scipt works:
+dat <- rs_dat
 
 rs_txt <- function(i, dat){
     txt <- c(
@@ -45,12 +61,22 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 "Last update: ", as.character(dat$date[i]) , "\n\n",
 ## Map
 "```{r map, out.width='100%', out.height='300px', results = 'markup'}\n
+
 cs <- cases |> 
-    filter(type == rs$regime_shift_name) 
+    filter(type == rs$regime_shift_name) |> 
+    mutate(sources_of_evidence = as.factor(sources_of_evidence))
+
+pal <- colorFactor(
+    palette = scales::hue_pal()( length(levels(cs$sources_of_evidence)) ),
+    na.color = 'grey75',
+    domain = levels(cs$sources_of_evidence), ordered = TRUE )
+
 m <- leaflet(cs) |> 
     addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
-    addCircleMarkers(cs$long, cs$lat, radius = 2, color = 'orange', popup = ~popups) |> 
-    setView(5,10, zoom = 2)
+    addCircleMarkers(lng = ~long, lat=~lat, radius = 2, 
+                     color =~pal(sources_of_evidence), popup = ~popups) |> 
+    setView(5,10, zoom = 2) |> 
+    addLegend('bottomright', pal = pal, values = ~sources_of_evidence, title = 'Evidence source:') 
 m
 ```\n\n",
 # summary
@@ -114,7 +140,7 @@ dat$key_attributes_confidence_existence_of_rs[i] %>% str_c("- ", . , "\n"), "\n\
 dat$key_attributes_confidence_mechanism_underlying_rs[i]  %>% str_c("- ", . , "\n"), "\n\n",
 ":::\n\n::::\n\n", 
 
-"{.tabset}\n--------------------------------------------------\n\n",
+# "{.tabset}\n--------------------------------------------------\n\n",
 
 "### Detail information\n\n",
 "#### Alternative regimes\n\n",
@@ -130,13 +156,32 @@ dat$management_options[i], "\n\n",
 
 "### Regime shift Analysis\n\n",
 
+## cld
+"```{r cld, error = FALSE, message = FALSE, out.width='80%'}\n
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```\n\n",
+
+# rs analysis
+"```{r}\n
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```\n\n",
+
 
 "## Citation\n\n ",
 
 "Acknowledge this review as:\n\n",
     
     
-"> <small> ", 
+"<small> ", 
 str_c(dat$main_contributors[i], ", ",  dat$other_contributors[i], ". ", dat$regime_shift_name[i], '. In: Regime Shift Database, www.regimeshifts.org. Last revised: ', dat$date[i]), "</small>", "\n\n", 
 
 
@@ -186,3 +231,6 @@ for (i in seq_along(dat$id)){
     )
 }
 toc() #27s all case studies!
+
+
+

@@ -1,10 +1,15 @@
 # create one markdwon document for each case study
 library(tidyverse)
 library(tictoc)
+library(fs)
 load("assets/cases_db.Rda")
 
 
-## parse to json
+## For cleaning old versions
+fls <- dir_ls()
+
+fls |> str_subset(pattern = "^cs") |> 
+    file_delete()
 
 
 
@@ -40,7 +45,7 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 "# ", dat$case_study_name[i], "\n\n",
 "**Main contributors**: ", dat$main_contributors[i], "\n\n",
 "**Other contributors**:", dat$other_contributors[i], "\n\n",
-"Last update: ", as.character(dat$date[i]) , "\n\n",
+"Last update: ", as.character(dat$creation_date[i]) , "\n\n",
 ## Map
 "```{r map, out.width='100%', out.height='300px', results = 'markup'}\n
 m <- leaflet(cs ) |> 
@@ -52,7 +57,7 @@ m
 # summary
 "### Summary\n\n",
 dat$summary[i], "\n\n",
-"**Type of regime shift**: ", dat$type[i], "\n\n",
+"**Type of regime shift**: ", ifelse(dat$type[i] == "Unclassified", dat$regime_shift_type_other[i], as.character(dat$type[i]) ) , "\n\n",
 "**Ecosystem type**: \n\n", dat$ecosystem_type[i] |>
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
@@ -60,15 +65,15 @@ dat$summary[i], "\n\n",
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(),"\n\n" ,
 "**Spatial scale**:\n",
-  dat$spatial_scale_of_the_case_study[i] |>
+  dat$spatial_scale[i] |>
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(),"\n\n" ,
 "**Continent or Ocean**:\n", 
-  dat$continent_or_ocean[i] |> 
+  dat$location_continent_or_ocean[i] |> 
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(),"\n\n" ,
-"**Region**: ", dat$region[i], "\n\n",
-"**Countries**: ", dat$countries[i], "\n\n",
+"**Region**: ", dat$location_region[i], "\n\n",
+"**Countries**: ", dat$location_countries[i], "\n\n",
 "{.tabset}\n--------------------------------------------------\n\n",
 
 # categorical attributes
@@ -77,27 +82,27 @@ dat$summary[i], "\n\n",
 ":::{style='width: 50%;'}\n\n",
 "#### Impacts\n\n",
 "**Ecosystem type**:'\n\n", 
-  dat$impacts_ecosystem_type[i] |> 
+  dat$ecosystem_type[i] |> 
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 "**Key ecosystem processes**:\n\n",
-  dat$impacts_key_ecosystem_processes[i] |> 
+  dat$impacts_on_key_ecosystem_processes[i] |> 
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
-"**Biodiversity**:\n\n",
-  dat$impacts_biodiversity[i] |> 
-      str_split(pattern = ", ") |> 
-      map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
+# "**Biodiversity**:\n\n",
+#   dat$impacts_biodiversity[i] |> 
+#       str_split(pattern = ", ") |> 
+#       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 "**Provisioning services**:\n\n",
-  dat$impacts_provisioning_services[i] |>
+  dat$impacts_on_provisioning_services[i] |>
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 "**Regulating services**:\n\n",
-  dat$impacts_regulating_services[i] |> 
+  dat$impacts_on_regulating_services[i] |> 
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist() , "\n\n",
 "**Cultural services**:\n\n",
-  dat$impacts_cultural_services[i] |> 
+  dat$impacts_on_cultural_services[i] |> 
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 "**Human well-being**:\n\n",
@@ -107,7 +112,7 @@ dat$summary[i], "\n\n",
 ":::\n\n:::{style='width: 50%;'}\n\n",
 "#### Drivers\n\n",
 "**Key drivers**:\n\n",
-  dat$drivers_key_direct_drivers[i] |>
+  dat$key_direct_drivers[i] |>
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist() , "\n\n",
 "**Land use**:\n\n",
@@ -116,27 +121,27 @@ dat$summary[i], "\n\n",
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 "#### Key attributes\n\n",
 "**Spatial scale**:\n\n",
-  dat$key_attributes_spatial_scale_of_rs[i] |> 
+  dat$spatial_scale[i] |> 
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 "**Time scale**:\n\n",
-  dat$key_attributes_time_scale_of_rs[i] |> 
+  dat$time_scale[i] |> 
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 "**Reversibility**:\n\n",
-  dat$key_attributes_reversibility[i] |> 
+  dat$reversibility[i] |> 
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 "**Evidence**:\n\n",
-  dat$key_attributes_evidence[i] |> 
+  dat$sources_of_evidence[i] |> 
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 "**Confidence: existence of the regime shift**\n\n",
-  dat$key_attributes_confidence_existence_of_rs[i] |> 
+  dat$confidence_of_existence[i] |> 
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 "**Confidence: mechanisms underlying the regime shift**\n\n",
-  dat$key_attributes_confidence_mechanism_underlying_rs[i] |> 
+  dat$confidence_of_mechanism[i] |> 
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 ":::\n\n::::\n\n",
@@ -145,7 +150,7 @@ dat$summary[i], "\n\n",
   dat$alternate_regimes[i] |> 
       str_remove_all(pattern = "\\<br \\/\\>"), "\n\n" ,
 "#### Drivers and causes of the regime shift\n\n",
-  dat$drivers_and_causes_of_the_regime_shift[i] |> 
+  dat$drivers_and_causes[i] |> 
       str_remove_all(pattern = "\\<p\\>\\&nbsp\\;\\<\\/p\\>"),
   "\n\n",
 "#### Impacts on ecosystem services and human well-being\n\n",
@@ -191,6 +196,11 @@ for (i in seq_along(dat$id)){
         append = FALSE
     )
 }
-toc() #27s all case studies!
+toc() # 98s ~ 3000 case studies
 
 
+## For cleaning old versions
+fls <- dir_ls()
+
+fls |> str_subset(pattern = "^cs") |> 
+    file_delete()
