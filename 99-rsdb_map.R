@@ -4,7 +4,7 @@ library(htmlwidgets)
 
 
 ## Most recent file:
-dat <- read_csv("~/Documents/Projects/regimeshifts/rsdb/RSDB.csv")
+#dat <- read_csv("~/Documents/Projects/regimeshifts/rsdb/RSDB.csv")
 
 ### Old version of cases from research assisstants [J240711]
 dat0 <- googlesheets4::read_sheet(
@@ -32,7 +32,9 @@ dat4 <- googlesheets4::read_sheet(
     sheet = 4, col_types = "c") |> # Jonas
     janitor::clean_names()
 
-dat5 <- read_csv("~/Documents/Projects/regimeshifts/rsdb-scripts/new_cases/2024_05_13_tree_die_off/tree_die_off_cases.csv", col_types = "ccccc") |> janitor::clean_names()
+dat5 <- read_csv(
+    "~/Documents/Projects/regimeshifts/rsdb-scripts/new_cases/2024_05_13_tree_die_off/tree_die_off_cases.csv", col_types = "ccccc") |> 
+    janitor::clean_names()
 
 ## alternatively
 load("assets/cases_db.Rda") # Old version
@@ -55,9 +57,10 @@ names(dat5) %in% names(dat1) |> all()
 # key_cols <- c("type_of_regime_shift", "longitude", "latitude")
 # 
 dat <- dat0  |> 
-    bind_rows(dat1 |> select(-x47) ) |>
+    bind_rows(dat1 ) |>
     bind_rows(dat2 ) |>
     bind_rows(dat3 ) |> 
+    bind_rows(dat4) |> 
     bind_rows( dat5 |> mutate(across(where(is.double), as.character)) )
  
 coord_rs <- read.csv2(
@@ -71,10 +74,11 @@ rs_types <- read.csv(
     mutate(type = str_to_sentence(type)) |> 
     mutate(type = case_when(
         type == "Desertification" ~ "Dryland degradation",
-        TRUE ~ type
+        type == "Wais" ~ "West antarctic ice sheet collapse", 
+        .default = type
     ))
 
-rs_types
+rs_types$type
 
 all(coord_rs$place %in% dat$case_study_name)
 
@@ -117,13 +121,14 @@ dat <- dat |> rename(type = regime_shift_type_value) |>
         type == "Marine food webs" ~ "Marine foodwebs",
         type == "River channel position" ~ "River channel change",
         type == "Desertification" ~ "Dryland degradation",
+        type == 'Wais' ~ "West antarctic ice sheet collapse", 
         type == "Proposed & new type" ~  "Unclassified",
         type == "Unknown" ~ "Unclassified",
         type == "To be determined" ~ "Unclassified",
         is.na(type) ~ "Unclassified",
         TRUE ~ type
     )) |>
-    mutate(type = str_to_sentence(type))
+    mutate(type = str_to_sentence(type)) 
 
 
 world + 
@@ -168,25 +173,132 @@ dat <- dat |> select(-id) |>
                 str_replace_all(pattern = " ", replacement = "_") ,
             ".html"
         )
-    ) 
+    ) |> 
+    mutate(
+        links = paste0("https://regimeshifts.netlify.app/", links)
+    )
+
+
+## alternatively
+load("assets/cases_db.Rda") # Old version
 
 ## there are RS for which we do not have case studies
+## add links to RS generic cases:
+rs_dat <- read_csv("assets/generic_types_RSDB_new.csv") |> 
+    janitor::clean_names()
 
+unique(dat$type)[!unique(dat$type) %in% rs_dat$regime_shift_name]
+rs_dat$regime_shift_name[!rs_dat$regime_shift_name %in% unique(dat$type)]
+
+# there is one case in RS that was moved to case study on the RSDB website\
+# to-do: recover and add to case studies file
+
+
+rs_dat <- rs_dat |>
+    mutate(regime_shift_name = as.character(regime_shift_name)) |> 
+    #filter(regime_shift_name != "Invasive floating to invasive submerged plant dominance") |> 
+    arrange(regime_shift_name) |> 
+    mutate(regime_shift_name = as_factor(regime_shift_name)) |> 
+    mutate(filename = str_replace(filename, "\\.Rmd", "\\.html")) |> 
+    # create links here, so there is links for RS without cases
+    mutate(link_rs = paste0(
+        "<a href=", "'", "https://regimeshifts.netlify.app/", filename, "'",
+        " target='_blank'",">", regime_shift_name, "</a>"))
+
+rs_dat$regime_shift_name |> levels()
 
 dat <- dat |> 
-    mutate(popups = paste("<b><a href=", "'", links, "'", ">", case_study_name, "</a></b>", sep = "")) |> 
-    mutate(type = as.factor(type))
+    mutate(type = case_when(
+        type =="Kelps transitions" ~ "Kelp transitions",
+        type == "Marine foodwebs" ~ "Marine food webs",
+        ## correct spellings for map visualization
+        type == "Primary production arctic ocean" ~ "Primary production Arctic Ocean",
+        type == "West antarctic ice sheet collapse" ~ "West Antarctic ice sheet collapse",
+        type == "Moonson" ~ "Indian summer monsoon",
+        .default = type
+    ))
+
+# I need to create a column with the rs_type link so I can bring it automatically 
+# on the legend
+dat <- dat |> 
+    # only activate for corrections, not when buidling from scratch
+    #select(-filename, -link_rs, -type_link) |> 
+    left_join(
+        rs_dat |>
+            select(regime_shift_name, filename, link_rs),
+        by = c("type" = "regime_shift_name")) |>
+    mutate(
+        popups = paste(
+            "<b><a href=", "'", links, "'", ">", case_study_name, "</a></b>", sep = "")) |> 
+    arrange(type) |> 
+    mutate(type = as_factor(type)) |> 
+    mutate(type_link = case_when(
+        is.na(filename) ~ type, 
+        .default = paste0(
+            "<a href=", "'", "https://regimeshifts.netlify.app/", filename, "'",
+            " target='_blank'", ">", type, "</a>"))) 
+
+names(dat)
+# links are the links to case studies
+# link_rs: are links to regime shift pages
+# type_link is another column with link_rs but NA if there is not a RS written
+
+## Voy aqui: necesito organizar los niveles del type_link de tal forma que hagan match
+## con type
+(dat |> pull(type) |> levels()) #%in%
+(rs_dat |> pull(regime_shift_name) |> levels())
+
+## expand factors: not necessary anymore
+# dat <- dat |> 
+#     mutate(type = fct_expand(type, levels(rs_dat$regime_shift_name))) #|> pull(type) |> levels()
+
+
+# ## create a df for the legend, perhaps that is more practical
+# lgnd <- tibble(
+#     type = levels(dat$type)
+# )
+# 
+# lgnd <- lgnd |> 
+#     left_join(
+#         rs_dat |> select(regime_shift_name, link_rs), 
+#         by = c("type" = "regime_shift_name")) |> 
+#     mutate(type = case_when(type == "Unclassified" ~ NA,
+#                             .default = type)) |> 
+#     arrange(type) |>
+#     mutate(type = as_factor(type), type = fct_na_value_to_level(type, level = "Unclassified"),
+#            link_rs = as_factor(link_rs)) 
+# 
+# lgnd |> pull(type) |> levels()
+
+## expand factors and correct order for legend:
+# dat <- dat |> 
+#     mutate(type = fct_expand(type, levels(lgnd$type)) |> 
+#                fct_relevel(levels(lgnd$type)),
+#            type_link = fct_expand(type_link, levels(lgnd$link_rs)) |> 
+#                fct_relevel(levels(lgnd$link_rs))) 
+
+dat <- dat |> 
+    mutate(type_link = as_factor(type_link)) #|> select(type, type_link) |> pull(type_link) |> levels()
+
 
 save(dat, file = "assets/cases_db.Rda")
 
-pal <- colorFactor(palette = scales::hue_pal()(length(levels(dat$type))), # number of regime shifts in the map
-                   domain = levels(dat$type), na.color = "grey90")
+pal <- colorFactor(
+    palette = scales::hue_pal()( length(levels(dat$type)) ),# number of regime shifts in the map
+    na.color = "grey75",
+    domain = levels(dat$type_link), ordered = TRUE )
 
-map_rsdb <- leaflet(dat) |> 
+
+map_rsdb <- leaflet(dat, options = labelOptions(textsize = "8px")) |> 
     addTiles("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png") |>
-    setView(80,0, zoom = 1) |> 
-    addCircleMarkers(~long, ~lat, radius = 1, popup = ~popups, color = ~pal(type)) |> 
-    addLegend("bottomright", pal = pal, values = ~type, title = "Regime shift")
+    setView(0,0, zoom = 2) |> 
+    addCircleMarkers(~long, ~lat, radius = 1, popup = ~popups, color = ~pal(type_link)) |> 
+    addLegend("topright", pal = pal, values = ~type_link, title = "Regime shift") 
+    
+# with type_link both in color = ~pal() and vlaues = ~type_link, it produces a map with the
+# Unclassified and Drialand degradation correctly plotted. But it does not add the RS to the legend
+# that do not have case studies.
+# The most practical solution is to add case studies for RS that do not have, then I do not have to make miracles to align both legends.
 
 map_rsdb
 
@@ -204,6 +316,15 @@ save(map_rsdb, file = "assets/map_rsdb.Rda")
 rs_types
 
 
+dat |> 
+    ggplot(aes(type)) +
+    geom_bar() + 
+    coord_flip()
+
+dat |> pull(type) |> table() |> sort()
+    group_by(type) |> 
+    summarize(n = n(), .groups = "drop") |> 
+    left_join(rs_dat |> select(regime_shift_name), by = c("type" = "regime_shift_name"))
 
 #### Old map with links to RSDB1 ####
 ## load data:
