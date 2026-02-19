@@ -196,7 +196,7 @@ for (i in seq_along(dat$id)){
         append = FALSE
     )
 }
-toc() # 98s ~ 3000 case studies
+toc() # 41s ~ 3000 case studies
 
 
 ## For cleaning old versions
@@ -204,3 +204,7 @@ fls <- dir_ls()
 
 fls |> str_subset(pattern = "^cs") |> 
     file_delete()
+
+
+## Some visualizations for 
+

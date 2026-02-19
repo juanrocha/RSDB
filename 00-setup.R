@@ -18,9 +18,11 @@ toc()
 # 225.253 sec (3.75min) elapsed, basic website with 31 generic regime shifts
 # including all case studies 3711.352 sec elapsed = 1hr
 
+tic()
+render_site()
+toc()
 
-
-## serve all pages in parallel
+## serve all pages in parallel: I don't tiknk it is working
 library(future)
 library(furrr)
 
@@ -28,7 +30,7 @@ plan(multisession)
 
 tic()
 future_walk(.x = here::here(), .f = render_site, .progress = TRUE)
-toc()
+toc() #
 
 plan(sequential)
 

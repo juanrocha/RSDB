@@ -20,21 +20,34 @@ df_refs |> pull(doi) |> unique()  # remove duplicates
 
 df_refs <- df_refs |> 
     mutate(doi = str_remove(doi, "\\; (.*)")) |> 
-    mutate(doi = str_trim(doi, "both")) 
+    mutate(doi = str_trim(doi, "both"))  |> 
+    group_by(doi) |> 
+    nest()
 
-# stupidly I did this whitout unique()
+df_refs |> unnest(data) |> ungroup() 
+
+
 citations <- map(df_refs$doi, cr_cn, format = "text", style = "apa")
 
 df_refs <- df_refs |> 
     add_column(citations = citations) |> 
-    unnest(citations)
+    unnest(c(data, citations)) |> 
+    select(-is_doi, -references) |> 
+    rename(references = citations) |> 
+    ungroup()
 
-dat <- dat |> left_join(df_refs |> select(-doi)) |> 
-    # select(doi, references, citations) |> 
-    # filter(!is.na(citations)) |> 
-    mutate(references = case_when(
-        is.na(references) ~ citations,
-        .default = references
-    )) 
+dat <- dat |> 
+    mutate(id = as.numeric(id)) |> 
+    arrange(id)
+
+df_refs <- df_refs |> 
+    mutate(id = as.numeric(id)) |> 
+    arrange(id)
+
+dat$references[df_refs$id] <- df_refs$references
+
+dat |> 
+    select(id, doi, references) |> 
+    filter(is.na(references))
 
 save(dat, file = "assets/cases_db.Rda") # re-save data with citations

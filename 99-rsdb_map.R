@@ -6,38 +6,72 @@ library(htmlwidgets)
 ## Most recent file:
 #dat <- read_csv("~/Documents/Projects/regimeshifts/rsdb/RSDB.csv")
 
+link <- "https://docs.google.com/spreadsheets/d/1OmKJB1CF_8H_GysNSJRBV2DYdhvsUpjZtAUfpnX7pZA/edit?usp=sharing"
+# old link "https://docs.google.com/spreadsheets/d/1YWjfGpQQgLBkahMM1MBzRH6EBpaJvH24i7RbMJFE0LQ/edit#gid=0"
+
 ### Old version of cases from research assisstants [J240711]
 dat0 <- googlesheets4::read_sheet(
     "https://docs.google.com/spreadsheets/d/1tpUh0D04kK5aQgDvWs4zDu5nHJvBcEsjPMfF36WMZFE/edit#gid=0",
     sheet = 3, col_types = "c") |> # Carla and others
-    janitor::clean_names()
+    janitor::clean_names() |> 
+    mutate(longitude = as.numeric(longitude), latitude = as.numeric(latitude))
 
-dat1 <- googlesheets4::read_sheet(
-    "https://docs.google.com/spreadsheets/d/1YWjfGpQQgLBkahMM1MBzRH6EBpaJvH24i7RbMJFE0LQ/edit#gid=0",
-    sheet = 1, col_types = "c") |> # Romain
-    janitor::clean_names()
+# dat1 <- googlesheets4::read_sheet(
+#     link,
+#     sheet = 1, col_types = "c") |> # Romain
+#     janitor::clean_names()
+# 
+# dat2 <- googlesheets4::read_sheet(
+#     link,
+#     sheet = 2, col_types = "c") |> # Rodrigo
+#     janitor::clean_names()
+# 
+# dat3 <- googlesheets4::read_sheet(
+#     link,
+#     sheet = 3, col_types = "c") |> # Mathis
+#     janitor::clean_names()
+# 
+# dat4 <- googlesheets4::read_sheet(
+#     link,
+#     sheet = 4, col_types = "c") |> # Jonas
+#     janitor::clean_names()
 
-dat2 <- googlesheets4::read_sheet(
-    "https://docs.google.com/spreadsheets/d/1YWjfGpQQgLBkahMM1MBzRH6EBpaJvH24i7RbMJFE0LQ/edit#gid=0",
-    sheet = 2, col_types = "c") |> # Rodrigo
-    janitor::clean_names()
+# forest die off is now included on dat0
+# dat5 <- read_csv(
+#     "~/Documents/Projects/regimeshifts/rsdb-scripts/new_cases/2024_05_13_tree_die_off/tree_die_off_cases.csv", col_types = "ccccc") |> 
+#     janitor::clean_names()
+# 
+# dat5 <- googlesheets4::read_sheet(
+#     "https://docs.google.com/spreadsheets/d/1YWjfGpQQgLBkahMM1MBzRH6EBpaJvH24i7RbMJFE0LQ/edit#gid=0",
+#     sheet = 5, col_types = "c") |> # tree die off
+#     janitor::clean_names()
 
-dat3 <- googlesheets4::read_sheet(
-    "https://docs.google.com/spreadsheets/d/1YWjfGpQQgLBkahMM1MBzRH6EBpaJvH24i7RbMJFE0LQ/edit#gid=0",
-    sheet = 3, col_types = "c") |> # Mathis
-    janitor::clean_names()
+dat6 <- googlesheets4::read_sheet(
+    link,
+    sheet = 6, col_types = "c") |> # bush encroachment
+    janitor::clean_names() 
 
-dat4 <- googlesheets4::read_sheet(
-    "https://docs.google.com/spreadsheets/d/1YWjfGpQQgLBkahMM1MBzRH6EBpaJvH24i7RbMJFE0LQ/edit#gid=0",
-    sheet = 4, col_types = "c") |> # Jonas
-    janitor::clean_names()
+dat7 <- googlesheets4::read_sheet(
+    "https://docs.google.com/spreadsheets/d/11AQrkFOhq0HgpxQHwdXO-Aljxn8svLi35ETYWwZnGqA/edit?resourcekey=&gid=649288044#gid=649288044",
+    sheet = 1, col_types = "c") |> # fisheries collapse
+    janitor::clean_names() 
 
-dat5 <- read_csv(
-    "~/Documents/Projects/regimeshifts/rsdb-scripts/new_cases/2024_05_13_tree_die_off/tree_die_off_cases.csv", col_types = "ccccc") |> 
-    janitor::clean_names()
+dat7 <- dat7 |> 
+    mutate(longitude = str_replace(longitude, ',', "\\.") |> as.numeric(),
+           latitude = str_replace(latitude, ",", "\\.") |> as.numeric()) 
+
+dat6 <- dat6 |> 
+    mutate(longitude = str_replace(longitude, ',', "\\.") |> as.numeric(),
+           latitude = str_replace(latitude, ",", "\\.") |> as.numeric()) 
+
+## remove columns with all missing values
+dat7 <- dat7 |> 
+    select(-where(fn = function (x) all(is.na(x))))
+
+dat6 <- dat6 |> select(-where(fn = function (x) all(is.na(x))))
 
 ## alternatively
-load("assets/cases_db.Rda") # Old version
+# load("assets/cases_db.Rda") # Old version
 
 # dat <- read_csv("~/Downloads/RSDB_cases_210917 - Sheet1.csv") |> 
 #     janitor::clean_names()
@@ -50,18 +84,26 @@ load("assets/cases_db.Rda") # Old version
 # 
 # dat <- dat |>
 #     filter(!is.na(id)) 
+## correct col names
+#names(dat6)[15:20] <- names(dat0)[17:22]
+#names(dat7)[17:22]
 
 # Now working
-names(dat5) %in% names(dat1) |> all()
-# 
+names(dat0)[!names(dat0) %in% names(dat7)]
+names(dat7)[!names(dat7) %in% names(dat0)]
+names(dat6)[!names(dat6) %in% names(dat0)]
+names(dat7) %in% names(dat0) |> all()
+names(dat7)[!names(dat7) %in% names(dat0)]
 # key_cols <- c("type_of_regime_shift", "longitude", "latitude")
 # 
 dat <- dat0  |> 
-    bind_rows(dat1 ) |>
-    bind_rows(dat2 ) |>
-    bind_rows(dat3 ) |> 
-    bind_rows(dat4) |> 
-    bind_rows( dat5 |> mutate(across(where(is.double), as.character)) )
+    #bind_rows(dat1 ) |>
+    #bind_rows(dat2 ) |>
+    #bind_rows(dat3 ) |> 
+    #bind_rows(dat4) |> 
+    #bind_rows( dat5 |> mutate(across(where(is.double), as.character)) ) |> 
+    bind_rows(dat6) |> 
+    bind_rows(dat7)
  
 coord_rs <- read.csv2(
     file = '~/Documents/Projects_old/Cascading Effects/data/case_coords.csv', dec = ".") |> 
@@ -84,8 +126,9 @@ all(coord_rs$place %in% dat$case_study_name)
 
 dat <- dat |> 
     left_join(coord_rs, by = c("case_study_name" = "place")) |> 
-    mutate(longitude = as.numeric(longitude), latitude = as.numeric(latitude),
-           lon = as.numeric(lon), lat = as.numeric(lat)) |> 
+    mutate(
+        longitude = as.numeric(longitude), latitude = as.numeric(latitude),
+        lon = as.numeric(lon), lat = as.numeric(lat)) |> 
     #select(case_study_name, longitude,latitude, lon, lat) |> 
     mutate(
         longitude = case_when(
@@ -130,6 +173,8 @@ dat <- dat |> rename(type = regime_shift_type_value) |>
     )) |>
     mutate(type = str_to_sentence(type)) 
 
+write_csv(dat, file = "assets/rsdb_clean_260219.csv")
+
 
 world + 
     geom_point(data = rs_types, aes(x = long, y = lat, color = type),
@@ -141,14 +186,14 @@ world +
     scale_colour_hue(
         "Regime shift type", guide = guide_legend(title.position = "top")) +
     labs(title = "Regime shifts documented in the world",
-         subtitle = "Big dots are regime shift types, small dots ~3000 case studies",
+         subtitle = "Big dots are regime shift types, small dots 3455 case studies",
          caption = "Data source: The regime shifts database (www.regimeshifts.org)") +
     theme_void(base_size = 12) +
     theme(legend.position = "bottom")
 
 # 
 ggsave(
-    file = "rsdb_map_240717.png", device = "png", width = 12, height = 9,
+    file = "rsdb_map_260219.png", device = "png", width = 12, height = 9,
     bg = "white", dpi = 500
 )
 
@@ -180,7 +225,7 @@ dat <- dat |> select(-id) |>
 
 
 ## alternatively
-load("assets/cases_db.Rda") # Old version
+# load("assets/cases_db.Rda") # Old version
 
 ## there are RS for which we do not have case studies
 ## add links to RS generic cases:
@@ -229,7 +274,7 @@ dat <- dat |>
         by = c("type" = "regime_shift_name")) |>
     mutate(
         popups = paste(
-            "<b><a href=", "'", links, "'", ">", case_study_name, "</a></b>", sep = "")) |> 
+            "<b><a href=", "'", links, "'", " target='_blank'",">", case_study_name, "</a></b>", sep = "")) |> 
     arrange(type) |> 
     mutate(type = as_factor(type)) |> 
     mutate(type_link = case_when(
@@ -293,7 +338,7 @@ map_rsdb <- leaflet(dat, options = labelOptions(textsize = "8px")) |>
     addTiles("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png") |>
     setView(0,0, zoom = 2) |> 
     addCircleMarkers(~long, ~lat, radius = 1, popup = ~popups, color = ~pal(type_link)) |> 
-    addLegend("topright", pal = pal, values = ~type_link, title = "Regime shift") 
+    addLegend("topright", pal = pal, values = ~type_link, title = "Regime shift", group = ~type_link) 
     
 # with type_link both in color = ~pal() and vlaues = ~type_link, it produces a map with the
 # Unclassified and Drialand degradation correctly plotted. But it does not add the RS to the legend
@@ -394,7 +439,7 @@ df$name[!df$name %in% urls$case_names][3:12] <- urls$case_names[!urls$case_names
 df <- left_join(df, urls, by = c("name" = "case_names"))
 
 df <- df %>%
-    mutate(., popups = paste("<b><a href=", "'", case_url, "'", ">", name, "</a></b>", sep = ""))
+    mutate(., popups = paste("<b><a target='_blank' href=", "'", case_url, "'", ">", name, "</a></b>", sep = ""))
 
 l <- leaflet() %>%
     addProviderTiles(provider = "CartoDB.PositronNoLabels") %>%

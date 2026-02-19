@@ -2,6 +2,35 @@
 title: "About the Regime Shifts Database"
 ---
 
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+library(tidyverse, quietly = TRUE)
+rs_dat <- read_csv("assets/generic_types_RSDB_new.csv")
+load("assets/cases_db.Rda")
+
+
+ppl1 <- rs_dat |> 
+    select(contains("contributors")) |> 
+    mutate(ppl = str_c(main_contributors, other_contributors, sep = ", ")) |> 
+    select(ppl) |> 
+    mutate(ppl = str_split(ppl, ", ")) |> 
+    unnest(ppl) |> 
+    filter(!is.na(ppl), ppl != "Juan Rocha") |> 
+    unique() |> arrange(ppl) # |> print(n=51)
+
+ppl2 <- dat |> 
+    select(contains("contributors")) |> 
+    mutate(ppl = str_c(main_contributors, other_contributors, sep = ", ")) |> 
+    select(ppl) |> 
+    mutate(ppl = str_split(ppl, ", ")) |> 
+    unnest(ppl) |> 
+    filter(ppl != "-1", ppl != "Juan Rocha") |> 
+    unique() |> arrange(ppl)# |> print(n=74)
+    
+ppl <- bind_rows(ppl1, ppl2) |> unique() |> 
+    arrange(ppl)
+```
+
+
 The Regime Shifts DataBase is an initiative led by the [Stockholm Resilience Centre](https://www.stockholmresilience.org) to review and synthesize examples of different types of regime shifts that have been documented in social-ecological systems. The database focuses specifically on regime shifts that have large impacts on ecosystem services and  human well-being. The aim is to provide a high-quality, descriptive, open-source information resource for students, lecturers, ecosystem managers and researchers. The database has been used for international assessments such as the Convention for Biological Diversity (CBD), Intergovernmental Platform on Biodiversity and Ecosystem Services (IPBES), and the Arctic Resilience Assessment (ARA).
 
 The information in the database is based on assessment and synthesis of the literature, and the description of each regime shift is reviewed by an expert prior to publishing it online wherever possible. The information is intended to provide a general descriptive overview of different regime shifts and point to resources for more detailed information. 
@@ -9,3 +38,20 @@ The information in the database is based on assessment and synthesis of the lite
 Learn more at:
 
 Biggs, Reinette, Garry Peterson, and Juan Rocha. 2018. **The Regime Shifts Database: a Framework for Analyzing Regime Shifts in Social-Ecological Systems.** Ecology and Society 23 (3): art9. [doi:10.5751/ES-10264-230309](https://www.ecologyandsociety.org/vol23/iss3/art9/).
+
+### Thanks to our contributors
+
+This work would have not been possible without the voluntary contribution of students and 
+scientists who have written and review the syntheses of regime shifts here published. 
+We would like to thank `r str_flatten(ppl$ppl, collapse = ", ", last = " and ")`
+
+### Thanks to our funders
+
+
+<p align="center">
+<img src="https://formas.se/images/18.7357e3f3168752d5a10324c6/1638869593402/formas_symbol_liggande_rgb_png.png" width="150">
+<img src="assets/img/logo_VR.png"  width="150">
+<img src="assets/img/logo_BWF.png"  width="150">
+<img src="assets/img/Logo_FutureEarth.png"  width="150">
+<img src="assets/img/logo_Mistra.png"  width="150">
+</p>

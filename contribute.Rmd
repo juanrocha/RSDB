@@ -2,22 +2,39 @@
 title: "How to contribute"
 ---
 
-The usefulness and ....
+The site is intended to function as a high-quality Wikipedia-like space. We warmly welcome all contributions! You can contribute by:
 
-- [ ] Intro text on how to contribute, what to contribute (spelling check, adding a ref, adding a case, or a full regime shift), and why
-- [ ] Discuss forum: add comments?
-- [ ] Fill out forms? a google form that can be reinported and turn into a list.
-- [ ] Github instructions for advanced contributors.
-- [ ] Page with acknowledgements
+- Adding additional figures or references to existing examples, spotting spelling typos.
+- Adding comments to existing examples to suggest how the text might be improved or expanded
+- Adding new examples of regime shifts or case studies
+- Suggesting possible new examples that we might add to the database
+- Sending us general comments and suggestions for improving this website
 
 
-We warmly welcome all contributions to the database! Please use the links below to contribute an example of a generic type of regime shift, a specific case study of a particular regime shift, or to suggest a potential regime shift or case study for future inclusion.
+## Contributing options {.tabset .tabset-pills}
 
-## Add Regime Shift
+### Add Regime Shift
 These are generic descriptions of types of regime shifts that have been observed at multiple locations or case studies (e.g. eutrophication). They can also include unique large scale subcontinental or global regime shifts (e.g. collapse of the Greenland ice sheet). We suggest filling out the description offline using the Regime Shift Template, and then copying and pasting the details into the online form.
 
-## Add Case Study
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScYOifUcVqytw1NrYuIgpGlMJq7l7cw5ob6_4kIdciOGGswVQ/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+
+### Add Case Study
 These are specific examples of regime shifts in particular places or case studies (e.g. eutrophication in the Baltic Sea). We suggest filling out the description offline using the Case Study Template, and then copying and pasting the details into the online form.
 
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe-zLessmx5jMPWO6Q6jtNYzD6Dj4h3bBRbxkBB_sSGxoi50g/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+### On Disqus
+Each page on the webiste has a Disqus forum at the end where you can leave comments 
+and suggestions for improvement.
+
+### On GitHub
+You can edit the source files of the regime shift database. The database is 
+also published as editable (R)markdown documents in our GitHub repository (link on
+the upper right corner). So you can contribute by forking, editing, push and pull 
+request cycle. Since the source files are under version control, we are then 
+able to track who contributed what, or how the narrative has changed and evolved
+over time as new scientific knowledge comes to light.
+
 ## Suggest a Regime Shift or Case Study
-Please let us know if you have suggestions for potential regime shifts or case studies to be included – e.g. if you are unable to write them up yourself, or are unsure if they fit. You are also welcome to contact us with questions at info@regimeshifts.org.
+Please let us know if you have suggestions for potential regime shifts or case studies to be included – e.g. if you are unable to write them up yourself, or are unsure if they fit. You are also welcome to contact us with questions at info@regimeshifts.org or the Disqus forum below.

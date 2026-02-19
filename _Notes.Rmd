@@ -4,11 +4,43 @@ author: "Juan Rocha"
 output: html_document
 ---
 
+**241115**
+
+- Think of online explorer types
+- RA description: what can she/he do, time and cost or postdoc.
+    - Things that need fixing: text of CS RS analysis
+    - whish list of add ons
+    
+
+**240803**
+- Netifly manual test working
+- ~~Re-create map with new url~~
+- ~~Upload all RS and CS~~
+- ~~colour case maps on RS pages by evidence type~~
+- Add better formatting for references and create bibtex block automatically
+- ~~Advance search for both RS and CS~~
+- ~~Funding acknowledgement~~
+- Publish drylands degradation (JCR), disease outbreaks (JCR), invasive species
+In review:
+    - Garry: forest croplands, dams
+    - Oonsie: soil structure (primary productivity)
+Future to add:
+    - Traffic jams
+    - Pollination collapse
+    - Fire regime
+    - Soil productivity
+    - Community and population shifts (terrestrial) [multiple cases: wolfs, rewilding]
+    - Freshwater salinization
+    - River delta accretion to recession [cases Mississippi]
+    - Glaciers accretion to recession
+    - Forest die-offs
+    - Dryland degradation
 
 **240729**
 - CLDs functions created: perhaps add legend and caption to figure
 - update the RS template to include CLD and RS analysis
 - clean up github
+- figure out how to cache, how to avoid rendering non-changed files (check workflow)
 
 **240726**
 - Generic regime shifts files created: the RS analysis and CLDs need to be added manually, it does not exist as downloadable files from RSDB.

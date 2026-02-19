@@ -62,21 +62,17 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ## Map
 "```{r map, out.width='100%', out.height='300px', results = 'markup'}\n
 
-cs <- cases |> 
-    filter(type == rs$regime_shift_name) |> 
-    mutate(sources_of_evidence = as.factor(sources_of_evidence))
 
-pal <- colorFactor(
-    palette = scales::hue_pal()( length(levels(cs$sources_of_evidence)) ),
-    na.color = 'grey75',
-    domain = levels(cs$sources_of_evidence), ordered = TRUE )
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
     addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
-    addCircleMarkers(lng = ~long, lat=~lat, radius = 2, 
-                     color =~pal(sources_of_evidence), popup = ~popups) |> 
-    setView(5,10, zoom = 2) |> 
-    addLegend('bottomright', pal = pal, values = ~sources_of_evidence, title = 'Evidence source:') 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
 m
 ```\n\n",
 # summary
