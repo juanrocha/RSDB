@@ -2,8 +2,9 @@
 library(tidyverse)
 library(network)
 library(ggiraph)
+
 ## Modify function to work with names instead of index i
-## create interactive CLDs
+#### create interactive CLDs ####
 ## updated function to add network attributes, from cascading paper
 rs_net <- function (dat, rs){ 
     # dat is the dataset with cld edgelist
@@ -75,3 +76,4 @@ plot_net <- function(net){
         theme_void()
     return(gg)
 }
+

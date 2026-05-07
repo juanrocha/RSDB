@@ -4,12 +4,50 @@ title: "Regime shifts"
 <div class="alert alert-dismissible alert-warning">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <h4 class="alert-heading">Warning!</h4>
-  <p class="mb-0">The original regime shifts database is available at [www.regimeshifts.org](https://www.regimeshifts.org). This website is a development version were we experiment with features to add, delete, or to improve continuous development, and facilitate external contributions.</p>
+  <p class="mb-0">The original regime shifts database is available at [www.regimeshifts.org](https://www.regimeshifts.org). This website is a development version were we experiment with features to add, delete, or to improve continuous development. The purpose of this website is to facilitate external contributions.</p>
 </div>
 
-
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+library(htmltools)
+library(widgetframe)
+```
 
 Regime shifts are large, persistent changes in the structure and function of social-ecological systems, with substantive impacts on the suite of ecosystem services provided by these systems. Better understanding of regime shifts is important as they may have substantial impacts on human economies, societies and well-being, and are often difficult to anticipate and costly to reverse.
 
-> The Regime Shifts DataBase provides examples of different types of regime shifts that have been documented in social-ecological systems. The database focuses specifically on regime shifts that have large impacts on ecosystem services and human well-being.
+The Regime Shifts database provides examples of different types of regime shifts in social-ecological systems that have been documented in the scientific literature. The database focuses specifically on regime shifts that have large impacts on ecosystem services and human well-being.
+
+## Browse all regime shifts
+
+```{r warnings = FALSE, message = FALSE, echo = FALSE, out.height="200px", out.width="100%"}
+library(slickR)
+
+df_img <- read_csv("assets/rs_images.csv")
+
+df_img <- df_img |> 
+    filter(priority == 1) |> 
+    mutate(img = str_c("assets/", file)) 
+
+opts <- settings(
+  initialSlide = 0,
+  slidesToShow = 5, 
+  slidesToScroll = 5, 
+  focusOnSelect = TRUE)
+
+(slickR(obj = df_img$img, objLinks = df_img$href, height = 100, width = "95%") +
+    opts) %synch% (slickR(obj = df_img$name, slideType = "p") + settings(arrows = FALSE, initialSlide = 0, slidesToShow = 5, slidesToScroll = 5, focusOnSelect = TRUE, dots = TRUE)) 
+
+```
+
+
+## Evidence of regime shifts
+
+```{r map, echo = FALSE, message=FALSE, warning=FALSE, fig.cap="The map offers links to literature reviews for generic regime shifts (in the legend) and links to over 3000 case studies (dots on the map). Each link will take you to a page where you can learn more about how the regime shift works.", out.width="100%", out.height="650px"}
+
+load("assets/map_rsdb.Rda")
+frameWidget(map_rsdb, width = "100%", height = "650")
+```
+
+
 

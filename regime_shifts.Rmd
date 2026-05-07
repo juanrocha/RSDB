@@ -2,3 +2,89 @@
 title: "Regime Shifts"
 
 ---
+
+```{r imgs, echo = FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(htmltools)
+library(widgetframe)
+
+df_img <- read_csv("assets/rs_images.csv")
+
+thumbnail <- function(href, img, name) {
+    div(class = "contain",
+        a(href = href, img(src = img, class = "image")),
+        div(class = "overlay", name)
+    )
+}
+
+
+df_img <- df_img |> 
+    filter(priority == 1) |> 
+    mutate(img = str_c("assets/", file)) 
+
+pics <-  pmap(select(df_img, href, img, name), .f = thumbnail)
+
+div(class = "row",
+    div(class = "column",
+        pics[1:7]
+        ),
+    div(class = "column",
+        pics[8:14]
+        ),
+    div(class = "column",
+        pics[15:21]
+        ),
+    div(class = "column",
+        pics[22:28]
+        )
+    )
+
+```
+
+
+## How do regime shifts work?
+
+Different regimes can be metaphorically represented by a ball-and-cup diagram. The valleys or cups represent different regimes or fundamental ways in which the system can function and be structured. A regime shift entails a shift in the current system state (represented as a ball) from one cup or valley to another. While in a particular regime, it is important to note that the system does not remain stable but fluctuates around.
+ 
+<p align="center"><img src="assets/img/regime.jpg"></p>
+ 
+Regime shifts result from a change in the dominant feedbacks. All complex systems contain many feedback loops, but these can typically evolve and combine in only a limited number of ways. Over time, a particular combination of feedbacks will tend to become dominant, leading the system to self-organize into a particular structure and function – or "regime". However, if the system experiences a large shock (eg a volcano) or persistent directional change (eg accumulation of pollutants, habitat loss) the dominant feedbacks may be overwhelmed or eroded. At some point a critical threshold may be passed where a different set of feedbacks become dominant, and the system experiences a large, often abrupt change in structure and function – or a "regime shift".
+
+## Advanced search
+
+```{r tabel, warning=FALSE, message=FALSE, echo = FALSE, out.width="100%"}
+library(DT)
+options(DT.options = list(pageLength = 50))
+rs_dat <- read_csv("assets/generic_types_RSDB_new.csv")
+
+rs_dat |> 
+    arrange(regime_shift_name) |> 
+    mutate(filename = str_replace(filename, "\\.Rmd", "\\.html")) |> 
+    # create links here, so there is links for RS without cases
+    mutate(link_rs = paste0(
+        "<a href=", "'", "https://regimeshifts.netlify.app/", filename, "'",
+        " target='_blank'",">", regime_shift_name, "</a>"),
+        Impacts = str_c(impacts_provisioning_services, impacts_regulating_services,
+                        impacts_cultural_services, impacts_human_well_being, sep = ", ")) |> 
+    select(
+        `Regime Shift` = link_rs, 
+        `Drivers` = drivers_key_direct_drivers, 
+        `Ecosystem type` = impacts_ecosystem_type,
+        Impacts
+        ) |>
+    datatable(escape = c(1), filter = "top")
+```
+
+
+## Further reading
+
+- Biggs R, Blenckner T, Folke C, Gordon L, Norström A, Nyström M & Peterson GD. 2011. Regime Shifts. In: Sourcebook in Theoretical Ecology. Hastings A & Gross L (eds). University of California Press, Berkeley.
+- May RM, Levin SA, Sugihara G. 2008. Ecology for Bankers. Nature 451, 893-895.
+- Scheffer M. 2009. Critical transitions in Nature and Society. Princeton University Press.
+- Scheffer M, Carpenter SR, Foley JA, Folke C & Walker BH. 2001. Catastrophic shifts in ecosystems. Nature 413, 591-596.
+ 
+**Online resources:**
+
+- Regime Shifts: What are they and why do they matter? http://www.regimeshifts.org/datasets-resources/details/15/26 
+- Wikipedia: http://en.wikipedia.org/wiki/Regime_shift
+- Resilience Alliance Thresholds Database: http://www.resalliance.org/index.php/thresholds_database

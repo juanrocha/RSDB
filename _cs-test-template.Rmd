@@ -1,0 +1,251 @@
+---
+output: html_document
+params:
+  i: 1
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+load("assets/cases_db.Rda")
+x <- dat$id[params$i]
+cs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+# `r cs$case_study_name`
+
+**Main contributors**: `r cs |> pull(main_contributors)`
+
+**Other contributors**: `r cs |> pull(other_contributors)`
+
+Last update: `r cs$date`
+
+
+
+```{r map, out.width="100%", out.height="300px", results = 'markup'}
+m <- leaflet(cs ) |> 
+    addTiles("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png") |> 
+    addMarkers(cs$long, cs$lat) |> 
+    setView(cs$long, cs$lat, zoom = 4)
+m
+```
+
+
+### Summary
+
+```{r summary, results='asis'}
+cs |> pull(summary) |> cat()
+```
+
+**Type of regime shift**: `r dat |> filter(id == x) |> pull(type) `
+
+**Ecosystem type**:
+
+```{r results='asis'}
+cs|> pull(ecosystem_type) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Land uses**:
+
+```{r results='asis'}
+cs |> pull(land_uses) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Spatial scale**:
+
+```{r results='asis'}
+cs |> pull(spatial_scale) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Continent or Ocean**:
+
+```{r results='asis'}
+cs |> pull(location_continent_or_ocean) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Region**: `r cs|> pull(location_region) `
+
+**Countries**: `r cs |> pull(location_countries) `
+
+
+{.tabset}
+--------------------------------------------------------------------------------
+
+### Categorical attributes
+
+::::{style="display: flex;"}
+
+
+:::{style="width: 50%;"}
+
+#### Impacts
+
+**Ecosystem type**:
+
+```{r results='asis'}
+cs |> pull(ecosystem_type) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Key ecosystem processes**:
+
+```{r results='asis'}
+cs |> pull(impacts_key_ecosystem_processes) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Biodiversity**:
+
+```{r results='asis'}
+cs |> pull(impacts_biodiversity) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Provisioning services**:
+
+```{r results='asis'}
+cs |> pull(impacts_provisioning_services) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Regulating services**:
+
+```{r results='asis'}
+cs |> pull(impacts_regulating_services) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Cultural services**:
+
+```{r results='asis'}
+cs |> pull(impacts_cultural_services) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Human well-being**:
+
+```{r results='asis'}
+cs |> pull(impacts_on_human_well_being) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+
+:::
+
+:::{style="width: 50%;"}
+
+#### Drivers
+
+**Key drivers**:
+
+```{r results='asis'}
+cs |> pull(drivers_key_direct_drivers) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Land use**:
+
+```{r results='asis'}
+cs |> pull(land_uses) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+```{r results='asis'}
+cs |> pull(key_attributes_spatial_scale_of_rs) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Time scale**:
+
+```{r results='asis'}
+cs |> pull(key_attributes_time_scale_of_rs) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Reversibility**:
+
+```{r results='asis'}
+cs |> pull(key_attributes_reversibility) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Evidence**:
+
+```{r results='asis'}
+cs |> pull(key_attributes_evidence) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Confidence: existence of the regime shift**
+
+```{r results='asis'}
+cs |> pull(key_attributes_confidence_existence_of_rs) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+**Confidence: mechanisms underlying the regime shift**
+
+```{r results='asis'}
+cs |> pull(key_attributes_confidence_mechanism_underlying_rs) |> str_split(pattern = ", ") |> 
+    map(~str_c("- ", ., "\n")) |> unlist() |> cat()
+```
+
+:::
+
+::::
+
+### Detail info and key references
+
+#### Alternative regimes
+
+```{r results='asis'}
+cs |> pull(alternate_regimes) |> str_remove_all(pattern = "\\<br \\/\\>") |>  cat()
+```
+
+#### Drivers and causes of the regime shift
+
+```{r results='asis'}
+cs |> pull(drivers_and_causes_of_the_regime_shift) |> 
+    str_remove_all(pattern = "\\<p\\>\\&nbsp\\;\\<\\/p\\>") |> cat()
+```
+
+#### Impacts on ecosystem services and human well-being
+
+```{r results='asis'}
+cs |> pull(impacts_on_ecosystem_services_and_human_well_being) |> cat()
+```
+
+#### Management options
+
+```{r results='asis'}
+cs |> pull(management_options) |> cat()
+```
+
+
+#### Key references
+
+<small>
+
+```{r results='asis'}
+cs |> pull(references) |> 
+    str_split(pattern = "\\(\\#\\d{1,}\\) ") |> 
+    map(~str_c("- ", ., "\n")) |> 
+    unlist() |> 
+    str_remove(pattern = "- \\\n") |> 
+    cat()
+```
+
+</small>
+
+

@@ -11,4 +11,9 @@ _site/
 site_libs
 *.html
 *.csv
-.gitignore
+_site/site_libs
+*.css
+*.html
+assets/
+cs*
+rs*
