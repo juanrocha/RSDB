@@ -1,0 +1,288 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 18
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Peatland transitions
+
+**Main contributors**: Daniel Ospina
+
+**Other contributors**: Helen Moor
+
+Last update: 2013-08-23
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+Two alternate regimes in peatland systems are described in this document: bogs, sphagnum-dominated peatlands with long-term carbon storage in peat, and fens, peatland in which vascular plants have a more dominant role, leading to higher-productivity but reduced peat long-term accumulation. The most important variables and mechanisms considered are peat accumulation and height of the surface above the water table, nutrient flux, and competition between plant functional groups. The key drivers of the shift are related with changes in climate (precipitation and temperature) and in nutrient input. The relevance of this shift in terms of ecosystem services and human well-being is the tradeoff between potential gains of nutrient-rich soils for agricultural activities on drained peatlands, versus a loss of long-term carbon accumulation with potentially great implications for global climate change.
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Tropical forests
+- Tundra
+
+
+**Key ecosystem processes**:
+
+- Soil formation
+- Primary production
+- Nutrient cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Food crops
+- Livestock
+- Fuel and fiber crops
+
+
+**Regulating services**:
+
+- Climate regulation
+
+
+**Cultural services**:
+
+NA
+
+**Human well-being**:
+
+- Livelihoods and economic activity
+
+
+**Links to other regime shifts**:
+
+NA
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- External inputs (e.g. fertilizers
+- pest control
+- irrigation)
+- Environmental shocks (e.g. fire
+- floods
+- droughts)
+- Global climate change
+
+
+**Land use**:
+
+- Small-scale subsistence crop cultivation
+- Large-scale commercial crop cultivation
+- Extensive livestock production (natural rangelands)
+- Land use impacts are primarily off-site (e.g. dead zones)
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake
+- catchment
+- community)
+
+
+**Time scale**:
+
+- Years
+- Decades
+- Centuries
+
+
+**Reversibility**:
+
+- Hysteretic (difficult to reverse)
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+
+
+**Confidence: existence of the regime shift**
+
+- Speculative – Regime shift has been proposed, but little evidence as yet
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+Peatlands are characterized by often deep accumulations of incompletely decomposed organic material (i.e. peat). The accumulation of peat occurs when carbon sequestration exceeds the long-term loss through decomposition or export by hydrological flow. Such rates of decomposition can be very low in acidic and anaerobic conditions. Globally, peatlands occupy about four million km2, of which boreal and subarctic peatlands constitute about 87%, mainly in Russia, Canada, United States, Finland and Sweden. Tropical peatlands also exist, a big percentage of which is in Indonesia (Vitt, 2008). A major distinction within peatlands is between fens (minerotrophic peatlands: plants have access to geogenous water) and bogs (ombrotrophic peatlands: plants are dependent on precipitation). These and other differences in hydrology, acidity and climate produce a great variety of peatlands worldwide. Such variety in genesis and characteristics makes any generalization of peatlands functional values very difficult.
+
+ A fen to bog transition is often seen as the natural course of peatland succession (Hughes & Barber, 2004), whereas a change from bog to fen usually requires external changes in conditions or strong perturbations. Both bogs and fens exhibit internal feedbacks that provide them with some stability, and threshold conditions associated with the transition between each other have been suggested in the literature (Belyea & Malmer, 2004). In line with this, the different reinforcing feedbacks of fens and bogs are described below as two alternate regimes, which have consequences in terms of carbon sequestration and other ecosystem services.
+
+ For example, Ohlson et al (2001) showed for the case of boreal bogs, Sphagnum mosses and peatland vascular plants like the Scots pine are capable of creating and maintaining fundamentally different environments. Competition between functional groups is a fundamental force maintaining these alternate regimes. Eppinga et al (2007) reviewed the 'pivotal environmental variables' determining growth of Sphagnum and vascular plants in these ecosystems (temperature, light availability, nutrient availability, pH, and the level of the water table), and argue that the physiological characteristics of both Sphagnum and vascular plants drive ecosystem processes that change these variables in opposite directions, modifying the habitat toward better growing conditions for themselves and/or suppressing the other functional group. These 'vegetation switches' (Wilson and Agnew, 1992) create reinforcing feedbacks, from which the possibility alternate stable states in peatlands arises (Eppinga et al 2007).
+
+ Although the type of processes described below has been explored predominantly in bogs (e.g. Rietkerk 2004; Belyea & Baird 2006; Eppinga et al 2007, 2009), the variables, mechanisms, and drivers can be related to the dynamics of fens too (e.g. Pastor et al 2002; Granath et al 2010). Peatlands respond to strong or persistent climatic changes through rapid shifts in surface structure (i.e. microtopography and vegetation) throughout the landscape (Eppinga et al 2007). These changes are related with the 'resilience of the carbon balance' in peatlands to hydrologic changes (Diser, 2009), provided by a strong balancing feedback between the height of the water table and peat accumulation, which also result in rapid changes in decomposition and carbon sequestration rates (Roulet et al 2007; Eppinga et al 2007). Rates of carbon sequestration/emission are determined to a great extent by the depth of the aerobic peat layer (i.e. acrotelm), which changes in response to exogenous climatic factors and endogenous factors including plant interactions.
+
+ Global changes associated with climate (e.g. temperature rises, droughts) and biogeochemical cycles (e.g. elevated nitrogen deposition) are likely to drive shifts in peatland's vegetation to more grassland/shrubland-like ecosystems (Belyea & Malmer, 2004). Such vegetation shift might increase carbon sequestration in the short-tem, but it will happen at the expense of the key function these systems have been performing for thousands of years: persistent long-term storage of carbon (Diser, 2009). Such global drivers and vegetation changes are linked in complex ways to changes in microtopography too: abrupt shifts can occur from a landscape dominated by a certain type of microform, to another (Belyea and Malmer 2004). For example, shifts from a hollow-dominated, treeless regime to hummock-dominated woodland regime (and also in the opposite direction) have been reported in paleoecological studies (e.g. Ohlson et al. 2001; references in Eppinga et al 2007).
+
+  **Bogs (Sphagnum-dominated peatland, with long-term carbon storage)**
+
+ This regime is characterized by a landscape dominated by sphagnum-mosses, covering low hummocks and lawns, usually exhibiting no conspicuous spatial pattern in vegetation. Under the surface a thick layer of slow-decaying peat is mostly kept in waterlogged and acidic conditions. The concept of ecosystem engineers (Jones et al. 1994) has been used to describe Sphagnum mosses, given their functional capacity to create and maintain an acidic and nutrient-poor environment, harsh for most other plants (references in Ohlson et al 2001). Additionally, mosses decay at extremely low rates due to their unique tissue chemistry, what strongly limits nutrient ?uxes to other types of plants (Pastor et al 2002). In the absence large external climatic changes or direct human impacts on hydrology or nutrient input, the species composition of these type of peatlands has proven to be very stable (references on Limpens et al 2008).
+
+ **Fens (Moss and vascular plant coexistence, with reduced peat accumulation)**
+
+ Vascular plants also alter the environment in ways that negatively affect Sphagnum mosses. So an increase in vascular plant cover beyond critical thresholds inevitably leads to a decrease in Sphagnum (Berendse et al., 2001). Some of the mechanisms involved in this process act by preventing or even reversing ombrotrophication, in favor of minerotropic conditions. While other mechanisms might operate in bogs prompting the development of particular microtopography and associated vegetation spatial patterns. Such microtopography is also believed to be very stable (references in Eppinga et al 2007 and in Limpens et al 2008). This regime is characterized by an increasingly dense and connected vascular plants cover, exhibiting spatial patterns (strings-flarks on slopes and maze on flat landscapes) consisting of densely vegetated bands (hummocks forming ridges), alternating with wetter zones that are more sparsely vegetated (hollows forming pools) (Rietkerk et al 2004).
+
+
+
+#### Drivers and causes of the regime shift
+
+**Shift from Bogs to Fens**
+
+ A Sphagnum dominated peatland becomes more susceptible to invasion by vascular plants as the nutrient input increases (Pastors et al 2002; Eppinga et al 2007, 2009; Limpens et al 2008). Ombrotrophic systems are particularly sensitive to nitrogen enrichment, which can prompt the invasion by graminoid species (e.g. Molinia caerulea) and woody species (e.g. Betula pubescens) with a parallel decline of ombrotrophic species (references in Tomassen et al 2003). A possible threshold might be related with the point where the input exceeds the accumulation capacity of moss, leading to movements of nitrogen or phosphorous from surface to the nutrient pool, becoming available to vascular plants (references in Malmer et al 2003). Additionally, Sphagna are directly affected negatively by high nutrient input, for example due to ammonium toxicity (see references in Fritz et al. 2012). At a certain point the nutrient pool is enough to activate the reinforcing feedbacks on regime 2, and the shift would occur. Additionally, related C:N ratio changes could enhance decomposition (references in Limpens et al 2008), further amplifying this nutrient positive relation with vascular plants.
+
+ Decreasing wetness during the growing season promotes vascular plant growth and hampers moss development (Eppinga et al 2007; Limpens et al 2008), and perhaps more importantly, it will weaken the nutrient flux delay of sphagnum peat by increasing aerobic decomposition (Hilbert et al 2000). Reduced precipitation and droughts in general directly decrease Sphagnum productivity, photosynthetic rates are strongly dependent on water saturation levels. Additionally, longer dry seasons can potentially increase wild?re frequency, with negative effects on peat depth (references in Limpens et al 2008).
+
+ In high latitude peatlands an increase in temperature implies a longer growing season for vascular plants and increases mineralization rates. As vascular plants presence increases and Sphagnum cover reduces, the temperature feedback in regime 1 weakens, allowing for even warmer conditions in the rooting zone further increasing the growing season of vascular plants (references in Eppinga et al 2007).
+
+ In regards to precipitation and temperature changes, it is worth mentioning that Eppinga et al (2007) highlight that the response of peatlands to this type of future changes is not straightforwardly determined, since the relative importance of different processes possibly inducing vegetation switches is yet to be more properly understood. And moreover, the relative importance of these different processes is probably site-specific, making predictions even more difficult. In the case of northern peatlands, an example is permafrost melting, which is considered to have far-reaching consequences, but still remains poorly understood (Limpens et al 2008). However, having made this clear, a causal-loop diagram synthesizing the mechanistic understanding compiled here has been included in this template.
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+**Shift from Bogs to Fens**
+
+ Since sphagnum litter enhances the formation of collapsible peat (i.e. with low porosity), which easily becomes waterlogged (references in Eppinga et al 2007), the conditions for low rates of decomposition, and an overall net carbon sequestration effect are maintained in regime 1. Rates of carbon sequestration and methane emission depend strongly on height of the peatland surface above the water table (references in Belyea & Malmer, 2004). Even though the same processes of anaerobic decomposition that increases carbon accumulation, also increases methane production, the overall desirable effect in relation to climate change gets lost in this shift, since the effect of removing long-lived atmospheric carbon dioxide ultimately surpasses that of releasing short-lived methane (Limpens et al 2008).
+
+ Because of the complex relations of acrotelm thickness with vegetation and microtopography, these two are considered to primarily determine carbon sequestration/emission rates (Belyea & Malmer 2004; Belyea & Baird 2006). Peat formation rate is greatest for 'intermediate microforms' (lawns, low hummocks) and lowest for microforms at the extremes of the water table gradient (high hummocks and pools) (Belyea & Malmer 2004). Given this trade-off of decomposability and productivity between elevated and low microforms (reference in Limpens et al 2008), a landscape will exhibit higher short-term sequestration of carbon or long-term storage depending o the microforms by which it is dominated.
+
+ **Shift from Fens to Bogs**
+
+ A reduction in species richness and the loss of agriculturally suitable lands are potential impacts of the shift to sphagnum-dominated peatlands.
+
+
+
+#### Management options
+
+Damming or blocking ditches are common management practices aimed at raising the water table.  More direct practices to recover or sustain sphagnum vegetation is to establish rafts of floating brush or clumps of peat for floating mosses settle, as well as the creation of suitable microclimates through techniques such as applying a layer of straw mulch, and carving depressions that promote carpet or lawn level Sphagnum (references in Limpens et al 2008 and in Rydin & Jeglum, 2006).
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Daniel Ospina, Helen Moor. Peatland transitions. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2013-08-23</small>
+
+### References
+
+<small>
+
+- Belyea LR, Baird AJ. 2006. Beyond u201cthe limits to peat bog growthu201d: cross-scale feedback in peatland development. Ecological Monographs, 76, 299-322. 
+- Belyea LR, Malmer N. 2004. Carbon sequestration in peatland: patterns and mechanisms of response to climate change. Global Change Biology 10: 1043u20131052 
+- Berendse F, Van Breemen N, Rydin H, Buttler A, Heijmans M, Hoosbeek MR, Lee JA, Mitchell E, Saarinen T, Vasander H, Wallen B. 2001. Raised atmospheric CO2 levels and increased N deposition cause shifts in plant species composition and production in Sphagnum bogs. Global Change Biology, 7, 591-598. 
+- Dise, NB. 2009. Peatland Response to Global Change. Science, 326, 810-811. 
+- Dugan PJ. (ed) 1990. Wetland Conservation: a Review of Current Issues and Required Action. IUCN, Gland (Switzerland) 
+- Eppinga MB, Rietkerk M, Wassen, MJ, Ruiter PC. 2007. Linking habitat modification to catastrophic shifts and vegetation patterns in bogs. Plant Ecology, 200, 53-68. 
+- Eppinga, MB, Ruiter, PC de Wassen MJ, Rietkerk M. 2009. Nutrients and hydrology indicate the driving mechanisms of peatland surface patterning. The American Naturalist, 173, 803-18. 
+- Fritz C, van Dijk G, Smolders AJP, Pancotto VA, Elzenga T Volume JTM, Roelofs JGM, Grootjans AP. 2012. Nutrient additions in pristine Patagonian Sphagnum bog vegetation: can phosphorus addition alleviate (the effects of) increased nitrogen loads. Plant Biology 14(3), 491u2013499. 
+- Granath G, Strengbom J, Rydin H. 2010. Rapid ecosystem shifts in peatlands: linking plant physiology and succession. Ecology, 91: 3047-3056. 
+- Hilbert DW, Roulet N, Moore T. 2000. Modelling and analysis of peatlands as dynamical systems. Journal of Ecology, 88: 230-242. 
+- Holmgren M, Lin CY, Murillo JE, Nieuwenhuis A, Penninkhof J, Sanders N, van Bart T, van Veen H, Vasander H, Vollebregt ME & Limpens J. 2015. Positive shrub–tree interactions facilitate woody encroachment in boreal peatlands. Journal of Ecology, 103: 58–66. doi: 10.1111/1365-2745.12331 
+- Hughes PDM, Barber KE. 2004. Contrasting pathways to ombrotrophy in three raised bogs from Ireland and Cumbria, England. The Holocene 14, 65 
+- Malmer N, Albinsson C, Svensson BM, Wallen B. 2003. Interferences between Sphagnum and vascular plants: effects on plant community structure and peat formation. Oikos, 100, 469-482. 
+- Ohlson M, Okland, RH, Nordbakken JF, Dahlberg B. 2001. Fatal interactions between Scots pine and Sphagnum mosses in bog ecosystems. Oikos, 94, 425-432. 
+- Pastor J, Peckham B, Bridgham S, Weltzin J, Chen, J. 2002. Plant community dynamics, nutrient cycling, and alternative stable equilibria in peatland. The American Naturalist, 160, 553-68. 
+- Rietkerk, M, Dekker, SC, Wassen, MJ, Verkroost, AWM, Bierkens, MFP. 2004. A putative mechanism for bog patterning. The American Naturalist, 163, 699-708. 
+- Roulet NT, Lafleur PM, Richard PJH, Moore TR, Humphreys ER, Bubier J. 2007 Contemporary carbon balance and late Holocene carbon accumulation in a northern peatland. Global Change Biology 13(2), 397u2013411. 
+- Rydin H, Jeglum JK. 2006 The Biology of Peatlands. Oxford University Press, New York (USA) 
+- Tomassen HBM, Smolders AJP, Lamers LPM, Roelofs JGM. 2003 Stimulated growth of Betula pubescens and Molinia caerulea on ombrotrophic bogs: role of high levels of atmospheric nitrogen deposition. Journal of Ecology, 91, 357-370. 
+- Vitt DH. 2008 Peatlands. 2656-2664 In: Jurgensen (ed) Encyclopedia of Ecology. Elsevier BV, Amsterdam (Netherlands)
+
+</small>
+

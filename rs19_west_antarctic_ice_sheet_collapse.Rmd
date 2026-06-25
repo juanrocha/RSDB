@@ -1,0 +1,310 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 19
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# West Antarctic ice sheet collapse
+
+**Main contributors**: Johanna Yletyinen
+
+**Other contributors**: Garry Peterson
+
+Last update: 2013-09-09
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+Indication exists for a possible regime shift of collapsed West Antarctic Ice Sheet (WAIS) due to the warming climate. As the atmosphere and ocean warm as an effect of the global warming, ice sheets are predicted to shrink in size, resulting in raised sea level. The WAIS is a marine ice sheet: it is surrounded by floating ice shelves and the main part of the sheet is below sea-level (Oppenheimer 1998). It is considered to be capable of past and future collapses bringing about several meters sea level rise (Mercer 1978; Oppenheimer & Alley 2004). The two WAIS regimes consist of the intact ice sheet and disintegrated WAIS. The global warming-induced future WAIS collapse could cause a sea level rise of approximately 3-5 meters with significant societal and economic impacts. Marine fauna that is adapted to sea ice dynamics would be directly impacted through habitat changes, food web interaction alterations and shifts in marine isotherms (Rogers et al. 2012; Clarke et al. 2007). Many uncertainties remain about the mechanisms of the WAIS system, drivers of the observed change and future scenarios. It is suggested that the warming of the oceanic deep water currently causes significant basal melting and thinning of the ice sheet. A basin-scale ice model study, published in 2014, provides strong evidence that the collapse has already begun (Joughin, Smith & Medley, 2014.)
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Polar
+
+
+**Key ecosystem processes**:
+
+- Water cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Fisheries
+
+
+**Regulating services**:
+
+- Climate regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Knowledge and educational values
+
+
+**Human well-being**:
+
+- Livelihoods and economic activity
+- Security of housing & infrastructure
+- Social conflict
+
+
+**Links to other regime shifts**:
+
+- Greenland ice sheet collapse
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Global climate change
+
+
+**Land use**:
+
+- Conservation
+- Tourism
+- Land use impacts are primarily off-site (e.g. dead zones)
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Sub-continental (e.g. southern Africa
+- Amazon basin)
+
+
+**Time scale**:
+
+- Centuries
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+
+
+**Confidence: existence of the regime shift**
+
+- Speculative – Regime shift has been proposed, but little evidence as yet
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Speculative – Mechanisms have been proposed, but little evidence as yet
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+**Intact WAIS** (full glacial or modern interglacial)
+
+ Antarctica is divided into two large ice sheets by the Transantarctic Mountains. A large part of Antarctic ice mass consists of the WAIS, which lies on a marine sediment-draped bed many hundreds of meters below sea level (Joughin & Alley 2011; Bamber et al. 2009). Compared to the East Antarctic ice sheet, the WAIS has rapid ice flow and discharge (Anderson et al. 2002). Ice shelves, which form over the water and float permanently attached to the landmass, serve as buttresses for the inland ice streams of the ice sheets (permanent layer of ice covering land), and are vulnerable to environmental forcing. Ice volume is stable when the water entering and leaving the system are in balance; the net accumulation (mainly snow) balances losses (ice calving, basal melting at the ice sheet margins) (Ivins 2009). The stability of the marine ice sheet is created between local basal restraint of the inland ice and longitudinal stretching of the ice shelves (Joughin & Alley 2011; Ivins 2009), meaning that the marine-based bottom topography, geometry of the interior part and stability of the buttressing ice shelves (Joughin & Alley 2011) contribute to maintaining the regime of the intact WAIS. The Southern Ocean marine environment is in general rich in diversity, whereas the Antarctic terrestrial environment is low in diversity and missing many taxonomic groups (Rogers et al. 2012). In this regime humans have harvested large marine mammals, fish and krill, the latter of which is in direct competition with higher trophic level species (summer breeding colonies) (Rogers et al. 2012). At the present the WAIS appears to be thinning and the extent of sea ice is increasing.
+
+ **Disintegrated WAIS** (extreme interglacial)
+
+ Changed internal dynamics, such as complicated ice stream flow changes or natural climatic and oceanic forcing, create instability in the WAIS. Disintegration (collapse) of the WAIS means the nonlinear process, in which the ice sheet would flow at increasing rates into the ocean as its buttressing ice shelves diminish (O'Reilly & ACOS 2013). In the absence of the WAIS, the area would be covered by a broad open sea, punctuated by islands (Scherer 1991). The changes are occurring now and the collapse of the WAIS appears to already be underway, but large uncertainty remains on the timing (Joughin, Smith & Medley 2014, Joughin & Alley 2011). The absence of the WAIS would affect local ecosystems adapted to the presence of ice, and due to the sea level rise, all global coastal ecosystems and coastal human habitats. Marine fauna adapted to the sea ice dynamics would be directly impacted through habitat changes and shifts in marine isotherms, and the changes could cascade to the higher trophic levels, and alter food webs (Rogers et al. 2012; Clarke et al. 2007). The absence of WAIS would leave broad, deep seaways (Joughin & Alley 2011), increasing accessibility for fishing vessels and tourists.
+
+
+
+#### Drivers and causes of the regime shift
+
+Climatic and oceanic forcing appear to cause the WAIS retreats. Geologic evidence shows that the Antarctic ice sheet has shrunk in the past when global temperatures were warmer, for instance during the late Quaternary period (see e.g. Barnes & Hillenbrand 2010). There have been times when parts of the WAIS have been lost to the ocean, causing raised sea levels (Ivins 2009). According to the model by Pollard and DeConto (2009), a collapse from the modern conditions could occur when sub-ice ocean melting increase from 0.1 to 2 m yr-1 under shelf interiors, and from 5 to 10 m yr-1 near exposed shelf edges.
+
+ The mechanisms leading to the WAIS collapse are still unclear. It has been suggested that the WAIS collapse could start by the intrusion of ocean water (i.e. sea level rise) between the ice sheet and its ground. As the grounding line retreats, a strong positive feedback would be triggered when ocean water undercuts the ice sheet and causes further separation from the bedrock (Oppenheimer 1998). This feedback with sea level changes driving further retreat is contested by other studies (Alley et al. 2007; Gomez et al. 2010).
+
+ At present, main cause for the thinning of the WAIS ice mass is suggested to be the intrusion of relatively warm ocean water beneath the ice. Ice shelves are very sensitive to ocean temperature changes (Turner & Overland 2009) and several studies (see e.g. Price et al. 2008; Thoma et al. 2008, Joughin, Smith & Medley 2014) have shown that increased transport of warm subsurface water significantly contributes to the basal ice-shelf melt. The warm Circumpolar Deep Water (CDW) protrudes into the ice shelves through submarine troughs (Bintanja et al. 2013) and produces large melt rates at the regions where it is able to access the sub-ice-shelf cavities (Jacobs et al. 1992). Although the upper layers of Southern Ocean have cooled, the subsurface sea has in fact warmed (Robertson et al. 2002). The reasons for the warming of the Southern Ocean are not completely know. It is probably caused by multiple processes, such as increased greenhouse gases in the atmosphere, shifts in Southern Annular Mode (SAM, a high-latitude mode, also called Antarctic Oscillation) and changes in sea currents.
+
+ Other, less direct contributors to the regime shift found in literature are hydrofracturing of crevasses by surface melting water, changes in landscape (glacier behavior), wind forcing, ocean upwelling, tides and long period waves, changes in stratospheric ozone affecting atmospheric and ocean circulation, and intensification and southward migration of the Southern Ocean Westerlies due to the positive trend in the SAM (e.g. Thompson & Solomon 2002; Goosse et al. 2008; Turner et al. 2009; Joughin, Smith & Medley 2014).
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+Humans mainly use the Antarctica for commercial fishing, conservation, research, and tourism. The Antarctic region also plays a remarkable role in the planetary functions. Shifting the regime to that of the fragmented WAIS would, in short, provide better access for humans to the currently more peripheral areas, and change habitats and food webs of the local marine and terrestrial organisms. The extent of the sea ice affects the regulating ecosystem services of the Antarctica, such as global climate and ocean circulation through ice and snow albedo, CO2 uptake and icescape changes. The Southern Ocean has a rich biodiversity, and fisheries include krill and toothfish. The biogeochemical cycles of the Southern Ocean and the sea ice impact the structure and dynamics of the marine ecosystems (e.g. life cycles of organisms), especially the trophic levels that are adapted to the presence, seasonality and properties of ice (Massom & Stammerjohn 2010; Arrigo 2002; Brierley & Thomas 2002; Thomas et al. 2010; Eicken et al. 1995; Moline et al. 2008; Tynan 2010; Clarke et al. 2007; Rogers et al. 2012). The icescape characteristics, seasonality and dynamics of the sea ice extent affect the magnitude of the changes (Massom & Stammerjohn 2010) but at present the uncertainty of predictions is high.
+
+ Cultural ecosystem services in the second regime include possibly increased tourism, increased regional accessibility and societal losses caused by the sea level rise. Sea level rise impacts for coastal areas are submergence or increased flooding, increased erosion, ecosystem changes, increased salinization and forced displacement of coastal population and economy (Nicholls et al. 2011). The economic consequences depend on the time-scale: playing out over a century, the WAIS collapse would damage many coastal communities, whereas occurring over several centruries, the additional time would give possibilities to develop an appropriate risk-mitigation strategy (Dowdeswell et al. 2008; Mercer 1978; Joughin & Alley 2011).
+
+ The absence of the WAIS would leave broad, deep seaways (Joughin & Alley 2011). Increased vessel access to more southern locations may have implications on the safety of ocean navigation (Anon 2009). Tourism, the largest commercial activity in the Antarctic, is predicted to increase due to the extended season with reduced sea ice thickness (Anon 2009). The impact of the changes in the sea ice on the biomass and distribution of marine species is a very important issue for the regional management and conservation. Fisheries management and accessibility would change due to the altered sea ice extent (Anon 2009). The increased human presence might be a threat to ecosystems, for instance winter ice has usually provided a relief from the fishing pressure.
+
+
+
+#### Management options
+
+Options for preventing regime shift
+
+ Two new studies in 2014 state that since the WAIS has reached the early stage collapse phase, the shift is unstoppable (Joughin, Smith & Medley 2014, NASA in press). Joughin, Smith & Medley argue that it is difficult to foresee stabilization of the system unles CDW recedes sufficienty to reduce present level  of melting. 
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Johanna Yletyinen, Garry Peterson. West Antarctic ice sheet collapse. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2013-09-09</small>
+
+### References
+
+<small>
+
+- Abram NJ et al. 2013. Acceleration of snow melt in an Antarctic Peninsula ice core during the twentieth century. Nature Geoscience 6, 404u2013411.  
+- Abram NJ, et al. 2013. Acceleration of snow melt in an Antarctic Peninsula ice core during the twentieth century. Nature Geoscience 6, 404–411.  
+- Alley RB et al. 2007. Effect of sedimentation on ice-sheet grounding-line stability. Science, 315, 1838u201341. 
+- Anderson JB et al. 2002. The Antarctic Ice Sheet during the Last Glacial Maximum and its subsequent retreat history: a review. Quaternary Science Reviews, 21, 49u201370 
+- Arrigo KR. 2002. Ecological impact of a large Antarctic iceberg. Geophysical Research Letters 29, 8:1-8:4. 
+- Bamber JL et al. 2009. Reassessment of the potential sea-level rise from a collapse of the West Antarctic Ice Sheet. Science, 324, 901u20133. 
+- Barnes DKA & Hillenbrand CD. 2010. Faunal evidence for a late quaternary trans-Antarctic seaway. Global Change Biology 16, 3297u20133303 
+- Bindoff N, Rintoul S & Massom R. 2000. Bottom water formation and polynyas in Adelie Land, Antarctica. Papers and Proceedings of the Royal Society of Tasmania 133, 51u201356. 
+- Bintanja R et al. 2013. Important role for ocean warming and increased ice-shelf melt in Antarctic sea-ice expansion. Nature Geoscience 6, 376u2013379. 
+- Brierley A & Thomas D. 2002. Ecology of Southern Ocean pack ice. Advances in Marine Biology 43, 171u2013276. 
+- Bromwich DH et al. 2012. Central West Antarctica among the most rapidly warming regions on Earth. Nature Geoscience 6, 139u2013145. 
+- Caldeira K & Duffy PB. 2000. The Role of the Southern Ocean in Uptake and Storage of Anthropogenic Carbon Dioxide. Science 287, 620u2013622. 
+- Clark PU et al. 2002. Sea-Level Fingerprinting as a Direct Test for the Source of Global Meltwater Pulse IA. Science 295, 2438u20132441. 
+- Clarke A et al. 2007. Climate change and the marine ecosystem of the western Antarctic Peninsula. Philosophical Transactions of the Royal Society B: Biological Sciences 362, 149u2013166. 
+- Doake C et al. 1997. Breakup and conditions for stability of the northern Larsen Ice Shelf, Antarcticae. Nature 391, 778u2013780. 
+- Dowdeswell JA et al. 2008. Submarine glacial landforms and rates of ice-stream collapse. Geology 36, 819. 
+- Eicken H, Fischer H & Lemke P. 1995. Effects of the snow cover on Antarctic sea ice and potential modulation of its response to climate change. Annals of Glaciology 21, 69u2013376 
+- Fairbanks RG, 1989. A 17,000-year glacio-eustatic sea level record: influence of glacial melting rates on the Younger Dryas event and deep-ocean circulation. Nature 342, 637u2013642. 
+- Fyke JG et al. 2010. Surface Melting over Ice Shelves and Ice Sheets as Assessed from Modeled Surface Air Temperatures. Journal of Climate 23, 1929u20131936.  
+- Gomez N et al. 2010. Sea level as a stabilizing factor for marine-ice-sheet grounding lines. Nature Geoscience 3, 850u2013853.  
+- Goosse H et al. 2008. Consistent past half-century trends in the atmosphere, the sea ice and the ocean at high southern latitudes. Climate Dynamics 33, 999u20131016. 
+- Hellmer HH et al. 2012. Twenty-first-century warming of a large Antarctic ice-shelf cavity by a redirected coastal current. Nature 485, 225u20138. 
+- Ivins ER. 2009. Ice sheet stability and sea level. Science 324, 888u20139.  
+- Jacobs S et al. 1992. Melting of ice shelves and the mass balance of Antarctica. Journal of Glaciology 38, 375u2013387. 
+- Joughi I, Smith BE, Medley B. 2014. Marine ice sheet collapse underway for the Thwaites Glacier Basin, West Antarctica. Science. Published online 12 May 2014 [DOI:10.1126/science.1249055]  
+- Joughin I & Alley RB. 2011. Stability of the West Antarctic ice sheet in a warming world. Nature Geoscience 4, 506u2013513. 
+- King M et al. 2012. Lower satellite-gravimetry estimates of Antarctic sea-level contribution. Nature, 491, 586u20139.  
+- Kriegler E et al. 2009. Imprecise probability assessment of tipping points in the climate system. Proceedings of the National Academy of Sciences of the United States of America 106, 5041u20135046. 
+- Le Quu00e9ru00e9 C et al. 2007. Saturation of the southern ocean CO2 sink due to recent climate change. Science 316, 1735u20138. 
+- Lenton TM et al. 2008. Tipping elements in the Earthu2019s climate system. Proceedings of the National Academy of Sciences of the United States of America, 105, 1786u201393. 
+- Marshall GJ et al. 2006. The Impact of a Changing Southern Hemisphere Annular Mode on Antarctic Peninsula Summer Temperatures. Journal of Climate, 19, 5388u20135404. 
+- Massom RA & Stammerjohn SE. 2010. Antarctic sea ice change and variability u2013 Physical and ecological implications. Polar Science 4, 149u2013186. 
+- Mercer JH. 1978. West Antarctic ice sheet and CO2 greenhouse effect: a threat of disaster. Nature 271, 321u2013325. 
+- Mercer JH. West Antarctic ice sheet and CO2 greenhouse effect: a threat of disaster. 1978. Nature 271, 321u2013325. 
+- Moline MA et al. 2008. High latitude changes in ice dynamics and their impact on polar marine ecosystems. Annals of the New York Academy of Sciences 1134, 267u2013319.  
+- NASA 2014.West Antarctic Glacier Loss Appears Unstoppable.(Title for the online news. Geophysical Research Letters article in press). http://www.jpl.nasa.gov/news/news.php?release=2014-148 (accessed 15th May 2014.) 
+- Naish T et al. 2009. Obliquity-paced Pliocene West Antarctic ice sheet oscillations. Nature 458, 322u2013328. 
+- Nicholls KW. 1997. Predicted reduction in basal melt rates of an Antarctic ice shelf in a warmer climate. Nature 388, 460u2013462. 
+- Nicholls RJ et al. 2011. Sea-level rise and its possible impacts given a u201cbeyond 4u00b0C worldu201d in the twenty-first century. Philosophical transactions. Series A, Mathematical, physical, and engineering sciences 369, 161u201381 
+- Notz D. 2009. The future of ice sheets and sea ice: between reversible retreat and unstoppable loss. Proceedings of the National Academy of Sciences of the United States of America 106, 20590u20135. 
+- Oppenheimer M & Alley RB. The West Antarctic Ice Sheet and Long Term Climate Policy. 2004. Climatic Change 64, 1u201310. 
+- Oppenheimer M.1998. Global warming and the stability of the West Antarctic Ice Sheet. Nature 393, 325u2013332. 
+- Ou2019Reilly J & ACOS, 2013. Updateu202f: The Future of the West Antarctic Ice Sheet. Information paper submitted by ASOC. XXXVI Antarctic Treaty Consultative Meeting. Brussels. 
+- Pollard D & DeConto RM. 2009. Modelling West Antarctic ice sheet growth and collapse through the past five million years. Nature 458, 329u201332. 
+- Price MR, Heywood KJ & Nicholls KW. 2008. Ice-shelf u2013 ocean interactions at Fimbul Ice Shelf, Antarctica from oxygen isotope ratio measurements. Ocean Science 4, 89u201398.  
+- Pritchard HD et al. 2012. Antarctic ice-sheet loss driven by basal melting of ice shelves. Nature 484, 502u20135. 
+- Rignot E et al. 2011. Acceleration of the contribution of the Greenland and Antarctic ice sheets to sea level rise. Geophysical Research Letters 38, 106u2013110. 
+- Robertson R. et al. 2002. Long-term temperature trends in the deep waters of the Weddell Sea. Deep-sea Research Part ii-Topical Studies in Oceanography, 49, 4791u20134806. 
+- Rogers AD et al. (eds.) 2012. Antarctic Ecosystems: An Extreme Environment in a Changing World., Published Online: 29 FEB 2012. Available at: http://onlinelibrary.wiley.com/book/10.1002/9781444347241. 
+- Sarmiento J et al. 1998. Simulated response of the ocean carbon cycle to anthropogenic climate warming. Nature 393, 245u2013249. 
+- Scambos TA et al. 2000. The link between climate warming and break-up of ice shelves in the Antarctic Peninsula. Journal of Glaciology, 46, 516u2013530.  
+- Scherer RP, 1991. Quaternary and Tertiary microfossils from beneath Ice Stream B: Evidence for a dynamic West Antarctic Ice Sheet history. Palaeogeography, Palaeoclimatology, Palaeoecology, 90, 395u2013412. 
+- Schoof C. 2007. Ice sheet grounding line dynamics: Steady states, stability, and hysteresis. Journal of Geophysical Research 112, F03S28.  
+- Shepherd A & Wingham D. 2007. Recent sea-level contributions of the Antarctic and Greenland ice sheets. Science 315, 1529u201332. 
+- Steig EJ et al. 2013. Recent climate and ice-sheet changes in West Antarctica compared with the past 2,000 years. Nature Geoscience 6, 372u2013375.  
+- Thoma M et al. 2008. Modelling Circumpolar Deep Water intrusions on the Amundsen Sea continental shelf, Antarctica. Geophysical Research Letters 35, L18602.  
+- Thomas DN & G. S. Dieckmann GS. (eds.) 2010. Sea Ice. Oxford, UK: Wiley-Blackwell. Available at: http://doi.wiley.com/10.1002/9781444317145 [Accessed July 9, 2013]. 
+- Thomas R et al. 2004. Accelerated sea-level rise from West Antarctica. Science 306, 255u20138. 
+- Thompson DWJ & Solomon S. 2002. Interpretation of recent Southern Hemisphere climate change. Science 296, 895u20139. 
+- Turner J & Overland J. 2009. Contrasting climate change in the two polar regions. Polar Research 28, 146u2013164. 
+- Turner J et al. 2009. Nonu2010annular atmospheric circulation change induced by stratospheric ozone depletion and its role in the recent increase of Antarctic sea ice extent. Geophysical Research Letters 36, L08502. 
+- Tynan C. 2010. Sea ice: A critical habitat for polar marine mammals and birds. In Thomas DN & G. S. Dieckmann GS. (eds.) 2010. Sea Ice. Oxford, UK: Wiley-Blackwell. Available at: http://doi.wiley.com/10.1002/9781444317145 [Accessed July 9, 2013]. 
+- Vaughan DG. 2008. West Antarctic Ice Sheet collapse u2013 the fall and rise of a paradigm. Climatic Change 91, 65u201379. 
+- Velicogna I & Wahr J. 2006. Measurements of time-variable gravity show mass loss in Antarctica. Science 311, 1754u20136 
+- Worby A et al. 2009 Position Analysis: Changes to Antarctic Sea Ice: Impacts. The Antarctic Climate & Ecosystems Cooperative Research Centre. ISSN 1835-7911. 
+- Zhang J. 2007. Increasing Antarctic Sea Ice under Warming Atmospheric and Oceanic Conditions. Journal of Climate 20, 2515u20132529.
+
+</small>
+

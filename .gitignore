@@ -3,7 +3,7 @@
 .Rapp.history
 .RData
 .Ruserdata
-_site/
+_site/*
 .DS_Store
 *.Rda
 *.png
@@ -16,4 +16,3 @@ _site/site_libs
 *.html
 assets/
 cs*
-rs*

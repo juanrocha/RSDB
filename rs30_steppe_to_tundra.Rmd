@@ -1,0 +1,307 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 30
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Steppe to tundra
+
+**Main contributors**: Johanna Mård Karlsson, Nicole Reid, Rodrigo Martínez-Peña
+
+**Other contributors**: Garry Peterson, Juan Carlos Rocha
+
+Last update: 2016-09-15
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+Steppe (a grassland) to tundra (mosses and shrubs growing in waterlogged soils) is a regime shift that can occur in cold terrestrial ecosystems.  Tundra and steppe regime shift is typically found where permafrost occurs.  Steppe and tundra are primarily found in the Arctic, north of the tree line, where mean temperature below 10-12 C for the warmest month (Jonasson et al. 2000). Climate change and changes in the density of large herbivores are the main drivers of regime shifts between steppe and tundra. Climate changes that reduce soil moisture can favor steppe over tundra, and vice versa. Tundra is favored by moss growth, which is more limited by water than by nutrients. Steppe is favored by grass growth, which is improved by drier soils with available nutrients. Large herbivores can shape ecosystems through their impact on vegetation species composition, soil structure, and ecological dynamics. Large herbivore trampling and grazing can slow moss growth and convert tundra to steppe vegetation. At the end of the last ice age (12,000 yr BP), human hunting greatly reduced populations of large herbivores which may have contributed to a shift from grass-dominated steppe to moss-dominated tundra. In the 21st century, climate change together with the presence of horses, bison, and musk oxen could lead to shifts between steppe and tundra vegetation.
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Tundra
+
+
+**Key ecosystem processes**:
+
+- Primary production
+- Nutrient cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Freshwater
+- Livestock
+- Wild animal and plant products
+
+
+**Regulating services**:
+
+- Climate regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+- Knowledge and educational values
+- Spiritual and religious
+
+
+**Human well-being**:
+
+- Food and nutrition
+- Health (e.g. toxins
+- disease)
+- Livelihoods and economic activity
+- Security of housing & infrastructure
+- Cultural
+- Aesthetic and recreational values
+- Social conflict
+
+
+**Links to other regime shifts**:
+
+- Tundra to forest
+- Arctic sea-ice loss
+- Greenland ice sheet collapse
+- Peatland transitions
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Harvest and resource consumption
+- Species introduction or removal
+- Global climate change
+
+
+**Land use**:
+
+- Extensive livestock production (natural rangelands)
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Sub-continental (e.g. southern Africa
+- Amazon basin)
+
+
+**Time scale**:
+
+- Years
+- Decades
+
+
+**Reversibility**:
+
+- Hysteretic (difficult to reverse)
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+- Experiments
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+**Steppe**
+
+ The steppe vegetation coverage is dominated by grasses growing in dry soils (Eroglu et al. 2012). In this regime, herbivores increase nutrient availability by accelerating nutrient cycling. This increases primary production. During the Pleistocene epoch, arctic steppes sustained large grazing herbivores such as mammoths, bison and yaks etc. (Zimov 2005). Today, grasses still sustain reindeer/caribou population. Currently, The steppe communities of Yakutia, Siberia are confined to the terraces above floodplains and south facing slopes of the river valleys (Yurtzev, 1982).
+
+ **Tundra**
+
+ The tundra vegetation coverage is dominated by mosses and shrub such as dwarf birches and willows growing in waterlogged soils. The ecosystem has lower primary production and nutrient cycling thus the growth rate is slow. Moss growth is limited by moisture so the moist and nutrient low soil promote and sustain moss growth.
+
+
+
+#### Drivers and causes of the regime shift
+
+Climate and herbivory are the two direct drivers of shifts between steppe and tundra.
+
+ Herbivory has caused large-scale vegetation changes across the Arctic (Speed et al., 2009; Bråthen et al., 2007; van der Wal, 2005; Srivastava & Jefferies, 1996). Herbivores trample the vegetation and deposit feces to nutrient limited soils which promotes grass growth sustaining herbivore population. In the absence of herbivory, grass litter increases causing soil moisture to increase which reduces nutrient availability promoting the growth of unpalatable mosses.
+
+ Climate can act as a driver by changing air temperatures which is associated with changes in soil moisture. Soil moisture is key component in sustaining moss or grass coverage. Moss growth is more limited by water than by nutrients; however, nutrients are more available in drier soils which promote grass growth. Currently, climate is changing, in the long term whether steppe, tundra or another regime will dominate Arctic ecosystems in uncertain.
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+**Steppe to tundra**
+
+ Shifting from steppe to tundra had a great impact on provision of food for Pleistocene hunters as megafauna declined. Nonetheless, tundra currently provides ecosystem services. At local level, thermal insulation of the tundra prevents permafrost melting, which prevents destabilization and collapse of infrastructure (Schaefer 2012); tourism is also a cultural ecosystem service provided at this level.
+
+ At regional level, wellbeing of nomadic indigenous peoples such as Nenets, Enets, Sami, Nganasans and Selkups, are connected to Arctic that provide opportunities for grazing and food sources, as well as ecosystems that co-produce cultural ecosystem services i.e. production and conservation of indigenous knowledge, practices and believes, as well as production of scientific knowledge (Huntington 2013).
+
+ At global level, increasing air temperature due to climate change deepens the active layer of permafrost. However, soils covered by moss, permafrost is less susceptible to degradation (Ivanova 2003), this ecosystem service is essential since permafrost contains almost twice as much carbon as the atmosphere today and its effects would be irreversible at human time scale (Schaefer et al. 2012).
+
+ **Tundra to steppe**
+
+ Arctic soils covered by mosses, permafrost is less susceptible to degradation (Ivanova 2003). Transition from tundra to steppe implies loss of this buffering layer. Consequence, the following ecosystem services will be impacted:
+
+ Water availability. Local and regional freshwater dynamics will change leading to a decline in the number of lakes and wetlands (Wrona et al. 2016; Schaefer 2012).
+
+ Livestock production. Increased abundance of grassland, steppe might benefit both reindeer hunters and herders.
+
+ Protection from infrastructure destabilization. Pipelines, railways and power lines across the arctic are built on solid ground provided by the permafrost that if degraded their stability might be lost. This might cause economic costs and serious ecological damages (Schaefer, 2012).
+
+ Fire regulation. As moss tundra shifts to a drier regime, possibilities of wild fires will increase, which contributes to thermal erosion of permafrost (Schaefer, 2012).
+
+ Prevention of climate change. Permafrost degradation turns permafrost's carbon stock into a carbon source, which would accelerate climate change (Schuur et al. 2015). Loss of this ecosystem service impacts the global level, since permafrost contains twice as much carbon as the atmosphere and effects of release is irreversible at human time scale (Schaefer, 2012).
+
+ Cultural ecosystem services. Conservation of indigenous knowledge, practices and believes related to tundra would be lost, affecting the well being of t he Nenets, Enets, Sami, Nganasans and Selkups (Huntington, 2013).
+
+
+
+#### Management options
+
+**Preventing tundra-steppe regime shift**
+
+ Global temperatures rise as consequence of green house gasses emission. A large part of the world's soil-bound carbon is in the tundra areas, where the organic carbon is mainly locked up in frozen soil (permafrost). If the greenhouse gas-induced warming continues, permafrost will thaw (ACIA, 2004). Moss-tundra regime is highly desirable since it helps maintaining low subsoil temperatures (Ivanova 2003). This is important, because when the soil thaws in the summer, organic matter decomposes, and methane and carbon dioxide emissions are released to the atmosphere. This could result in a positive feedback loop, where warming increases the release of greenhouse gas emissions. Preventing the initiation of this feedback loop will help reduce global climate change and should be an important goal of the management arctic ecosystems (Schaefer et al. 2012).
+
+ To prevent this regime shift, greenhouse gas emissions must be reduced in order to avoid the effects of climate change. The planetary boundary value for atmospheric CO2 concentration is 350 ppm above pre-industrial level (Rockstrom et al. 2009). This was further supported by the COP21 agreement, a sign treaty, to limit temperature increase to 1.5 degrees Celsius compared to pre-industrial levels. These efforts are not enough to prevent the feedback loop, eliminating emission is the only solution. In the Artic, land management strategies can address feedback loop on the local level. In a study, by Post and Pederson (2008), a 5-year experimental investigation of Arctic plant community response to warming, showed that warming under continuous grazing pressure from muskoxen did not differ from plant composition without warming suggest that management of large herbivores may be an important aspect for mitigating ecosystem response to future climate change
+
+ **Supporting tundra-steppe regime shift**
+
+ Attempts are being made today to restore the Pleistocene steppe ecosystem on a limited spatial extent in Siberia. Sergey Zimov's Pleistonce Park, 160 km2, attempts to reestablish the steppe ecosystem by reintroducing megafauna to Northern Siberia (Republic of Yakutia). Zimov (2005) and colleagues tried to test if the 'key-herbivore´ hypothesis can be verified, as today's Holocene climate should be optimal for the Pleistocene steppe vegetation. The megafauna consisting of reindeer, moose, Yakutian horses, musk oxen and bison would influence the vegetation and soil composition, by trampling on grassland and returning nutrients to the soil through their manure (Zimov 2005). The grass root systems stabilize the soil and trampling reduces the albedo, exposing ground to colder temperatures, both would prevent permafrost from melting.
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Johanna Mård Karlsson, Nicole Reid, Rodrigo Martínez-Peña, Garry Peterson, Juan Carlos Rocha. Steppe to tundra. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2016-09-15</small>
+
+### References
+
+<small>
+
+- ACIA. Impacts of a Warming Arctic: Arctic Climate Impacts Assessment. Cambridge University Press. 2004.  
+- Bråthen, KA, RA Ims, NG Yoccoz,  P Fauchald, T Tvereaa, VH Hausner. 2007. Induced shift  in ecosystem productivity? Extensive scale effects of abundant large herbivores. Ecosystems 10:773-789.  
+- Chapin, F.S., 2005. Role of Land-Surface Changes in Arctic Summer Warming. Science, 310(5748), pp.657–660.  
+- Eroglu S., Toprak S., Urgan O, MD, Ozge E. Onur, MD, Arzu Denizbasi, MD, Haldun Akoglu, MD, Cigdem Ozpolat, MD, Ebru Akoglu, M., 2012. Far North: Plant Biodiversity and Ecology of Yakutia, 
+- Folke, C. et al., 2004. Regime Shifts , Resilience , in Ecosystem Management. Annual Review of Ecology, Evolution, and Systematics, 35(May), pp.557–581. 
+- Hollesen, JB, B Elberling and PE Jansson. 2011. Future active layer dynamics and carbon dioxide prodcution from thawing permafrost layers in Northeast Greenland. Global Change Biology, 17(2) 911-926 
+- Huntington, H. P. 2013. Chapter 18 Provisioning and cultural services. In: Meltofte, H. (ed). Arctic Biodiversity Assessment. Status and trends in Arctic biodiversity. Conservation of Arctic Flora and Fauna, Akureyri.  pp. 593 - 626. 
+- Ivanova, R., 2003. Seasonal thawing of soils in the Yana River valley, northern Yakutia. , pp.7–10.  
+- Jonasson, S, TV Callaghan, GR Shaver, and LA Nielsen. 2000. Arctic terrestrial ecosystems  and ecosystem function. In M. Nuttall and TV Callaghan ed. The Arctic, Environment, People, Policy 275-313 Hardwood academic Publishers Newark.  
+- Jorgenson, M.T., YL Shur, and ER Pullman. 2006. Abrupt increase in permafrost degradation in Arctic Alaska, Geophysical Research Letters. 33, LO2503 
+- Karlsson, JM, A. Bring, GD Peterson, LJ Gordon, G Destouni. 2011. Opportunities and limitations to detect climate-related regime shifts in inland Arctic ecosystems through eco-hydrological monitoring. Environmental Research Letter 6 
+- Nadelhoffer, KJ, AE Giblin, GR Shaver and JA Laundre. 1991. Effects of temperature  and substrata quality on element mineralization in six arctic soils Ecology 72: 242-253  
+- Natali, SM, EAG Shuur, M Mauritz, JD Schade, G. Celis, KG Crummer, C Johnston, J Krapek, E Pegoraro and VG Salmon and EE Webb. 2015. Permafrost thaw and soil moisture driving CO2 and CH4 release from upland tundra, Journal Geophysical Research: Biogeosciences, 120, 525-537 
+- Post, E. and  C Pedersen., 2008. Opposing plant community responses to warming with and without herbivores. Proceedings of the National Academy of Sciences of the United States of America, 105(34), pp.12353–12358. 
+- Rockström J. et al. 2009. Planetary Boundaries: Exploring the Safe Operating Space for Humanity. Ecology and Society 14(2),32. 
+- Schuur, E. and J. Bockheim, 2008. Vulnerability of permafrost carbon to climate change: Implications for the global carbon cycle. BioScience, 58(September), pp.701–714.  
+- Schuur, E.A.G. et al., 2015. Climate change and the permafrost carbon feedback. Nature, 520, pp.171–179. 
+- Shaver, GR and FS Chapin III. 1986. Effect of fertilizer on production and biomass of tussock tundra, Alaska, U.S.A   Arctic and Alpine Research 18 3:261-268. 
+- Skre, O and WC Oechel. 1979. Moss production in a black spruce Picea mariana forest with permafrost near Fairbanks, Alaska, as compared with two permafrost-free stands. Holarctic Ecology 2:249-254. 
+- Van der Wal, R and RW Brooker. 2004. Mosses mediate grazer impacts on grass abundance in arctic ecosystem. Functional Ecology 18:77-86. 
+- Welker JM, Fahnestock JT, and Jones MH. 2000. Annual CO, flux from dry and moist arctic tundra: Field responses to increases in summer temperature and winter snow depth. Climatic Change 44(1-2),139-150.  
+- Wolff, JO. 1980. The role of habitat patchiness in the population dynamics of snowshoe hares. Ecological Monographs 50:111-129. 
+- Wrona, FJ, M Johansson, JM Culp, A Jenkins, J Mård, IH Myers-Smith, TD Prowse, WF Vincent, and P.A. Wookey 
+- Zeng, H., G Jia, and BC Forbes. 2013. Shifts in Arctic phenology in response to climate and anthropogenic factors as detected from multiple satellite time series. Environmental Research Letter 8 
+- Zimov, A.S.A. VI Chuprynin, AP Orshko, FS Chapin III, JF Reynolds, and MC Chapin, 1995. Steppe-Tundra Transition?: A Herbivore-Driven Biome Shift at the End of the Pleistocene Published by?: The University of Chicago Press for The American Society of Naturalists , 146(5), pp.765–794. 
+- Zimov, S.A., 2005. Pleistocene Park?: Return of the Mammoth ’ s Ecosystem. Science, 308, pp.796–798.
+
+</small>
+

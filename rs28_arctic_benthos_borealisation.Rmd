@@ -1,0 +1,266 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 28
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Arctic benthos borealisation
+
+**Main contributors**: Sara  Andersson, Noah Linder, Katharina Fryers Hellquist, Linn Järnberg
+
+**Other contributors**: Thorsten Blenckner, Juan Carlos Rocha
+
+Last update: 2015-03-23
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+A regime shift occurred on the west coast of Svalbard in 1996 and 2000; the former Arctic benthos was mainly constituted by red calcareous algae and filter feeders whereas the present subarctic benthos is dominated by macroalgae. The main drivers of this shift are increases in sea surface temperature and inflow of light that are both due to global warming and changes in the North Atlantic Oscillation. Changes in benthos could impact other trophic levels, potentially affecting commercial fisheries as well as tourism. The implications for ecosystem services and human well-being are highly uncertain.Management options are mainly to reduce greenhouse gases to combat global warming and an adaptive management approach is also proposed on a local scale. 
+
+  
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Marine & coastal
+- Polar
+
+
+**Key ecosystem processes**:
+
+- Primary production
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Fisheries
+- Wild animal and plant products
+
+
+**Regulating services**:
+
+NA
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+- Knowledge and educational values
+
+
+**Human well-being**:
+
+- Food and nutrition
+- Livelihoods and economic activity
+- Cultural
+- Aesthetic and recreational values
+
+
+**Links to other regime shifts**:
+
+- Arctic sea-ice loss
+- Fisheries collapse
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Global climate change
+
+
+**Land use**:
+
+- Fisheries
+- Tourism
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake
+- catchment
+- community)
+
+
+**Time scale**:
+
+- Years
+
+
+**Reversibility**:
+
+- Unknown
+
+
+**Evidence**:
+
+- Contemporary observations
+- Experiments
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+A regime shift in the rocky bottom communities in two fjords (Smeerenburgfjord and Kongsfjord) on the west coast of Svalbard occurred in 2000 and 1996, respectively. A phenomenon that could occur in areas with similar conditions throughout the Arctic. Regional, but also a local regime shifts will have social-ecological effects due to trophic cascades through the food-web (Grebmeier et al. 2006) with potential consequences for the local low-density human population of Svalbard and for commercial fisheries operating in the area.  
+
+ With increasing light availability and an increase in sea surface temperature (SST) caused by climate change, the Arctic climate zone will become more similar to subarctic conditions and thus promote species that thrive in these regions. It has been proposed that erect macroalgae will benefit from these novel conditions (Bischoff and Wiencke 1993) thus causing a borealisation of the Arctic benthos. 
+
+ **Alternate regime 1 – Arctic benthos**
+
+ With local variation in species composition, the substrate in Kongsfjord was dominated by sea anemones and red calcareous algae, whereas Smeerenburgfjord consisted of red calcareous algae and several different filter feeders such as sea anemones, sea squirts and barnacles (Kortsch et al. 2012). According to Johansen (1981), the dominating species was the red calcareous algae (*Lithothamnion sp.*) that thrives in low light and low SST. 
+
+ **Alternate regime 2 – Subarctic benthos**
+
+ After the regime shift had occurred, the species composition was more characteristic to subarctic regions (Kortsch et al. 2012). In Kongsfjord, brown algae cover increased from 8% to 80% in 1996 and thereafter fluctuated around 40%, whereas in 2000 the benthos in Smeerenburgfjord consisted of several brown and red macroalgae species (Kortsch et al. 2012). The species found in this new borealised state (e.g. *Desmarestia sp.*) generally have high light and temperature requirements (Bischoff and Wiencke 1993).
+
+  
+
+
+
+#### Drivers and causes of the regime shift
+
+The two key drivers regulating the regime shift in the Arctic benthos are sea ice cover and sea surface temperature (Kortsch et al. 2012). Over the last few decades, there has been a simultaneous increase in sea surface temperature and in the length of the ice-free season in the region (Kortsch et al. 2012), which Beuchel et al*.* (2006) explain as effects of global warming and changing patterns of the North Atlantic Oscillation (NAO). NAO is a large-scale climatic phenomenon that regulates atmospheric circulation across the North Atlantic, and its changing patterns have led to larger inflows of warm currents in the studied region (Beuchel, Gulliksen, and Carroll 2006). Changing NAO patterns are likely to affect the climatic conditions in different ways in different regions of the Arctic (AICA 2005), which makes it hard to generalize the impacts in benthic structure on a regional scale. 
+
+ The reduced sea ice cover in the fjords enhances the light conditions in the water column, which, coupled with higher SST, promotes reproduction and growth of erect, boreal macroalgae that thrive under conditions with higher temperature and more light (Bischoff and Wiencke 1993). Correspondingly, the red calcareous algae that dominates in the Arctic regime is disfavoured by the changed conditions as it thrives under low light and low temperature conditions (Kortsch et al. 2012).
+
+  
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+Benthos plays an important role in marine ecosystems, as food and habitat provider for marine organisms such as commercial fish species (Snelgrove 1999). The shift from Arctic to subarctic benthos could lead to large ecosystem changes that affect provisioning (e.g. food and wild animal products), recreational, and aesthetic ecosystem services. On a local scale, the regime shift led to higher local biodiversity (Kortsch et al. 2012), and will potentially lead to larger fish stocks and more primary production, e.g. more carbon cycling (Grebmeier et al. 2006; Snelgrove 1999). Regionally, biodiversity could decrease due to homogenisation of different ecosystems (Weslawski et al. 2011). If, and how, recreational and aesthetic service provision will change as a result of the regime shift is uncertain.
+
+ The potential increase in fish stocks in the subarctic regime would be beneficial for the commercial fishing industry that operates near Svalbard, and the consumers that enjoy their products. Carbon cycling is beneficial on a global scale, but the local contribution to global carbon cycling is negligible. Trophic cascades could affect local livelihoods and tourists if recreational ecosystem services are changed, and effects can be both increase and decrease in human well-being. 
+
+  
+
+
+
+#### Management options
+
+Since the main drivers of the regime shift are caused by global warming, decreasing the greenhouse gas emissions to reduce atmospheric temperatures is arguable the most powerful point of intervention. This is, however, a management option associated with several difficulties: a) any serious attempt to deal with climate change would have to be on a global scale, involving a multitude of nations and stakeholders, which so far has proven a difficult task, b) due to time lags in the climate system the borealisation of the benthos could occur in more places across the Arctic than what has been observed, even with successful greenhouse gas reduction, and c) the new regime dominated by macroalgae could be stable, and just reversing or slowing down the effects of global warming might not be enough to push the system back into the first regime.
+
+ Any local scale management options aimed to successfully inhibit the borealisation are hard to find due to the global and regional processes that are driving the regime shift. Realising the fact that there are going to be continued changes, taking an adaptive management approach in handling this ecosystem might be the best local management option. Adaptive management is often suggested when facing uncertainty, and its goal is to reduce these uncertainties over time, but also to continuously learn more about the system (Holling 1978). In Svalbard this could mean ecosystem monitoring and research with the goal of increasing knowledge about the Arctic benthos, which would enable decision-making based on up-to-date information about the state of the system. Svalbard can be considered unique in its management conditions, since there is a symbiotic relationship between the tourism industry, research activities and governing institutions (Viken 2010), something that could provide good opportunities for an adaptive management approach.
+
+  
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Sara  Andersson, Noah Linder, Katharina Fryers Hellquist, Linn Järnberg, Thorsten Blenckner, Juan Carlos Rocha. Arctic benthos borealisation. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2015-03-23</small>
+
+### References
+
+<small>
+
+- Beuchel, Frank, Bjørn Gulliksen, and Michael L. Carroll. 2006. “Long-Term Patterns of Rocky Bottom Macrobenthic Community Structure in an Arctic Fjord (Kongsfjorden, Svalbard) in Relation to Climate Variability (1980–2003).” Journal of Marine Systems 63(1-2):35–48. 
+- Bischoff, B., and C. Wiencke. 1993. “Temperature Requirements for Growth and Survival of Macroalgae from Disko Island (Greenland).” Helgoländer Meeresuntersuchungen 47(2):167–91.  
+- Drinkwater, Kenneth F. 2006. “The Regime Shift of the 1920s and 1930s in the North Atlantic.” Progress in Oceanography 68(2-4):134–51. 
+- Grebmeier, Jacqueline M. et al. 2006. “A Major Ecosystem Shift in the Northern Bering Sea.” Science (New York, N.Y.) 311(5766):1461–64.  
+- Holling, C. S. 1978. Adaptive Enviromental Assessment and Management. New York: John Wiley & Sons. 
+- IPCC. 2013. Climate Change 2013: The Physical Science Basis. Cambridge, United Kingdom andNew York, NY, USA: Cambridge University Press. 
+- Johansen, H. W. 1981. Coralline Algae, A First Synthesis. CRC Press. 
+- Kortsch, Susanne et al. 2012. “Climate-Driven Regime Shifts in Arctic Marine Benthos.” Proceedings of the National Academy of Sciences of the United States of America 109(35):14052–57.  
+- Snelgrove, Paul V. R. 1999. “Getting to the Bottom of Marine Biodiversity?: Sedimentary Habitats Ocean Bottoms Are the Most Widespread Habitat on Earth and Support High Biodiversity and Key Ecosystem Services.” BioScience 49(2):129–38. 
+- Viken, Arvid. 2010. “Tourism, Research, and Governance on Svalbard: A Symbiotic Relationship.” Polar Record 47(04):335–47. 
+- Weslawski, Jan M. et al. 2011. “Climate Change Effects on Arctic Fjord and Coastal Macrobenthic Diversity—observations and Predictions.” Marine Biodiversity 41(1):71–85.
+
+</small>
+

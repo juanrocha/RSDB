@@ -1,0 +1,268 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 13
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Thermohaline circulation
+
+**Main contributors**: Juan Carlos Rocha, Rolands Sadauskis
+
+**Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
+
+Last update: 2011-02-28
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+A regime shift may be perceived in Thermohaline circulation (THC) as it might stop due to the increasing depletion of Arctic ice resulting in a catastrophic release of freshwater to the North Atlantic Ocean. This would balance out the differences in water salinity and density between Southern and Northern Atlantic Ocean. Therefore this would lead to collapse of water transport from tropical Atlantic to North Atlantic. Thus the high latitudes of the North Atlantic Ocean are perceived as key regions for triggering the collapse of THC. The regime shift is initiated by the main driver - input of Greenhouse gases in atmosphere. Particularly CO2 continues to increase the atmospheric temperatures thus leading to decrease in Arctic ice volumes. Therefore the amount of freshwater entering the ocean waters decline the salinity and density of the water which weakens the density driven water transport. Several essential mechanisms such as freshwater-overturning mechanism, water temperature-density mechanism and evaporation-salinity mechanism are proposed to weaken the THC. Current management strategies primarily relate to the decrease of greenhouse gas emissions on a global scale.
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Marine & coastal
+
+
+**Key ecosystem processes**:
+
+- Primary production
+- Water cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Food crops
+- Livestock
+- Fisheries
+
+
+**Regulating services**:
+
+- Climate regulation
+
+
+**Cultural services**:
+
+NA
+
+**Human well-being**:
+
+- Food and nutrition
+- Livelihoods and economic activity
+- Security of housing & infrastructure
+- Social conflict
+
+
+**Links to other regime shifts**:
+
+- Greenland ice sheet collapse
+- Monsoon
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Global climate change
+
+
+**Land use**:
+
+NA
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Sub-continental (e.g. southern Africa
+- Amazon basin)
+- Global
+
+
+**Time scale**:
+
+- Decades
+- Centuries
+
+
+**Reversibility**:
+
+- Unknown
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+
+
+**Confidence: existence of the regime shift**
+
+- Speculative – Regime shift has been proposed, but little evidence as yet
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+Thermohaline circulation is complex, but can be summarised as a global scale deep overturning of water masses, with sinking motions occurring in the northern Atlantic and around Antarctica and a transport of relatively warm surface waters towards these sinking regions [Steffen et al. 2004]. The term thermohaline circulation thus refers to a particular driving mechanism; it is a physical, not an observational concept.
+
+ **Strong Thermohaline circulation** 
+
+ THC regime can be characterized by:
+
+ * Deep water currents formation in the high latitudes of both hemispheres;
+* Spreading of deep waters mainly as deep western boundary currents.
+* Upwelling (or upwards movement) of deep waters. It is thought to take place mainly in the Antarctic Circumpolar Current region, possibly aided by the wind.
+* Near-surface currents: these are required to close the flow [Rahmstorf et al. 2006]
+
+ **Collapse of the Thermohaline circulation**
+
+ This regime is characterized by weak formation of the dense and saline high latitude deep waters due to the increased influx of freshwater. The decreased salinity of the deep waters is weakening the density driven water movement towards south. The transport of less dense and saline waters from south towards north is decreased causing additional atmospheric temperature increase in tropical areas.
+
+
+
+#### Drivers and causes of the regime shift
+
+Increasing greenhouse gas concentration from anthropogenic sources is predicted to cause a rise in global mean temperatures [Cubasch et al. 2001]. One of the most common anthropogenic greenhouse gases is carbon dioxide (CO2). It is considered to be the main driver for this regime shift and is typically operating in global scale due to the global input of CO2 in the atmosphere. Increasing CO2 levels in atmosphere slowly enhance the mean atmospheric temperature. This results in weakening ice-albedo mechanism for the initial regime as a result of increased atmospheric temperatures and changes in albedo. The increasing freshwater influx from loss of ice is initiating the two main mechanisms for the new regime: freshwater-overturning mechanism and the precipitation-river runoff mechanism. Thus, new processes such as increased evaporation, river runoff, changes in water salinity and density are activated causing the system to shift to a new regime. The influence of this driver is well established. Another cause for the regime to shift is the burning of fossil fuels such as coal and natural gas. It is occurring regionally but has global impact and is well established in the literature.
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+The weakening of THC has influence on global water regulation as water circulations in Global scale are influenced by the changes in temperature, salinity and density. In response, climate regulation is altered and changed as the transport of heat is distributed in a different pattern. The water mass and heat circulation is not transporting the heat towards Northern latitudes. This could lead to increased hurricane activity, a southward shift of tropical rainfall belts with resulting agricultural impacts, and disruptions to marine ecosystems. Therefore fisheries, livestock and food crops as provisioning services are potentially affected.
+
+ Food crisis and emigration are potential threats in the regions that are subjected to the loss of these services (Barnett and Adger, 2007). In addition to the above impacts, regional changes in sea level would project sea level rise of up to 80 cm in the North Atlantic [Knutti et al. 2002]. This could affect the coastlines of the United States, Canada, and Europe causing coastal erosion and affecting security of housing and infrastructure [Delworth et al. 2008]. The marine biodiversity of flora and fauna would change as the salinity and temperature would drive the introduction of new species that are able to live in the new environment. This would affect the livelihoods and economic activity of local fishermen as they would have to adapt to new circumstances. Schmittner et al. (2007) show that changes in Atlantic circulation can have large effects on marine ecosystems and biogeochemical cycles, even in areas remote from the Atlantic, such as the Indian and North Pacific Oceans. Although loss of THC could plunge Western Europe into conditions much colder than our current climate, on the basis of our current understanding of the climate system, such a scenario appears very unlikely. On the multidecadal to century time scale, it is very likely that Europe and North America will warm in response to increasing greenhouse gases (although natural variability and regional shifts could lead to periods of decadal-scale cooling in some regions) [Delworth et al. 2008]. A warmer and more stratified North Atlantic would also take up less anthropogenic CO2, thus adding to the climate warming [Clark et al. 2002]. Substantial warming would occur over the United States and Mexico, with weaker warming over Western Europe [Schmittner et al. 2007; Broecker et al. 1997].
+
+
+
+#### Management options
+
+The options for potentially preventing regime shift or restoring the desirable regime overlap. This potential regime shift mainly relate to the increase of greenhouse gas input (the main driver) in to the atmosphere at a global scale. Therefore decrease in CO2 emissions and other greenhouse gases has to be achieved in order to prevent further climate warming leading to large influx of freshwater from the depletion of Arctic ice. In the best-case scenario, it may be possible to avert a regime change in a situation where the underlying driver(s) of change are amenable to fast manipulation through management, and where there are not substantial lags in ecosystem response. In the case of the THC neither of these factors hold: the underlying causes of global warming appear very difficult to address through rapid changes in management, and there are substantial inertias in ecosystem response to changes in the driving factors. Therefore an early warning system primarily would be useful in providing advance warning of a substantial coming change in ecosystem conditions, but is unlikely to be useful in averting the regime change.
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Juan Carlos Rocha, Rolands Sadauskis, Reinette (Oonsie) Biggs, Garry Peterson. Thermohaline circulation. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-28</small>
+
+### References
+
+<small>
+
+- Barnett J, Adger WN (2007) Climate change, human security and violent conflict. Journal of Experimental Marine Biology and Ecology 26:639u2013655. 
+- Bitz CM, Gent PR, Woodgate RA, Hall A, Holland MM, and Lindsay R. 2006. The influence of sea ice on ocean heat uptake in response to increasing CO2. J. Clim 20, 2437-2450. 
+- Bond G, Showers W, Elliot M, Evans M, Lotti R, Hajdas I, Bonani G, Johnsen SJ, 1999. The North Atlantic’s 1-2 kyr climate rhythm: Relation to Heinrich events, Dansgaard/Oescheger cycles and the Little Ice Age. In: Clark PU, Webb RS, Keigwin LD (eds) Mechanisms of global climate change at millennial time scales. American Geophysical Union, Washington. USA.35-58. 
+- Broecker WS. 1997. Thermohaline Circulation, the Achilles Heel of Our Climate System: Will Man-Made CO2 Upset the Current Balance? Science 278,1582 – 1588. 
+- Clark PU, Pisias NG, Stocker TF, Weaver AJ. 2002. The role of the thermohaline circulation in abrupt climate change. Nature 415,863-869. 
+- Cubasch U. et al. 2001. Projections of future climate change. Climate Change 2001: The Scientific Basis, Houghton JT, et al., Eds., Cambridge University Press. 525–582. 
+- Delworth TL, Clark PU, Holland M, Johns WE, Kuhlbrodt T, Lynch-Stieglitz J, Morrill C, Seager R, Weaver AJ, and Zhang R. 2008. The potential for abrupt change in the Atlantic Meridional Overturning Circulation. In: Abrupt Climate Change. A report by the U.S. Climate Change Science Program and the Subcommittee on Global Change Research. U.S. Geological Survey, Reston, VA, pp. 117–162. 
+- Higgins PAT. and Schneider SH. 2005. Long-term potential ecosystem responses to greenhouse gas-induced thermohaline circulation collapse. Global Change Biology 11,699-709. 
+- Holland MM, Bitz CM, and Tremblay B. 2006. Future abrupt reductions in the summer Arctic sea ice. Geophys. Res. Lett. 33. 
+- IPCC 2007. Climate Change 2007. The Physical Science Basis. Cambridge University Press, New York. 
+- Knutti R, Stocker TF. 2002. Limited predictability of the future thermohaline circulation close to an instability threshold. J Climate 15,179-186. 
+- Lenton, T. et al. 2008. Tipping elements in the Earth's climate system. Proceedings of the National Academy of Sciences 105, 1786 . 
+- Lindsay RW, and Zhang J. 2005. The thinning of Arctic sea ice, 1988– 2003: Have we passed a tipping point?, J. Clim., 18,4879– 4894. 
+- Lu RY, and Dong BW. 2008. Response of the Asian summer monsoon to a weakening of Atlantic thermohaline circulation. Adv. in Atmos. Sci. 25,723-736. 
+- Otterå OH, Drange H, Bentsen M, Kvamstø NG, and Jiang D. 2004. Transient response of the Atlantic meridional overturning circulation to enhanced freshwater input to the Nordic Seas-Arctic Ocean in the Bergen Climate Model. Tellus, 56A, 342-361. 
+- Peterson BJ, Holmes RM, McClelland JW, Vorosmarty CJ, Lammers RB, Shiklomanov AI, Shiklomanov IA, Rahmstorf S. 2002. Increasing river discharge to the Arctic Ocean. Science 298,2171-2173. 
+- Rahmstorf S. 2000. The thermohaline ocean circulation—A system with dangerous thresholds?, Clim. Change 46,247–256. 
+- Rahmstorf S. 2006. Thermohaline Ocean Circulation. In: Encyclopedia of Quaternary Sciences, Edited by Elias SA. Elsevier, Amsterdam. 
+- Rigor IG, Wallace JM, and Colony RL. 2002. Response of sea ice to the Arctic Oscillation. J. Climate 15,2648–2668. 
+- Ruhlemann C, Mulitza S, Muller PJ, Wefer G, Zahn R. 1999. Warming of the tropical Atlantic Ocean and slow down thermocline circulation during the last deglaciation. Nature 402,511-514. 
+- Schmittner A, Brook EJ, & Ahn J. 2007.  Ocean Circulation: Mechanisms and Impacts - Past and Future Changes of Meridional Overturning (eds Schmittner, A, Chiang JCH, & Hemming SR.) Geophysical Monograph Series, American Geophysical Union 173,209–246. 
+- Steffen W, Sanderson A, Jager J, Tyson PD, Moore B III, et al. 2004. Gloabl change and the Earth system: A Planet Under Pressure. Heidelberg: Springer-Verlag. 239-242. 
+- Stouffer RJ, Yin J, Gregory JM, Dixon KW, Spelman MJ, Hurlin W, Weaver AJ, Eby M, Flato GM, Hasumi H, Hu A, Jungclaus JH, Kamenkovich IV, Levermann A, Montoya M, Murakami S, Nawrath S, Oka A, Peltier WR, Robitaille DY, Sokolov A, Vettoretti G, Weber SL. 2006. Investigating the causes of the response of the thermohaline circulation to past and future climate changes. Journal of Climate 19,1365-1387. 
+- Zhang R, Delworth TL. 2005. Simulated tropical response to a substantial weakening of the Atlantic thermohaline circulation. Journal of Climate 18, 1853-1860. 
+- Zhang X, and Walsh JE. 2006. Towards a seasonally ice-covered Arctic Ocean: Scenarios from the IPCC AR4 simulations, Journal of Climate 19,1730– 1747. 
+- Zickfeld K, Eby M, and Weaver AJ. 2008. Carbon-cycle feedbacks of changes in the Atlantic meridional overturning circulation under future atmospheric CO2, Global Biogeochem. Cycles, 22.
+
+</small>
+

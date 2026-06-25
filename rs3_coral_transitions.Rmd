@@ -1,0 +1,302 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 3
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Coral transitions
+
+**Main contributors**: Juan Carlos Rocha
+
+**Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson, Albert Norström
+
+Last update: 2011-02-25
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+Regime shifts in coral reefs typically involve a change in species dominance from hard corals (3D structure) to algal dominance. Less commonly documented shifts include shifts from hard corals to soft coral dominance, corallimorpharians, urchin barrens or sponge dominance. All of these regime shifts result in loss of diversity and structural complexity, and are typically triggered by a combination overfishing, pollution, diseases and climate change. Loss of biodiversity and coral bleaching make coral systems more vulnerable to such stressors. 
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Marine & coastal
+
+
+**Key ecosystem processes**:
+
+- Soil formation
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Fisheries
+- Wild animal and plant products
+
+
+**Regulating services**:
+
+- Water purification
+- Regulation of soil erosion
+- Pest & disease regulation
+- Natural hazard regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+- Knowledge and educational values
+- Spiritual and religious
+
+
+**Human well-being**:
+
+- Food and nutrition
+- Livelihoods and economic activity
+- Security of housing & infrastructure
+- Cultural
+- Aesthetic and recreational values
+
+
+**Links to other regime shifts**:
+
+- Freshwater eutrophication
+- Forest to savanna
+- Fisheries collapse
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Harvest and resource consumption
+- External inputs (e.g. fertilizers
+- pest control
+- irrigation)
+- Adoption of new technology (e.g. new fishing nets)
+- Species introduction or removal
+- Disease
+- Soil erosion & land degradation
+- Environmental shocks (e.g. fire
+- floods
+- droughts)
+- Global climate change
+
+
+**Land use**:
+
+- Fisheries
+- Conservation
+- Tourism
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake
+- catchment
+- community)
+
+
+**Time scale**:
+
+- Years
+
+
+**Reversibility**:
+
+- Hysteretic (difficult to reverse)
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+- Experiments
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+Regime shifts in coral systems are usually associated with a change in the species dominance of this ecological community, and consequent changes in the ecosystem structure. Coral reefs are marine ecosystems, three-dimensional shallow-water structures dominated by sclearactinean or hard corals(Bellwood et al. 2004). The most well documented regime shifts entail shifts from hard coral to fleshy seaweed (macroalgae) dominance. However, shifts from hard coral to corallimorpharians dominance, soft coral dominance, sponge dominance, and urchin barrens states have also been documented(Norström et al. 2009).
+
+ **Coral dominated reefs**
+
+ Corals reefs are marine communities considered one of the most biodiverse and economically important ecosystems on the planet(Hoegh-Guldberg et al. 2007). Coral reefs are old calcareous tridimensional structures created by corals - coral polyps colonies in symbiosis with microscopic algae. This regime implies high biodiversity and three dimensional habitat complexity that offer shelter to other species.
+
+ Coral reefs occupy less than 0.5% of ocean floor but sustain up to 25% of marine biodiversity, and produce at least 10% of fish consumed by humans(Moberg and Folke 1999). Due to their three dimensional structure coral reefs host up to 60 000 species of plants and animals(Moberg and Folke 1999); and this rich diversity makes coral reefs a target for tourism. In over 100 countries, coral reefs are major natural and economic resources(Goreau and Hayes 1994). For example, coral reefs are one of the major attractions in the Carribean.  In that region tourism is a major source of foreign currency. In some Carribean countries tourism accounts for up to half of nation's gross domestic product(Hoegh-Guldberg et al. 2007).
+
+ Coral reefs can also reduce coastal erosion by reducing the impact of ocean currents and waves.  Consquently, intact coral reefs protect coastal infrastructure and valuable sandy beaches.  Furthermore, increases in erosion can result in the degradation or loss of other coastal ecosystems such as mangroves and sea-grasses areas, which provide valuable ecosystem services such as fish nurseries(Moberg and Folke 1999, Hoegh-Guldberg et al. 2007).
+
+ **Algae dominated reefs**
+
+ Algae dominated benthos appear when algae overgrow corals. Submarine algal emerge and reduce coral growth, eventually leading to the loss of the habitat complexity of coral reefs(Bellwood et al. 2004).  Algae dominated reefs have lower biodiversity, fish production, and provide less protection from coastal erosion.  There is also less primary production on algae dominated reefs(Moberg and Folke 1999).
+
+ **Coralimorpharians, soft corals and sponges**.
+
+ Although less documented, other regimes can dominate former coral reefs when dramatically disturbed (Bruno et al. 2009, Norström et al. 2009). Norström et a. (2009)reports that system dominated by coralimorpharians, soft corals, and sponges are alternative regimes where coral patches can fall when strongly disturbed. Corallimorpharians, soft corals and sponges are thought to reduce habitat complexity and hence biodiversity. Thus, one may expect to see fisheries production and tourism services reduced. However, because such systems are not well studied it is unclear to what extent the ecosystem services provided by coral reefs are reduced.
+
+ **Urchin barrens**
+
+ Urchins are herbivores that live on coral reefs.  In the absence of predatory fish, urchins can become the dominant grazer on reefs and produce urchin barrens.  Urchin barrens inhibit coral growth, because urchins erode calcium carbonate from living and dead corals eroding reef structure.  When urchins are present at densities high enough that their erosion exceeds coral growth, urban barrens can form(Norström et al. 2009).
+
+ Urchin barren are the regime with most severe habitat complexity loss, which reduces habitat for other species.  There is low production of fish, and the urchin populations are vulnerable to disease.  However, urchin can be a valuable species when harvested, therefore urchin barrens can support an urchin harvest. 
+
+
+
+#### Drivers and causes of the regime shift
+
+Coral regime shifts are driven by multiple drivers, including overfishing, pollution, disease, global warming and ocean acidification(Bellwood et al. 2004, Bruno et al. 2007, Mumby et al. 2007). The hard coral regime is more desirable than the other five regimes for most people, because of the inherent biological, social and economical importance of coral reefs.
+
+ All regime shifts from hard coral dominated to any of the alternative regimes are influenced by the same set of drivers. However, differences in the resulting regime are produced by contextual features or the ordering of events. For example, coral reef systems in the Indian Ocean are more likely to shift towards coralimorpharians, soft corals or sponges since algal grazing herbivores are more persistent than they are in the Caribbean, where macro-algae dominance is more common. The role of different drivers is relatively consistent across cases, but variation in their impact, timing and interaction likely produce different types of regime shifts in different regions. 
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+A regime shift from a coral reef to another regime results in a decline in multiple ecosystem services including coastal erosion regulation, fisheries, tourism, water cleansing, and calcium fixation(Moberg and Folke 1999).  Coral reefs occupy less than 0.5% of ocean floor but sustain up to 25% of its biodiversity and produce at least 10% of fish consumed by humans(Moberg and Folke 1999).  Alternative regimes do not support biodiversity or fish to the same extent.   Constanza et al.(1997)estimated the value of coral reefs services at up to US$ 6 075 per hectare per year based on their contribution to disturbance regulation, waste treatment, biological control, refuge habitat, food production, raw materials, recreation and cultural values.  Many of these services are lost or substantially reduced when regime shifts away from coral reefs occur.
+
+ Coral reef regime shifts can result in the collapse of coral fisheries that can produce unemployment for fishermen, and reduce the value of the fishery, as well as reduce food production. Recreational services (primarily based around diving and snorkelling) are diminished when regime shifts occur, causing losses estimated at up to AUS$ 682 million in the Great Barrier Reef and US$ 8.9 billion for the Caribbean, in addition to 350 000 jobs related in the Caribbean(Moberg and Folke 1999). Coral reefs support cultural and spiritual values such as religious rituals, cultural traditions and institutional frameworks for cooperative fishing, especially in small scale fishing communities(Moberg and Folke 1999). 
+
+
+
+#### Management options
+
+Options for enhancing resilience
+
+ ''The persistence of hard coral dominated reefscapes beyond 2050 will be heavily reliant on 2 things, the ability of corals to increase their upper thermal bleaching limits by ~0.1°C per decade, and management that produce local conditions that constrain excessive algal biomass proliferation during inter-disturbance intervals''(Wooldridge et al. 2005).
+
+ Coral reef regime shifts are driven by local, regional and global drivers.
+
+ Given that temperature and acidification are global drivers that are difficult for local mangers to influence, Hoegh-Guldberg et al(2007)emphasize the management of the local level drivers. Due to the multi-causal nature of coral regime shifts, scholars emphasize the necessity of managing coral reefs using an ecosystem approach. Such an approach requires taking into account the interaction between land and sea, as well as the scale and origin of the stressors when making decisions at different scales of governance(Moberg and Folke 1999). Management programs which successfully address the improvement of water quality, reduction of sediments, nutrients, toxins, pathogens and fishing pressure will increase the likelihood of corals to recover to shocks like bleaching events(Wooldridge et al. 2005, Hoegh-Guldberg et al. 2007, Houk et al. 2010b).
+
+ Herbivore populations are a key driver that can be actively managed because reduced grazing increases the vulnerability to regime shifts(Mumby et al. 2007). For example, herbivorous fish like parrotfish can be protected. It has been suggested that markets should be transformed to incorporate a body of incentives to prevent the depletion of species in critical functional groups(Bellwood et al. 2004). The abundance of sea urchins should also be carefully managed because urchin dominance can produce negative effects on coral recruitment(Norström et al. 2009).
+
+ The spatial resilience of coral reefs is a regional driver that is possible to manage by managing connectivity, metapopulation dynamics, and to take into consideration the spatial distribution of coral reefs(Moberg and Folke 1999, Nyström and Folke 2001). This is because large-scale regional shifts are typically preceded by smaller-scale localized shifts. Therefore, monitoring the occurrence and spatial distribution of smaller-scale regime shifts may help to anticipate, and potentially avert, large-scale catastrophic shifts(Norström et al. 2009).
+
+ To manage spatial resilience, Bellwood et al.(2004)recommend increasing the rate of establishment and size of no-take areas, including 'cool-spots' of biodiversity. The reason is that areas with low species richness may be more vulnerable, as they may have lost functional groups, or may have low functional redundancy. Hence, minor changes in such ecosystems may trigger regime shifts locally, and erode spatial resilience regionally. International agreements are badly needed to keep oceans condition below the 480ppm and +2ºC thresholds for coral reefs(Hoegh-Guldberg et al. 2007).
+
+ Reducing pressure from global scale drivers, requires coordinated global action, but would substantially increase the resilience of coral reefs. 
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Juan Carlos Rocha, Reinette (Oonsie) Biggs, Garry Peterson, Albert Norström. Coral transitions. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-25</small>
+
+### References
+
+<small>
+
+- Bellwood, D., T. Hughes, C. Folke, and M. Nyström. 2004. Confronting the coral reef crisis. Nature 429:827-833. 
+- Bruno, J. F., H. Sweatman, W. F. Precht, E. R. Selig, and V. G. W. Schutte. 2009. Assessing evidence of phase shifts from coral to macroalgal dominance on coral reefs. Ecology 90:1478-1484. 
+- Bruno, J., E. Selig, K. Casey, C. Page, B. Willis, C. Harvell, H. Sweatman, and A. Melendy. 2007. Thermal stress and coral cover as drivers of coral disease outbreaks. Plos Biol 5:e124. 
+- Costanza, R., R. dArge, R. deGroot, S. Farber, M. Grasso, B. Hannon, K. Limburg, S. Naeem, R. V. Oneill, J. Paruelo, R. G. Raskin, P. Sutton, and M. vandenBelt. 1997. The value of the world's ecosystem services and natural capital. Nature 387:253-260 
+- Elmhirst, T., S. R. Connolly, and T. P. Hughes. 2009. Connectivity, regime shifts and the resilience of coral reefs. Coral Reefs 28:949-957. 
+- Goreau, T. and R. Hayes. 1994. Coral bleaching and ocean'' hot spots''. Ambio:176-180. 
+- Hoegh-Guldberg, O., P. Mumby, A. Hooten, R. Steneck, P. Greenfield, E. Gomez, C. Harvell, P. Sale, A. Edwards, K. Caldeira, N. Knowlton, C. Eakin, R. Iglesias-Prieto, N. Muthiga, R. Bradbury, A. Dubi, and M. Hatziolos. 2007. Coral reefs under rapid climate change and ocean acidification. Science 318:1737-1742. 
+- Hughes, T., N. Graham, J. Jackson, P. Mumby, and R. Steneck. 2010. Rising to the challenge of sustaining coral reef resilience. Trends in Ecology & Evolution. 
+- Moberg, F. and C. Folke. 1999. Ecological goods and services of coral reef ecosystems. Ecological Economics 29:215-233. 
+- Mumby, P. J., A. Hastings, and H. J. Edwards. 2007. Thresholds and the resilience of Caribbean coral reefs. Nature 450:98-101. 
+- Norström, A., M. Nyström, J. Lokrantz, and C. Folke. 2009. Alternative states on coral reefs: beyond coral–macroalgal phase shifts. Mar. Ecol. Prog. Ser. 376:295-306. 
+- Nyström, M. and C. Folke. 2001. Spatial resilience of coral reefs. Ecosystems 4:406-417. 
+- Scheffer, M., E. H. Nes, M. Holmgren, and T. Hughes. 2008. Pulse-Driven Loss of Top-Down Control: The Critical-Rate Hypothesis. Ecosystems 11:226-237.
+
+</small>
+

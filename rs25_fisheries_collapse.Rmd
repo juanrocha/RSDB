@@ -1,0 +1,312 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 25
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Fisheries collapse
+
+**Main contributors**: Garry Peterson, Juan Carlos Rocha
+
+**Other contributors**: Henrik Österblom, Reinette (Oonsie) Biggs
+
+Last update: 2014-10-14
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+A fishery collapses when the structure of the marine community (i.e. its species composition) changes radically, trapping the fishery into a regime in which high-valued commercial species cannot recover. These dynamics are often characterized by cascading effects across multiple trophic levels in marine food webs. Both top-down and bottom-up drivers contribute to the collapse of commercial fisheries. Overfishing is the main top-down driver, and is associated with indirect drivers that maintain fishing effort despite variation on fisheries demand, such as number of fishing boats in a fleet and fishing quotas that are insensitive to stock variation, as well as indirect drivers which increase fishing effort, such as demand from new markets, new possibilities to export fish, and technology improvements. The chief bottom-up drivers of collapse are drivers that influence the productivity of the base of marine food web. These include both anthropogenic and natural climate change that can shift the intensity and frequency of upwelling of cool nutrient rich water. Other factors, such as diseases spread, changes in ocean circulation, winds and temperature variation can act as synergistic factors contributing to collapses. The collapse of a commercial fishery can have substantial economic and social impacts.
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Marine & coastal
+- Freshwater lakes & rivers
+
+
+**Key ecosystem processes**:
+
+- Primary production
+- Nutrient cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Fisheries
+
+
+**Regulating services**:
+
+- Pest & disease regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+- Knowledge and educational values
+
+
+**Human well-being**:
+
+- Food and nutrition
+- Livelihoods and economic activity
+- Cultural
+- Aesthetic and recreational values
+- Cultural identity
+
+
+**Links to other regime shifts**:
+
+- Bivalves Collapse
+- Hypoxia
+- Marine food webs
+- Marine eutrophication
+- Freshwater eutrophication
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Harvest and resource consumption
+- External inputs (e.g. fertilizers
+- pest control
+- irrigation)
+- Adoption of new technology (e.g. new fishing nets)
+- Species introduction or removal
+- Disease
+- Global climate change
+
+
+**Land use**:
+
+- Fisheries
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake
+- catchment
+- community)
+- National (country)
+- Sub-continental (e.g. southern Africa
+- Amazon basin)
+
+
+**Time scale**:
+
+- Years
+- Decades
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+- Hysteretic (difficult to reverse)
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+- Experiments
+
+
+**Confidence: existence of the regime shift**
+
+- Contested – Reasonable evidence both for and against the existence of RS
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+During the 20th century global fisheries greatly expanded in terms of effort and range. This expansion resulted in the overfishing of many fish stocks, and in some cases triggered fisheries collapses, for example the collapse of the highly productive Newfoundland cod fishery (Worm et al. 2009). While overfishing can severely deplete fish stocks, it will not necessarily trigger a fisheries collapse. A collapse occurs when once fishery pressure has been removed, stocks fail to rebuild (Hutchings 2000, Kirby et al. 2009), suggesting that the system has become locked into an alternate regime. In this case, alternate regimes are usefully conceptualized as alternative food web structures:
+
+ **High abundance of a commercial fish species.** 
+
+ In this regime a valuable fish species is common and the fishery is highly productive. The main ecosystem services associated with high abundance of commercial fish are the production of food in first place, employment for both artisanal and industrial fishermen; followed by pest and disease regulation by healthy food webs, recreational values as recreational fishing, knowledge and educational values, as well as maintenance of biodiversity.
+
+ **Low abundance of the commercial fish species.** 
+
+ This regime is characterized by a substantially reduced abundance of the valuable fish species. In cases where the valuable fish species performs key ecological functions, it can lead to trophic cascades that lead to an overabundance of planktivorous fish or primary producers such as seagrass, macroalgae, sponge or phytoplankton (Jackson et al. 2001). With low fish abundance, food production is the most immediate ecosystem services affected. While industrial fishermen often can move and harvest new areas or new species, artisanal fishermen often can lose their livelihoods and traditions.  
+
+
+
+#### Drivers and causes of the regime shift
+
+There are two key direct drivers of fisheries collapse: overfishing as a top-down disturbance, and the change in nutrients input as a bottom-up disturbance.
+
+ Overfishing reduce the population size of commercial fish species, reduce their ability to perform their functional role in the ecosystem, can destabilize their population dynamics (Anderson et al. 2008), and ultimately could change the structure of the food web. Nutrient inputs, on the other hand, affect fisheries by increasing the abundance of lower trophic levels e.g. phytoplankton and zooplanktivores such as jellyfish (Daskalov et al. 2007). Such changes in food web configuration can reduce the energy transfer to fish and hence reduce fishing productivity. These drivers can reduce the resilience of a regime making it more vulnerable to other types of regime shift, such as climate driven food web reorganization [see: Climate & Marine Food Webs]. The indirect drivers that explain overfishing and changes in nutrient input interact in synergistic ways, making their identification a challenging process (Ocean Studies Board 2006, Kirby et al. 2009).
+
+ Indirect drivers of overfishing include oversupply of fishing boats, inflexible fishing quotas, demand for fish, the development of new fishing technologies, the facilitation of trade (market connectivity), governance failures such as the failure of regulation to halt illegal fishing, and market failures such as subsidies or perverse incentives. Nutrient enrichment of marine ecosystems is also indirectly driven by runoff of fertilizer nutrients from agriculture and sewage from urban areas (Diaz and Rosenberg 2008).
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+**Shift from high to low abundance of commercial fish species**
+
+ Since 1950 the world marine fisheries catch has expanded almost fivefold, and is currently about 80 million tonnes of fish. According to FAO, about 30% of fish stocks are overexploited, 60% are fully exploited and about 10 % are not fully exploited (FAO 2012). Global marine fish catches have plateaued and are not expected to increase. Local fisheries decline has been estimated to have affected the employment of roughly 14 million fishermen, 12 million of which correspond to artisanal fisheries (Pauly et al. 2006). There is not clear assessment of the number of stocks that have collapsed but FAO suggests about 5% of fish stocks are depleted (FAO 2012). Some collapsed stocks have remained at under 10% of their previous sizes even after decades of fishing closure (Ainley and Blight 2009). Food production, primary productivity, pest regulation, and cultural services are the ecosystem services most affected by the collapse of fisheries.  
+
+ **Shift from low to high abundance of commercial fish species**
+
+ An abundant fish population regime will likely better maintain marine biodiversity and will be more resilience to climate variation and climate change. Society will benefit of high abundance regime in terms of high primary productivity that translate in more food, jobs and livelihoods in small coastal communities. It will also better regulate marine hypoxia.
+
+
+
+#### Management options
+
+A review of marine fisheries in the Millennium Ecosystem Assessment offer a synthetic set of managerial options for addressing fisheries collapse(Pauly et al. 2006).
+
+ **Options for enhancing resilience** 
+
+ There are two types of strategies for enhancing resilience. The first is to stop doing things that are eroding resilience, while the second is to being activities that build resilience. There are a number of fishing practices that could be eliminated because they damage the resilience of fisheries. For example, fishing practices that destroy habitat such as bottom trawling should be avoided. Developing alternative technologies and reduction of fishing effort are suggested. Bycatch, the killing but not consuming of unwanted fish, can also have substantial impacts and can be reduced. Indirectly, fisheries subsidies and inflexible quotas can drive fishing effort to high levels that erode the resilience of a fishery.
+
+  **Options for reducing resilience of unwanted regime to encourage restoration or transformation**
+
+ Direct resilience building strategies include the establishment of Marine protected areas (MPAs) (Takashina and Mougi 2014). These areas can play an important role by providing refugia for fish and increasing ecologically diversity. Research suggests that they need to cover ecologically significant areas, including different habitats, ensuring connectivity among them. However their remains controversy over the extent to which MPAs shift fishing pressure to less protected sites.
+
+ Indirect resilience building efforts include efficient regulation and policing of fishing can reduce illegal fishing, while comprehensive fisheries policies at the international and national level can also build resilience if they result in fisheries policies that reinforce one another. Indirect resilience building strategies include improving the ability of fishers to exit fisheries.
+
+ Good management of fishing pressure has been able to restore fisheries stocks. For example, in the US fishing closures and implementation of management measures for bottom fishing have enabled the restoration of George Bank haddock, Atlantic scallops, George Bank yellowtail flounder, Atlantic stripped bass, Atlantic Arcadian redfish, Pacific chub mackerel, and Pacific sardine. However, there is no clear strategy that works across many ecosystems or nations (Beddington et al. 2007).
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Garry Peterson, Juan Carlos Rocha, Henrik Österblom, Reinette (Oonsie) Biggs. Fisheries collapse. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2014-10-14</small>
+
+### References
+
+<small>
+
+- Ainley, D. G., and L. K. Blight. 2009. Ecological repercussions of historical fish extraction from the Southern Ocean. Fish And Fisheries 10:13–38. 
+- Alheit, J. 2009. Consequences of regime shifts for marine food webs. International Journal Of Earth Sciences 98:261–268. 
+- Anderson, C. N. K., C.-H. Hsieh, S. A. Sandin, R. Hewitt, A. Hollowed, J. Beddington, R. M. May, and G. Sugihara. 2008. Why fishing magnifies fluctuations in fish abundance. Nature 452:835–839. 
+- Bakun, A., D. Field, A. Redondo-Rodriguez, and S. Weeks. 2010. Greenhouse gas, upwelling-favorable winds, and the future of coastal ocean upwelling ecosystems. Global Change Biology 16:1213–1228. 
+- Beddington, J. R., D. J. Agnew, and C. W. Clark. 2007. Current problems in the management of marine fisheries. Science 316:1713–1716. 
+- Behrenfeld, M. J., R. T. O'Malley, D. A. Siegel, C. R. Mcclain, J. L. Sarmiento, G. C. Feldman, A. J. Milligan, P. G. Falkowski, R. M. Letelier, and E. S. Boss. 2006. Climate-driven trends in contemporary ocean productivity. Nature 444:752–755. 
+- Berkes, F. 2008. Sacred ecology. Taylor & Francis 
+- Berkes, F., T. Hughes, R. Steneck, J. Wilson, D. Bellwood, B. Crona, C. Folke, L. Gunderson, H. Leslie, J. Norberg, M. Nystrom, P. Olsson, H. Osterblom, M. Scheffer, and B. Worm. 2006. Ecology - Globalization, roving bandits, and marine resources. Science 311:1557–1558. 
+- Brotz, L., W. W. L. Cheung, K. Kleisner, E. Pakhomov, and D. Pauly. 2012. Increasing jellyfish populations: trends in Large Marine Ecosystems. Hydrobiologia. 
+- Carpenter, S. R. 2003. Regime shifts in lake ecosystems. Ecology Institute. 
+- Clarke, S. 2004. Understanding pressures on fishery resources through trade statistics: a pilot study of four products in the Chinese dried seafood market. Fish And Fisheries 5:53–74. 
+- Condon, R. H., C. M. Duarte, K. A. Pitt, K. L. Robinson, C. H. Lucas, K. R. Sutherland, H. W. Mianzan, M. Bogeberg, J. E. Purcell, M. B. Decker, S.-I. Uye, L. P. Madin, R. D. Brodeur, S. H. D. Haddock, A. Malej, G. D. Parry, E. Eriksen, J. Quiñones, M. Acha, M. Harvey, J. M. Arthur, and W. M. Graham. 2013. Recurrent jellyfish blooms are a consequence of global oscillations. Proceedings of the National Academy of Sciences 110:1000–1005. 
+- Daskalov, G. M., A. N. Grishin, S. Rodionov, and V. Mihneva. 2007. Trophic cascades triggered by overfishing reveal possible mechanisms of ecosystem regime shifts. Proceedings Of The National Academy Of Sciences Of The United States Of America 104:10518–10523. 
+- Diaz, R. J., and R. Rosenberg. 2008. Spreading Dead Zones and Consequences for Marine Ecosystems. Science 321:926–929 
+- Essington, T. E., A. H. Beaudreau, and J. Wiedenmann. 2006. Fishing through marine food webs. Proceedings Of The National Academy Of Sciences Of The United States Of America 103:3171–3175. 
+- Estes, J., J. Terborgh, J. Brashares, and M. Power. 2011. Trophic Downgrading of Planet Earth. Science. 
+- FAO. 2012. The state of world fisheries and aquaculture. UN Food & Agriculture Organization. 
+- Hilborn, R. 2007. Reinterpreting the State of Fisheries and their Management. Ecosystems 10:1362–1369. 
+- Hutchings, J. A. 2000. Collapse and recovery of marine fishes. Nature 406:882–885. 
+- Hutchings, J., and J. Reynolds. 2004. Marine fish population collapses: Consequences for recovery and extinction risk. BioScience 54:297–309. 
+- Jackson, J., M. Kirby, W. Berger, K. Bjorndal, L. Botsford, B. Bourque, R. Bradbury, R. Cooke, J. Erlandson, J. Estes, T. Hughes, S. Kidwell, C. Lange, H. Lenihan, J. Pandolfi, C. Peterson, R. Steneck, M. Tegner, and R. Warner. 2001. Historical Overfishing and the Recent Collapse of Coastal Ecosystems. Science 293:629–637. 
+- Jiao, Y. 2009. Regime shift in marine ecosystems and implications for fisheries management, a review. Reviews in Fish Biology and Fisheries 19:177–191. 
+- Kirby, R. R., G. Beaugrand, and J. A. Lindley. 2009. Synergistic Effects of Climate and Fishing in a Marine Ecosystem. Ecosystems 12:548–561. 
+- Lenzen, M., D. Moran, K. Kanemoto, B. Foran, L. Lobefaro, and A. Geschke. 2012. International trade drives biodiversity threats in developing nations. Nature 486:109–112. 
+- Liermann, M., and R. Hilborn. 1997. Depensation in fish stocks: a hierarchic Bayesian meta-analysis. dx.doi.org. 
+- Litzow, M. A., and D. Urban. 2009. Fishing through (and up) Alaskan food webs. Canadian Journal Of Fisheries And Aquatic Sciences 66:201–211. 
+- Moellmann, C., B. Mueller-Karulis, G. Kornilovs, and M. A. St John. 2008. Effects of climate and overfishing on zooplankton dynamics and ecosystem structure: regime shifts, trophic cascade, and feedback coops in a simple ecosystem. Ices Journal Of Marine Science 65:302–310. 
+- Moellmann, C., R. Diekmann, B. Muller-Karulis, G. Kornilovs, M. Plikshs, and P. Axe. 2009. Reorganization of a large marine ecosystem due to atmospheric and anthropogenic pressure: a discontinuous regime shift in the Central Baltic Sea. Global Change Biology 15:1377–1393. 
+- Ocean Studies Board. 2006. Dynamic Changes in Marine Ecosystems: Fishing, Food Webs, and Future Options. National Research Council, Washington D.C. 
+- Pauly, D., J. Alder, A. Bakun, S. Heileman, K. Koch, P. Mace, W. Perrin, K. Stergiou, U. Sumaila, M. Vierros, K. Freire, Y. Sadovy, V. Christensen, K. Kaschner, M. Palomares, P. Tyedmers, C. Wabnitz, R. Watson, and B. Worm. 2006. Chapter 18: Marine Fisheries Systems. Pages 1–35 in R. Hassan, R. Scholes, and N. Ash, editors. Millennium Ecosystem Assessment. Island Press, Washington, D.C. 
+- Scheffer, M., E. H. Nes, M. Holmgren, and T. Hughes. 2008. Pulse-Driven Loss of Top-Down Control: The Critical-Rate Hypothesis. Ecosystems 11:226–237. 
+- Takashina, N., and A. Mougi. 2014. Effects of marine protected areas on overfished fishing stocks with multiple stable states. Journal Of Theoretical Biology 341:64–70. 
+- Takasuka, A., Y. Oozeki, H. Kubota, and S. E. Lluch-Cota. 2008. Contrasting spawning temperature optima: Why are anchovy and sardine regime shifts synchronous across the North Pacific? Progress in Oceanography 77:225–232. 
+- Walters, C., and J. F. Kitchell. 2001. Cultivation/depensation effects on juvenile survival and recruitment: implications for the theory of fishing. dx.doi.org. 
+- Worm, B., R. Hilborn, J. K. Baum, T. A. Branch, J. S. Collie, C. Costello, M. J. Fogarty, E. A. Fulton, J. A. Hutchings, S. Jennings, O. P. Jensen, H. K. Lotze, P. M. Mace, T. R. Mcclanahan, C. Minto, S. R. Palumbi, A. M. Parma, D. Ricard, A. A. Rosenberg, R. Watson, and D. Zeller. 2009. Rebuilding global fisheries. Science 325:578–585.
+
+</small>
+

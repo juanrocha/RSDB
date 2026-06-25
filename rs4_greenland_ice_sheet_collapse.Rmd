@@ -1,0 +1,259 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 4
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Greenland ice sheet collapse
+
+**Main contributors**: Juan Carlos Rocha, Rolands Sadauskis
+
+**Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
+
+Last update: 2011-02-27
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+The great ice sheet of Greenland was, traditionally, believed to take thousands of years to respond to external forcing. Recent observations suggest, however, that major changes in the dynamics of parts of the ice sheet are taking place over timescales of years. Widespread thinning at rates generally exceeding those expected occur due to recent warmer summers as the atmospheric temperatures are rising. The main identified direct driver behind the loss of ice sheet volume is greenhouse gas emissions in atmosphere that initiate change in dominating reinforcing feedbacks. There are two initial feedback mechanisms that are maintaining the initial regime of the system – ice-albedo mechanism and meltwater-ice sliding mechanism. The options to prevent or reverse this potential regime shift mainly relate to the decrease of greenhouse gas input in to the atmosphere at a global scale.
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Marine & coastal
+- Polar
+
+
+**Key ecosystem processes**:
+
+- Water cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Fisheries
+- Wild animal and plant foods
+
+
+**Regulating services**:
+
+- Climate regulation
+- Water regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+
+
+**Human well-being**:
+
+- Security of housing & infrastructure
+- Cultural
+- Aesthetic and recreational values
+
+
+**Links to other regime shifts**:
+
+- Thermohaline circulation
+- Arctic sea-ice loss
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Global climate change
+
+
+**Land use**:
+
+NA
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Sub-continental (e.g. southern Africa
+- Amazon basin)
+
+
+**Time scale**:
+
+- Centuries
+
+
+**Reversibility**:
+
+- Unknown
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+
+
+**Confidence: existence of the regime shift**
+
+- Contested – Reasonable evidence both for and against the existence of RS
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+The Greenland Ice Sheet (GIS) is approximately 1.7 million km2 in area covering approximately 80% of the surface of Greenland. It is grounded on bedrock that mostly rests near or above sea level thus would contribute to the globally averaged sea-level rise of 7.3 m if melted completely. [Parizek et al. 2004; Lemke et al. 2007].  Anticipated future warming of the climate system has the potential to permanently reduce large areas of GIS or even abate it completely. The evidence suggests nearly total ice-sheet loss may result from warming of more than a few degrees above mean 20th century values, but this threshold is poorly defined (perhaps as little as 2oC or more than7oC) [Alley et al. 2010].
+
+ **Greenland with permanent ice sheet** 
+
+ This regime can be described as permanent ice body cover over major parts (~80%) of Greenland only exposing the bedrock in western and southern parts. The Greenland Ice Sheet has been more closely tied to temperature than to anything else. It shrinks with warming and grows with cooling, thus the volume and cover vary throughout the seasons, but in case of cold climate the relationship between the ice growth/decline would be approximately evenly balanced or with a slightly increased ice growth. In winter when the atmospheric temperatures decrease below freezing point and precipitation levels decline, the accumulation of the ice steadily increases [Bamber et al. 2007].
+
+ **Greenland without permanent ice sheet** 
+
+ Due to the loss of the ice-sheet volume as a result of the warming, Greenland territory in future could become free from permanent ice sheet cover. This would happen as a consequence of the negative relation to ice growth/ice decline during the winter and summer where the lost ice volume in summer could not be reproduced in the following winter. Rising sea level as a result of warming tends to float marginal regions of ice sheets and force further retreat, so the generally positive relation between sea level and temperature means that typically both reduce the volume of the ice sheet. [Alley et al. 2010]
+
+
+
+#### Drivers and causes of the regime shift
+
+Increasing greenhouse gas concentration from anthropogenic sources is predicted to cause a rise in global mean temperatures [Cubasch et al. 2001]. One of the most common anthropogenic greenhouse gases is carbon dioxide (CO2). The influence of this driver is well established as there are many research done that confirm this theory. The indirect driver that is increasing anthropogenic CO2 levels in atmosphere is the burning of fossil fuels such as coal and natural gas. It is occurring regionally but has global impact and is well established in literature.
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+The shift to the regime of Greenland without ice sheet will mainly result in loss of some desirable ecosystem services. The ecosystem service of desirable climate regulation could be lost as the change in movement of currents (change in thermohaline circulation) and air masses would alter the transport of heat. This could lead to increased hurricane activity, a southward shift of tropical rainfall belts with resulting agricultural impacts, and disruptions to marine ecosystems.
+
+ The loss of certain animal and plant food species as provisioning service is predicted in future. These changes may have important consequences for food webs and could well be extremely significant for the Greenland economy, which is highly dependent on fisheries [AMAP 2007]. Such cultural services like recreation and aesthetical values would also be affected. Each of those services attracts more people to see the Ice sheet thus also bringing in more tourists. Water regulation as regulating ecosystem service could be altered through the large input of freshwater in the water cycle.  The vast amount of ''stored'' water entering the water cycle within warmer climate would result in severe winter precipitation.
+
+ A new ecosystem service is possible as the thawing ice sheet will potentially form glacial freshwater lakes in Greenland. This will generate new recreation opportunities in summer – using lakes for different purposes from different social groups. Flora could expand deeper into Greenland and new species could be introduced as the climate warms giving the local population the chance to gain additional plant foods.
+
+
+
+#### Management options
+
+The potential options for preventing or reversing this potential regime shift mainly relate to the decrease of greenhouse gas input into the atmosphere at a global scale. This has to be achieved in order to prevent further climate warming leading to the loss of Greenland Ice Sheet. Options include reduction of deforestation, use of fossil fuels and charcoal as energy source, and cleaner economies. Geoengineering strategies has also been proposed, large scale experiments to decrease global temperature and CO2 concentration in the atmosphere. However, their applicability is debated and usefulness is contested. As this system boundaries are set mainly around geophysical variables it is necessary to look at the social mechanisms involved to limit the influence on the main direct driver of greenhouse gas emissions. Nevertheless even if it is identified as in this case the CO2 levels in atmosphere leading to atmospheric temperature increase, it is very hard to achieve from the local to regional management perspective. It does require global coordination and cooperation in order to achieve CO2 reduction targets.
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Juan Carlos Rocha, Rolands Sadauskis, Reinette (Oonsie) Biggs, Garry Peterson. Greenland ice sheet collapse. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-27</small>
+
+### References
+
+<small>
+
+- AMAP. 2009. Summary – The Greenland Ice Sheet in a Changing Climate: Snow, Water, Ice and Permafrost in the Arctic (SWIPA). Arctic Monitoring and Assessment Programme (AMAP). Oslo. 22 pp. 
+- Alley RB, Andrews JT, Brigham-Grette J, Clarke GKC, Cuffey KM, Fitzpatrick JJ, Funder S, Marshall SJ, Miller GH, Mitrovica JX, Muhs DR, Otto-Bliesner BL, Polyak L, White JWC. 2010. History of the Greenland Ice Sheet: paleoclimatic insights. Quaternary Science Reviews 29,1728-1756.    
+- Bamber JL, Alley RB, Joughin I. 2007. Rapid response of modern day ice sheets to external forcing. Earth and Planetary Science Letters 257,1-13. 
+- Bell RE. 2008. The role of subglacial water in ice-sheet mass balance. Nat Geosci 1,297–304. 
+- Cubasch U. et al. 2001. Projections of future climate change. Climate Change 2001: The Scientific Basis, J. T. Houghton et al., Eds., Cambridge University Press. 525–582. 
+- Cuffey KM, Marshall SJ. 2000. Substantial contribution to sealevel rise during the last interglacial fromthe Greenland ice sheet. Nature 404, 591–594. 
+- Gregory JM, Huybrects P, Raper SCB. 2004. Threatened loss of the Greenland ice-sheet. Nature 428, 616. 
+- Holland MM, Bitz CM, and Tremblay B. 2006. Future abrupt reductions in the summer Arctic sea ice. Geophys. Res. Lett. 33. 
+- IPCC 2007. Climate Change 2007: The Physical Science Basis. Cambridge University Press, New York. 
+- Krabill W. et al. 2004. Greenland ice sheet: Increased coastal thinning. Geophys. Res. Lett. 31. 
+- Le Quere C, Takahashi T, Buitenhuis ET, Rodenbeck C,  Sutherland SC. 2010. Impact of climate change and variability on the global oceanic sink of CO2. Global Biogeochemical Cycles 24. 
+- Lemke P, Ren J, Alley RB, Allison I, Carrasco J, Flato G, Fujii Y, Kaser G, Mote P, Thomas RH, Zhang T. 2007. Observations: changes in snow, ice and frozen ground. In: Solomon S, Qin D, Manning M, Chen Z, Marquis M, Averyt KB, Tignor M, Miller HL. (Eds.), Climate Change 2007: The Physical Science Basis. Contribution ofWorking Group I to the Fourth Assessment Report of the Intergovernmental Panel on Climate Change. Cambridge University Press, Cambridge and New York. 996 pp. 
+- Murray T, Scharrer K, James TD, Dye SR,  Hanna E, Booth AD, Selmes N, Luckman A,  Hughes ALC, Cook S, Huybrechts P. 2010. Ocean regulation hypothesis for glacier dynamics in southeast Greenland and implications for ice sheet mass changes.  Journal of Geophysical Research 115.  
+- Nick MF, Vieli A, Howat IM, Joughin I. 2009. Large-scale changes in Greenland outlet glacier dynamics triggered at the terminus. Nature Geoscience 2, 110-114. 
+- Otterå OH, Drange H, Bentsen M, Kvamstø NG, Jiang D. 2004. Transient response of the Atlantic meridional overturning circulation to enhanced freshwater input to the Nordic Seas-Arctic Ocean in the Bergen Climate Model. Tellus 56A, 342-361. 
+- Parizek BR, and Alley RB. 2004. Implications of increased Greenland surface melt under global-warming scenarios: Ice-sheet simulations. Quat. Sci. Rev. 23,1013-1027. 
+- Rahmstorf S. 2000. The thermohaline ocean circulation—A system with dangerous thresholds? Clim. Change 46,247–256. 
+- Rigor IG, Wallace JM, and Colony RL. 2002. Response of sea ice to the Arctic Oscillation. J. Climate 15,2648–2668. 
+- Vizcaino M, Mikolajewicz U, Groger M, Maier-Reimer E, Schurgers G, and Winguth A. 2008. Long-term ice sheet-climate interactions under anthropogenic greenhouse forcing simulated with a complex Earth System Model. Clim. Dynam. 31,665– 690. 
+- Zhang X, and Walsh JE. 2006. Towards a seasonally ice-covered Arctic Ocean: Scenarios from the IPCC AR4 simulations. Journal of Climate 19,1730– 1747.
+
+</small>
+

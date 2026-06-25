@@ -1,0 +1,285 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 9
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Kelp transitions
+
+**Main contributors**: Juan Carlos Rocha
+
+**Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
+
+Last update: 2011-02-28
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+Kelp forests are marine coastal ecosystems located in shallow areas where large macroalgae ecologically engineer the environment to produce a coastal marine environmental substantially different from the same are without kelp.  Kelp forests can undergo a regime shift to turf-forming algae or urchin barrens. These shift leads to loss of habitat and ecological complexity. Shifts to turf algae are related to nutrient input, while shifts to urchin barrens are related to trophic-level changes. The consequent loss of habitat complexity may affect commercially important fisheries. Managerial options include restoring biodiversity and installing wastewater treatment plants in coastal zones.
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Marine & coastal
+
+
+**Key ecosystem processes**:
+
+- Primary production
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Fisheries
+- Wild animal and plant products
+- Other crops (eg cotton)
+
+
+**Regulating services**:
+
+- Natural hazard regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+
+
+**Human well-being**:
+
+- Food and nutrition
+- Livelihoods and economic activity
+- Cultural
+- Aesthetic and recreational values
+
+
+**Links to other regime shifts**:
+
+- Freshwater eutrophication
+- Fisheries collapse
+- Hypoxia
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Harvest and resource consumption
+- External inputs (e.g. fertilizers
+- pest control
+- irrigation)
+- Global climate change
+
+
+**Land use**:
+
+- Large-scale commercial crop cultivation
+- Fisheries
+- Conservation
+- Land use impacts are primarily off-site (e.g. dead zones)
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake
+- catchment
+- community)
+
+
+**Time scale**:
+
+- Months
+- Years
+
+
+**Reversibility**:
+
+- Hysteretic (difficult to reverse)
+- Readily reversible
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+- Experiments
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+Kelps are marine coastal ecosystems dominated by macroalgae typically found in temperate areas. This group of species forms submarine forest with three or four layers, which provides different habitats to several species. Kelp ecosystems are important to maintaining important industries such as, lobster and rockfish fisheries, tourism based on fishing, recreational diving and kayaking, as well food and pharmaceutical products derived from kelp (e.g. tooth paste).
+
+ Three different self-reinforcing regimes can be identified:
+
+ **Kelp forests** are highly productive ecosystems dominated by canopy-formed algae in cold-water rocky marine coastlines. Among the biota associated with kelp forest are marine mammals, fishes, crabs, sea urchins, mollusks, other algae and biota that live on the kelp themselves (Steneck et al 2002). At least 4 trophic levels are found in kelp forests. Apex predators such as sea otters, cod, pollock, hake, and haddock are common. These predators regulate populations of species at lower trophic levels. In particular the regulation of sea urchins populations, who are an important consumer of kelp, is important to maintain kelp forests.
+
+  **Urchin barrens** are an alternative regime in which there is no kelp forest and substantial populations of urchins on the sea bed. This regime has low or no populations of apex predators and large populations of herbivores that keep macroalgae a very low population levels, preventing the regrowth of the kelp forest which is important habitat for apex predators (Steneck, R., et al. 2004). Ecosystem services related to apex predator fisheries and recreational activities are substantially reduced. However populations of bottom dwelling species can increase. In some places urchins have themselves become a valuable fishery. While in others, populations other harvested species such as lobster and crab have increased.
+
+ **Turf-forming algae** regime is similar to urchin barrens in that there is no kelp forest, however rather than dominance by urchins the seabed is dominated by turf forming algae. This regime also lacks apex predators (Gorman, D., et al. 2009). Ecosystem services related to fisheries and recreational activities are substantially reduced. However, populations of invertebrate species such as lobster and crab can be higher.This regime shift is associated with a change in habitat in shallow marine coastal ecosystems. Three different self-reinforcing regimes can be identified:   
+  
+  
+
+
+
+
+#### Drivers and causes of the regime shift
+
+This regime shift is driven by two key direct drivers: reducing populations functional groups (Steneck et al 2002; Steneck, R., et al. 2004) and input of nutrients (Gorman, D., and Connell, S. 2009). Reductions in populations of key functional groups is due to the hunting of sea otter and the fishing to large apex predator fish species. Overfishing usually diminish the controlling function of top predators, and in severe cases, the trophic levels may be simplified. Nutrient input is often due to the output of wastewater from urban settlement and agriculture in nearby coastal areas. However it can also be due to naturally occurring offshore upwelling events. Nutrients addition favors the growth of turf algae over kelp. Strong rain events and floods can produce shock events for kelp ecosystems by providing a pulse input of nutrients and turbidity, which can stimulate the growth of turf algae.
+
+  
+
+ Other drivers can also contribute to this regime shift. Pollution discharges and sedimentation may play a synergetic role as stressors. In Tasmania for example, global warming has favored the reproduction of urchins which acting in synergy with lobster fishing has reduced kelp resilience (Ling et al. 2009). El Niño events and global warming can generate water stratification. As consequence, nitrogen concentration declines and kelp forest growth becomes limited by the availability of nitrogen (Steneck et al 2002).
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+**Shift from kelps forest to urchin barrens or turfs**
+
+ The main ecosystem impact of the loss of kelp forests is the loss of habitat complexity. Kelp is a three-dimensional structure that offers shelter and food for many species; urchin barrens and turfs do not have such characteristic. This loss is associated with the reduction of the food web complexity and loss of functional groups (Steneck et al 2004), with varying effects on fisheries. Some valuable fish species may diminish since kelp forests provide nursery areas. Invertebrate species such as lobster and crab can increases in population (Steneck et al 2002). Along with hosting high marine biodiversity, kelp forest provide ecosystem services related to recreation for divers. In addition, kelps support a multi-million dollar industry of canopy-cropping for alginates (Steneck et al 2002). This product is commercially important in pharmaceutical and chemical industry. These services can reduced or loss by this regime shift.
+
+ The ecosystem service impacts of algae turfs are likely to be similar to those related to coastal eutrophication. Such effects include abundance of rich-nutrient environment species as shellfish, bad odors and the associated consequences for recreational and aesthetic values.
+
+  **Shift from urchin barrens or turfs back to kelp forest.**
+
+ The recovery of kelp forest increases habitat complexity and is expected to increase biodiversity. On the other hand, the benefits gained by urchin and lobster fisheries may be diminished, since the recovery of functional groups and increasing biodiversity will control their populations. However, other species of commercial fisheries and tourism may recover, although it is not always the case.
+
+
+
+#### Management options
+
+**Options for enhancing resilience**
+
+ Restoring biodiversity in functional groups. For kelp forests it is particularly important to maintain apex predators (Estes et al 2011). A high profile version of this strategy has been efforts to recover sea otter populations on the west coast of North America, by protecting sea otter populations (Steneck et al. 2002).
+
+ Reducing nutrients can be done by reducing runoff from agricultural areas, as well as improving water treatment and managing runoff in urban areas (Gorman, D., et al. 2009). Reducing nutrients income will attack the positive feedback that maintain turfed landscapes and inhibit kelp recruitment (Gorman, D., and Connell, S. 2009).
+
+ Targeted removal of sea urchins and measures to maintain the abundance of predators like cod, sea otters and sheep-head through fishery controls may provide stability to kelp forest ecosystems (Steneck et al 2002; Steneck, R., et al. 2004).
+
+  **Options for reducing resilience to encourage restoration or transformation**
+
+ Transplantation of kelp-forming species has been proposed as a restoration strategy in highly fragmented seascapes. This strategy is likely to increase the supply of kelp propagules to colonize new areas and maintain free substratum for canopy recruitment (Gorman, D., and Connell, S. 2009). However this strategy has not been tested.
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Juan Carlos Rocha, Reinette (Oonsie) Biggs, Garry Peterson. Kelp transitions. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-28</small>
+
+### References
+
+<small>
+
+- Bakun, A., et al. (2010) Greenhouse gas, upwelling-favorable winds, and the future of coastal ocean upwelling ecosystems. Global Change Biol 16, 1213-1228 
+- Estes, J., et al. (2011) Trophic Downgrading of Planet Earth. Science  
+- Gorman, D. and S. Connell. 2009. Recovering subtidal forests in human-dominated landscapes. J Appl Ecol 46:1258-1265. 
+- Gorman, D., B. D. Russell, and S. D. Connell. 2009. Land-to-sea connectivity: linking human-derived terrestrial subsidies to subtidal habitat change on open rocky coasts. Ecological Applications 19:1114-1126. 
+- Konar, B. and J. Estes. 2003. The stability of boundary regions between kelp beds and deforested areas. Ecology 84:174-185. 
+- Lauzon-Guay, J.-S., R. Scheibling, and M. Barbeau. 2009. Modelling phase shifts in a rocky subtidal ecosystem. Mar Ecol-Prog Ser 375:25-39. 
+- Ling, S., C. Johnson, S. Frusher, and K. Ridgway. 2009. Overfishing reduces resilience of kelp beds to climate-driven catastrophic phase shift. P Natl Acad Sci Usa 106:22341-22345. 
+- Pauly, D., V. Christensen, J. Dalsgaard, R. Froese, and F. Torres. 1998. Fishing down marine food webs. Science 279:860-863. 
+- Scheffer, M. 2009. Critical transitions in nature and society. 
+- Smith, V.H., and Schindler, D.W. (2009) Eutrophication science: where do we go from here? Trends Ecol. Evol. 24, 201-207 
+- Steneck, R., J. Vavrinec, and A. Leland. 2004. Accelerating trophic-level dysfunction in kelp forest ecosystems of the  western North Atlantic. Ecosystems 7:323-332. 
+- Steneck, R., M. Graham, B. Bourque, D. Corbett, J. Erlandson, J. Estes, and M. Tegner. 2002. Kelp forest ecosystems: biodiversity, stability, resilience and future. Environ. Conserv. 29:436-459.
+
+</small>
+

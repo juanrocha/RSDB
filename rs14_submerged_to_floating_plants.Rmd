@@ -1,0 +1,269 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 14
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Submerged to floating plants
+
+**Main contributors**: Henning Nolzen
+
+**Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
+
+Last update: 2011-09-08
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+The shift from submerged to floating plants in aquatic ecosystems such as ponds, canals, ditches or tropical lakes generates a loss of ecosystem services such as freshwater, fisheries and biodiversity. This regime shift is primarily driven by nutrient enrichment in the water body, as well as invasion by exotic species. Other drivers are turbidity, changes of the water depth and fluctuations in the water-level. The main mechanism that maintains floating plant dominance is the decrease of in situ light due to an increase of shading by floating plant biomass in higher strata which leads to dark and anoxic conditions under the leaf surface, leaving little opportunity for plant or animal life. Harvesting of floating plants is a management strategy that can shift the floating plant dominated regime back to a submerged plant dominated system. 
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Freshwater lakes & rivers
+
+
+**Key ecosystem processes**:
+
+- Primary production
+- Nutrient cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Freshwater
+- Fisheries
+
+
+**Regulating services**:
+
+- Water purification
+- Water regulation
+- Pest & disease regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+
+
+**Human well-being**:
+
+- Food and nutrition
+- Health (e.g. toxins
+- disease)
+- Livelihoods and economic activity
+- Security of housing & infrastructure
+- Cultural
+- Aesthetic and recreational values
+
+
+**Links to other regime shifts**:
+
+- Freshwater eutrophication
+- Hypoxia
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- External inputs (e.g. fertilizers
+- pest control
+- irrigation)
+- Species introduction or removal
+- Environmental shocks (e.g. fire
+- floods
+- droughts)
+
+
+**Land use**:
+
+- Large-scale commercial crop cultivation
+- Intensive livestock production (e.g. feedlots
+- dairies)
+- Land use impacts are primarily off-site (e.g. dead zones)
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake
+- catchment
+- community)
+
+
+**Time scale**:
+
+- Weeks
+- Months
+
+
+**Reversibility**:
+
+- Hysteretic (difficult to reverse)
+- Readily reversible
+
+
+**Evidence**:
+
+- Models
+- Contemporary observations
+- Experiments
+
+
+**Confidence: existence of the regime shift**
+
+- Contested – Reasonable evidence both for and against the existence of RS
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+Aquatic ecosystems, such as ponds, canals, ditches or tropical lakes can experience shifts between submerged and floating plant-dominated regimes when the concentration of nutrients (i.e. nitrogen and phosphorus) in the water column changes. The two possible regimes and their associated ecosystem services are:
+
+ **Submerged plant-dominated regime**
+
+ This regime is dominated by submerged plants such as Elodea nuttallii (better known as waterweed, a rapidly growing, long and stringy plant) that grow underwater in aquatic ecosystems such as ponds, canals, ditches or tropical lakes. They can be found in water bodies with a low water depth, clear water, low turbidity and weak water-level fluctuations. Typically, their roots are connected to the sediment pool. The regime of submerged dominated plants is also characterized by a low-nutrient concentration in the water column.
+
+ **Floating plant-dominated regime**
+
+ This regime is dominated by floating plants such as Eichhornia crassipes, Salvinia molesta, Lemna gibba or Pistia stratiotes found in aquatic ecosystems such as ponds, canals, ditches or tropical lakes. In many places these are invasive exotic species. These plants have their leaf surface exposed to the atmosphere and their roots are not connected to the sediment floor. Typically, a floating plant dominated regime is characterized by dark, anoxic and high nutrient conditions in the water column. 
+
+  
+
+
+
+#### Drivers and causes of the regime shift
+
+**Submerged to floating plant dominance**
+
+ The main direct driver that leads to the shift from submerged to floating plant dominance is nutrient enrichment of the water body, typically associated with fertilizer and manure runoff from agricultural activities in the catchment. Strong water-level fluctuations associated with large rainfall events or water abstraction for irrigation and other uses can also enhance nutrient input from the shoreline.
+
+ A shift from a submerged plant-dominated system to a floating plant-dominated system can also be caused by a change in water depth (associated with rainfall events and water abstraction) or turbidity (resulting from pollution, sediment runoff, and algal growth). Both directly affect the availability of light, which in turn affects photosynthetic activity and therefore the growth of submerged plants. The deeper a water body is, the darker it gets with increasing water depth. The more turbid a water body is, the less light is available for photosynthetic activity in the deeper water layers. Floating plants are therefore in a better position to compete for in situ light than submerged plants. Hence, the deeper or more turbid the water body is, the more likely a shift to a floating plant dominated system.
+
+ Moreover, the floating plant regime shift can be caused by the introduction of invasive species. Invasive floating plant species might grow very rapidly and aggressively outside their natural environment with the consequence that they might take over an entire water body by reducing the incidence of light, which in turn lead to a decrease of submerged plants. A famous invasive floating plant is Eichhornia crassipes which causes substantial problems in many parts of the world.
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+**Submerged to floating plant dominance**
+
+ Floating plant dominated systems decrease fisheries and plant life due to the dark and anoxic conditions under the leaf surface. They can also have a negative impact on navigation in lakes and canals, water purification and recreation opportunities. Moreover, floating plants can clog water supply pipes for households, ditches or even a river mouth. They can also complicate fishing. In addition, there is a greater risk of pathogens that can negatively affect human health in floating plant dominated systems. 
+
+
+
+#### Management options
+
+The main management option to enhance the resilience of the submerged plant regime is to control the nutrient levels in the system, and prevent the establishment of significant numbers of floating plants through a mechanical or chemical removal.
+
+ A drastic harvest of floating plants in a shallow water body that has some submerged plants and a not too high nutrient level can shift to a floating plant-dominated regime back to submerged plant-dominated regime (see also the Dutch Ditches Case Study). The amount of harvest needed for a shift is predicted to increase with the water nutrient level. Harvesting the floating plants allows light to penetrate to the deeper water layers and enables submerged plants to re-establish. Once re-established, the submerged plants can help reduce nutrient levels by absorbing nutrients for their growth and trapping suspended nutrients in the sediment.
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Henning Nolzen, Reinette (Oonsie) Biggs, Garry Peterson. Submerged to floating plants. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-09-08</small>
+
+### References
+
+<small>
+
+- Coops H, Doef RW. 1996. Submerged vegetation development in two shallow, eutrophic lakes. Hydrobiologia 340, 115-120. 
+- Janse JH, Van Puijenbroeck PJTM. 1998. Effects of eutrophication in drainage ditches. Environmental Pollution 102, 547-552 
+- Oliver JD. 1993. A review of the biology of Giant Salvinia (Salvinia molesta Mitchell). Journal of Aquatic Plant Management 31, 227-231 
+- Scheffer M, Szabó S, Gragnani A, van Nes EH, Rinaldi S, Kautsky N, Norberg J, Roijackers RMM, Franken RJM. 2003. Floating plant dominance as a stable state. PNAS 100, Issue 7, 4040-4045.
+
+</small>
+

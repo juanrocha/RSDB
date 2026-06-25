@@ -1,0 +1,304 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 29
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Primary production Arctic Ocean
+
+**Main contributors**: Patricia  Villarrubia Gomez, Helene Albinus Søgaard, Karl Samuelsson, Sophie Laggan
+
+**Other contributors**: Thorsten Blenckner
+
+Last update: 2015-05-09
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+A shift from polar to temperate primary production (PP) patterns has been detected in the Arctic Ocean. Following a regime shift in the North Atlantic in 1995, similar structural changes are now occurring in Arctic waters. Rapid warming of atmospheric and oceanic temperatures has caused a near year-on-year decline in the extent and thickness of summer sea ice since 1979 (NSIDC 2014). Anthropogenic climatic change has extended the growing season and delayed august freeze-up through a decline in albedo reflectivity and enhanced wind-driven vertical mixing. Natural modes of variability at the lower latitudes has also led to poleward shifts of temperate marine species and caused pronounced phenological changes to primary producers. The difference in the temporal scale of these forcing mechanisms makes it hard to predict which event is causing changes to PP. It is uncertain what impact this change will have on the food web of this ecosystem.
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Marine & coastal
+- Polar
+
+
+**Key ecosystem processes**:
+
+- Primary production
+- Nutrient cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Fisheries
+- Wild animal and plant products
+
+
+**Regulating services**:
+
+- Climate regulation
+- Natural hazard regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+- Knowledge and educational values
+
+
+**Human well-being**:
+
+- Food and nutrition
+- Health (e.g. toxins
+- disease)
+- Livelihoods and economic activity
+- Cultural
+- Aesthetic and recreational values
+
+
+**Links to other regime shifts**:
+
+- Arctic benthos borealisation
+- Arctic sea-ice loss
+- Marine food webs
+- Tundra to forest
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- External inputs (e.g. fertilizers
+- pest control
+- irrigation)
+- Environmental shocks (e.g. fire
+- floods
+- droughts)
+- Global climate change
+
+
+**Land use**:
+
+- Fisheries
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Sub-continental (e.g. southern Africa
+- Amazon basin)
+
+
+**Time scale**:
+
+- Unknown
+
+
+**Reversibility**:
+
+- Unknown
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+
+
+**Confidence: existence of the regime shift**
+
+- Contested – Reasonable evidence both for and against the existence of RS
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+Anthropogenic climate change is largely responsible for the observed changes in the Arctic Ocean over the last few decades (Dicks et al. 2011). The Arctic thermal, hydrological, climatological and biological changes are highly interconnected and the system dynamics are poorly understood insulated from each other (Hinzman et al. 2005). Precisely how the changes in the biological conditions will affect the food web system in the Arctic Ocean is unknown; however, it is evident that people depending on Arctic fish for their livelihoods will be effected in the short term (ibid), while in the longer term, changes might profoundly affect commercial fish stocks in the lower latitudes (Hassan et al. 2005).
+
+ **Polar regime**
+
+ The polar regime is characterized by long winters of 7-10 months (Hinzman et al. 2005). The large extent of year-round sea ice reinforce the albedo effect exhibited at these latitudes, keeping the system in a state of low primary productivity. The ice melt in summer allows phytoplankton to reproduce and provide energy for the dominant cold-loving zooplankton species *Calanus hyperboreus* and *C. glacialis* (Ardyna et al. 2014).
+
+ **Temperate regime**
+
+ Summer air temperatures over the Arctic have continued to increase since 1800 (Dicks et al. 2011). The associated decline in sea ice extent and thickness has allowed light to penetrate the upper water column, while the exposure of year-round sea water has increased storminess and the upwelling of nutrients. In some cases, this has led to two annual bloom events and an extent of single annual blooms in areas previously characterized by flat patterns at the sea-ice boundary (Ardyna et al. 2014).
+
+
+
+#### Drivers and causes of the regime shift
+
+Global warming is well documented as the main driver of warmer air temperatures over the Arctic (Dicks et al. 2011). Warming is causing sea ice to melt and is extending the amount of year-round and seasonal open water (Ardyna et al. 2014). This darker surface is reducing albedo reflexivity and increasing sea surface temperatures (SST). The IPCC AR5 states that warming must be kept below 1°C to prevent irreversible changes of the Arctic system.
+
+ Natural variations in Arctic SST are observed through Atlantic Multidecadal Oscillation (AMO) and North Atlantic Oscillation (NAO) internal forcing mechanisms, both modes of climate variability that originate in the lower latitudes. The latter enhances westerly winds, while the combination of both the NAO and a positive AMO enhance ocean advection and storm events (Schlesinger & Ramankutty 1994). This phase of activity has been observed since the mid-1990s, enhancing the poleward movement of warm, saline waters to the eastern Arctic (Chylek et al. 2009).
+
+ The amount of water masses entering into the Arctic is highly influenced by the strength of Subpolar gyre (Hátún et al. 2009), which itself is influenced by the AMO mode. Since 1995, the North Atlantic Subpolar gyre has been weakening (Häkkinen & Rhines 2004). Together, the AMO and Subpolar gyre have enhanced the observed melting of sea ice in the Arctic and the calving events of the Greenland Ice Sheet (GIS, Straneo & Heinback 2009). However, freshwater inflow from Greenland and Siberian runoff reduces the density of the water column and enhances stratification with the denser saline layer below. It is uncertain how this inflow might counter the observed increase in bloom events, but a change in Siberian forest cover could enhance nutrient inputs and thus promote further PP, where rates of PP have already increased by 135% from 1998 to 2009 (Frey et al. 2007).
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+**Shift from polar regime to temperate regime** 
+
+ Ice-dependent species with limited distribution, specialised feeding habits and predator avoidance (Post et al. 2009), such as cod, shrimp, marine mammals and seabirds, have seen changes in abundance due to warmer temperatures and changes in their ecosystems (Wasmann 2011). In contrast, warm-loving species are thriving due to rising SST and food abundance (Hátún et al. 2009). Nevertheless, in the long term a shift in food-web composition and diversity could diminish the resilience of the Arctic system by the invasion of non-native species, eutrophication or the spread of disease thus decreasing the recreational and aesthetic value of these ecosystems (Niiranen et al. 2014).
+
+   
+ Due to their highly adapted way of live, the loss of provisioning ES could indirectly impact indigenous wellbeing and livelihoods (Arctic Council 2013). Contrarily, this shift to a temperate regime could bring shorter-term gains to tourism (eg. whale watching) and commercial fishing, helped by easier navigation in ice-free waters, although the benefit will be felt by mainly non-Arctic residents (Hassan et al. 2005). Human health is at risk due to the consumption of high level fish and mammal from the Arctic by the bioaccumulation of pollutants (Butler and Oluoch-Kosura 2006). Changes in the Arctic will also have spillover effects in Atlantic waters, reducing PP and food provisioning (Arctic Council 2013).
+
+
+
+#### Management options
+
+From the point of view of PP, it is unclear how the regime shift would affect the ecosystem and the services people derive from it (Moore & Huntington 2008; Greene et al. 2008; Li et al. 2011). However, the regime shift is connected to other changes with possibly catastrophic implications, such as reduced Albedo negatively influencing the Arctic Ocean’s temperature regulating ability, or the loss of habitat for Arctic-specific species. Considering these implications of a regime shift, from a global perspective polar conditions are clearly preferable.
+
+ It is essential to cut global emissions of greenhouse gases (GHG) in order to prevent further sea ice loss and the kicking-in of feedback mechanisms that risk putting the Arctic in a permanent temperate state. Equally important is to prevent deforestation, as this reduces the biosphere’s ability to sequester atmospheric carbon. Especially important, in the polar region, ceased deforestation could reduce primary production by decreasing the discharge of nutrients into the Arctic Ocean. For carrying this out, international agreements on emissions and land use are necessary.However, it might not be enough to prevent a regime shift considering observed changes and the time lag of global climate processes. Management options for reversing the regime shift are essentially the same as for preventing it, but a reversal is likely to take a long time, as several feedback mechanisms will drive the system towards temperate conditions.
+
+ Although highly criticised, geoengineering has been proposed as a way to speed up the reversal of the regime shift (Heckendorn et al. 2009). A scheme often put forward is to reflect some solar radiation back into space by introducing aerosols into the stratosphere. Though economically viable, this is highly controversial due to its ethically challenging nature, the many possible ecological side effects and the impossibility to reverse action once implemented.
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Patricia  Villarrubia Gomez, Helene Albinus Søgaard, Karl Samuelsson, Sophie Laggan, Thorsten Blenckner. Primary production Arctic Ocean. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2015-05-09</small>
+
+### References
+
+<small>
+
+- Aagaard, K., Carmarck, E.C., 1989. The Role of Sea Ice and other Fresh Water in the Arctic Circulation, Journal of Geophysical Research, 94, C10, pp. 14485-14498. 
+- Arctic Council, 2013. Arctic Resilience Interim Report 2013. Stockholm Environment Institute and Stockholm Resilience Centre, Stockholm.  
+- Ardyna M., Babin M., Gosselin M., Devred E., Rainville L., and Tremblay A-É., 2014. Recent Arctic Ocean sea ice loss triggers novel fall phytoplankton blooms. Geophysical Research Letters, 41, 17, pp. 6207–6212. 
+- Bascompte, J., C. Melian, and Sala E., 2005. Interaction strength combinations and the overfishing of a marine food web. Proceedings Of The National Academy Of Sciences Of The United States Of America, 102, pp. 5443–5447. 
+- Bates, N.R., and Mathis, J.T., 2009. The Arctic Ocean marine carbon cycle: evaluation of air-sea CO2 exchanges, ocean acidification impacts and potential feedbacks, Biogeosciences, 6, pp. 2433-2459. 
+- Butler, C.D., and Oluoch-Kosura, W., 2011. Linking Future Ecosystem Services and Future Human Well-being, Ecology and Society,11. 
+- Chylek, P., Folland, C.K., Lesins, G., Dubey, M.K., and Wang, M., 2009. Arctic air temperature change amplification and the Atlantic Multidecadal Oscillation, Geophysical Research Letters, 36, 14, L14801, doi:10.1029/2009GL038777. 
+- Curry, J.A., Schramm, J.L., and Ebert, E.E., 1995. Sea Ice-Albedo Climate Feedback Mechanism. J. Climate, 8, 240–247. 
+- Dicks L., Almond R., and McIvor A., 2011 (eds.) Arctic Climate Issues 2011: Changes in Arctic Snow, Water, Ice and Permafrost, Arctic Monitoring and Assessment Programme (AMAP) Arctic SWIPA Overview Report. DOI: 10.1088/1748-9326/4/4/045108 
+- Falk-Petersen S., Timofeev S., Pavlov V., Sargent J.R., 2007, Climate variability and possible effects on arctic food chains: The role of Calanus. In: Ørbæk J.B.,Tombre T., Kallenborn R., Hegseth E., Falk-Petersen S., Hoel A.H. (eds.), Arctic Alpine Ecosystems and People in a Changing Environment, Springer Verlag, Berlin. 433 p. 
+- Falk-Petersen, S., Pavlov V., Timofeev S., and Sargent J.S., 2007. Climate Variability and Possible Effects on Arctic Food Chains: The Role of Calanus. In Ørbæk, J.B., Kallenborn, R., Tombre, I., Hegseth, E.N., Falk-Petersen, S., and Hoel A.H (Eds.), 2007: Arctic Alpine Ecosystems and People in a Changing Environment. pp. 147-166. 
+- Frey, K.E., Arrigo, K.R., Gradiner, R.R., Arctic Ocean Primary Productivity, 2011. Arctic Report Card: Update for 2011. www.arctic.noaa.gov/report11/primary_productivity.html 
+- Greene, Charles H., Pershing, Andrew J., Cronin, Thomas M., and Ceci, N., 2008. Arctic climate change and its impacts on the ecology of the north Atlantic. Ecology 89, 11, pp. 24 - 38. 
+- Hassan, R.M., Scholes, R., Ash, N., (eds.) 2005. Ecosystems and Human Wellbeing: Current State and Trends: Findings of the Conditions and Trends Working Group. Island Press. 
+- Hawkins, E., and R. Sutton, 2009. The potential to narrow uncertainty in regional climate predictions. Bulletin of the American Meteorological Society, 90, 1095-1107, doi:10.1175/2009BAMS2607.1. 
+- Heckendorn, P., Weisenstein, D., Fueglistaler, S., Luo, B. P., Rozanov, E., Schraner, M., Thomason L. W., and Peter, T., 2009. The impact of geoengineering aerosols on stratospheric temperature and ozone. Environmental Research Letters 4 045108. 
+- Henson, S.A., Dunne, J.P. and Sarmiento, J.L.,  2009.  Decadal variability in North Atlantic phytoplankton blooms.  Journal of Geophysical Research: Oceans (1978–2012), 114, C4, DOI: 10.1029/2008JC005139. 
+- Hinzman, L.D., Bettez, N.D., Bolton, W. R., Chapin, F. S., Dyurgerov, M. B., Fastie, C. L., and Yoshikawa, K., 2005. Evidence and implications of recent climate change in northern Alaska and other arctic regions. Climatic Change,72, 3, pp. 251-298. 
+- Hátún, H., Payne M.R., Beaugrandd G., Reide P.C., Sandøb A.B., Drangeg H., Hansena B., Jacobsena J.A., and Blochi D., 2009. Large bio-geographical shifts in the north-eastern Atlantic Ocean: From the subpolar gyre, via plankton, to blue whiting and pilot whales. Progress in Oceanography 80, 3-4, 149–162. 
+- Hátún, H., Sando, A.B., Drange, H., Hansen, B., and Valdimarsson, H., 2005. Influence of the Atlantic subpolar gyre on the thermohaline circulation. Science 309, 1841– 1844.   Hjarnmann, D.Ø., Bogstad, B., Eikeset, A.M., Ottersen, G., Gjøsæter, H., Stenseth, N.C., 2006. Food web dynamics affect Northeast Arctic cod recruitment. Proceedings of Royal Society B 274, pp. 661–669.  
+- IPCC, 2014: Climate Change 2014: Mitigation of Climate Change. Contribution of Working Group III to the Fifth Assessment Report of the Intergovernmental Panel on Climate Change [Edenhofer, O., R. Pichs-Madruga, Y. Sokona, E. Farahani, S. Kadner, K. Seyboth, A. Adler, I. Baum, S. Brunner, P. Eickemeier, B. Kriemann, J. Savolainen, S. Schlömer, C. von Stechow, T. Zwickel and J.C. Minx (eds.)]. Cambridge University Press, Cambridge, United Kingdom and New York, NY, USA. 
+- Kriegler, Elmar, Hall, Jim W., Helda, Hermann, Dawson, Richard and Schellnhu- bera, Hans Joachim (2009) Imprecise probability assessment of tipping points in the climate system, PNAS 
+- Kriegsmann, A., Brümmer B., 2014. Cyclone impact on sea ice in the central Arctic Ocean: a statistical study. The Cryosphere, 8, pp. 303–317. 
+- Lenaerts, J.T.M., van Angelen, J.H., van den Broeke, M.R., Gardner, A.S., Wouters, B., van Meijgaard, E., 2013. Irreversible mass loss of Canadian Arctic Archipelago glaciers. Geophysical Research Letters, 40, pp. 1-5. 
+- Li, W.K.W., McLaughlin, F.A., Lovejoy, C., and Carmack, E.C.,  2009. Smallest algae thrive as the Arctic Ocean freshens. Science, 326, 539. 
+- Masson-Delmotte, V., Swingedouw, D., Landais, A., Seidenkrantz, M-S., Gauthier, E., Bichet, V., Massa C., Perren, B., Jomelli, V., Adalgeirsdottir G., Hesselbjerg Christensen, J., Arneborg, J., Bhatt, U., Walker, D.A., Elberling, B., Gillet-Chaulet, F., Ritz, C., Gallée, H., van den Broeke, M., Fettweis, X., de Vernal, A., and Vinther, B., 2012, Greenland climate change: from the past to the future. Wiley Interdisciplinary Reviews: Climate Change, 3, 5, pp. 427–449. 
+- Moore, S. E. & Huntington, H. P., 2008. Arctic marine mammals and climate change: Impacts and resilience. Ecological Applications 18, pp. 157-165. 
+- NSIDC 2014. National Snow and Ice Data Centre. Last accessed 04/05/2015. URL: http://nsidc.org 
+- Niiranen, S., Peterson, G., Biggs, R., Rocha, J.C., and Österblom, H. Marine food webs: community change and trophic level decline. In: Regime Shifts Database, www.regimeshifts.org. Last revised 2014-10-15 03:05:20 GMT. 
+- Post, E., Mads C. Forchhammer, M.C., Bret-Harte, M.S., Callaghan, T.V., Christensen, T.R., Elberling, B., Fox, A.D., Olivier Gilg, O., Hik, D.S., T. Høye, T.T., Ims, R.A., Jeppesen, E., R. Klein, D.R., Madsen, J., McGuire, A.D., Rysgaard, S., Schindler, D.E., Ian Stirling, I., Tamstorf, M.P., Tyler, N.J.C., van der Wal, R., Welker, J., Wookey, P.W., Schmidt, N.M., and Aastrup, P., 2009. Ecological Dynamics Across the Arctic Associated with Recent Climate Change Eric Post et al. Science 325, 1355, doi: 10.1126/science.1173113. 
+- Rahmstorf, S. and Ganopolski, A., 1999. Long-term global warming scenarios computed with an efficient coupled climate model. Climatic Change 43, pp. 353 - 367. 
+- Schlesinger M.E., and Ramankutty N., 1994. An oscillation in the global climate system of period 65–70 years. Nature, 367, pp. 723–726. 
+- Shadwick, E.H, Trull, T.W., Thomas, H., and Gibson J.A.E, 2013. Vulnerability of Polar Oceans to Anthropogenic Acidification: Comparison of Arctic and Antarctic Seasonal Cycles. Scientific Reports 3, 2339 doi:10.1038/srep02339. 
+- Shimada, K., Kamoshida, T., Itoh, M., Nishino, S., Carmack, E., Mclaughlin, F., Zimmermann, S., Proshotinsky, A., 2006. Pacific Ocean inflow: Influence on catastrophic reduction of sea ice cover in the Arctic Ocean. Geophysical Research Letters. 33, L08605. 
+- Sirevaag, A., de la Rosa, S., Fer, I., Nicolaus, M., Tjernström N., McFee, M.G., 2011. Mixing, heat fluxes and heat content evolution of the Arctic Ocean mixed layer. Ocean Sci., 7, 335–349. 
+- Stein, R., and Macdonald, R.W., 2004. The Organic Carbon Cycle in the Arctic Ocean. Springer Science & Business Media. 
+- Straneo, F., and Heimbach, P., 2013. North Atlantic warming and the retreat of Greenland's outlet glaciers Nature 504, pp. 36–43 doi:10.1038/nature12854. 
+- Stroeve, J., Holland, M.M., Meier W., Scambos T., and Serreze, M., 2007. Arctic sea ice decline: Faster than forecast. Geophysical Research Letters, 34, L09501, doi:10.1029/2007GL029703. 
+- Tremblay, J.É., S. Bélanger, D. G. Barber, M. Asplin, J. Martin, G. Darnis, L. Fortier, Y. Gratton, H. Link, P. Archambault, A. Sallon, C. Michel, W. J. Williams, B. Philippe, and M. Gosselin (2011), Climate forcing multiplies biological productivity in the coastal Arctic Ocean, Geophys. Res. Lett., 38, L18604, doi:10.1029/2011GL048825. 
+- Wang, M., and Overland, J.E., 2012. A sea ice free summer Arctic within 30 years: An update from CMIP5 models, Geophysical Research Letters, 39, L18501, doi:10.1029/2012GL052868. 
+- Wassmann, P., Duarte, C.M. Agustí, S., Sejr, M.K., 2011. Footprints of climate change in the Arctic marine ecosystem. Global Change Biology, 17, pp. 1235–1249, doi:10.1111/j.1365-2486.2010.02311.  
+- Zhou S., Flynn P.C., 2005. Geoengineering downwelling ocean currents: A cost assessment. Climatic Change, 71, pp. 203–220. doi: 10.1007/s10584-005-5933-0.
+
+</small>
+

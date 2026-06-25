@@ -1,0 +1,290 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 6
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Soil salinization
+
+**Main contributors**: Reinette (Oonsie) Biggs, Garry Peterson, Juan Carlos Rocha, Christine Hammond, Matteo Giusti
+
+**Other contributors**: Brian Walker
+
+Last update: 2011-02-27
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+Soil salinization is a serious and difficult to reverse form of soil degradation.  Salinization occurs when dissolved salts in water tables rise to the soil surface and accumulate as water evaporates.  Often rise in a water table is due to the replacement of deep-rooted vegetation, such as trees, with shallower rooted vegetation, such as grasses.  Application of irrigation water or heavy rainfall can also cause water tables to rise.  Topsoil salts can greatly reduce agricultural productivity, erode infrastructure, and impose long-term limitations on land productivity.  Soils containing high levels of salts are much more likely to experience this regime shift.
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Drylands & deserts (below ~500mm rainfall/year)
+- Grasslands
+- Agro-ecosystems
+
+
+**Key ecosystem processes**:
+
+- Soil formation
+- Primary production
+- Nutrient cycling
+- Water cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Freshwater
+- Food crops
+- Livestock
+- Wild animal and plant products
+- Fuel and fiber crops
+- Wild animal and plant foods
+
+
+**Regulating services**:
+
+- Water purification
+- Water regulation
+- Regulation of soil erosion
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+
+
+**Human well-being**:
+
+- Food and nutrition
+- Livelihoods and economic activity
+- Cultural
+- Aesthetic and recreational values
+
+
+**Links to other regime shifts**:
+
+- Forest to Cropland
+- Bush encroachment
+- Dryland degradation
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Vegetation conversion and habitat fragmentation
+- Harvest and resource consumption
+- External inputs (e.g. fertilizers
+- pest control
+- irrigation)
+- Environmental shocks (e.g. fire
+- floods
+- droughts)
+
+
+**Land use**:
+
+- Large-scale commercial crop cultivation
+- Extensive livestock production (natural rangelands)
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake
+- catchment
+- community)
+
+
+**Time scale**:
+
+- Months
+- Years
+- Decades
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+- Hysteretic (difficult to reverse)
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+- Experiments
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+Cultivated drylands are especially vulnerable to soil salinization, especially regions with variable rainfall. Evaporation of water following floods accumulates salts at the soil surface, and dry-spells prevent salts from being flushed back down into the water table. Older soils that contain great concentrations of salts are more prone to salinization. Dryland salinization is occurs worldwide, but the greatest region is in Australia, in dryland areas with very old, salt rich soils.
+
+ **Nonsaline Topsoil** 
+
+ The nonsaline topsoil regime is characterized by landscapes with normal topsoil salt levels, deep water tables, and healthy plant communities. Rainfall leaches high salt concentrations from topsoil to below the root zone. In cultivated areas, crop water-uptake is unhindered and crop growth is normal. Land produces high yields, supporting livelihoods and providing food and nutrition. Freshwater is not saline, supporting biodiversity and providing clean water (Anderies et al 2006).
+
+ **Saline Topsoil**
+
+ The saline topsoil regime is characterized by elevated water tables, significantly higher than normal soil salt levels and reduced plant growth across the landscape. High concentrations of salt in the topsoil reduce the uptake of water by plants and impede nutrient absorption. Some salts may also be toxic to plants when present in high concentrations, inhibiting plant growth. Under extreme salinization, a white crust of salt accumulates at the soil surface, and only salt tolerant plants are able to grow. Persistent high water tables change the hydrology of local aquifers considerably. Surface water becomes brackish, harmful to wildlife and unsuitable for irrigation. In cultivated regions, crop yields are restricted, threatening livelihoods and reducing food and nutrition. High levels of salt in freshwater can make water non-drinkable and harm wildlife and corrode water infrastructure, roads, and bridges (Neilsen et al 2003, Pannell 2002).
+
+
+
+#### Drivers and causes of the regime shift
+
+**Nonsaline to Saline Topsoil** 
+
+ The main direct driver that leads to the shift from normal to saline topsoil is elevation of dissolved salts within the water table to the soil surface. Typically, this rise in groundwater is due to a decrease in evapotranspiration due to the removal of deep-rooted perennial plants, such as trees. The water table can also rise due to intensive use of irrigation. Agriculture is the major indirect driver of both deforestation and irrigation (Anderies 2005).
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+**Shift from Normal to Saline Soil**
+
+ No ecosystem services are gained in this regime shift. Where crops are grown, the salinization regime shift negatively impacts ecosystem services such as food production, livestock feed, protection from soil erosion, human nutrition, livelihoods and economic activity. Freshwater becomes contaminated with salt, which can reduce the availability of drinking water, reduce fish and other aquatic populations, and damage infrastructure. In saline soil biodiversity is reduced as only salt-tolerant species can live in saline soil. Availability of wild plant and animal products are also reduced. Farmers lose the security of their livelihoods due to lost crop yield and degraded soil and water. Hunters and outdoor recreation seekers lose due to a loss of wildlife. The general public loses availability of high quality, low cost good, as well as clean water. Salinized soil can benefit people who mitigate and adapt to salinization, such as desalinization technology providers and salt tolerant crop breeders.
+
+
+
+#### Management options
+
+**Building resilience of nonsaline regime** 
+
+ Management to prevent soil salinization involves maintaining a mix of deep-rooted perennial vegetation and crops in order to prevent the rise of the water table, and limiting the amount of irrigation water that is applied to the system. However, the management of dryland salinity is complicated by the difficulty of understand groundwater dynamics and the long delays (decades to centuries) between action and response in some dryland groundwater systems.
+
+ **Coping with the saline regime** 
+
+ Once the root zone has become saline, there are several short-term management options for removing the accumulated salts or preventing further salt accumulation. These include mechanically scraping surface salt (which leads to the problem of salt disposal), or flushing the topsoil using water (which has poor efficacy and might exacerbate the problem in situations with high water tables). A more efficient option is to create a surface water drainage system using field ditches to avoid the deposition of salt, combined with subsurface water pumping to decrease the water table level (Abrol et al 1988). Another approach, used in Australia, is to pump groundwater to lower the water table. The expenses arising from the implementation and maintenance of such drainage or pumping systems are, however, substantial (Anderies 2005).
+
+ **Transforming out of saline regime** 
+
+ Long-term methods to keep the groundwater level below the root-zone include planting of deep-rooted vegetation and salt tolerant plants. However, while planting the halt the rise of a water table it will likely take decades to lower it. Apart from the direct effects of lowering the water table and reducing the salt concentration in the topsoil, if the planting of deep-rooted vegetation can be linked to economically beneficial activities this strategy can contribute to increasing the diversity of the agricultural system. This may improve soil health and make the ecosystem less vulnerable to disturbances (Anderies 2005).
+
+ Social systems also offer great potential for managing soil salinity. Water pricing systems, long-term tenancy of the land, use of appropriate technology and farmer's education can contribute significantly towards the goal of maintaining productive land. However, the substantial social resistance of the established irrigation regime can block many attempts at reform (Allison & Hobbs 2004, Anderies et al 2006)
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Reinette (Oonsie) Biggs, Garry Peterson, Juan Carlos Rocha, Christine Hammond, Matteo Giusti, Brian Walker. Soil salinization. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-27</small>
+
+### References
+
+<small>
+
+- Abrol IP, Yadav ISP & Massoud FI “Salt-Affected Soils and their Management”, Rome, 1988, FAO Soils Bulletin 39, Food and Agriculture Organization of the United Nations. M-53 ISBN 92-5-102686-6 
+- Allison, H. E. and R. J. Hobbs. 2004. Resilience, adaptive capacity, and the “Lock-in Trap” of the Western Australian agricultural region. Ecology and Society 9(1): 3. [online] URL: http://www.ecologyandsociety.org/vol9/iss1/art3/  
+- Anderies J M. 2005. Minimal models and agroecological policy at the regional scale: An application to salinity problems in southeastern Australia. Regional Environmental Change 5, 1-17. 
+- Anderies JM, Ryan P & Walker BH. 2006. Loss of resilience, crisis and institutional change: lessons from an intensive agricultural system in southeastern Australia. Ecosystems 9, 865-878. 
+- George R, Kingwell R, Hill-Tonkin J and Nulsen B. 2005. Salinity Investment Framework: Agricultural land and infrastructure. Resource Management Technical Report 270 
+- Gordon, L., Dunlop, M., Foran, B. 2003. Land cover change and water vapour flows: learning from Australia. Philosophical Transactions of the Royal Society of London. Series B: Biological Sciences, 358(1440), 1973-1984. 
+- Lazof DB & Bernstein N. 1999. Effects of salinization on nutrient transport to lettuce leaves : consideration of leaf developmental stage. New Phytol. 144: 85-94. 
+- Munns, R.  2002. Comparative physiology of salt and water stress. Plant, Cell & Environment.  25(2) 239–250, 
+- Nielsen, D. L., M. A. Brock, G. N. Rees, and D. S. Baldwin.  2003.  Effects of increasing salinity on freshwater ecosystems in Australia. Australian Journal of Botany 51(6): 655-665. 
+- Pannell, D. J. (2002). Dryland salinity: economic, scientific, social and policy dimensions. Australian Journal of Agricultural and Resource Economics, 45(4), 517-546. 
+- Pannell, D. J., & Roberts, A. M. (2010). Australia’s National Action Plan for Salinity and Water Quality: a retrospective assessment. Australian Journal of Agricultural and Resource Economics, 54(4), 437-456. 
+- Pitman M &  Lauchli A. 2004. Global Impact of Salinity and Agricultural Ecosystems. Salinity: environment - plants - molecules, A, 3-20. 
+- Walker, B.H. and D. Salt. 2006. Resilience Thinking, Island Press, London. ISBN 1597260932. 
+- Wall DH & Virginia RA.  1999.  Controls on soil biodiversity: insights from extreme environments. Applied Soil Ecology 13: 137-150.
+
+</small>
+

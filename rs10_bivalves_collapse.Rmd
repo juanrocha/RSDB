@@ -1,0 +1,286 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 10
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Bivalves collapse
+
+**Main contributors**: Juan Carlos Rocha, Christine Hammond
+
+**Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
+
+Last update: 2011-02-28
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+Bivalves form reefs that filter water removing sediments and nutrients maintaining clear water.  Bivalve reefs also produce spatial structure that provides habitat to other aquatic species. A low abundance regime can be induced by harvesting. Low abundances of bivalves do not provide water filtering, leading to murkier water, which can impede bivalve population growth. 
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Marine & coastal
+- Freshwater lakes & rivers
+
+
+**Key ecosystem processes**:
+
+- Nutrient cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Freshwater
+- Fisheries
+
+
+**Regulating services**:
+
+- Water purification
+
+
+**Cultural services**:
+
+- Aesthetic values
+
+
+**Human well-being**:
+
+- Food and nutrition
+- Livelihoods and economic activity
+
+
+**Links to other regime shifts**:
+
+- Freshwater eutrophication
+- Hypoxia
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Harvest and resource consumption
+- External inputs (e.g. fertilizers
+- pest control
+- irrigation)
+- Adoption of new technology (e.g. new fishing nets)
+- Disease
+- Environmental shocks (e.g. fire
+- floods
+- droughts)
+
+
+**Land use**:
+
+- Urban
+- Large-scale commercial crop cultivation
+- Intensive livestock production (e.g. feedlots
+- dairies)
+- Fisheries
+- Land use impacts are primarily off-site (e.g. dead zones)
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake
+- catchment
+- community)
+
+
+**Time scale**:
+
+- Months
+- Years
+
+
+**Reversibility**:
+
+- Hysteretic (difficult to reverse)
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+- Experiments
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+Bivalve mollusks play an important role in aquatic ecosystems by filtering and sequestering nutrients. When bivalve abundance changes, it can have substantial ecosystem impacts, creating two different, self-reinforcing regimes.
+
+ **Bivalve mollusk reef regime**
+
+ When aquatic ecosystems have high bivalve mollusk density, they form reefs that include many bivalves and are shallow, nearing the water's surface. The filtering activity of the bivalves results in clear water with high levels of dissolved oxygen. Plankton populations are limited in these conditions. The bivalves themselves operate as reinforcing feedbacks in that their abundance ensures sufficient filtration to maintain this clear water regime. The clear water in turn reinforces bivalve abundance by maintaining hydrodynamics that are conducive to bivalve health (Scheffer 2009). Large, shallow bivalve mollusk reefs encourage biodiversity by providing habitat and filtering nutrients.
+
+ **Isolated, low density bivalve mollusk regime**
+
+ When aquatic ecosystems have low bivalve mollusk density, the reefs are small and deep. Water is turbid, with low levels of dissolved oxygen. Plankton and filamentous algae flourish under these conditions. Poor reef size and water filtration limit biodiversity. The low bivalve abundance state is reinforced as bivalve health and fecundity is weakened by turbid water conditions. The turbid water conditions are in turn reinforced by low bivalve abundance(Weijerman et al. 2005, Powell et al. 2008).
+
+ The regime of low bivalve abundance is expected to reduce fish populations, water cleansing and the ability of the ecosystem to maintain biodiversity. Such effects would have an impact on fisheries, human health, and recreation. 
+
+
+
+#### Drivers and causes of the regime shift
+
+Mechanized anthropogenic over-harvesting of bivalve mollusks is the main driver of the shift from high to low abundance (Thrush and Dayton 2002).  High inputs of nutrients from agricultural or urban sources can act as a slow driver that weakens bivalve health by creating plankton blooms that the bivalves are unable to filter.  Plankton blooms can further weaken the health of bivalves by producing organic matter, whose decay, reduces oxygen availability.  A disturbance that can trigger a regime shift is bivalve disease (Powell et al. 2008).  When populations are weakened by eutrophication and anoxia, they become physiologically susceptible to diseases that can rapidly devastate remaining populations (Leniham 1999). 
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+**Shift from high to low bivalve mollusk abundance regime**
+
+ The loss of abundant bivalve mollusk reefs threatens diverse ecosystem services. The most direct impact is the loss of valuable shellfisheries. A secondary, but potentially substantial impact is the loss of the filtering service provided by bivalves.  In urbanized estuaries, it can necessitate the installation of costly synthetic water filtration technology (Gren et al. 2009).  In other areas it can lead to declines in water quality that shift populations and reduce recreation opportunities, and potentially the value of waterfront property.
+
+ The loss of bivalve habitat structure leads to lower species abundances, and to declines in species richness (Airoldi et al. 2008). Both structural and functional biodiversity is threatened by loss of bivalve abundance, with far reaching effects on marine ecosystems and human ability to exploit such systems (Worm et al. 2006).  The regime of low bivalve abundance is expected to reduce fisheries, water cleansing and the ability of the ecosystem to maintain biodiversity. Such effects would have an impact on fishing productivity and human health.
+
+ The loss of bivalve nutrient filtration can lead to other regime shifts, such as eutrophication and hypoxia, which can produce unproductive and undesirable ecosystems (see Hypoxia and Eutrophication regime shifts). 
+
+
+
+#### Management options
+
+**Options for enhancing resilience**
+
+ Estuaries are the world's most degraded marine ecosystems, receiving land-based pollution from crop cultivation and urbanization, and suffering from anthropogenic over-harvesting (Lotze et al. 2006).  The resulting problems are complex, impacting bivalve health and fecundity as well as many other species, with far reaching implications in both biological and social domains.
+
+ Experience has shown that management focused on one species or problem tends to be ineffective.  Newer research stresses the need to address natural resources as part of complex social-ecological systems, often with long histories of human exploitation (Jackson et al. 2001).   Rather than addressing problems on a species-by-species basis, multi -species management has shown to have synergistic effects.  For example, in Chesapeake bay, fisheries management looks at oyster, blue crab, striped bass and shad together (Boesch 2004).
+
+ Taking this approach further, Ecosystem-based fishery management efforts focus on recognizing interactions between multiple species and environmental stressors, such as low dissolved oxygen levels. Success is measured by the degree to which management efforts include ecosystem-based approaches, rather than by an assessment of fishing stocks (Lotze et al. 2006). 
+
+  
+
+ **Options for reducing resilience to encourage restoration or transformation**
+
+ The main option exercised for preventing or reversing a regime shift regarding bivalve abundance is to import bivalve mollusks from another region for aquaculture (Van de Koppel 2008) .  Another practice commonly used is to hang bivalves from the surface or build artificial reefs to elevate bivalves in order to avoid the hypoxic conditions in deeper water (Carlsson et al. 2009). 
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Juan Carlos Rocha, Christine Hammond, Reinette (Oonsie) Biggs, Garry Peterson. Bivalves collapse. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-28</small>
+
+### References
+
+<small>
+
+- Airoldi, L., Balata, B. Beck, M.W.  2008  The Grey Zone: Relationships between habitat loss and marine diversity.  Journal of experimental marine biology and ecology: 366 pp. 8-15 
+- Boesch, D.F. 2004.  Scientific requirements for ecosystem-based management in the restoration of Chesapeake Bay and Coastal Louisiana.  Ecological Engineering. 26 (1) pp 6-26 
+- Burns KA, Smith JL. 1981. Biological monitoring of ambient water quality: the case for using bivalves as sentinel organisms for monitoring petroleum pollution in coastal waters. Estuarine, Coastal and Shelf Science 30(4), 433–443. doi:10.1016/S0302-3524(81)80039-4. 
+- Carlsson, M.S., Holmer, M., Petersen, J.K.  2009 Seasonal and spatial variations of benthic impacts of mussel longline farming in a eutrophic Danish Fjord, Limfjorden.  Journal of Shellfish Research. 28 (4) pp 791-801 
+- Gren, I., Lindahl, O., Lindqvist, M.  2009  Values of Mussel farming for combating eutrophication:  An application to the Baltic Sea.  Ecological Engineering.  In Press: doi:10.1016/j.ecoleng.2008.12.033 
+- Jackson, J; Kirby, M; Berger, W; Bjorndal, K; Botsford, L; Bourque, B; Bradbury, R; Cooke, R; Erlandson, J; Estes, J; Hughes, T; Kidwell, S; Lange, C; Lenihan, H; Pandofi, J; Peterson, C; Steneck, R; Tegner, M; and Warner, R. 2001. Historical Overfishing and the Recent Collapse of Coastal Ecosystems. Science. 293 pp. 639-637 
+- Leniham, H.S., Micheli, F., SHelton, S.W., Peterson, C.H.  1999  The influence of multiple environmental stressors on susceptibility to parasites:  An experimental determination with oysters.  Limnology and Oceanography: 44 (3) pp. 910-924 
+- Loo, L.O. ,and R.Rosenber., 1989. Bivalve suspension-feeding dynamics and benthic-pelagic coupling in an eutrophicated marine bay. J. Exp. Mar. Biol. Ecol. 130: pp. 253-276  
+- Lotze H. K., et Lenihan, H.S., Bourque, B., Bradbury, R.H., Cooke, R.G., Kay, M.C., Kidwell, S.M., Kirby, M.X., Peterson, C.H., Jackson, J.B.C.  2006 Depletion, degradation and recovery potential of estuaries and coastal seas. Science 312 pp. 1806–1809. 
+- Norroko, A., Hewitt, J., Thrush, S., Funnell, G.  2006 Conditional outcomes of facilitation by a habitat-modifying subtidal bivalve.  Ecology 87(1) pp. 226-234 
+- Powell, EN, Ashton-Alcox, K.A, Kraeuter JN, Ford SE, Bushek D. Long-term trends in oyster population dynamics in Delaware Bay: Regime shifts and response to disease. J Shellfish Res (2008) vol. 27 (4) pp. 729-755 
+- Scheffer, M.  2009.  Critical Transitions in Nature and Society.  Princeton Studies in Complexity pp. 207-208 
+- Thrush SF, JE Hewitt, S Parkes, AM Lohrer, C Pilditch, SA Woodin, DS Wethey, M Chiantore, V Asnaghi, S De Juan, C Kraan, I Rodil, C Savage, aC Van Colen 2014. Experimenting with ecosystem interaction networks in search of threshold potentials in real-world marine ecosystems. Ecology 95:1451–1457.  
+- Thrush, S.F. and Paul K. Dayton.  2002 Disturbance to marine benthic habitats by trawling and dredging: Implications for marine biodiversity.  Annu. Rev. Ecol. Syst. 33 pp. 449-473 
+- Van de Koppel, J., Gascoigne, J.C., Theraulaz, G., Rietkerk, M., Mooij W.M., & Herman, P.M.J. (2008) Experimental evidence for spatial self-organization and its emergent effects in mussel beds. Science 322 
+- Weijerman, M., Lindeboom, H., Zuur, A.  Regime shifts in marine ecosystems of the North Sea and Wadden Sea  2005  Mar Ecol Prog Ser 298 pp. 21-39 
+- Worm, B., Barbier, E., Beaumont, N., Duffy, E., Folke, C., Halpern, B.S., Jackson, J.B.C., Lotze, H.k., Micheli, F., Palumbi, S.R., Sala, E., Selkoe, K.A., Stachowicz, J.J., Watson, R.  2006  Impacts of biodiversity loss on ecosystem services.  Science: 314 pp. 787-790
+
+</small>
+

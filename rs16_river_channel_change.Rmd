@@ -1,0 +1,282 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 16
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# River channel change
+
+**Main contributors**: Henning Nolzen
+
+**Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
+
+Last update: 2012-03-16
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+In freshwater lake and river systems, a river channel position regime shift occurs when the main channel of a river abruptly changes its course to a new river channel. Meandering and braided rivers are especially vulnerable to such shifts. The actual shift of the channel usually follows a large flood event, but other factors make the system susceptible to the shift. Most commonly, sediment buildup blocks the riverflow due to changes in current and riverbed gradient. In other cases, a cutoff occurs at the meandering neck in rivers with high channel sinuosity. Human activities such as land clearance and artificial channel widening can also make the river system vulnerable to a sudden course change. A shift in river channel position has large impacts on the ecology, economy and society, especially through impacts on water availability which is important for agriculture and transportation. On a 100 year time-scale the shift is irreversible. Only enormous engineering efforts can prevent a river from switching to a new channel, or restore a former river course. However, such efforts are very complex and costly. 
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Freshwater lakes & rivers
+
+
+**Key ecosystem processes**:
+
+- Soil formation
+- Water cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Freshwater
+- Food crops
+- Fisheries
+
+
+**Regulating services**:
+
+- Water regulation
+- Regulation of soil erosion
+- Natural hazard regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+- Spiritual and religious
+
+
+**Human well-being**:
+
+- Food and nutrition
+- Livelihoods and economic activity
+- Security of housing & infrastructure
+- Social conflict
+
+
+**Links to other regime shifts**:
+
+NA
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Infrastructure development (e.g. roads
+- pipelines)
+- Soil erosion & land degradation
+- Environmental shocks (e.g. fire
+- floods
+- droughts)
+
+
+**Land use**:
+
+- Urban
+- Small-scale subsistence crop cultivation
+- Large-scale commercial crop cultivation
+- Intensive livestock production (e.g. feedlots
+- dairies)
+- Extensive livestock production (natural rangelands)
+- Fisheries
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake
+- catchment
+- community)
+- Sub-continental (e.g. southern Africa
+- Amazon basin)
+
+
+**Time scale**:
+
+- Weeks
+- Months
+- Years
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+Freshwater river systems experience river channel position regime shifts when the main channel of a river abruptly changes its course to a new river channel. Meandering rivers are especially vulnerable to channel changes because of their high sinuosity which supports meander cutoffs. Other river types with a lower sinuosity can also experience river channel position shifts, for example braided rivers which have many small channels.
+
+ Changes in river channel position can be understood as regime shifts when one considers the timescale at which they occur and the irreversibility of the shift. Large channel shifts (shifting the river position tens of kilometers) occur only approximately once a millennium. Within this timeframe humans settle along the river and establish complex social and economic structures which depend on the river. When a large, abrupt shift in the channel position occurs it results in huge disruption and the need for large-scale reorganization of the economy and societies that depend on the river. Once the river channel has shifted it will very rarely return to its former position, but instead become stabilized in its new position. In this context the alternate regimes are:
+
+ **Old channel course**
+
+ In this regime the river flows along a path which it has followed for many decades. People have therefore adapted to and have based their activities on this position of the river channel. For example, the floodplain area is often used by farmers to cultivate crops. Cities are located in the floodplain area, often protected by levees in case of a flood event. The mentality of the local inhabitants is that a channel shift should not be allowed to happen because their well-being is closely linked to the river in its current position. Therefore, large defense infrastructure is sometimes a characteristic of this regime (see also Tisza River case study).
+
+ **New channel course**
+
+ In this regime the river has switched its main course to a new path, often tens of kilometers from its previous course. Typically, riverflow is more rapid, and the length of the river is shorter. In the case of a meander cutoff, a so-called oxbow lake is formed. This happens when the meandering necks connect with each other and the abandoned part of the river after the cutoff is disconnected from the riverflow. The size of a cutoff and the resulting oxbow lake varies and depends on the size of the river. 
+
+
+
+#### Drivers and causes of the regime shift
+
+The main direct driver of the regime shift is strong floods, associated with large rainfall events. Such events cause the river to shift its course because they have enough power to break through a natural river levee or dyke, and to breach defense infrastructure such as a spillway that tries to control the riverflow (see Mississippi Case Study).
+
+ Human activities such as artificial channel widening, removal of debris, changes in the river course or cutting of vegetation play an important role in making a river more susceptible to channel shifts. The reason is that people may change the actual channel to improve transport or create a shortcut to decrease travel time and costs. Often, these activities might start very small by (e.g. removal of debris) and then slowly grow (e.g. by digging of a channel to make a shortcut) until a critical threshold has been reached and the river suddenly changes its course. In the case of the Ucayali River in Peru, an inconspicuous ditch of approximately one meter width was slowly but systematically widened which eventually led to a 71 kilometer cutoff after a strong flood event (see Ucayali River case study) with large negative impacts for the people living in the region. The destruction of dykes or levees can also cause a river channel to shift its position. For instance, a dyke at the Yellow River was destroyed to check the advance of the Jin army in China in 1128, leading to a shift in the river's course (see Yellow River Case Study). 
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+Large rivers are of vital importance for the ecology, the economy and the society. They provide for example freshwater for inhabitants living in the region and are an important economically, for example as transportation routes, for inland navigation, the supply of fresh water, food and nutrition through small-scale and large-scale crop cultivation, fisheries, water regulation and regulation of soil erosion. Large rivers may be very important for regional and global trade. Therefore, a significant change in the position of the main channel usually has significant, mostly negative, impacts on human well-being.
+
+ When a river channel shifts course, local industries, cities and agriculture along the old channel course may be severely affected if they are dependent on the river for water and transportation of goods. Economic activities along the old channel will usually decline, and in some cases seaports have to be moved. However, impacts might also be positive, for example a decrease in flood events and flood levels along the old channel course. This may lead to new economic opportunities such as changes in subsistence and cash crops that generate a higher income. These new economic opportunities may support in-migration (see Ucayali River case study).
+
+ In contrast, places along the new channel course may experience more economic opportunities, for example through trade, agriculture or travelling. However, they may also experience greater threats of flooding. The impacts might also consist of an increase in flood levels, riverbed aggradation, bank erosion, lateral channel shifts and stranded communities. These negative impacts might in turn lead to migration. 
+
+
+
+#### Management options
+
+Typically, river channel position regime shifts are irreversible. Without human action the river will almost never return to its original course. Managing river channel position regime shifts is very difficult because of the sudden and nonlinear nature of such shifts.
+
+ **Options for enhancing resilience**
+
+ In some situations attempts are made to retard or prevent a channel shift by controlling the riverflow (volume, current) through engineering works such as levees, spillways and weirs. This is usually done to protect housing, infrastructure and floodplain agriculture. However, efforts to modify the riverflow or implement defense infrastructure are usually extremely costly and requires enormous engineering efforts. Moreover, it is possible that the point where the shift is predicted to occur moves upstream or downstream, in which case the defense infrastructure becomes useless.
+
+ The most iconic example of extensive engineering control structures to prevent a channel shift is the Mississippi River. The main channel is threatened by capture by the Atchafalaya River, and if this were to occur, New Orleans and Baton Rouge would suffer enormous negative economic consequences (see Mississippi River case study).
+
+ **Options for reducing resilience to encourage restoration or transformation**
+
+  It is possible to reduce the resilience of the system to encourage it to shift to a new channel position or return to a previous position, for example by removing levees. However, this is usually extremely costly and risky. 
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Henning Nolzen, Reinette (Oonsie) Biggs, Garry Peterson. River channel change. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2012-03-16</small>
+
+### References
+
+<small>
+
+- Biedenharn DS, Thorne CR, Watson CC. 2000. Recent morphological evolution of the Lower Mississippi River. Geomorphology 34, 227-249. 
+- Coomes OT, Abizaid C, Lapointe M. 2009. Human Modification of a Large Meandering Amazonian River: Genesis, Ecological and Economic Consequences of The Masisea Cutoff on the Central Ucayali, Peru. Ambio 38, 130-134. 
+- Dent CL, Cumming GS, Carpenter SR. 2002. Multiple states in river and lake ecosystems.  Phil. Trans. R. Soc. Lond. 357, 635-645.  
+- Gordon L, Peterson GD, Bennett E. 2008. Agricultural modifications of hydrological flows create ecological surprises. TREE 23, No. 4. 
+- Hooke JM. 2003. River meander behaviour and instability: a framework for analysis. Transactions of the Institute of British Geographers 28, 238–253. 
+- Hooke JM. 2004. Cutoffs galore!: occurrence and causes of multiple cutoffs on a meandering river. Geomorphology 61, 225-238. 
+- Knox JC. 2006. Floodplain sedimentation in the Upper Mississippi Valley: Natural versus human accelerated. Geomorphology 79, 286-310. 
+- Shields JR, Simon A, Steffen LJ. 2000. Reservoir effects on downstream river channel migration. Environmental Conservation 27, 54-66. 
+- Stølum H. 1996. River Meandering as a Self-Organization Process, Science 271, 1710-1712. 
+- Xue C. 1993. Historical Changes in the Yellow River delta, China. Marine Geology 113, 321-329.
+
+</small>
+

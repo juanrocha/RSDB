@@ -1,0 +1,281 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 21
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Marine eutrophication
+
+**Main contributors**: Thorsten Blenckner, Johanna Yletyinen
+
+**Other contributors**: NA
+
+Last update: 2013-10-28
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+Eutrophication is a complex process that turns low-nutrient, clear water sea to a murky, high-nutrient sea. Marine eutrophication processes differ from lakes due to the open physical structure of the sea, higher diversity of biotic habitats and more complex hydrological structure. Increases in nutrients (both nitrogen and phosphorus) increase primary production, leading to a higher turbidity, and may threat ecosystem stability and animal as well as human health. Decomposition of the increased biomass results in increased consumption of oxygen in deep water, which may lead to hypoxia and anoxic bottoms with severe consequences for benthic organisms. Light availability can become too low to sustain macroalgae and/or submerged plants.
+
+ Scientific knowledge on the eutrophication is considerable and major commitments have been made to reduce eutrophication. These include institutional arrangements, nutrient reduction goals, assessment of progress and second-generation goals. Coastal marine eutrophication has occurred for instance in the Baltic Sea and Chesapeake Bay.
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Marine & coastal
+
+
+**Key ecosystem processes**:
+
+- Primary production
+- Nutrient cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Fisheries
+
+
+**Regulating services**:
+
+- Water purification
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+
+
+**Human well-being**:
+
+- Food and nutrition
+- Health (e.g. toxins
+- disease)
+- Livelihoods and economic activity
+- Cultural
+- Aesthetic and recreational values
+
+
+**Links to other regime shifts**:
+
+- Freshwater eutrophication
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- External inputs (e.g. fertilizers
+- pest control
+- irrigation)
+
+
+**Land use**:
+
+- Fisheries
+- Land use impacts are primarily off-site (e.g. dead zones)
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Sub-continental (e.g. southern Africa
+- Amazon basin)
+
+
+**Time scale**:
+
+- Decades
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+
+
+**Evidence**:
+
+- Models
+- Contemporary observations
+- Experiments
+- Other
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+**Oligotrophic regime** 
+
+ Coastal regions are attractive to people for living, marine resources, recreation and transport, which on the other hand cause high human impact on these ecosystems. An oligotrophic coastal system has clear water and often submerged vegetation. Commercially preferred fish species may be abundant, because coastal ecosystems support many fisheries and are highly productive due to the nutrients from the land via runoff, or deep ocean via upwelling (Boesch 2002). Many seas experience some natural hypoxia/anoxia and eutrophication, but in smaller extent and shorter time period than in the eutrophic regime. The limited amount of nutrients keeps the growth of primary production and algal blooms restricted.
+
+ **Eutrophic regime** 
+
+ Estuaries and coastal marine ecosystem receive anthropogenic pollutants rapidly from rivers and streams from drainage basins. In eutrophic marine ecosystems phytoplankton and epiphytic algae biomass, as well as nuisance blooms of gelatinous zooplankton, have increased. Changes in species composition can take place in all trophic levels. Phytoplankton species may have shifted to taxa that are toxic or inedible. Animal species composition often changes to include less recreationally and commercially desired species. Macroalgal and vascular plants can experience changes in biomass and species composition or disappear completely. (Smith et al. 1999; Smith 2003)
+
+ Eutrophic regime causes economic losses due to restoration and damaged goods and health threats to humans exposed to algal toxins. Water clarity is reduced and humans perceive the water overall as less aesthetic.
+
+
+
+#### Drivers and causes of the regime shift
+
+Eutrophication commonly takes place in marine coastal waters (Smith et al. 1999; Cloern 2001). The primary cause of marine eutrophication is excessive increase in nutrient concentration (Nixon 1995) from riverine loads, originating from fertilized agricultural areas, urban sewage and industrial wastewaters (e.g. Bonsdorff et al. 1997). The nutrient loads from land to sea have been successively increased as a result of land clearing, population growth, industrial development, increased use of fossil fuels and increased use of fertilizers in agriculture (Boesch 2002). In addition, oceanic upwelling transports nutrient-rich waters to water surface and atmospheric nitrogen can enter the ocean (Boesch 2002; Paerl 1997). Estuaries may be naturally eutrophic as the nutrient loads from land are concentrated in confined channels, but cultural eutrophication often increases the nutrients significantly. In marine systems nitrogen is usually the key limiting nutrient (Borysova et al. 2005), but the limiting nutrient might differ between locations.
+
+ Also other human impacts contribute to the changes observed in many coastal areas (Cloern 2001), such as fishing (removal of top-predators causing food web reorganizations). For instance in the Black Sea the intense eutrophication is suggested to result from the combination of nutrient inputs, low grazing pressure on phytoplankton and favorable climatic influences (Llope et al. 2011). Climate change is projected to intensify eutrophication by potentially increasing the water temperature and thereby strengthening the vertical stratification potentially leading to larger deep anoxic water volumes or by increasing the discharge due to higher rainfalls (Justic et al. 2009). Local characteristics of the sea, such as water residence time, stratification and tides affect the intensity of eutrophication and the ecosystem vulnerability to it (Cloern 2001; Justic et al. 2009).
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+In eutrophic systems nutrient availability regulates primary production levels. The increased occurrence of harmful algal blooms are of great concern in marine systems (Smith et al. 1999). Provisioning ecosystem services are lost when toxins cause mortality of both wild and farmed fish as well as shellfish, and other animals. The composition and structure of food webs may be altered (Caddy 1993; Smith et al. 2006), potentially affecting the resilience of the coastal ecosystem. Damage and destruction of habitats (e.g. Kemp et al. 2005; Walker et al. 2001; Andersen & Rydberg 1988) and weakened quality of nursery and spawning grounds (Borysova et al., 2005) cause commercial fish species to migrate away or die.
+
+ Over half of the world population lives within coastal areas and most of the world's fisheries are connected to estuaries and near-shore habitats (Smith 2003 ref. Hobbie 2000), making the marine eutrophication a serious problem. Humans experience illness or even mortality due to contaminated fish and seafood and harmful algal blooms. Economic losses are caused by water quality problems, expenditures undertaken to reduce or avoid the damaging effects, damage on market goods and decreased tourism (Committee on the Causes and Management of Eutrophication, Ocean Studies Board, Water Science and Technology Board 2000; Cloern 2001).
+
+
+
+#### Management options
+
+**Options for preventing the regime shift** 
+
+ Returning to the pristine, oligotrophic state is seldom a realistic option especially with continuation of anthropogenic nutrient inputs (Boesch 2002) and the human population growth. Eutrophication can be avoided, or restored, by defining a good ecological status for example in the European coasts through the implemented Water Framework Directive (WFD), for the system and the standards (nutrient reductions) needed to achieve it (Boesch 2002). The effect of current regulations to meet these standards is estimated and additional means to satisfy the established ecological goals identified, as was also done by the first assessment of the success of the WFD. Overall, the management strategy should be integrated to include for instance the catchment basin and atmospheric impact. The use of nutrients can be reduced already in the point of release and pollution should be removed before they end to the sea. Ecosystem based fisheries management could improve the resilience of food-web against perturbations (Llope et al. 2011)
+
+  **Options for restoration of desirable regimes** 
+
+ The key action to decrease eutrophication is limiting (Smith 2003; Smith et al. 2006; Conley et al. 2009) and most measures needs to be taken in the surrounding catchments. Commitments and organized efforts have been made in several regions to reverse eutrophication. Examples of institutional arrangements are regulations to reduce emissions, multinational directives for the national level such as the WFD, coastal management programs and educational efforts (Boesch 2002).
+
+ Different ecosystems need separate, specific management frameworks including several sectors. Local to regional nutrient reduction programs are formed in combination of scientific knowledge and politics. Reductions can be done through wastewater treatment, emission regulations, increased efficiency of nutrient use in agriculture, reduced fertilizer use, manure management, enhancement of nutrient sinks and reduction of urban runoff (Boesch 2002).
+
+ Estimation of progress requires observations, continuous monitoring of the nutrient sources and tracking the changes in the sea back to the particular action. A time lag of years may occur before the management effects can be seen in the sea, in particular as internal phosphorus loading from sediments continues.  Modeling enables forecasting the future consequences for nutrient reduction for, for instance, water clarity, algal blooms and oxygen levels. (Boesch 2002)
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> NA</small>
+
+### References
+
+<small>
+
+- Andersen L, Rydberg L. 1988. Trends in nutrient and oxygen conditions within the Kattegat: effects of local nutrient supply. Estuar Coast Shelf Sci 26, 559u2013579. 
+- Boesch DF. 2002. Challenges and opportunities for science in reducing nutrient over-enrichment of coastal ecosystems. Estuaries 25, 886u2013900. 
+- Bonsdorff E et al. 1997. Coastal eutrophicationu202f: causes, consequences and perspectives in the archipelago areas of the northern Baltic Sea. Estuarine, Coastal and Shelf Science 44, 63u201372.  
+- Borysova O et al., 2005. Eutrophication in the Black Sea region. Impact assessment and causal chain analysis. Kalmar. 
+- Boynton WR, Kemp WM & Keefe C. 2009. A comparative analysis of nutrients and other factors influencing estuarine phytoplankton production. In Estuarine Comparisons. Academic Press, Inc. New York. 
+- Caddy JF. 1993. Toward a comparative evaluation of human impacts on fishery ecosystems of enclosed and semiu2010enclosed seas. Reviews in Fisheries Science, 1, 57u201395. 
+- Cloern J. 2001. Our evolving conceptual model of the coastal eutrophication problem. Marine Ecology Progress Series 210, 223u2013253.  
+- Committee on the Causes and Management of Eutrophication, Ocean Studies Board, Water Science and Technology Board, N.R.C. 2000. Clean Coastal Waters: Understanding and Reducing the Effects of Nutrient Pollution. National Academy Press.Washington, DC.  
+- Conley DJ et al. 2009. Controlling eutrophication: nitrogen and phosphorus. Science 324, 1014u20131015. 
+- Goldman JC, McCarthy JJ, Peavey DG. 1979. Growth rate influence on the chemical composition of phytoplankton in oceanic waters. Nature 279, 210u2013215. 
+- Hobbie J. 2000. Estuarine Science: A Synthetic Approach to Research and Practice. Hobbie J (ed.) Island Press. Washington, DC. 
+- Howarth RW. 1988. Nutrient limitation of net primary production in marine ecosystems. Annual review of ecology and systematics 19, 89u2013110.  
+- Justic D. et al. 2009. Global change and eutrophication of coastal waters. ICES Journal of Marine Science 70, 1528u20131537. 
+- Kemp WM et al. 2005. Eutrophication of Chesapeake Bayu202f: historical trends and ecological interactions. Marine Ecology Progress Series 303, 1u201329. 
+- Llope M et al. 2011. Overfishing of top predators eroded the resilience of the Black Sea system regardless of the climate and anthropogenic conditions. Global Change Biology 17, 1251u20131265 
+- Mort HP et al. 2007. Phosphorus and the roles of productivity and nutrient recycling during oceanic anoxic event 2. Geology 35, 483. 
+- Mort HP et al. 2010. Phosphorus recycling and burial in Baltic Sea sediments with contrasting redox conditions. Geochimica et Cosmochimica Acta 74, 1350u20131362.  
+- Nixon, S.W., 1995. Coastal marine eutrophication: a definition, social causes and future concerns. OPHELIA 41, 199u2013219. 
+- Nystru00f6m M et al. 2012. Confronting feedbacks of degraded marine ecosystems. Ecosystems 15, 695u2013710 
+- Paerl HW 1997. Coastal eutrophication and harmful algal bloomsu202f: Importance of atmospheric deposition and groundwater as new nitrogen and other nutrient sources. Limnology and oceanography 42, 1154u20131165.  
+- Smith VH, Joye SB, Howarth RV. 2006. Eutrophication of freshwater and marine ecosystems. Limnology and Oceanography 51, 351u2013355. 
+- Smith VH, Tilman GD, Nekola JC. 1999. Eutrophication: impacts of excess nutrient inputs on freshwater, marine, and terrestrial ecosystems. Environmental pollution 100, 179u201396. 
+- Smith VH. 2003. Eutrophication of freshwater and coastal marine ecosystems a global problem. Environmental Science and Pollution Research 10, 126u2013139.  
+- Vahtera E et al. 2007. Internal Ecosystem Feedbacks Enhance Nitrogen-fixing Cyanobacteria Blooms and Complicate Management in the Baltic Sea. AMBIO 36, 186u2013194.  
+- Walker D et al. 2001. Ecological significance of seagrass: Assessment for management of environmental impact in Western Australia. Ecol Eng 16, 323u2013330.
+
+</small>
+

@@ -1,0 +1,314 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 27
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Thermokarst lakes
+
+**Main contributors**: Elinor Holén, Hannah Griffiths, Jessica Spijkers, Hannah Griffiths, Elinor Holén, Jessica Spijkers
+
+**Other contributors**: Reinette (Oonsie) Biggs, Juan Carlos Rocha
+
+Last update: 2014-11-19
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+Thermokarst lake dominated landscapes are transforming into terrestrial ecosystems (e.g.: tundra). There is a natural fluctuation between these two ecosystems. However, the rate and scale at which those fluctuations are occurring are increasing due to permafrost melting caused by the increasing atmospheric temperatures associated with climate change. Warmer air temperature increases soil temperature, which melts permafrost (permanently frozen soils found in Arctic regions). The shift in ecosystems occurs when permafrost degradation becomes severe enough for the lakes to get permanently drained, creating the necessary conditions for vegetation to establish. The increased rate and scales of these land cover changes has extensive impacts on food and freshwater provisioning, but its greatest impact is on carbon sequestration. The melting of permafrost releases greenhouse gases, i.e. carbon dioxide (CO2) and methane (CH4), which further increase climate change, creating a powerful reinforcing feedback. 
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Tundra
+- Polar
+
+
+**Key ecosystem processes**:
+
+- Soil formation
+- Nutrient cycling
+- Water cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Freshwater
+- Fisheries
+- Fuel and fiber crops
+- Hydropower
+
+
+**Regulating services**:
+
+- Climate regulation
+- Regulation of soil erosion
+- Natural hazard regulation
+
+
+**Cultural services**:
+
+- Aesthetic values
+
+
+**Human well-being**:
+
+- Security of housing & infrastructure
+
+
+**Links to other regime shifts**:
+
+- Arctic sea-ice loss
+- Thermohaline circulation
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Global climate change
+
+
+**Land use**:
+
+- Fisheries
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake
+- catchment
+- community)
+- Sub-continental (e.g. southern Africa
+- Amazon basin)
+
+
+**Time scale**:
+
+- Months
+- Years
+- Decades
+- Centuries
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+
+
+**Evidence**:
+
+- Models
+- Contemporary observations
+
+
+**Confidence: existence of the regime shift**
+
+- Contested – Reasonable evidence both for and against the existence of RS
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+Due to thermokarst processes such as permafrost melting, numerous areas of the Arctic landscape are extremely lake-rich.  The water balance of those lakes may either be maintained due to impermeable permafrost that limits groundwater flow (Marsh 2009, 145) or lost due to seasonal drainage, a natural characteristic of the Arctic system. However, a widespread, unnatural decline in lake abundance is being observed within the Arctic due to decades of rising atmospheric temperatures in the region that has been deteriorating the state of the permafrost (Smith et al. 2005, 1429). Thus, the lake-rich landscape of the Arctic is overtime being transformed into a drained, dry landscape which is increasingly dominated by vegetation such as shrubs and graminoids (Hinzman 2005, 286).
+
+  **Thermokarst lake ecosystem**
+
+  The thermokarst lake-dominated landscape is formed as a response to some imposed disturbance, such as road construction, wildfire or climatic warming, which causes permafrost to thaw, creating irregular surface topography depressions, called thermokarsts. Those may appear as near-surface massive ice melts, allowing the surface to subside (Hinzman et al. 2005, 256). As permafrost melts over time, those depressions become filled with melt water forming the lakes characteristic of the Arctic region. 
+
+  **Terrestrial ecosystem**
+
+  Driven by external and internal factors, Arctic lakes are drying up at an unnatural speed within the region. This shift is accompanied by changes in vegetation, for example, increased shrub- and graminord abundance and a decrease in the cover of mosses and lichens through a broad expanse of the Arctic (Hinzman et al. 2005, 286). The changes in vegetation may then further transform the landscape through sequential effects on foraging mammals and birds, as well as aquatic fauna and insects (Hinzman et al 2005, 286).
+
+
+
+#### Drivers and causes of the regime shift
+
+ 
+
+ **Shift from thermokarst lakes to terrestrial ecosystem**
+
+ The main external driver of this regime shift is climate change, which is caused by elevated greenhouse gas emissions (IPCC 2007, 97). Increased temperatures warm the soil and precipitates permafrost to thaw. As the permafrost thaws, greenhouse gasses such as CO2 and CH4 that are trapped in the ice are emitted into the atmosphere, further increasing the effects of climate change (Hinzman 2005, 260; Karlsson et al. 2011, np). At a local scale, the effects of climate change are incremental. However, as this interaction is happening over large areas, the effects are aggregated and self-reinforcing, which is significant since permafrost and seasonally frozen grounds store about 25 per cent of the total global soil carbon stock (IPCC 2007, 110).
+
+ At a local scale, initial thawing of the permafrost from increased atmospheric temperatures creates a dynamic landscape of depressions (thermokarst) in which lakes are formed (IPCC 2007, 369). As permafrost become more degraded, drainage through outlet channels occurs. Since the temperature of melt water is higher than that of ice, it will exacerbate the melting of permafrost, causing another reinforcing feedback. Once the layer of frozen ground is completely penetrated the lakes can become permanently drained allowing for vegetation to be established (Marsh et al. 2008,148,157).
+
+ **Shift from terrestrial ecosystem to thermokarst lake ecosystem**
+
+ Heightened air- and soil temperatures melt the ice-rich soils and permafrost on which forests in the Arctic region develop, changing the physical conditions for the forest growing on top of it. When the roots of the trees get flooded, the trees die and ponds and lakes eventually replace the forest (Hinzman. 2005, 262). However, it is important to note that the shift from a terrestrial ecosystem to a lake dominated one is not as frequent as the shift from lakes to terrestrial ecosystems. The reason for this are the reinforcing feedbacks as mentioned above.
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+**Provisioning ecosystem services**
+
+ Even though this regime shift occurs at the local scale, its consequences go beyond that scale because it reshapes regional hydrology (through changes in water balance and surface water- connection and fragmentation) and alters regional supplies of the ecosystem (Karlsson et al. 2011, 4).[1]
+
+ Firstly, freshwater will locally become less abundant: the above-ground stored freshwater, which is of vital importance to migratory birds, fish, and other wildlife used by indigenous people, will shift to below-ground stored freshwater (Artic Science Journeys Radio Stories 2005, nap). Additionally, the Arctic lakes are of vital importance to indigenous people as they are a source of fresh drinking water (Vincent et al. 2013, 34). Globally, however, freshwater will become a more abundant ES due to reductions permafrost and subsequently ice sheets and glaciers resulting from the regime’s feedbacks to climate change. Nevertheless, this global increase in the freshwater ES is not a positive one: “Increased freshwater delivery to the Arctic Ocean from reductions in ice sheets and glaciers result in rising sea level (...)” (Hinzman et al. 2005, 271). 
+
+ Secondly, at a local scale traditional hunting and fishing practices will be impaired (Vincent et al. 2013, 34).  Arctic freshwater systems provide important migratory routes for fish stock. Due to this regime shit, those routes would be greatly altered in connectivity among lakes and river channels, as well as in terms of their physical coupling to the coastal marine ecosystem (Vincent et al. 2012, 90). Globally, fishing practices would suffer as well. Increased discharge of water into the Arctic Ocean due to draining results in increased nutrient and external organic matter inputs to the Arctic Ocean that affect primary processes at the base of the marine food web (Vincent et al. 2012, 90).
+
+ Thirdly, in the north, the lake regime provides winter transport routes that are important to indigenous peoples as it allows them to access not only their traditional hunting and fishing areas, but also to transport goods to remote communities and industries such as mining centers (Vincent et al. 2013, 35). 
+
+ Fourthly, the regime shift would mean an increase in products extracted from woods such as timber commodities and fuel: “increased areas of tree growth in the Arctic could serve to (…) take supply more wood products and related employment, providing local and global economic benefits” (Hassol et al. 2004, 7). 
+
+ Lastly, hydroelectricity, a provisioning ES that plays an important role in some northern economies, would be greatly damaged due to this regime shift (Vincent et al. 2013, 35). 
+
+ **Regulating ecosystem services**
+
+ Climate regulation is heavily affected on a global scale through the processes of this regime shift: as it sets up a positive feedback cycle in which the release of methane and carbon dioxide through the newly exposed soil and melted permafrost feeds into global warming.[2]
+
+ The shift from lakes to terrestrial ecosystems heightens gully erosion, a type of erosion that occurs when water is channeled across unprotected land and washes away the soil along the drainage lines. As permafrost degrades further, it causes erosion and slumping of lake edges and stream channels (Witthaus n.d., n.p.). 
+
+ **Cultural ecosystem services**
+
+ Lastly, Vincent et al. (2013) report that cultural services are affected on a local scale: the traditional diet of Inuit and other northern indigenous people is being disturbed which has an impact on northern culture and health; traditional hunting and fishing practices are altered; traditional routes are subject to earlier break-up which impact traditional freight-hauling (Vincent et al. 2013, 34-35).
+
+ 
+
+---
+
+  [1]From a global perspective, we can perceive that the shift also has implications for the earth system as a whole through its feedbacks to global climate change by “changes in albedo and energy and carbon fluxes” (ibid. 4). However, even though the system has widespread consequences on ecosystem services (ES) through its contribution to global climate change, we will focus only on those ES that are affected by the drainage that occurs in this regime shift. The reason for this is that the ES affected by global mechanisms such as climate change are too complex and numerous to describe here.
+
+   [2]“The zone of thaw beneath a lake, called a talik or thaw bulb, is an anaerobic environment in which microbes readily decompose organic matter that was locked up in permafrost for tens of thousands of years. This thawing results in the rapid production and emission of methane and carbon dioxide predominately in the form of ebullition (bubbling) and with radiocarbon ages of 30 000–43 000 years. Given the tremendous size of the permafrost carbon pool, which is more than twice the size of the atmospheric carbon pool, permafrost thaw associated with thermokarst lake cycles could result in the release of more than 50 000 teragrams of 14C-depleted methane in the future. This is more than ten times the amount of methane in the current atmosphere. The release of this potent greenhouse gas from thermokarst lakes sets up a positive feedback cycle in which methane causes global climate warming, which in turn causes permafrost to thaw, and more methane to be formed and released” (Vincent et al. 2013, 32).
+
+
+
+#### Management options
+
+There are few management options available to maintain the thermokarst lake ecosystems due to the long time scale at which permafrost melts and the natural dynamics within this system e.g. hydraulic fluctuations or site-specific soil conditions. One management option is to continue to reduce the emissions of greenhouse gases while simultaneously investigating further opportunities for carbon offsetting schemes. 
+
+ **Managing downstream effects**
+
+ For hydroelectric reservoirs, shifting ice conditions will have both positive and negative effects, and may require adaptive changes in operating procedures, with attention to minimize negative impacts associated with ice jams and ice breakup downstream of the spillway (Vincent et al. 2013, 37).
+
+ Fisheries management plans will also need to be adapted to the changes in migration and productivity of northern fish populations with ongoing climate change (Vincent et al. 2013, 36).
+
+ These essential resources require the development of integrated freshwater management plans, which include consideration of alternate water sources as traditional supplies change in quantity or quality (Vincent et al. 2011, 36). The Arctic will require increasing vigilance and appropriate water management strategies to avoid and minimize the impacts of changing water impacts in the future (Vincent et al. 2013, 36).
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Elinor Holén, Hannah Griffiths, Jessica Spijkers, Hannah Griffiths, Elinor Holén, Jessica Spijkers, Reinette (Oonsie) Biggs, Juan Carlos Rocha. Thermokarst lakes. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2014-11-19</small>
+
+### References
+
+<small>
+
+-  Chapman, W. L. and Walsh, J. E. (1993). Recent variations of sea ice and air temperatures in high latitudes, Bull. Amer. Meteoric. Soc. 74, 33–47. http://dx.doi.org/10.1175/1520-0477(1993)074<0033:RVOSIA>2.0.CO;2  
+- Artic Science Journeys Radio Stories. (2005). Arctic Lakes Shrink, Disappear. http://seagrant.uaf.edu/news/05ASJ/06.09.05arctic-lakes.html  
+- Clarke GKC. (1982) Glacier outburst floods from “Hazard Lake”, Yukon Territory, and the problem of flood magnitude prediction. Journal of Glaciology 28(98): 3–21. 
+- Clarke GKC. 1982. Glacier outburst floods from “Hazard Lake”, Yukon Territory, and the problem of flood magnitude prediction. Journal of Glaciology 28(98): 3–21. 
+- Hassan, R. M., Scholes, R., & Ash, N. (2005). Ecosystems and human well-being: current state and trends: findings of the Condition and Trends Working Group (p. 917). Island Press. 
+- Hassol, S. J. (2004). Impacts of a Warming Arctic. Arctic Climate Impact Assessment. 
+- Hinzman, L. D., Bettez, N. D., Bolton, W. R., Chapin, F. S., Dyurgerov, M. B., Fastie, C. L., … Yoshikawa, K. (2005). Evidence and Implications of Recent Climate Change in Northern Alaska and Other Arctic Regions. Climatic Change, 72(3), 251–298. doi:10.1007/s10584-005-5352-2 
+- IPCC (2007). Climate Change 2007: The Physical Science Basis. Cambridge University Press, New York. Nap. 
+- Karlsson, J. M., Bring, A., Peterson, G. D., Gordon, L. J., & Destouni, G. (2011). Opportunities and limitations to detect climate-related regime shifts in inland Arctic ecosystems through eco-hydrological monitoring. Environmental Research Letters, 6(1), 014015. 
+- Kirpotin, S., Polishchuk, Y., Zakharova, E., & Shirokova, L. (2008). One of the possible mechanisms of thermokarst lakes drainage in West ? Siberian North. International Journal of Environmental Studies, 65(5), 37–41. 
+- Magnuson, J., Robertson, D., Benson, B., Wynne, R., Livingstone, D., Arai, T., Assel, R., Barry, R., Card, V., Kuusisto, E., Granin, N., Prowse, T., Steward, K., and Vuglinski, V. (2000). Historical trends in lake and river ice cover in the northern hemisphere, Science 289, 1743–1746. DOI: 10.1126/science.289.5485.1743 
+- Marsh P, Neumann N. (2001). Processes controlling the rapid drainage of two ice-rich permafrost-dammed lakes in NW Canada. Hydrological Processes 15, 3433–3446. 
+- Marsh, P., Russell, M., Pohl, S., Haywood, H., Onclin, C. (2009). Changes in thaw lake drainage in the Western Canadian Arctic from 1950 to 2000. National Hydrology Research Centre.158, 145–158. 
+- Moore, T. R., Roulet, N. T., and Waddington, J. M. (1998) Uncertainty in predicting the effect of climatic change on the carbon cycling of Canadian peatlands, Clim. Change 40, 229–245.  DOI 10.1023/A:1005408719297 
+- National Snow and Ice Data Center. All about frozen ground. Webpage. Date of access: 12/11/2013. http://nsidc.org/cryosphere/frozenground/people.html 
+- Oechel,W. C. and Vourlitis, G. L. (1997), Climate change in northern latitudes: Alterations in ecosystem structure and function and effects on carbon sequestration, in Oechel, W. C., Callaghan, T., Gilmanov, T., Holten, J. I., Maxwell, B., Molau, U., and Sveinbj¨ornsson, B. (eds.), Global Change and Arctic Terrestrial Ecosystems, Ecological Studies 124, 381–401. 
+- Prowse, T., Alfredsen, K., Beltaos, S., Bonsal, B., Duguay, C., Korhola, A., … Weyhenmeyer, G. a. (2012). Past and Future Changes in Arctic Lake and River Ice. Ambio, 40(S1), 53–62. doi:10.1007/s13280-011-0216-7 
+- Schaefer, K., Lantuit, H., Romanovsky, V.E., Schuur, E.A.G., Gärtner-Roer, I. (2012). UNEP Policy Implications of Warming Permafrost nap. ISBN: 978-92-807-3308-2 
+- Smith, L.C., Sheng, Y., MacDonald, G., Hinzman, L.D. (2005). Disappearing Arctic lakes. Science (New York, N.Y.), 308(5727), p.1429. Available at: http://www.ncbi.nlm.nih.gov/pubmed/15933192. 
+- Vincent, W. F., Callaghan, T. V., Dahl-Jensen, D., Johansson, M., Kovacs, K. M., Michel, C., … Sharp, M. (2012). Ecological Implications of Changes in the Arctic Cryosphere. Ambio, 40(S1), 87–99. doi:10.1007/s13280-011-0218-5 
+- Vincent, W. F., Laurion, I., Pienitz, R., Anthony, K. M. W., & Katey, M. (2013). Climate Impacts on Arctic Lake Ecosystems. Climatic Change and Global Warming of Inland Waters: Impacts and Mitigation for Ecosystems and Societies. 27-42. 
+- Witthaus, L., Zung, A. n.d. Threatened Arctic Lakes: Pressures from Climate Change and Resource Development. PowerPoint presentation.  
+- Zhang, T. (2005). Influence of the seasonal snow cover on the ground thermal regime: An overview. Reviews of Geophysics. 43, 1-23.
+
+</small>
+

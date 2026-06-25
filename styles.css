@@ -1,3 +1,81 @@
 blockquote {
   font-style: italic
 }
+
+
+/*for image gallery from https://www.w3schools.com/howto/howto_css_image_grid_responsive.asp */
+
+/* Responsive gallery, code from : https://www.w3schools.com/howto/howto_css_image_grid_responsive.asp*/
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+  max-width: 225px;
+  display: block;
+}
+
+/* Container needed to position the overlay. Adjust the width as needed. Note: the original class container messes up the nav bar */
+.contain {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+}
+
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+  .column img {
+      max-width: 100%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+  .column img {
+      max-width: 100%;
+  }
+}
+
+
+/* The overlay effect - lays on top of the container and over the image */
+.overlay {
+  position: absolute; 
+  bottom: 0; 
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1; 
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* When you mouse over the container, fade in the overlay title */
+.contain:hover .overlay {
+  opacity: 1;
+}

@@ -1,0 +1,305 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 26
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Coniferous to deciduous forest
+
+**Main contributors**: Katja Malmborg, Linda Lindström Lindström, Lara D. Mateos
+
+**Other contributors**: Garry Peterson, Juan Carlos Rocha
+
+Last update: 2014-10-21
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+The regime shift is the boreal forest, where the coniferous dominated forest is slowly being replaced by deciduous trees due to recent climate warming and changes in the wildfire regime.  Coniferous trees thrive in cold, moist soil conditions, and enhance these conditions by accumulating a deep soil organic layer. The moisture of the soil prevents frequent fires from occurring, but when they do, the soil organic layer is rarely consumed in its entirety due to the high water content (Johnstone et al., 2010). Coniferous trees regenerate well in organic soil, which means that only really severe fires that consume the whole soil organic layer will alter the coniferous-promoting soil conditions (Hollingsworth et al., 2013). Deciduous trees, on the other hand, thrive in nutrient rich, dry and warm soils, which are conditions that they reinforce by keeping the decomposition rate high, making the soil organic layer shallow. Fires tend to be more frequent than in coniferous dominated forests, but not as intense. However, since the soil organic layer is so shallow, it tends to be consumed by the fire, exposing the mineral soil (Johnstone et al., 2010). Deciduous trees have well developed strategies for regenerating in mineral soil, which means that deciduous trees tend to return to these areas after a wildfire (Hollingsworth et al., 2013). A severe fire can get the system to shift from one regime to the other, while changes in climate (i.e. mainly temperature or precipitation) can change the underlying conditions to make each regime less resilient (Johnstone et al., 2010). It has been well studied in interior Alaska (Wolken et al., 2011).  Currently, warmer temperatures are decreasing the relative humidity in the boreal forest in Interior Alaska, which is both causing more frequent and severe fires, as well as altering temperature and moisture conditions in the soil to favour deciduous tree regeneration (Mann et al., 2012).  The productivity of the boreal forest in Interior Alaska is expected to decrease due to drought stress in the new regime (Beck et al., 2011).  The provisioning of wild products such as berries and game is expected to shift as some species and decrease for others, but it is unclear what the net changes will be (Chapin et al., 2008). The boreal forest is likely to become a net source of carbon to the atmosphere (McGuire et al., 2009; Schuur et al., 2009), while the air quality is expected to decrease periodically due to the increase in fire frequency (Chapin et al., 2008). Because the main driver of the regime shift is climate warming, decreasing  emissions of greenhouse gasses into the atmosphere would be the most powerful way to prevent or reverse the regime shift.  Reducing greenhouse gas emissions is a difficult and challenging intervention that requires substantial coordinated global action that seems unlikely to occur in the near future.  Fire suppression could potentially slow down the rate of change in parts of the forest, but fire supression is not feasible in most of the boreal forest.
+
+  
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Temperate & boreal forests
+
+
+**Key ecosystem processes**:
+
+- Soil formation
+- Primary production
+- Nutrient cycling
+- Water cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Freshwater
+- Wild animal and plant products
+- Timber
+- Woodfuel
+
+
+**Regulating services**:
+
+- Air quality regulation
+- Climate regulation
+- Water purification
+- Regulation of soil erosion
+- Pest & disease regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+
+
+**Human well-being**:
+
+- Food and nutrition
+- Health (e.g. toxins
+- disease)
+- Livelihoods and economic activity
+- Security of housing & infrastructure
+- Cultural
+- Aesthetic and recreational values
+
+
+**Links to other regime shifts**:
+
+NA
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Environmental shocks (e.g. fire
+- floods
+- droughts)
+- Global climate change
+
+
+**Land use**:
+
+- Timber production
+- Conservation
+- Tourism
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake
+- catchment
+- community)
+- National (country)
+
+
+**Time scale**:
+
+- Decades
+- Centuries
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+- Hysteretic (difficult to reverse)
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+The boreal forest in northern Interior Alaska is approximately 48 million hectares (Mann et al., 2012) and is bounded by the Alaska Range to the south, the Seward Peninsula to the west and Brooks Range to the north (Wolken et al., 2011). It is characterized by large areas of gently sloping uplands and flat lowlands isolated by mountain ranges and braided rivers with broad floodplains. During the past 50 years, the mean annual temperature in the interior boreal forest of Alaska has increased by 1.3 ºC (Hartmann and Wendler, 2005) and this has been strongly associated with recent increase in fire frequency and severity (Wolken et al., 2011). The annual area burned in Interior Alaska has doubled during the last decade (Kasischke et al., 2010). The forest has been dominated by coniferous trees (mainly black spruce), which is a group of species that thrive under colder, moist conditions in a deep soil organic layer. However, due to climate warming, Interior Alaska is currently  shifting towards a deciduous dominated  forest (e.g. aspen and birch) that prefer warmer and drier conditions with a shallow soil organic layer (Johnstone et al., 2010).   
+
+  
+
+  
+
+ **Low fire frequency coniferous dominated forest**
+
+ Under cold and wet conditions, coniferous trees, such as the black spruce (Picea mariana), dominate the boreal forest in Interior Alaska. The coniferous trees promote the accumulation of a deep soil organic layer, cold and moist soil temperatures, and slow decomposition rates. Due to the moistness of the soil, fires are not frequent in these forests. However, when they occur, they tend to be severe due to the high flammability of the black spruce. Due to the high water content of the soil organic layer, it will only be entirely consumed by the most severe fires (Johnstone et al., 2010). As long as the entire organic layer has not been consumed, the coniferous trees have a regenerative advantage due to their seed’s ability to sprout in moist organic soils. This means that these forests tend to return to a coniferous dominated state even after a fire (Hollingsworth et al., 2013).
+
+  
+
+ **High fire frequency deciduous dominated forest**
+
+ A deciduous dominated forest, mainly consisting of aspen and birch trees in Interior Alaska, prefers and reinforces dry and warm soil conditions. Although these forests have a high organic litter production, the fast decomposition rate and the subsequent fast nutrient turnover, leaves a shallow soil organic layer and a nutrient rich mineral soil that favours deciduous tree regeneration. The warm and dry conditions in the forest lead to a comparatively high fire frequency, but due to the low flammability of the deciduous trees, the fires rarely become very severe (Johnstone et al., 2010). However, because of the shallow pre-fire soil organic layer, the fires tend to expose the mineral soil, which favours the post-fire reproduction of deciduous trees (Hollingsworth et al., 2013).
+
+  
+
+
+
+#### Drivers and causes of the regime shift
+
+**Shift from coniferous to deciduous-dominated forest**
+
+ The main external direct driver of the regime shift is climate warming, which affects the important feedbacks of the boreal forest ecosystem. Warmer and drier climatic conditions have a direct effect on the most important soil characteristics (i.e. soil temperature, moisture and depth of the soil organic layer), influencing the vegetation cover. Coniferous trees require a cold moist soil with a deep soil organic layer in order to successfully reproduce. Deciduous trees, on the other hand, are competitively superior under warmer and drier soil conditions with a shallow soil organic layer (Johnstone et al., 2010). Extended summer seasons and the accompanying drier conditions create a suitable environment for an increase in the annual number of natural ignitions by lightning strikes (Kasischke et al., in press). Fires have an immediate effect on the environmental conditions of the forest, affecting factors such as soil moisture and the post-fire forest community composition (Kelly et al., 2012). Once established, the trees support and emphasize the conditions that favour their own reproduction and dominance. Under colder environmental conditions, coniferous trees, such as the black spruce, produce large amounts of organic litter, which, together with the presence of permafrost, maintains a moist soil and slow decomposition rates, contributing to a deep soil organic layer. Under warmer climatic conditions, deciduous trees produce ground layer fuels that decompose at fast rates, maintaining a shallow organic layer (Johnstone et al., 2010). Global socio-economic development indirectly drives climate warming, contributing to the increased atmospheric temperatures through e.g. greenhouse gas emissions (IPCC, 2011). Fire management can have a limited effect on the regime shift through fire suppression practices.
+
+ **Shift from deciduous-dominated **to******coniferous **forest****
+
+ In order to shift from regime 2 to regime 1, a prolonged climatic cooling would be necessary. A slow change of the environmental conditions towards those that favour a coniferous boreal forest could, if the forest is left undisturbed for a sufficiently long time, lead to late successional coniferous species, like the black spruce, replacing early successional deciduous species (Rupp et al., 2002). Although the spatial scale considered is of extreme importance, sufficiently large external shocks, such as deciduous-specific insect outbreaks, could clear sufficiently large areas to advance the dominance of coniferous trees. In such hypothetical events, coniferous trees could get the opportunity to sprout and start altering the soil conditions to their own favour.
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+**Shift from coniferous to deciduous-dominated forest**
+
+ The coniferous dominated boreal forest of Interior Alaska requires a deep soil organic layer to succeed over other classes of trees. Once the required depth is present, this has a strong reinforcing effect on the coniferous forest. This is a requisite to maintain cold moist soil conditions in which coniferous trees thrive. The cold soil temperature reduces the decomposition rate of organic litter, maintaining a deep soil organic layer (Johnstone et al., 2010). 
+
+ External shocks such as severe and frequent fires or insect outbreaks might cause dramatic shifts in the soil and vegetation by impacting the soil organic layer depth and tree succession (Hollingsworth et al., 2013; McCullough et al., 1998; Wolken et al., 2011). If the severity of such external shocks is sufficient, thresholds in the most important regime characteristics will be crossed (e.g. shallow post-shock soil organic layer) creating windows of opportunity for deciduous species to dominate. Atmospheric temperature influences the frequency and severity of fires, the soil characteristics and the length of the growing season; therefore, climate warming can also cause a change in conditions that would set the grounds for a shift to a new stable state (Mann et al., 2012). 
+
+ The deciduous dominated forest has a competitive advantage in warm and dry conditions with shallow soil organic layers. Again, once the required shallow layer is present, it has a strong reinforcing effect on the deciduous forest. A shallow soil organic layer maintains warm and dry soil conditions that speed up the decomposition of organic litter, maintaining the required depth of soil organic layer (Johnstone et al., 2012). 
+
+ **Shift from deciduous-dominated **to******coniferous **forest****
+
+ A future shift from regime 2 to regime 1 could occur if the environmental and climatic conditions became colder and moist again. However, this is an unlikely scenario in the near future. As discussed previously, the climatic conditions alter the soil characteristics, which in turn influence the vegetation cover and the fire regime of the forest. 
+
+
+
+#### Management options
+
+The primary tactic used for reducing impacts of fire and enhance resilience (i.e. maintain structures, feedbacks, functions and processes of regime 1) is fire suppression to reduce the fire severity (Chapin et al., 2008). Decrease in fire severity could prevent the fire from consuming the soil organic layer, which in turn favours the conditions for coniferous tree. Fire suppression should be maintained in Alaska since it minimizes the risk fire imposes to life and property in communities. However, distant fires should be allowed to burn under controlled conditions, since it could have a cooling effect at a regional scale due to the higher albedo of post-fire deciduous species compared to the previous coniferous forest (Chapin et al., 2008). 
+
+ Reducing air temperature is essential to be able to restore regime 1. Alaska itself accounts for a miniscule proportion of global greenhouse gas emissions and consequently to climate warming (Chapin et al., 2008). Therefore, reducing Alaska’s emissions will not have a major impact on global climate change. Global abatement of emissions is the long-term solution. Regardless of global greenhouse gas emission policies, it is highly likely that recent warming and wildfire frequency will continue for several decades in Alaska due to the multidecadal lag in the climate system (IPCC, 2007). This makes the reduction of emissions an inefficient short-term solution.  Secondary challenges that face efforts to achieve reduced emissions include restricting the economy and changing the focus of developed nations on a continued economic but sustainable growth. Educating global public about the social impacts of climate change in Alaska and other parts of the world (e.g. reduction in ecosystem services) may promote the willingness to reduce emissions (Chapin et al., 2008). 
+
+ In summary, this means that the regime shift from coniferous to deciduous dominated forest in theory could be reversible through manipulation of e.g. soil conditions or local climate. However, due to projected global socio-economic development and climate change, it is highly unlikely that reversing the regime shift will be possible during the next 100 years.
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Katja Malmborg, Linda Lindström Lindström, Lara D. Mateos, Garry Peterson, Juan Carlos Rocha. Coniferous to deciduous forest. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2014-10-21</small>
+
+### References
+
+<small>
+
+- Beck, Pieter S.A., Glenn P. Juday, Claire Alix, Valerie A. Barber, Stephen E. Winslow, Emily E. Sousa, Patricia Heiser, James D. Herriges and Scott J. Goetz, 2011. Changes in forest productivity across Alaska consistent with biome shift. Ecology Letters, no. 14: 373-379. Blackwell Publishing Ltd, Hoboken, New Jersey. 
+- Beck, Pieter S.A., Glenn P. Juday, Claire Alix, Valerie A. Barber, Stephen E. Winslow, Emily E. Sousa, Patricia Heiser, James D. Herriges and Scott J. Goetz, 2011. Changes in forest productivity across Alaska consistent with biome shift. Ecology Letters, no. 14: 373-379. Blackwell Publishing Ltd, Hoboken, New Jersey. 
+- Chapin, F. Stuart III, Sarah F. Trainor, Orville Huntington, Amy L. Lovecraft, Erika Zavaleta, David C. Natcher, A. David McGuire, Joanna L. Nelson, Lily Ray, Monika Calef, Nancy Fresco, Henry Huntington, T. Scott Rupp, La’Ona DeWilde and Rosamond L. Naylor, 2008. Increasing wildfire in Alaska’s boreal forests: Pathways to potential solutions of a wicked problem. BioScience, vol. 58, no. 6: 531-540. American Institute of Biological Sciences. 
+- Hartmann, B., and G. Wendler, 2005. The significance of the 1976 Pacific climate shift in the climatology of Alaska. Journal of Climate, vol. 18: 4824–4839.  
+- Hollingsworth, Teresa N., Jill F. Johnstone, Emily L. Bernhardt, F. Stuart Chapin III, 2013: Fire severity filters regeneration traits to shape community assembly in Alaska’s boreal forest. PLoS ONE 8(2): e56033. doi:10.1371/journal.pone.0056033 
+- Huntsinger, E., N. Fried, and D. Robinson. 2007. Alaska economic trends. Alaska Department of Labor and Workforce Development, Juneau, Alaska, USA. 
+- IPCC (Intergovernmental Panel on Climate Change), 2007. Climate Change 2007: The PhysicalScience Basis, Cambridge (MA): Cambridge University Press, (8 May 2008; www.climatescience.gov/Library/ipcc/wgl4ar-review. htm) 
+- IPCC, 2011. Summary for Policymakers. In: Edenhofer, O., R.  Pichs-Madruga, Y. Sokona, K. Seyboth, P. Matschoss, S. Kadner, T. Zwickel, P. Eickemeier, G. Hansen, S. Schlömer, C. von Stechow (eds): IPCC Special Report on Renewable Energy Sources and Climate Change Mitigation. Cambridge University Press, Cambridge, United Kingdom and New York, NY, USA. 
+- Johnstone, Jill F., F. Stuart Chapin III, Teresa N. Hollingsworth, Michelle C. Mack, Vladimir Romanovsky and Merritt Turetsky, 2010: Fire, climate change, and forest resilience in interior Alaska. Canadian Journal of Forest Research, vol. 40: 1302-1312. NRC Research Press, Ottawa, Ontario. 
+- Kasischke, Eric S., David L. Verbyla, T. Scott Rupp, A. David McGuire, Karen A. Murphy, Randi Jandt, Jennifer L. Barnes, Elizabeth E. Hoy, Paul A. Duffy, Monika Calef, and Merritt R. Turetsky, 2010.	Alaska’s changing fire regime: implications for the vulnerability of its boreal forests. Canadian Journal of Forest Research, vol. 40: 1313–1324.  
+- Kasischke, Eric S., T.Scott Rupp and D.L. Verbyla, in press. Fire trends in the Alaskan boreal forest. In: F.S. Chapin III, J. Yarie, K. Van Cleve, L.A. Viereck, M.W. Oswood and D.L. Verbyla (eds.). Alaska’s Changing Boreal Forest. Oxford University Press.  
+- Kelly, R., M. L. Chipman, P. E. Higuera, I. Stefanova, L.B. Brubaker and F. S. Hu, 2013. Recent burning of boreal forests exceeds fire regime limits of the past 10,000 years. Proceedings of the National Academy of Sciences of the United States of America, vol. 110, no. 32: 13055–13060.  
+- Keyser, A. R., J. S. Kimball, R. R. Nemani and S. W. Running, 2000. Simulating the effects of climate change on the carbon balance of North American high-latitude forests. Global Change Biology, vol. 6: 185-195. Blackwell Science Ltd, Hoboken, New Jersey. 
+- Lynch, J. S., J.L. Hollis and F.S. Hu, 2004. Climatic and landscape controls of the boreal forest fire regime: Holocene records from Alaska. Journal of Ecology, vol. 92, no. 3: 477–489.  
+- Mann, Daniel H., T. Scott Rupp, Mark A. Olson and Paul Duffy, 2012. Is Alaska’s boreal forest now crossing a major ecological threshold? Arctic, Antarctic, and Alpine Research, vol. 44, no. 3: 319-331. Institute of Arctic and Alpine Research (INSTAAR), University of Colorado. 
+- McCoy, V. M., and C. R. Burn, 2005: Potential alteration by climate change of the forest-fire regime in the boreal forest of central Yukon Territory. Arctic, vol. 58, no. 3: 276-285. Arctic Institute of North America. 
+- McCullough, D.G., R. A. Werner and D. Neumann, 1998. Fire and insects in northern and boreal forest ecosystems of North America. Annual review of entomology, vol. 43: 107–27.  
+- McGuire, A. David, Leif G. Anderson, Torben R. Christensen, Scott Dallimore, Laodong Guo, Daniel J. Hayes, Martin Heimann, Thomas D. Lorenson, Robie W. Macdonald and Nigel Roulet, 2009: Sensitivity of the carbon cycle in the Arctic to climate change. Ecological Monographs, vol. 79, no. 4: 523-555. Ecological Society of America. 
+- Rupp, T. Scott, A. M. Starfield, F. Stuart Chapin III and Paul Duffy, 2002: Modeling the impact of black spruce on the fire regime of Alaskan boreal forest. Climatic Change, vol. 55: 212-233. Kluwer Academic Publishers.  
+- Schuur, Edward A. G., Jason G. Vogel, Kathryn G. Crummer, Hanna Lee, James O. Sickman and T. E. Osterkamp, 2009: The effect of permafrost thaw on old carbon release and net carbon exchange from tundra. Nature, vol. 459: 556-559. Macmillan Publishers Ltd, London. 
+- Wolken, Jane M., Teresa N. Hollingsworth, T. Scott Rupp, F. Stuart Chapin, III, Sarah F. Trainor, Tara M. Barrett, Patrick F. Sullivan, A. David McGuire, Eugenie S. Euskirchen, Paul E. Hennon, Erik A. Beever, Jeff S. Conn, Lisa K. Crone, David V. D&#039;Amore, Nancy Fresco, Thomas A. Hanley, Knut Kielland, James J. Kruse, Trista Patterson, Edward A. G. Schuur, David L. Verbyla, and John Yarie 2011. Evidence and implications of recent and projected climate change in Alaska&#039;s forest ecosystems. Ecosphere 2:art124. http://dx.doi.org/10.1890/ES11-00288.1
+
+</small>
+

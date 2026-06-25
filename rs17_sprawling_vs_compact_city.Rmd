@@ -1,0 +1,301 @@
+---
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
+params:
+  j: 17
+---
+
+
+```{r include = FALSE}
+library(tidyverse)
+library(leaflet)
+
+load('assets/cases_db.Rda')
+cases <- dat
+dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+    janitor::clean_names()
+
+x <- dat$id[params$j]
+rs <- dat |> filter(id== x)
+knitr::opts_chunk$set(echo = FALSE, results = 'asis')
+```
+
+
+# Sprawling vs compact city
+
+**Main contributors**: Beom-Sik Yoo, Maja Berggren, Anneli Sundin
+
+**Other contributors**: Reinette (Oonsie) Biggs, Juan Carlos Rocha
+
+Last update: 2012-03-21
+
+```{r map, out.width='100%', out.height='300px', results = 'markup'}
+
+
+
+cs <- cases |> 
+    filter(type == rs$regime_shift_name) 
+
+m <- leaflet(cs) |> 
+    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addCircleMarkers(
+        lng = ~long, lat=~lat, radius = 2, 
+        color = 'orange', 
+        popup = ~popups) |> 
+    setView(5,10, zoom = 2) 
+m
+```
+
+### Summary
+
+Urban sprawl, i.e. expansion of cities into low density, single use development, is a growing problem across the world leading to loss of ecosystem services, air pollution, class segregation and increased energy use. It is mainly driven by population growth, housing preferences, demand for social security and aesthetic preferences. The key maintainers of sprawl are road infrastructure designed with automobile use in mind and government's intentional and unintentional support for city expansion. Many cities are beginning to realize the negative impacts of urban sprawl, and governments are working towards shifting from sprawling of cities to development towards a more compact structure. This is made by e.g. investments in public transportation and new compact and mixed used areas where automobiles are not necessary. 
+
+
+
+### Categorical attributes
+
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Planetary
+
+
+**Key ecosystem processes**:
+
+- Soil formation
+- Primary production
+- Nutrient cycling
+- Water cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Freshwater
+- Food crops
+- Livestock
+- Fisheries
+- Wild animal and plant products
+- Timber
+- Woodfuel
+- Fuel and fiber crops
+- Hydropower
+
+
+**Regulating services**:
+
+- Air quality regulation
+- Climate regulation
+- Water purification
+- Water regulation
+- Regulation of soil erosion
+- Pest & disease regulation
+- Pollination
+- Natural hazard regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+- Knowledge and educational values
+- Spiritual and religious
+
+
+**Human well-being**:
+
+- Food and nutrition
+- Health (e.g. toxins
+- disease)
+- Livelihoods and economic activity
+- Security of housing & infrastructure
+- Cultural
+- Aesthetic and recreational values
+- Social conflict
+
+
+**Links to other regime shifts**:
+
+- Freshwater eutrophication
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Infrastructure development (e.g. roads
+- pipelines)
+- Environmental shocks (e.g. fire
+- floods
+- droughts)
+
+
+**Land use**:
+
+- Urban
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake
+- catchment
+- community)
+
+
+**Time scale**:
+
+- Years
+- Decades
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+- Hysteretic (difficult to reverse)
+
+
+**Evidence**:
+
+- Models
+- Contemporary observations
+
+
+**Confidence: existence of the regime shift**
+
+- Speculative – Regime shift has been proposed, but little evidence as yet
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
+
+
+:::
+
+::::
+
+### Detail information
+
+#### Alternative regimes
+
+When discussing the two different regimes we will focus on the archetypes for compact city and sprawled city as large cities and megacities that still attract people. Thus, rather than a proper regime shift, development of cities is often path dependent according to one of the two trajectories towards either a sprawling city or a compact city. Our focus is on urban areas in developed countries, therefore we do not take e.g. poor city slums into consideration.   
+
+ **Compact city**
+
+ A compact city is more than just a city that is densely populated. ''Dwelling density, the advancement of mixed-use development, and reaffirmed focus on the nature and quality of development have been identified as important aspects in the creation of the compact city'' (Arbury 2005).Three elements are consistently found in many literatures that describe a compact city - mix-used development, greater focus on public transportation and quality urban design (Breheny 2001, Arbury 2005). Studies have included the promotion of urban regeneration, the revitalisation of town centres, and restraint on development in rural areas (Breheny 2001) and pedestrian friendly with large pavements (Arbury 2005) as part of the definition. 
+
+ **Sprawling city**
+
+ Urban sprawl can be defined as ''unplanned, uncontrolled, and uncoordinated single use development that does not provide for a functional mix of uses and/or is not functionally related to surrounding land uses and which variously appears as low-density ...development'' (Arbury 2005). The European Environment Agency (EEA) has described sprawl as the physical pattern of low-density expansion of large urban areas, under market conditions, mainly into the surrounding agricultural areas. Low-density, single-use and automobile dependent type of development has been the key attributes with lack of planning and control being the key enablers for urban sprawl.  
+
+ Unfortunately, there is not one single measurement for compact city or sprawling city. It requires a set of indicators that incorporate economic, social and environmental attributes of city development. Furthermore, defining what is desirable is quite subjective to preferences held by residents of different cities, which implies what may be desirable for one city might be undesirable for others. 
+
+
+
+#### Drivers and causes of the regime shift
+
+**From compact city to sprawling city**
+
+ The main drivers and causes contributing to sprawl are urban population growth and the demand for housing. City expansion impels economic development, through the production of jobs, creativity, technology and the accumulation of knowledge and economic markets, which in many ways can lead to better welfare (Bairoch 1991). This induces the demand to live more spaciously, own a private lot and drive a car. Moreover, there are many people wishing to live closer to nature, hence people preferring aesthetic quality of the landscape seems to be contributing to sprawl development (Brown 2006). At the same time living in the inner city becomes more and more expensive and undesirable.
+
+ In Europe, many cities developed long before cars existed, and therefore have a more compact structure. Cities in North America, Australia and New Zealand, on the other hand, are planned for automobile use as a central part of the city system. Infrastructure, such as construction of roads, works as a feedback in the system and facilitates transportation. Increased private automobile ownership and low prices of fuel raises the automobile use even further. Another cause is the sudden rush of people to a city due to natural disasters (famines, flooding etc.) leading to uncontrolled sprawled or slum areas.  
+
+ **From sprawling city to compact city**
+
+ The negative consequences of sprawling cities are what eventually drive the government to strive for more compact development. In the long-term these consequences will have an impact on the human well-being of the urban population. 
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+**Sprawling city**
+
+ Sprawl leads to loss of land, which could have a negative impact on all provisioning ecosystem services depending on what type of land that is removed. Examples of such provisioning services are food crops, livestock, fisheries, wild animals, plant products, timber, fuel, fibre crops and woodfuel. This also leads to loss of air quality regulation from trees. Furthermore, there is biodiversity loss affecting other regulating services such as pollination, pest control and disease control. Cultural services affected are recreation areas, aesthetic values, knowledge, educational values and spiritual and religious values.  
+
+ Since sprawled areas consist of private owned lots, commercial centres and roads, there is a lack of public space (Arbury 2005). Thus, people who own a private lot gain from sprawl whereas others loose. The suburban residents get the advantages of living in a house, away from urban stress and insecurities, but still have access to work opportunities and activities in the city (Arbury 2005). Also pollution and car accidents have a bigger impact on inner city dwellers since cars gather in the centre (Ewing 2008). Segregation is another problem that increases with sprawl, leading to poorer health among people who are less well off (Arbury 2005).  
+
+ Cities in general and the expansion of the cities in particular result in increased emissions of greenhouse gases. Cities emit 70 % of the world's greenhouse gases, which have vast consequences for the climate (CDP Cities 2011). In turn, climate change can result in many different ecological regime shifts, such as Greenland without constant ice sheet, shrub invasion, loss of arctic sea ice etc. (RSD 2011)  
+
+ **Compact city**
+
+ Going towards a more compact development means less of the costs connected to sprawl. However, if a city is made more compact, green areas and open spaces are sometimes removed, which affects cultural ecosystem services such as recreation and aesthetic values. Biodiversity loss means less carbon sequestration and pollination, both examples of regulating services.  
+
+ The compact city model encourages people to use public transportation and to walk and bike more, which have a positive impact on human health. However, city life is often considered stressful and can contribute to mental strains. 
+
+
+
+#### Management options
+
+Without city planning, there will always be economic, social and environmental driving forces motivating people to move to the outskirts, as long as there is population growth. However, as long as the government does not allow feedback mechanisms of sprawl to be initiated, such as government support for road construction and large-scale outskirt development, or become too strong, this will be enough to prevent sprawl. This will enhance the resilience of the city to stay compact.  
+
+ However, in order to restore a sprawled city back to a compact city, a comprehensive and balanced approach that fundamentally reverse all drivers and feedbacks are necessary (EEA 2006). Another possible approach will be to establish new feedbacks that lead to compact city structure. Foremost, inner city building structures should be transformed into mixed-use structure so that affordable inner-city housing becomes more accessible. City planners should be on the lookout for ''windows of opportunity'', i.e. brownfield projects, to turn unattractive urban areas into mixed used housing or urban green areas. Governments should work actively to prevent inner-city crime and improve environmental conditions in order to make living in the city more safe and attractive (Ewing 2008).  
+
+ Governments have an important role to play to ensure that feedback mechanisms enabling sprawling cities to develop are effectively addressed. Important first step is to formulate and enforce a city plan with wide public support (EEA 2006). Bold steps can be taken to abolish subsidies and other government support on outskirt road construction and ''new town'' developments. Full cost of providing public utilities, i.e. electricity, water and sanitation supply and waste treatment can be incurred to residents in newly developed areas (EEA 2006). Full cost of externalities from private automobile use can also be incurred through tax on vehicle ownership, fuel price and other schemes such as city tolls. Public finance from these resources along with savings from less road construction can be invested to promote inner-city mobility, such as investment on public transportation and bicycle and pedestrian roads. 
+
+
+
+### Regime shift Analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    girafe(ggobj = gg)}
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+## Citation
+
+ Acknowledge this review as:
+
+<small> Beom-Sik Yoo, Maja Berggren, Anneli Sundin, Reinette (Oonsie) Biggs, Juan Carlos Rocha. Sprawling vs compact city. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2012-03-21</small>
+
+### References
+
+<small>
+
+- Arbury, J., 2005. From Urban Sprawl to Compact City – An Analysis of urban growth management in Auckland, thesis, University of Auckland, Available at: http://portal.jarbury.net/thesis.pdf.  
+- Bairoch, P. (1991) Cities and economic development: from the dawn of history to the present. University of Chicago Press.  
+- Breheny, M., 2001. Densities and Sustainable Cities: the UK experience. In Echenique M. and Saint A. (eds.) Cities for the New Millennium, London.  
+- Brown, D.G.  and Robinson, D.T. (2006). Effects of Heterogeneity in Residential Preferences on an Agent-Based Model of Urban Sprawl. Ecology and Society.  
+- Carpenter, S. R., and K. L. Cottingham. 1997. Resilience and restoration of lakes. Conservation Ecology [online]1(1): 2. Available from the Internet. URL: http://www.consecol.org/vol1/iss1/art2/ 
+- Dye, C., 2008. Health and Urban Living. Science 8 February 2008: Vol. 319 no. 5864 pp. 766-769. 
+- EEA, 2006. Urban sprawl in Europe: The ignored challenge. EEA-report, no 10, 2006, European Environment Agency (EEA), Copenhagen, Denmark. 
+- Ewing, R. H., 2008. Characteristics, Causes, and Effects of Sprawl: A Literature Review. Pages 519-535 in Marzluff, J. M., Shulenberger, E., Endlicher, W., Albert, M., Bradley, G., Ryan, C., Simon, U., and ZumBrunnen, C., editors. Urban Ecology. Springer US. Available at: http://www.springerlink.com/content/v8522178lm8g7370/fulltext.pdf.  
+- Hendriksen, B. and de Boer, Y., 2011. CDP Cities 2011: Global report on C40 cities. Carbon Disclosure Project (CDP). 
+- Scheffer, M., Carpenter, S., Foley, J. A., Folke, C., Walker, B., 2001. Catastrophic shifts in ecosystems. Nature 413:591–596. 
+- Scoffham, E. and Vale, B., 1996. ‘How compact is sustainable – how sustainable is compact?’ in Jenks, Burton and Williams (eds.) The Compact City: a sustainable urban  form? E & FN Spoon, London.  
+- Williams, K., Burton, E., and Jenks, M., 1996. ‘Achieving the Compact City through  Intensification: an acceptable option?’ in Jenks, M., Burton, E. and Williams, K. (eds.) The Compact City: a sustainable urban form? E & FN Spoon, London.
+
+</small>
+
