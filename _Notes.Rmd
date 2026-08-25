@@ -4,6 +4,22 @@ author: "Juan Rocha"
 output: html_document
 ---
 
+
+**260825**
+
+- Updated coral transitions: created a carousel with pictures, changed the analysis section to include tabs so the scrolling is not too long. All references updated.
+- Idea: add a tab on "key statistics" where you show the countries most affected and the time line
+- Currently the drivers summary table is lost, and the ES per stakeholders originally missing. Uncertainty assessment and leverage points are also missing from the original draft.
+- Perhaps add table with case studies?
+
+**260625**
+
+- New batch of cases updated to the map (not yet pages) N = 3722
+- There are errors on coordinates and non-informative names
+- There are errors on unpublished generic RS
+- Solve a system for referencing
+- Fix pictures carrousel
+
 **241115**
 
 - Think of online explorer types

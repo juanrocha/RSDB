@@ -51,11 +51,13 @@ dat6 <- googlesheets4::read_sheet(
     sheet = 6, col_types = "c") |> # bush encroachment
     janitor::clean_names() 
 
+### This is the current development version, the sheet produced  by the GoogleForm:
 dat7 <- googlesheets4::read_sheet(
     "https://docs.google.com/spreadsheets/d/11AQrkFOhq0HgpxQHwdXO-Aljxn8svLi35ETYWwZnGqA/edit?resourcekey=&gid=649288044#gid=649288044",
     sheet = 1, col_types = "c") |> # fisheries collapse
     janitor::clean_names() 
 
+## this should not through errors, if so, it creates missing values
 dat7 <- dat7 |> 
     mutate(longitude = str_replace(longitude, ',', "\\.") |> as.numeric(),
            latitude = str_replace(latitude, ",", "\\.") |> as.numeric()) 
@@ -173,7 +175,7 @@ dat <- dat |> rename(type = regime_shift_type_value) |>
     )) |>
     mutate(type = str_to_sentence(type)) 
 
-write_csv(dat, file = "assets/rsdb_clean_260219.csv")
+write_csv(dat, file = "assets/rsdb_clean_260625.csv")
 
 
 world + 
@@ -186,14 +188,14 @@ world +
     scale_colour_hue(
         "Regime shift type", guide = guide_legend(title.position = "top")) +
     labs(title = "Regime shifts documented in the world",
-         subtitle = "Big dots are regime shift types, small dots 3455 case studies",
+         subtitle = "Big dots are regime shift types, small dots 3722 case studies",
          caption = "Data source: The regime shifts database (www.regimeshifts.org)") +
     theme_void(base_size = 12) +
     theme(legend.position = "bottom")
 
 # 
 ggsave(
-    file = "rsdb_map_260219.png", device = "png", width = 12, height = 9,
+    file = "rsdb_map_260625.png", device = "png", width = 12, height = 9,
     bg = "white", dpi = 500
 )
 
