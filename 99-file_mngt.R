@@ -24,3 +24,22 @@ rs |>
     filter(regime_shift_name == "Coral transitions") |> 
     select(references, new_ref_format) |> pull(new_ref_format) |> #jsonlite::parse_json()
     jsonlite::fromJSON() |> as_tibble() |> select(doi, authors, title)
+
+
+
+#### Danger zone ####
+# clean up, delete files so they can be compiled again if new versions come or
+# corrections need to be made
+
+# remove all case studies: files starting with cs+number
+dat |> 
+    filter(str_detect(path, "^cs\\d{1}")) |> 
+    filter(str_detect(path, "Rmd$")) |> 
+    pull(path) |> 
+    file_delete()
+
+# clean up the _site folder
+fls <- dir_info("_site/")
+fls |> filter(str_detect(path, "bib$")) |> 
+    pull(path) |> 
+    file_delete()

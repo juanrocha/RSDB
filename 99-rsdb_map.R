@@ -222,7 +222,7 @@ dat <- dat |> select(-id) |>
         )
     ) |> 
     mutate(
-        links = paste0("https://regimeshifts.netlify.app/", links)
+        links = paste0("https://regimeshifts.org/", links)
     )
 
 
@@ -249,7 +249,7 @@ rs_dat <- rs_dat |>
     mutate(filename = str_replace(filename, "\\.Rmd", "\\.html")) |> 
     # create links here, so there is links for RS without cases
     mutate(link_rs = paste0(
-        "<a href=", "'", "https://regimeshifts.netlify.app/", filename, "'",
+        "<a href=", "'", "https://regimeshifts.org/", filename, "'",
         " target='_blank'",">", regime_shift_name, "</a>"))
 
 rs_dat$regime_shift_name |> levels()
@@ -282,7 +282,7 @@ dat <- dat |>
     mutate(type_link = case_when(
         is.na(filename) ~ type, 
         .default = paste0(
-            "<a href=", "'", "https://regimeshifts.netlify.app/", filename, "'",
+            "<a href=", "'", "https://regimeshifts.org/", filename, "'",
             " target='_blank'", ">", type, "</a>"))) 
 
 names(dat)
@@ -337,7 +337,7 @@ pal <- colorFactor(
 
 
 map_rsdb <- leaflet(dat, options = labelOptions(textsize = "8px")) |> 
-    addTiles("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png") |>
+    addTiles(paste0("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=", keyring::key_get("carto-maps"))) |>
     setView(0,0, zoom = 2) |> 
     addCircleMarkers(~long, ~lat, radius = 1, popup = ~popups, color = ~pal(type_link)) |> 
     addLegend("topright", pal = pal, values = ~type_link, title = "Regime shift", group = ~type_link) 
@@ -393,7 +393,7 @@ rsdb <- rsdb [-2,] # delete for know Invasive floating plants... seems to be dup
 # str(coords)
 # write.csv(coords, file = 'case_coords.csv' )
 coords <- read.csv2("https://www.dropbox.com/s/csk2fret7d39t1l/case_coords.csv?dl=1", dec = '.')
-coord_rs <- read.csv(file = 'https://www.dropbox.com/s/7vj2a0jqwetdaxm/rs_coords_paper.csv?dl=1', dec = '.') %>% select(-X)
+coord_rs <- read.csv(file = 'https://www.dropbox.com/s/7vj2a0jqwetdaxm/rs_coords_paper.csv?dl=1', dec = '.') 
 
 cases <- cbind(cases, coords)
 #rs <- cbind(rs, coord_rs)

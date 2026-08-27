@@ -5,14 +5,18 @@ library(fs)
 
 
 ## For cleaning old versions
-fls <- dir_ls()
-
-fls |> str_subset(pattern = "^rs") |> 
-    file_delete()
+# fls <- dir_ls()
+# 
+# fls |> str_subset(pattern = "^rs") |> 
+#     file_delete()
 
 
 rs_dat <- read_csv("assets/generic_types_RSDB_new.csv") |> 
     janitor::clean_names()
+
+img <- read_csv("assets/rs_images.csv")
+
+
 
 # correct Monsoon, not moonson
 rs_dat <- rs_dat |> 
@@ -26,18 +30,19 @@ rs_dat <- rs_dat |>
 ## change name so the rest of the scipt works:
 dat <- rs_dat
 
-rs_txt <- function(i, dat){
+rs_txt <- function(i, dat, img){
     txt <- c(
 
 #yaml
 "---
 output: 
   html_document:
-    toc: true
+    toc: false
     toc_depth: 3
     toc_float: true
-
-params:
+bibliography: ",
+paste0('"','assets/bibliography/rs', i, '.bib','"', '\n'),
+"params:
   j: ",i, 
 "\n---\n\n\n",
 # load libs
@@ -54,11 +59,35 @@ x <- dat$id[params$j]
 rs <- dat |> filter(id== x)
 knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```\n\n\n", 
+
+"::::{style='display: flex;'}\n\n",
+":::{style='width: 50%;'}\n\n",
+
 # title and authors
-"# ", dat$regime_shift_name[i], "\n\n",
-"**Main contributors**: ", dat$main_contributors[i], "\n\n",
-"**Other contributors**: ", dat$other_contributors[i], "\n\n",
-"Last update: ", as.character(dat$date[i]) , "\n\n",
+"# ", dat$regime_shift_name[i], "\n\n\n",
+"- **Main contributors**: ", dat$main_contributors[i], "\n\n",
+"- **Other contributors**: ", dat$other_contributors[i], "\n\n",
+"- Last update: ", as.character(dat$date[i]) , "\n\n",
+
+":::\n\n:::{style='width: 5%;'}\n\n",
+":::\n\n:::{style='width: 45%;'}\n\n",
+
+## Carousel
+"```{r carousel, out.width='500px', out.height='100px', results = 'asis'}\n\n
+
+library(htmltools)
+library(bsplus)
+
+w <- 'https://www.juanrocha.se/img/'
+bs_carousel(id = rs",i, ", use_indicators = TRUE) |>
+",
+
+#### Voy aqui ### creando una funcion que repita el bs_apend para cada foto en el carrusel
+
+
+
+
+
 ## Map
 "```{r map, out.width='100%', out.height='300px', results = 'markup'}\n
 
@@ -81,6 +110,7 @@ dat$summary[i], "\n\n",
 
 # categorical attributes
 "### Categorical attributes\n\n",
+
 "::::{style='display: flex;'}\n\n",
 ":::{style='width: 50%;'}\n\n",
 "#### Impacts\n\n",
@@ -213,7 +243,7 @@ dat <- dat |>
 
 dat$filename
 
-write_csv(dat, file = "assets/generic_types_RSDB_new.csv")
+#write_csv(dat, file = "assets/generic_types_RSDB_new.csv")
 
 ## Create one markdown file for every regime shift
 

@@ -15,7 +15,7 @@ rs_dat <- rs_dat |>
     filter(regime_shift_name != "Invasive floating to invasive submerged plant dominance") |>
     mutate(filename = str_replace(filename, "\\.Rmd", "\\.html")) |> 
     # create links here, so there is links for RS without cases
-    mutate(href = paste0("https://regimeshifts.netlify.app/", filename))
+    mutate(href = paste0("https://regimeshifts.org/", filename))
 
 df_img <- df_img |> 
     filter(str_detect(href, "rs/rs-")) |> 
