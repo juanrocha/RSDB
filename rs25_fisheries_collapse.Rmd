@@ -1,10 +1,10 @@
 ---
 output: 
   html_document:
-    toc: true
+    toc: false
     toc_depth: 3
     toc_float: true
-
+bibliography: "assets/bibliography/rs25.bib"
 params:
   j: 25
 ---
@@ -25,13 +25,51 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
 
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
 # Fisheries collapse
 
-**Main contributors**: Garry Peterson, Juan Carlos Rocha
 
-**Other contributors**: Henrik Österblom, Reinette (Oonsie) Biggs
+- **Main contributors**: Garry Peterson, Juan Carlos Rocha
 
-Last update: 2014-10-14
+- **Other contributors**: Henrik Österblom, Reinette (Oonsie) Biggs
+
+- Last update: 2014-10-14
+
+A fishery collapses when the structure of the marine community (i.e. its species composition) changes radically, trapping the fishery into a regime in which high-valued commercial species cannot recover. These dynamics are often characterized by cascading effects across multiple trophic levels in marine food webs. Both top-down and bottom-up drivers contribute to the collapse of commercial fisheries. Overfishing is the main top-down driver, and is associated with indirect drivers that maintain fishing effort despite variation on fisheries demand, such as number of fishing boats in a fleet and fishing quotas that are insensitive to stock variation, as well as indirect drivers which increase fishing effort, such as demand from new markets, new possibilities to export fish, and technology improvements. The chief bottom-up drivers of collapse are drivers that influence the productivity of the base of marine food web. These include both anthropogenic and natural climate change that can shift the intensity and frequency of upwelling of cool nutrient rich water. Other factors, such as diseases spread, changes in ocean circulation, winds and temperature variation can act as synergistic factors contributing to collapses. The collapse of a commercial fishery can have substantial economic and social impacts.
+
+
+
+:::
+
+:::{style='width: 5%;'}
+
+:::
+
+:::{style='width: 45%;'}
+
+```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
+
+
+
+library(htmltools)
+library(bsplus)
+
+w <- 'https://www.juanrocha.se/'
+bs_carousel(id = 'rs25', use_indicators = TRUE)|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/6261536855_40fc6782a6_b.jpg'), alt = 'Fisheries collapse'),
+    caption = bs_carousel_caption(title = 'Fisheries collapse'))
+
+```
+
+:::
+::::
+
+## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
 
@@ -41,7 +79,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -50,142 +88,11 @@ m <- leaflet(cs) |>
 m
 ```
 
-### Summary
+**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
 
-A fishery collapses when the structure of the marine community (i.e. its species composition) changes radically, trapping the fishery into a regime in which high-valued commercial species cannot recover. These dynamics are often characterized by cascading effects across multiple trophic levels in marine food webs. Both top-down and bottom-up drivers contribute to the collapse of commercial fisheries. Overfishing is the main top-down driver, and is associated with indirect drivers that maintain fishing effort despite variation on fisheries demand, such as number of fishing boats in a fleet and fishing quotas that are insensitive to stock variation, as well as indirect drivers which increase fishing effort, such as demand from new markets, new possibilities to export fish, and technology improvements. The chief bottom-up drivers of collapse are drivers that influence the productivity of the base of marine food web. These include both anthropogenic and natural climate change that can shift the intensity and frequency of upwelling of cool nutrient rich water. Other factors, such as diseases spread, changes in ocean circulation, winds and temperature variation can act as synergistic factors contributing to collapses. The collapse of a commercial fishery can have substantial economic and social impacts.
+## Analysis {.tabset .tabset-pills}
 
-
-
-### Categorical attributes
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
-#### Impacts
-
-**Ecosystem type**:'
-
-- Marine & coastal
-- Freshwater lakes & rivers
-
-
-**Key ecosystem processes**:
-
-- Primary production
-- Nutrient cycling
-
-
-**Biodiversity**:
-
-- Biodiversity
-
-
-**Provisioning services**:
-
-- Fisheries
-
-
-**Regulating services**:
-
-- Pest & disease regulation
-
-
-**Cultural services**:
-
-- Recreation
-- Aesthetic values
-- Knowledge and educational values
-
-
-**Human well-being**:
-
-- Food and nutrition
-- Livelihoods and economic activity
-- Cultural
-- Aesthetic and recreational values
-- Cultural identity
-
-
-**Links to other regime shifts**:
-
-- Bivalves Collapse
-- Hypoxia
-- Marine food webs
-- Marine eutrophication
-- Freshwater eutrophication
-
-
-:::
-
-:::{style='width: 50%;'}
-
-#### Drivers
-
-**Key drivers**:
-
-- Harvest and resource consumption
-- External inputs (e.g. fertilizers
-- pest control
-- irrigation)
-- Adoption of new technology (e.g. new fishing nets)
-- Species introduction or removal
-- Disease
-- Global climate change
-
-
-**Land use**:
-
-- Fisheries
-
-
-#### Key attributes
-
-**Spatial scale**:
-
-- Local/landscape (e.g. lake
-- catchment
-- community)
-- National (country)
-- Sub-continental (e.g. southern Africa
-- Amazon basin)
-
-
-**Time scale**:
-
-- Years
-- Decades
-
-
-**Reversibility**:
-
-- Irreversible (on 100 year time scale)
-- Hysteretic (difficult to reverse)
-
-
-**Evidence**:
-
-- Models
-- Paleo-observation
-- Contemporary observations
-- Experiments
-
-
-**Confidence: existence of the regime shift**
-
-- Contested – Reasonable evidence both for and against the existence of RS
-
-
-**Confidence: mechanisms underlying the regime shift**
-
-- Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
-
-
-:::
-
-::::
-
-### Detail information
+### General information
 
 #### Alternative regimes
 
@@ -241,17 +148,29 @@ A review of marine fisheries in the Millennium Ecosystem Assessment offer a synt
 
 
 
-### Regime shift Analysis
+### In-depth analysis
 
 ```{r cld, error = FALSE, message = FALSE, out.width='80%'}
 
+#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+
+library(ggiraph)
+library(htmlwidgets)
 source('tools.R')
 load('assets/clds.Rda')
 
 if (rs$regime_shift_name %in% clds$regime_shift) {
     gg <- rs_net(clds, rs$regime_shift_name) |> 
     plot_net()
-    girafe(ggobj = gg)}
+    # create the html obj: sizing not working
+    girafe(ggobj = gg) |> 
+        girafe_options(
+            opts_tooltip(opacity = 0.7), opts_zoom(min =0.5, max =2),
+        sizingPolicy(defaultWidth='100px', defaultHeight='50px'),
+        opts_hover(css = 'fill:red;stroke:orange;r:5pt;'))
+    }
+
+
 ```
 
 ```{r}
@@ -262,13 +181,125 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
 
-## Citation
+### Categorical summary
 
- Acknowledge this review as:
+::::{style='display: flex;'}
 
-<small> Garry Peterson, Juan Carlos Rocha, Henrik Österblom, Reinette (Oonsie) Biggs. Fisheries collapse. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2014-10-14</small>
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Marine & coastal
+- Freshwater lakes & rivers
+
+
+**Key ecosystem processes**:
+
+- Primary production
+- Nutrient cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Fisheries
+
+
+**Regulating services**:
+
+- Pest & disease regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+- Knowledge and educational values
+
+
+**Human well-being**:
+
+- Food and nutrition or Livelihoods and economic activity or Cultural or Aesthetic and recreational values or Cultural identity
+
+
+**Links to other regime shifts**:
+
+- Bivalves Collapse
+- Hypoxia
+- Marine food webs
+- Marine eutrophication
+- Freshwater eutrophication
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Harvest and resource consumption or External inputs (e.g. fertilizers or pest control or irrigation) or Adoption of new technology (e.g. new fishing nets) or Species introduction or removal or Disease or Global climate change
+
+
+**Land use**:
+
+- Fisheries
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake or catchment or community) or National (country) or Sub-continental (e.g. southern Africa or Amazon basin)
+
+
+**Time scale**:
+
+- Years
+- Decades
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+- Hysteretic (difficult to reverse)
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+- Experiments
+
+
+**Confidence: existence of the regime shift**
+
+- Contested – Reasonable evidence both for and against the existence of RS
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
+
+
+:::
+
+::::
 
 ### References
+
+::: {#refs}
+
+:::
+### References old [Delete]
 
 <small>
 
@@ -310,3 +341,28 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 </small>
 
+## Citation
+Acknowledge this review as:
+
+<tiny> 
+``` {style='color: gray;'}
+Garry Peterson, Juan Carlos Rocha, Henrik Österblom, Reinette (Oonsie) Biggs. Fisheries collapse. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2014-10-14
+```
+
+</tiny>
+
+BibTeX citation:
+
+<tiny><tiny> 
+``` {style='color: gray;'}
+@misc{
+  author = {Garry Peterson and Juan Carlos RochaHenrik Österblom and Reinette (Oonsie) Biggs},
+  title = {Fisheries collapse},
+  url = {www.regimeshifts.org},
+  howpublished = {Regime Shifts Database},
+  publisher = {Stockholm Resilience Centre},
+  institution = {Stockholm University}
+}
+```
+
+</tiny>

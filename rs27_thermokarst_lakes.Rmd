@@ -1,10 +1,10 @@
 ---
 output: 
   html_document:
-    toc: true
+    toc: false
     toc_depth: 3
     toc_float: true
-
+bibliography: "assets/bibliography/rs27.bib"
 params:
   j: 27
 ---
@@ -25,13 +25,55 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
 
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
 # Thermokarst lakes
 
-**Main contributors**: Elinor Holén, Hannah Griffiths, Jessica Spijkers, Hannah Griffiths, Elinor Holén, Jessica Spijkers
 
-**Other contributors**: Reinette (Oonsie) Biggs, Juan Carlos Rocha
+- **Main contributors**: Elinor Holén, Hannah Griffiths, Jessica Spijkers, Hannah Griffiths, Elinor Holén, Jessica Spijkers
 
-Last update: 2014-11-19
+- **Other contributors**: Reinette (Oonsie) Biggs, Juan Carlos Rocha
+
+- Last update: 2014-11-19
+
+Thermokarst lake dominated landscapes are transforming into terrestrial ecosystems (e.g.: tundra). There is a natural fluctuation between these two ecosystems. However, the rate and scale at which those fluctuations are occurring are increasing due to permafrost melting caused by the increasing atmospheric temperatures associated with climate change. Warmer air temperature increases soil temperature, which melts permafrost (permanently frozen soils found in Arctic regions). The shift in ecosystems occurs when permafrost degradation becomes severe enough for the lakes to get permanently drained, creating the necessary conditions for vegetation to establish. The increased rate and scales of these land cover changes has extensive impacts on food and freshwater provisioning, but its greatest impact is on carbon sequestration. The melting of permafrost releases greenhouse gases, i.e. carbon dioxide (CO2) and methane (CH4), which further increase climate change, creating a powerful reinforcing feedback. 
+
+
+
+:::
+
+:::{style='width: 5%;'}
+
+:::
+
+:::{style='width: 45%;'}
+
+```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
+
+
+
+library(htmltools)
+library(bsplus)
+
+w <- 'https://www.juanrocha.se/'
+bs_carousel(id = 'rs27', use_indicators = TRUE)|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/Permafrost_thaw_ponds_in_Hudson_Bay_Canada_near_Greenland.jpg'), alt = 'Thermokarst lakes'),
+    caption = bs_carousel_caption(title = 'Thermokarst lakes'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/Omulyakhskaya_and_Khromskaya_Bays__Northern_Siberia.jpg'), alt = 'Thermokarst lakes'),
+    caption = bs_carousel_caption(title = 'Thermokarst lakes'))
+
+```
+
+:::
+::::
+
+## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
 
@@ -41,7 +83,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -50,130 +92,11 @@ m <- leaflet(cs) |>
 m
 ```
 
-### Summary
+**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
 
-Thermokarst lake dominated landscapes are transforming into terrestrial ecosystems (e.g.: tundra). There is a natural fluctuation between these two ecosystems. However, the rate and scale at which those fluctuations are occurring are increasing due to permafrost melting caused by the increasing atmospheric temperatures associated with climate change. Warmer air temperature increases soil temperature, which melts permafrost (permanently frozen soils found in Arctic regions). The shift in ecosystems occurs when permafrost degradation becomes severe enough for the lakes to get permanently drained, creating the necessary conditions for vegetation to establish. The increased rate and scales of these land cover changes has extensive impacts on food and freshwater provisioning, but its greatest impact is on carbon sequestration. The melting of permafrost releases greenhouse gases, i.e. carbon dioxide (CO2) and methane (CH4), which further increase climate change, creating a powerful reinforcing feedback. 
+## Analysis {.tabset .tabset-pills}
 
-
-
-### Categorical attributes
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
-#### Impacts
-
-**Ecosystem type**:'
-
-- Tundra
-- Polar
-
-
-**Key ecosystem processes**:
-
-- Soil formation
-- Nutrient cycling
-- Water cycling
-
-
-**Biodiversity**:
-
-- Biodiversity
-
-
-**Provisioning services**:
-
-- Freshwater
-- Fisheries
-- Fuel and fiber crops
-- Hydropower
-
-
-**Regulating services**:
-
-- Climate regulation
-- Regulation of soil erosion
-- Natural hazard regulation
-
-
-**Cultural services**:
-
-- Aesthetic values
-
-
-**Human well-being**:
-
-- Security of housing & infrastructure
-
-
-**Links to other regime shifts**:
-
-- Arctic sea-ice loss
-- Thermohaline circulation
-
-
-:::
-
-:::{style='width: 50%;'}
-
-#### Drivers
-
-**Key drivers**:
-
-- Global climate change
-
-
-**Land use**:
-
-- Fisheries
-
-
-#### Key attributes
-
-**Spatial scale**:
-
-- Local/landscape (e.g. lake
-- catchment
-- community)
-- Sub-continental (e.g. southern Africa
-- Amazon basin)
-
-
-**Time scale**:
-
-- Months
-- Years
-- Decades
-- Centuries
-
-
-**Reversibility**:
-
-- Irreversible (on 100 year time scale)
-
-
-**Evidence**:
-
-- Models
-- Contemporary observations
-
-
-**Confidence: existence of the regime shift**
-
-- Contested – Reasonable evidence both for and against the existence of RS
-
-
-**Confidence: mechanisms underlying the regime shift**
-
-- Well established – Wide agreement on the underlying mechanism
-
-
-:::
-
-::::
-
-### Detail information
+### General information
 
 #### Alternative regimes
 
@@ -255,17 +178,29 @@ There are few management options available to maintain the thermokarst lake ecos
 
 
 
-### Regime shift Analysis
+### In-depth analysis
 
 ```{r cld, error = FALSE, message = FALSE, out.width='80%'}
 
+#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+
+library(ggiraph)
+library(htmlwidgets)
 source('tools.R')
 load('assets/clds.Rda')
 
 if (rs$regime_shift_name %in% clds$regime_shift) {
     gg <- rs_net(clds, rs$regime_shift_name) |> 
     plot_net()
-    girafe(ggobj = gg)}
+    # create the html obj: sizing not working
+    girafe(ggobj = gg) |> 
+        girafe_options(
+            opts_tooltip(opacity = 0.7), opts_zoom(min =0.5, max =2),
+        sizingPolicy(defaultWidth='100px', defaultHeight='50px'),
+        opts_hover(css = 'fill:red;stroke:orange;r:5pt;'))
+    }
+
+
 ```
 
 ```{r}
@@ -276,13 +211,125 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
 
-## Citation
+### Categorical summary
 
- Acknowledge this review as:
+::::{style='display: flex;'}
 
-<small> Elinor Holén, Hannah Griffiths, Jessica Spijkers, Hannah Griffiths, Elinor Holén, Jessica Spijkers, Reinette (Oonsie) Biggs, Juan Carlos Rocha. Thermokarst lakes. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2014-11-19</small>
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Tundra
+- Polar
+
+
+**Key ecosystem processes**:
+
+- Soil formation
+- Nutrient cycling
+- Water cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Freshwater
+- Fisheries
+- Fuel and fiber crops
+- Hydropower
+
+
+**Regulating services**:
+
+- Climate regulation
+- Regulation of soil erosion
+- Natural hazard regulation
+
+
+**Cultural services**:
+
+- Aesthetic values
+
+
+**Human well-being**:
+
+- Security of housing & infrastructure
+
+
+**Links to other regime shifts**:
+
+- Arctic sea-ice loss
+- Thermohaline circulation
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Global climate change
+
+
+**Land use**:
+
+- Fisheries
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake or catchment or community) or Sub-continental (e.g. southern Africa or Amazon basin)
+
+
+**Time scale**:
+
+- Months
+- Years
+- Decades
+- Centuries
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+
+
+**Evidence**:
+
+- Models
+- Contemporary observations
+
+
+**Confidence: existence of the regime shift**
+
+- Contested – Reasonable evidence both for and against the existence of RS
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
 
 ### References
+
+::: {#refs}
+
+:::
+### References old [Delete]
 
 <small>
 
@@ -312,3 +359,28 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 </small>
 
+## Citation
+Acknowledge this review as:
+
+<tiny> 
+``` {style='color: gray;'}
+Elinor Holén, Hannah Griffiths, Jessica Spijkers, Hannah Griffiths, Elinor Holén, Jessica Spijkers, Reinette (Oonsie) Biggs, Juan Carlos Rocha. Thermokarst lakes. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2014-11-19
+```
+
+</tiny>
+
+BibTeX citation:
+
+<tiny><tiny> 
+``` {style='color: gray;'}
+@misc{
+  author = {Elinor Holén and Hannah Griffiths and Jessica Spijkers and Hannah Griffiths and Elinor Holén and Jessica SpijkersReinette (Oonsie) Biggs and Juan Carlos Rocha},
+  title = {Thermokarst lakes},
+  url = {www.regimeshifts.org},
+  howpublished = {Regime Shifts Database},
+  publisher = {Stockholm Resilience Centre},
+  institution = {Stockholm University}
+}
+```
+
+</tiny>

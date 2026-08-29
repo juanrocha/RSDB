@@ -1,10 +1,10 @@
 ---
 output: 
   html_document:
-    toc: true
+    toc: false
     toc_depth: 3
     toc_float: true
-
+bibliography: "assets/bibliography/rs30.bib"
 params:
   j: 30
 ---
@@ -25,13 +25,55 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
 
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
 # Steppe to tundra
 
-**Main contributors**: Johanna Mård Karlsson, Nicole Reid, Rodrigo Martínez-Peña
 
-**Other contributors**: Garry Peterson, Juan Carlos Rocha
+- **Main contributors**: Johanna Mård Karlsson, Nicole Reid, Rodrigo Martínez-Peña
 
-Last update: 2016-09-15
+- **Other contributors**: Garry Peterson, Juan Carlos Rocha
+
+- Last update: 2016-09-15
+
+Steppe (a grassland) to tundra (mosses and shrubs growing in waterlogged soils) is a regime shift that can occur in cold terrestrial ecosystems.  Tundra and steppe regime shift is typically found where permafrost occurs.  Steppe and tundra are primarily found in the Arctic, north of the tree line, where mean temperature below 10-12 C for the warmest month (Jonasson et al. 2000). Climate change and changes in the density of large herbivores are the main drivers of regime shifts between steppe and tundra. Climate changes that reduce soil moisture can favor steppe over tundra, and vice versa. Tundra is favored by moss growth, which is more limited by water than by nutrients. Steppe is favored by grass growth, which is improved by drier soils with available nutrients. Large herbivores can shape ecosystems through their impact on vegetation species composition, soil structure, and ecological dynamics. Large herbivore trampling and grazing can slow moss growth and convert tundra to steppe vegetation. At the end of the last ice age (12,000 yr BP), human hunting greatly reduced populations of large herbivores which may have contributed to a shift from grass-dominated steppe to moss-dominated tundra. In the 21st century, climate change together with the presence of horses, bison, and musk oxen could lead to shifts between steppe and tundra vegetation.
+
+
+
+:::
+
+:::{style='width: 5%;'}
+
+:::
+
+:::{style='width: 45%;'}
+
+```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
+
+
+
+library(htmltools)
+library(bsplus)
+
+w <- 'https://www.juanrocha.se/'
+bs_carousel(id = 'rs30', use_indicators = TRUE)|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/Pleistocene_Park.jpg'), alt = 'Steppe to tundra'),
+    caption = bs_carousel_caption(title = 'Steppe to tundra'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/Northeast_Science_Station_View.jpg'), alt = 'Steppe to tundra'),
+    caption = bs_carousel_caption(title = 'Steppe to tundra'))
+
+```
+
+:::
+::::
+
+## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
 
@@ -41,7 +83,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -50,136 +92,11 @@ m <- leaflet(cs) |>
 m
 ```
 
-### Summary
+**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
 
-Steppe (a grassland) to tundra (mosses and shrubs growing in waterlogged soils) is a regime shift that can occur in cold terrestrial ecosystems.  Tundra and steppe regime shift is typically found where permafrost occurs.  Steppe and tundra are primarily found in the Arctic, north of the tree line, where mean temperature below 10-12 C for the warmest month (Jonasson et al. 2000). Climate change and changes in the density of large herbivores are the main drivers of regime shifts between steppe and tundra. Climate changes that reduce soil moisture can favor steppe over tundra, and vice versa. Tundra is favored by moss growth, which is more limited by water than by nutrients. Steppe is favored by grass growth, which is improved by drier soils with available nutrients. Large herbivores can shape ecosystems through their impact on vegetation species composition, soil structure, and ecological dynamics. Large herbivore trampling and grazing can slow moss growth and convert tundra to steppe vegetation. At the end of the last ice age (12,000 yr BP), human hunting greatly reduced populations of large herbivores which may have contributed to a shift from grass-dominated steppe to moss-dominated tundra. In the 21st century, climate change together with the presence of horses, bison, and musk oxen could lead to shifts between steppe and tundra vegetation.
+## Analysis {.tabset .tabset-pills}
 
-
-
-### Categorical attributes
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
-#### Impacts
-
-**Ecosystem type**:'
-
-- Tundra
-
-
-**Key ecosystem processes**:
-
-- Primary production
-- Nutrient cycling
-
-
-**Biodiversity**:
-
-- Biodiversity
-
-
-**Provisioning services**:
-
-- Freshwater
-- Livestock
-- Wild animal and plant products
-
-
-**Regulating services**:
-
-- Climate regulation
-
-
-**Cultural services**:
-
-- Recreation
-- Aesthetic values
-- Knowledge and educational values
-- Spiritual and religious
-
-
-**Human well-being**:
-
-- Food and nutrition
-- Health (e.g. toxins
-- disease)
-- Livelihoods and economic activity
-- Security of housing & infrastructure
-- Cultural
-- Aesthetic and recreational values
-- Social conflict
-
-
-**Links to other regime shifts**:
-
-- Tundra to forest
-- Arctic sea-ice loss
-- Greenland ice sheet collapse
-- Peatland transitions
-
-
-:::
-
-:::{style='width: 50%;'}
-
-#### Drivers
-
-**Key drivers**:
-
-- Harvest and resource consumption
-- Species introduction or removal
-- Global climate change
-
-
-**Land use**:
-
-- Extensive livestock production (natural rangelands)
-
-
-#### Key attributes
-
-**Spatial scale**:
-
-- Sub-continental (e.g. southern Africa
-- Amazon basin)
-
-
-**Time scale**:
-
-- Years
-- Decades
-
-
-**Reversibility**:
-
-- Hysteretic (difficult to reverse)
-
-
-**Evidence**:
-
-- Models
-- Paleo-observation
-- Contemporary observations
-- Experiments
-
-
-**Confidence: existence of the regime shift**
-
-- Well established – Wide agreement in the literature that the RS exists
-
-
-**Confidence: mechanisms underlying the regime shift**
-
-- Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
-
-
-:::
-
-::::
-
-### Detail information
+### General information
 
 #### Alternative regimes
 
@@ -245,17 +162,29 @@ Climate and herbivory are the two direct drivers of shifts between steppe and tu
 
 
 
-### Regime shift Analysis
+### In-depth analysis
 
 ```{r cld, error = FALSE, message = FALSE, out.width='80%'}
 
+#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+
+library(ggiraph)
+library(htmlwidgets)
 source('tools.R')
 load('assets/clds.Rda')
 
 if (rs$regime_shift_name %in% clds$regime_shift) {
     gg <- rs_net(clds, rs$regime_shift_name) |> 
     plot_net()
-    girafe(ggobj = gg)}
+    # create the html obj: sizing not working
+    girafe(ggobj = gg) |> 
+        girafe_options(
+            opts_tooltip(opacity = 0.7), opts_zoom(min =0.5, max =2),
+        sizingPolicy(defaultWidth='100px', defaultHeight='50px'),
+        opts_hover(css = 'fill:red;stroke:orange;r:5pt;'))
+    }
+
+
 ```
 
 ```{r}
@@ -266,13 +195,125 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
 
-## Citation
+### Categorical summary
 
- Acknowledge this review as:
+::::{style='display: flex;'}
 
-<small> Johanna Mård Karlsson, Nicole Reid, Rodrigo Martínez-Peña, Garry Peterson, Juan Carlos Rocha. Steppe to tundra. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2016-09-15</small>
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Tundra
+
+
+**Key ecosystem processes**:
+
+- Primary production
+- Nutrient cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Freshwater
+- Livestock
+- Wild animal and plant products
+
+
+**Regulating services**:
+
+- Climate regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+- Knowledge and educational values
+- Spiritual and religious
+
+
+**Human well-being**:
+
+- Food and nutrition or Health (e.g. toxins or disease) or Livelihoods and economic activity or Security of housing & infrastructure or Cultural or Aesthetic and recreational values or Social conflict
+
+
+**Links to other regime shifts**:
+
+- Tundra to forest
+- Arctic sea-ice loss
+- Greenland ice sheet collapse
+- Peatland transitions
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Harvest and resource consumption or Species introduction or removal or Global climate change
+
+
+**Land use**:
+
+- Extensive livestock production (natural rangelands)
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Sub-continental (e.g. southern Africa or Amazon basin)
+
+
+**Time scale**:
+
+- Years
+- Decades
+
+
+**Reversibility**:
+
+- Hysteretic (difficult to reverse)
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+- Experiments
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
+
+
+:::
+
+::::
 
 ### References
+
+::: {#refs}
+
+:::
+### References old [Delete]
 
 <small>
 
@@ -305,3 +346,28 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 </small>
 
+## Citation
+Acknowledge this review as:
+
+<tiny> 
+``` {style='color: gray;'}
+Johanna Mård Karlsson, Nicole Reid, Rodrigo Martínez-Peña, Garry Peterson, Juan Carlos Rocha. Steppe to tundra. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2016-09-15
+```
+
+</tiny>
+
+BibTeX citation:
+
+<tiny><tiny> 
+``` {style='color: gray;'}
+@misc{
+  author = {Johanna Mård Karlsson and Nicole Reid and Rodrigo Martínez-PeñaGarry Peterson and Juan Carlos Rocha},
+  title = {Steppe to tundra},
+  url = {www.regimeshifts.org},
+  howpublished = {Regime Shifts Database},
+  publisher = {Stockholm Resilience Centre},
+  institution = {Stockholm University}
+}
+```
+
+</tiny>

@@ -4,7 +4,7 @@ title: "Regime shifts"
 <div class="alert alert-dismissible alert-warning">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <h4 class="alert-heading">Warning!</h4>
-  <p class="mb-0">The original regime shifts database is available at [www.regimeshifts.org](https://www.regimeshifts.org). This website is a development version were we experiment with features to add, delete, or to improve continuous development. The purpose of this website is to facilitate external contributions.</p>
+  <p class="mb-0">The original website of the regime shifts database was hacked. This is a development version were we experiment with features to add, delete, or to improve continuous development. You may find provisional errors. Please let us know to correct them. Thanks for your patience</p>
 </div>
 
 ```{r include = FALSE}
@@ -43,7 +43,7 @@ opts <- settings(
 
 ## Evidence of regime shifts
 
-```{r map, echo = FALSE, message=FALSE, warning=FALSE, fig.cap="The map offers links to literature reviews for generic regime shifts (in the legend) and links to over 3000 case studies (dots on the map). Each link will take you to a page where you can learn more about how the regime shift works.", out.width="100%", out.height="650px"}
+```{r map, echo = FALSE, message=FALSE, warning=FALSE, fig.cap="The map offers links to literature reviews for generic regime shifts (in the legend) and links to over 3500 case studies (dots on the map). Each link will take you to a page where you can learn more about how the regime shift works.", out.width="100%", out.height="650px"}
 
 load("assets/map_rsdb.Rda")
 frameWidget(map_rsdb, width = "100%", height = "650")

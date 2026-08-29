@@ -1,10 +1,10 @@
 ---
 output: 
   html_document:
-    toc: true
+    toc: false
     toc_depth: 3
     toc_float: true
-
+bibliography: "assets/bibliography/rs16.bib"
 params:
   j: 16
 ---
@@ -25,13 +25,67 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
 
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
 # River channel change
 
-**Main contributors**: Henning Nolzen
 
-**Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
+- **Main contributors**: Henning Nolzen
 
-Last update: 2012-03-16
+- **Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
+
+- Last update: 2012-03-16
+
+In freshwater lake and river systems, a river channel position regime shift occurs when the main channel of a river abruptly changes its course to a new river channel. Meandering and braided rivers are especially vulnerable to such shifts. The actual shift of the channel usually follows a large flood event, but other factors make the system susceptible to the shift. Most commonly, sediment buildup blocks the riverflow due to changes in current and riverbed gradient. In other cases, a cutoff occurs at the meandering neck in rivers with high channel sinuosity. Human activities such as land clearance and artificial channel widening can also make the river system vulnerable to a sudden course change. A shift in river channel position has large impacts on the ecology, economy and society, especially through impacts on water availability which is important for agriculture and transportation. On a 100 year time-scale the shift is irreversible. Only enormous engineering efforts can prevent a river from switching to a new channel, or restore a former river course. However, such efforts are very complex and costly. 
+
+
+
+:::
+
+:::{style='width: 5%;'}
+
+:::
+
+:::{style='width: 45%;'}
+
+```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
+
+
+
+library(htmltools)
+library(bsplus)
+
+w <- 'https://www.juanrocha.se/'
+bs_carousel(id = 'rs16', use_indicators = TRUE)|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/coomes_fig3_1.png'), alt = 'River channel change'),
+    caption = bs_carousel_caption(title = 'River channel change'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/coomes_fig3_2.png'), alt = 'River channel change'),
+    caption = bs_carousel_caption(title = 'River channel change'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/Nowitna_river.jpg'), alt = 'River channel change'),
+    caption = bs_carousel_caption(title = 'River channel change'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/hooke204_fig1.png'), alt = 'River channel change'),
+    caption = bs_carousel_caption(title = 'River channel change'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/hooke2004_fig4.png'), alt = 'River channel change'),
+    caption = bs_carousel_caption(title = 'River channel change'))
+
+```
+
+:::
+::::
+
+## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
 
@@ -41,7 +95,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -50,141 +104,11 @@ m <- leaflet(cs) |>
 m
 ```
 
-### Summary
+**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
 
-In freshwater lake and river systems, a river channel position regime shift occurs when the main channel of a river abruptly changes its course to a new river channel. Meandering and braided rivers are especially vulnerable to such shifts. The actual shift of the channel usually follows a large flood event, but other factors make the system susceptible to the shift. Most commonly, sediment buildup blocks the riverflow due to changes in current and riverbed gradient. In other cases, a cutoff occurs at the meandering neck in rivers with high channel sinuosity. Human activities such as land clearance and artificial channel widening can also make the river system vulnerable to a sudden course change. A shift in river channel position has large impacts on the ecology, economy and society, especially through impacts on water availability which is important for agriculture and transportation. On a 100 year time-scale the shift is irreversible. Only enormous engineering efforts can prevent a river from switching to a new channel, or restore a former river course. However, such efforts are very complex and costly. 
+## Analysis {.tabset .tabset-pills}
 
-
-
-### Categorical attributes
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
-#### Impacts
-
-**Ecosystem type**:'
-
-- Freshwater lakes & rivers
-
-
-**Key ecosystem processes**:
-
-- Soil formation
-- Water cycling
-
-
-**Biodiversity**:
-
-- Biodiversity
-
-
-**Provisioning services**:
-
-- Freshwater
-- Food crops
-- Fisheries
-
-
-**Regulating services**:
-
-- Water regulation
-- Regulation of soil erosion
-- Natural hazard regulation
-
-
-**Cultural services**:
-
-- Recreation
-- Aesthetic values
-- Spiritual and religious
-
-
-**Human well-being**:
-
-- Food and nutrition
-- Livelihoods and economic activity
-- Security of housing & infrastructure
-- Social conflict
-
-
-**Links to other regime shifts**:
-
-NA
-
-:::
-
-:::{style='width: 50%;'}
-
-#### Drivers
-
-**Key drivers**:
-
-- Infrastructure development (e.g. roads
-- pipelines)
-- Soil erosion & land degradation
-- Environmental shocks (e.g. fire
-- floods
-- droughts)
-
-
-**Land use**:
-
-- Urban
-- Small-scale subsistence crop cultivation
-- Large-scale commercial crop cultivation
-- Intensive livestock production (e.g. feedlots
-- dairies)
-- Extensive livestock production (natural rangelands)
-- Fisheries
-
-
-#### Key attributes
-
-**Spatial scale**:
-
-- Local/landscape (e.g. lake
-- catchment
-- community)
-- Sub-continental (e.g. southern Africa
-- Amazon basin)
-
-
-**Time scale**:
-
-- Weeks
-- Months
-- Years
-
-
-**Reversibility**:
-
-- Irreversible (on 100 year time scale)
-
-
-**Evidence**:
-
-- Models
-- Paleo-observation
-- Contemporary observations
-
-
-**Confidence: existence of the regime shift**
-
-- Well established – Wide agreement in the literature that the RS exists
-
-
-**Confidence: mechanisms underlying the regime shift**
-
-- Well established – Wide agreement on the underlying mechanism
-
-
-:::
-
-::::
-
-### Detail information
+### General information
 
 #### Alternative regimes
 
@@ -236,17 +160,29 @@ Typically, river channel position regime shifts are irreversible. Without human 
 
 
 
-### Regime shift Analysis
+### In-depth analysis
 
 ```{r cld, error = FALSE, message = FALSE, out.width='80%'}
 
+#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+
+library(ggiraph)
+library(htmlwidgets)
 source('tools.R')
 load('assets/clds.Rda')
 
 if (rs$regime_shift_name %in% clds$regime_shift) {
     gg <- rs_net(clds, rs$regime_shift_name) |> 
     plot_net()
-    girafe(ggobj = gg)}
+    # create the html obj: sizing not working
+    girafe(ggobj = gg) |> 
+        girafe_options(
+            opts_tooltip(opacity = 0.7), opts_zoom(min =0.5, max =2),
+        sizingPolicy(defaultWidth='100px', defaultHeight='50px'),
+        opts_hover(css = 'fill:red;stroke:orange;r:5pt;'))
+    }
+
+
 ```
 
 ```{r}
@@ -257,13 +193,122 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
 
-## Citation
+### Categorical summary
 
- Acknowledge this review as:
+::::{style='display: flex;'}
 
-<small> Henning Nolzen, Reinette (Oonsie) Biggs, Garry Peterson. River channel change. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2012-03-16</small>
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Freshwater lakes & rivers
+
+
+**Key ecosystem processes**:
+
+- Soil formation
+- Water cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Freshwater
+- Food crops
+- Fisheries
+
+
+**Regulating services**:
+
+- Water regulation
+- Regulation of soil erosion
+- Natural hazard regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+- Spiritual and religious
+
+
+**Human well-being**:
+
+- Food and nutrition or Livelihoods and economic activity or Security of housing & infrastructure or Social conflict
+
+
+**Links to other regime shifts**:
+
+NA
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Infrastructure development (e.g. roads or pipelines) or Soil erosion & land degradation or Environmental shocks (e.g. fire or floods or droughts)
+
+
+**Land use**:
+
+- Urban or Small-scale subsistence crop cultivation or Large-scale commercial crop cultivation or Intensive livestock production (e.g. feedlots or dairies) or Extensive livestock production (natural rangelands) or Fisheries
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake or catchment or community) or Sub-continental (e.g. southern Africa or Amazon basin)
+
+
+**Time scale**:
+
+- Weeks
+- Months
+- Years
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
 
 ### References
+
+::: {#refs}
+
+:::
+### References old [Delete]
 
 <small>
 
@@ -280,3 +325,28 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 </small>
 
+## Citation
+Acknowledge this review as:
+
+<tiny> 
+``` {style='color: gray;'}
+Henning Nolzen, Reinette (Oonsie) Biggs, Garry Peterson. River channel change. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2012-03-16
+```
+
+</tiny>
+
+BibTeX citation:
+
+<tiny><tiny> 
+``` {style='color: gray;'}
+@misc{
+  author = {Henning NolzenReinette (Oonsie) Biggs and Garry Peterson},
+  title = {River channel change},
+  url = {www.regimeshifts.org},
+  howpublished = {Regime Shifts Database},
+  publisher = {Stockholm Resilience Centre},
+  institution = {Stockholm University}
+}
+```
+
+</tiny>

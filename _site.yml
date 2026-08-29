@@ -1,7 +1,7 @@
-name: "https://regimeshifts.netlify.app"
+name: "https://www.regimeshifts.org"
 output_dir: "_site"
 navbar:
-  title: "Regime Shifts DataBase 2.0"
+  title: "Regime Shifts DataBase"
   type: default
   left:
     - text: "Regime shifts"

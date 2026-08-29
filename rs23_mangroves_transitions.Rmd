@@ -1,10 +1,10 @@
 ---
 output: 
   html_document:
-    toc: true
+    toc: false
     toc_depth: 3
     toc_float: true
-
+bibliography: "assets/bibliography/rs23.bib"
 params:
   j: 23
 ---
@@ -25,13 +25,51 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
 
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
 # Mangroves transitions
 
-**Main contributors**: Juan Carlos Rocha
 
-**Other contributors**: Reinette (Oonsie) Biggs
+- **Main contributors**: Juan Carlos Rocha
 
-Last update: 2014-10-03
+- **Other contributors**: Reinette (Oonsie) Biggs
+
+- Last update: 2014-10-03
+
+Mangroves are ecosystems adapted to the mixture of salt and fresh water in coastal areas. They provide important ecosystem services such as carbon storage, storm protection, ground fields for several marine species, water cleansing, and wood for construction and energy. Despite their importance for both local communities and the global carbon budget, mangroves are at risk of collapsing in tropical areas of the world while they are likely to expand on temperate areas. World’s mangrove cover has been reduced by 30% during the last 50 years mainly driven by aquaculture, deforestation, land cover change towards agricultural fields, shrip farming, salt extraction or urban development, as well as by infrastructure development changing the water salinity. In the coming century, climate change is expected to add pressure to this ecosystem by increasing sea level rise and changing the distribution of extreme weather events such as storms and droughts with impacts on the balance between salt and fresh water. In temperate areas climate change is expected to raise temperature enough for mangroves development in areas currently dominated by salt marshes. Managerial options include identifying areas where these ecosystems have potential for expansion and migration, reduce human pressure on them and assist them by monitoring drivers and implementing marine protected areas.
+
+
+
+:::
+
+:::{style='width: 5%;'}
+
+:::
+
+:::{style='width: 45%;'}
+
+```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
+
+
+
+library(htmltools)
+library(bsplus)
+
+w <- 'https://www.juanrocha.se/'
+bs_carousel(id = 'rs23', use_indicators = TRUE)|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/7114626779_0e2f8ce569_o.jpg'), alt = 'Mangroves transitions'),
+    caption = bs_carousel_caption(title = 'Mangroves transitions'))
+
+```
+
+:::
+::::
+
+## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
 
@@ -41,7 +79,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -50,13 +88,88 @@ m <- leaflet(cs) |>
 m
 ```
 
-### Summary
+**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
 
-Mangroves are ecosystems adapted to the mixture of salt and fresh water in coastal areas. They provide important ecosystem services such as carbon storage, storm protection, ground fields for several marine species, water cleansing, and wood for construction and energy. Despite their importance for both local communities and the global carbon budget, mangroves are at risk of collapsing in tropical areas of the world while they are likely to expand on temperate areas. World’s mangrove cover has been reduced by 30% during the last 50 years mainly driven by aquaculture, deforestation, land cover change towards agricultural fields, shrip farming, salt extraction or urban development, as well as by infrastructure development changing the water salinity. In the coming century, climate change is expected to add pressure to this ecosystem by increasing sea level rise and changing the distribution of extreme weather events such as storms and droughts with impacts on the balance between salt and fresh water. In temperate areas climate change is expected to raise temperature enough for mangroves development in areas currently dominated by salt marshes. Managerial options include identifying areas where these ecosystems have potential for expansion and migration, reduce human pressure on them and assist them by monitoring drivers and implementing marine protected areas.
+## Analysis {.tabset .tabset-pills}
+
+### General information
+
+#### Alternative regimes
+
+Mangroves are ecosystems adapted to the mixture of fresh and salt water common in intertidal zones of marine coastal environments. Mangroves cover between 1.7-1.8 x 105 km2 globally. They develop within 30ºN and 38ºS and grow optimally between 15ºC and 25ºC (Lovelock 2008). Outside this geographical and thermal range mangroves show reduced leaf formation and above 38ºC or below freezing temperatures they do not photosynthesize(Mcleod and V Salm 2006, Cavanaugh et al. 2014). Mangrove ecosystems are often used by local communities who depend on fishing and timber harvesting.
+
+ **Mangrove forest** 
+
+ Mangrove forest is characterized by an ensemble of species with aerial roots adapted to survive in environments where water salinity and tides are highly variable. Mangroves grow in tropical and subtropical waters, where the optimal temperature range is between 15-24ºC. Different species occur under different salinity gradients and some trees reach 40m high in areas with high precipitation. Mangroves usually establish in soil enriched by the sediment discharge of rivers (Mcleod and V Salm 2006). Mangroves are ecologically important because they provide habitat for many marine species at some stages of their lifespan, increasing both marine and terrestrial biodiversity.
+
+ **Salt marshes, rocky tidal, shrimp farms.** 
+
+ Mangroves can become dominated by salt marshes or other configuration of coastal wetlands depending on the substrate, sediment deposition and the topography (Mcleod and V Salm 2006). The alternative regime once a mangrove has collapsed is not straightforward. It strongly depends on the land use, topological characteristics, latitude and the history of the system disturbance (Cavanaugh et al. 2014). For example, many mangroves around the world have been converted into ponds for shrimp farming, salt extraction, or simply dry out to establish agriculture, cattle ranching, infrastructure development or human settlements.
 
 
 
-### Categorical attributes
+#### Drivers and causes of the regime shift
+
+The main drivers of mangrove collapse have typically been land use / cover change during the last 50 years. One third of world’s mangroves have been lost due to overexploitation of forest resources (deforestation) or conversion into agriculture, salt extraction, or ponds for shrimp farming (Cavanaugh et al. 2014). Other threats to mangroves include the development of infrastructure (roads, dams), the diversion of fresh water for irrigation and the development of urban areas. These impacts are typically stronger in developing countries where it is expected that mangroves will decline by 25% by 2025 (Mcleod and V Salm 2006), while recent studies show that mangroves area are declining 1-2% yearly(Duke et al. 2007, Alongi 2008, Cavanaugh et al. 2014).
+
+ Current climate change is also expected to affect mangroves via the increase in frequency and severity of storms, floods and droughts (climate extreme events), the increase of temperature, sea level rise, and ocean acidification. Frequent extreme events that potentially decrease the flow of fresh water will increase salinity, putting stress on some species and reducing their growing rates and seedling survival (Mcleod and V Salm 2006). Precipitation increase, on the other hand, could favor mangrove over salt marshes by decreasing salinity and giving a competitive advantage to mangroves (Cavanaugh et al. 2014). However, strong storms and flooding event could prevent mangroves from respiring when their aerial roots are underwater. Although temperature is expected to increase 2-6ºC before 2100, its effect on mangroves is contested. On the one hand, a 6ºC increase would heterogeneously affect mangroves around the world, although it is likely to induce thermal stress, it won’t be strong enough to surpass the temperature tolerance of these ecosystems. An increase in temperature will increase the melting rate of ice and expand the volume of world’s oceans increasing the level of the sea. On the other hand, it has also been observed that warming on the coldest time of the year can favor mangroves over taking salt marshes in temperate areas of the planet, with a suggested threshold of -4ºC for Florida (Cavanaugh et al. 2014).
+
+ Sea level rise is perhaps the most important threat to mangroves nowadays. While the expected sea level rise projection range from 0.09 to 0.88 m (or 0.9 to 8.8 mm per year) several studies report that mangrove ability to migrate upwards range from 1.2 to 4.5mm per year (Mcleod and V Salm 2006). Although faster migration has been observed in Holocene stratigraphic records for Florida, migration also depends of local topological conditions. Increase of carbon dioxide in the atmosphere could increase mangroves growth but also ocean acidification. While the increase in growth is not expected to be strong enough to overcome the pressure of sea level rise, acidification is expected to have an indirect effect on mangroves by reducing coral reefs accretion, increasing in turn the erosive effects of waves on mangrove soils (Mcleod and V Salm 2006).
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+Mangroves provide a variety of ecosystem services. Mangrove ecosystems provide habitat for economically important marine species for fishing (e.g. shrimp or lobster among other crustaceans and mollusc), and they are habitat for important groups of terrestrial species such as reptiles, monkeys, and birds. Thus they are important for maintaining both marine and terrestrial biodiversity. Mangroves also provide fuelwood, charcoal, and construction wood. As a forest it provides protection against storms, floods, river born siltation and also traps water pollutants and sediments, reducing in turn the erosive action of waves, particularly protecting adjacent ecosystems such as coral reefs, sea grass beds (Duke et al. 2007). Mangroves have also been shown to play a key role on the global carbon budget, capturing up to 15% of global carbon and exporting up to 11% of particular terrestrial carbon to the oceans (Alongi 2014). In fact, recent studies support the hypothesis that mangroves are able to capture and store carbon in a greater extend that terrestrial ecosystems (Lovelock 2008), nearly identical to those of tropical forest (Alongi 2014). Therefore, losing mangrove area implies the loss of carbon storage.
+
+ While in the short term local communities could benefit by converting mangroves into shrimp farms, agriculture fields, or using its wood; in the long term they mean the loss of important services such as coastline protection, biodiversity important for tourism and fishing, water cleansing and carbon storage(Ewel et al. 1998, Cavanaugh et al. 2014). In fact, their services has been valued over $1.6 trillion per year (Costanza et al. 1997).
+
+
+
+#### Management options
+
+McLeod et al (2006) propose a series of tools to monitor and plan for mangroves adaptation to climate change. First they propose to assess mangrove vulnerability based the local conditions. Management options for mangrove forests are highly context dependent. As the main threat to mangroves is climate change through sea level rise, mangrove ecosystems will likely migrate upwards and northwards (Cavanaugh et al. 2014). However, such migration is constrained by local conditions such as substrate types, infrastructure development, sediment input and changes in salinity.
+
+ Second, they propose to apply risk-spreading principles (Duke et al. 2007) and identify areas that are likely to be sources and sinks of the migratory process (Mcleod and V Salm 2006).  By identifying the role of each mangrove patch, it is easier to prioritize where green belts are needed to increase connectivity, which patches should be protected and which patches are more likely to respond to restoration efforts. They emphasize the importance of establishing a baseline and monitoring program with local communities in order to assess the main drivers locally. Developing partnerships with local stakeholders and developing alternative livelihoods for mangrove dependent communities are key managerial efforts (Mcleod and V Salm 2006). The resilience of mangroves to future climate change scenarios also depend on how successful management efforts are at reducing the influence of other drivers: deforestation, overexploitation, infrastructure development, divergence of water for irrigation, and urbanization. Management of such local forcing will increase resilience to regional forcing such as increasing storm events or ocean acidification.
+
+ Third, it has been suggested that policy and market-based are critical to foster conservation efforts, reduce mangrove encroachment and maintain carbon storage through funding mechanisms such as REDD or other payment for ecosystem services schemes (Hutchison et al. 2013). Effective governance structures and education has also been suggested as managerial strategies (Duke et al. 2007).
+
+
+
+### In-depth analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+
+library(ggiraph)
+library(htmlwidgets)
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    # create the html obj: sizing not working
+    girafe(ggobj = gg) |> 
+        girafe_options(
+            opts_tooltip(opacity = 0.7), opts_zoom(min =0.5, max =2),
+        sizingPolicy(defaultWidth='100px', defaultHeight='50px'),
+        opts_hover(css = 'fill:red;stroke:orange;r:5pt;'))
+    }
+
+
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+### Categorical summary
 
 ::::{style='display: flex;'}
 
@@ -105,11 +218,7 @@ Mangroves are ecosystems adapted to the mixture of salt and fresh water in coast
 
 **Human well-being**:
 
-- Food and nutrition
-- Livelihoods and economic activity
-- Security of housing & infrastructure
-- Cultural
-- Aesthetic and recreational values
+- Food and nutrition or Livelihoods and economic activity or Security of housing & infrastructure or Cultural or Aesthetic and recreational values
 
 
 **Links to other regime shifts**:
@@ -129,37 +238,19 @@ Mangroves are ecosystems adapted to the mixture of salt and fresh water in coast
 
 **Key drivers**:
 
-- Vegetation conversion and habitat fragmentation
-- Harvest and resource consumption
-- External inputs (e.g. fertilizers
-- pest control
-- irrigation)
-- Infrastructure development (e.g. roads
-- pipelines)
-- Soil erosion & land degradation
-- Environmental shocks (e.g. fire
-- floods
-- droughts)
-- Global climate change
+- Vegetation conversion and habitat fragmentation or Harvest and resource consumption or External inputs (e.g. fertilizers or pest control or irrigation) or Infrastructure development (e.g. roads or pipelines) or Soil erosion & land degradation or Environmental shocks (e.g. fire or floods or droughts) or Global climate change
 
 
 **Land use**:
 
-- Urban
-- Small-scale subsistence crop cultivation
-- Timber production
-- Fisheries
-- Conservation
-- Tourism
+- Urban or Small-scale subsistence crop cultivation or Timber production or Fisheries or Conservation or Tourism
 
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake
-- catchment
-- community)
+- Local/landscape (e.g. lake or catchment or community)
 
 
 **Time scale**:
@@ -195,78 +286,12 @@ Mangroves are ecosystems adapted to the mixture of salt and fresh water in coast
 
 ::::
 
-### Detail information
-
-#### Alternative regimes
-
-Mangroves are ecosystems adapted to the mixture of fresh and salt water common in intertidal zones of marine coastal environments. Mangroves cover between 1.7-1.8 x 105 km2 globally. They develop within 30ºN and 38ºS and grow optimally between 15ºC and 25ºC (Lovelock 2008). Outside this geographical and thermal range mangroves show reduced leaf formation and above 38ºC or below freezing temperatures they do not photosynthesize(Mcleod and V Salm 2006, Cavanaugh et al. 2014). Mangrove ecosystems are often used by local communities who depend on fishing and timber harvesting.
-
- **Mangrove forest** 
-
- Mangrove forest is characterized by an ensemble of species with aerial roots adapted to survive in environments where water salinity and tides are highly variable. Mangroves grow in tropical and subtropical waters, where the optimal temperature range is between 15-24ºC. Different species occur under different salinity gradients and some trees reach 40m high in areas with high precipitation. Mangroves usually establish in soil enriched by the sediment discharge of rivers (Mcleod and V Salm 2006). Mangroves are ecologically important because they provide habitat for many marine species at some stages of their lifespan, increasing both marine and terrestrial biodiversity.
-
- **Salt marshes, rocky tidal, shrimp farms.** 
-
- Mangroves can become dominated by salt marshes or other configuration of coastal wetlands depending on the substrate, sediment deposition and the topography (Mcleod and V Salm 2006). The alternative regime once a mangrove has collapsed is not straightforward. It strongly depends on the land use, topological characteristics, latitude and the history of the system disturbance (Cavanaugh et al. 2014). For example, many mangroves around the world have been converted into ponds for shrimp farming, salt extraction, or simply dry out to establish agriculture, cattle ranching, infrastructure development or human settlements.
-
-
-
-#### Drivers and causes of the regime shift
-
-The main drivers of mangrove collapse have typically been land use / cover change during the last 50 years. One third of world’s mangroves have been lost due to overexploitation of forest resources (deforestation) or conversion into agriculture, salt extraction, or ponds for shrimp farming (Cavanaugh et al. 2014). Other threats to mangroves include the development of infrastructure (roads, dams), the diversion of fresh water for irrigation and the development of urban areas. These impacts are typically stronger in developing countries where it is expected that mangroves will decline by 25% by 2025 (Mcleod and V Salm 2006), while recent studies show that mangroves area are declining 1-2% yearly(Duke et al. 2007, Alongi 2008, Cavanaugh et al. 2014).
-
- Current climate change is also expected to affect mangroves via the increase in frequency and severity of storms, floods and droughts (climate extreme events), the increase of temperature, sea level rise, and ocean acidification. Frequent extreme events that potentially decrease the flow of fresh water will increase salinity, putting stress on some species and reducing their growing rates and seedling survival (Mcleod and V Salm 2006). Precipitation increase, on the other hand, could favor mangrove over salt marshes by decreasing salinity and giving a competitive advantage to mangroves (Cavanaugh et al. 2014). However, strong storms and flooding event could prevent mangroves from respiring when their aerial roots are underwater. Although temperature is expected to increase 2-6ºC before 2100, its effect on mangroves is contested. On the one hand, a 6ºC increase would heterogeneously affect mangroves around the world, although it is likely to induce thermal stress, it won’t be strong enough to surpass the temperature tolerance of these ecosystems. An increase in temperature will increase the melting rate of ice and expand the volume of world’s oceans increasing the level of the sea. On the other hand, it has also been observed that warming on the coldest time of the year can favor mangroves over taking salt marshes in temperate areas of the planet, with a suggested threshold of -4ºC for Florida (Cavanaugh et al. 2014).
-
- Sea level rise is perhaps the most important threat to mangroves nowadays. While the expected sea level rise projection range from 0.09 to 0.88 m (or 0.9 to 8.8 mm per year) several studies report that mangrove ability to migrate upwards range from 1.2 to 4.5mm per year (Mcleod and V Salm 2006). Although faster migration has been observed in Holocene stratigraphic records for Florida, migration also depends of local topological conditions. Increase of carbon dioxide in the atmosphere could increase mangroves growth but also ocean acidification. While the increase in growth is not expected to be strong enough to overcome the pressure of sea level rise, acidification is expected to have an indirect effect on mangroves by reducing coral reefs accretion, increasing in turn the erosive effects of waves on mangrove soils (Mcleod and V Salm 2006).
-
-
-
-#### Impacts on ecosystem services and human well-being
-
-Mangroves provide a variety of ecosystem services. Mangrove ecosystems provide habitat for economically important marine species for fishing (e.g. shrimp or lobster among other crustaceans and mollusc), and they are habitat for important groups of terrestrial species such as reptiles, monkeys, and birds. Thus they are important for maintaining both marine and terrestrial biodiversity. Mangroves also provide fuelwood, charcoal, and construction wood. As a forest it provides protection against storms, floods, river born siltation and also traps water pollutants and sediments, reducing in turn the erosive action of waves, particularly protecting adjacent ecosystems such as coral reefs, sea grass beds (Duke et al. 2007). Mangroves have also been shown to play a key role on the global carbon budget, capturing up to 15% of global carbon and exporting up to 11% of particular terrestrial carbon to the oceans (Alongi 2014). In fact, recent studies support the hypothesis that mangroves are able to capture and store carbon in a greater extend that terrestrial ecosystems (Lovelock 2008), nearly identical to those of tropical forest (Alongi 2014). Therefore, losing mangrove area implies the loss of carbon storage.
-
- While in the short term local communities could benefit by converting mangroves into shrimp farms, agriculture fields, or using its wood; in the long term they mean the loss of important services such as coastline protection, biodiversity important for tourism and fishing, water cleansing and carbon storage(Ewel et al. 1998, Cavanaugh et al. 2014). In fact, their services has been valued over $1.6 trillion per year (Costanza et al. 1997).
-
-
-
-#### Management options
-
-McLeod et al (2006) propose a series of tools to monitor and plan for mangroves adaptation to climate change. First they propose to assess mangrove vulnerability based the local conditions. Management options for mangrove forests are highly context dependent. As the main threat to mangroves is climate change through sea level rise, mangrove ecosystems will likely migrate upwards and northwards (Cavanaugh et al. 2014). However, such migration is constrained by local conditions such as substrate types, infrastructure development, sediment input and changes in salinity.
-
- Second, they propose to apply risk-spreading principles (Duke et al. 2007) and identify areas that are likely to be sources and sinks of the migratory process (Mcleod and V Salm 2006).  By identifying the role of each mangrove patch, it is easier to prioritize where green belts are needed to increase connectivity, which patches should be protected and which patches are more likely to respond to restoration efforts. They emphasize the importance of establishing a baseline and monitoring program with local communities in order to assess the main drivers locally. Developing partnerships with local stakeholders and developing alternative livelihoods for mangrove dependent communities are key managerial efforts (Mcleod and V Salm 2006). The resilience of mangroves to future climate change scenarios also depend on how successful management efforts are at reducing the influence of other drivers: deforestation, overexploitation, infrastructure development, divergence of water for irrigation, and urbanization. Management of such local forcing will increase resilience to regional forcing such as increasing storm events or ocean acidification.
-
- Third, it has been suggested that policy and market-based are critical to foster conservation efforts, reduce mangrove encroachment and maintain carbon storage through funding mechanisms such as REDD or other payment for ecosystem services schemes (Hutchison et al. 2013). Effective governance structures and education has also been suggested as managerial strategies (Duke et al. 2007).
-
-
-
-### Regime shift Analysis
-
-```{r cld, error = FALSE, message = FALSE, out.width='80%'}
-
-source('tools.R')
-load('assets/clds.Rda')
-
-if (rs$regime_shift_name %in% clds$regime_shift) {
-    gg <- rs_net(clds, rs$regime_shift_name) |> 
-    plot_net()
-    girafe(ggobj = gg)}
-```
-
-```{r}
-
-load('assets/rs_analysis_text.Rda')
-
-if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
-    rs_analysis[[rs$regime_shift_name]] |> writeLines()
-```
-
-## Citation
-
- Acknowledge this review as:
-
-<small> Juan Carlos Rocha, Reinette (Oonsie) Biggs. Mangroves transitions. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2014-10-03</small>
-
 ### References
+
+::: {#refs}
+
+:::
+### References old [Delete]
 
 <small>
 
@@ -284,3 +309,28 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 </small>
 
+## Citation
+Acknowledge this review as:
+
+<tiny> 
+``` {style='color: gray;'}
+Juan Carlos Rocha, Reinette (Oonsie) Biggs. Mangroves transitions. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2014-10-03
+```
+
+</tiny>
+
+BibTeX citation:
+
+<tiny><tiny> 
+``` {style='color: gray;'}
+@misc{
+  author = {Juan Carlos RochaReinette (Oonsie) Biggs},
+  title = {Mangroves transitions},
+  url = {www.regimeshifts.org},
+  howpublished = {Regime Shifts Database},
+  publisher = {Stockholm Resilience Centre},
+  institution = {Stockholm University}
+}
+```
+
+</tiny>

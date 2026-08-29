@@ -1,7 +1,13 @@
 library(tidyverse)
 
+
+df_img <- read_csv(file = "assets/rs_images.csv")
+p <- df_img$priority
+
 # load datasets and check name compatibility
 load("assets/rsdb_images.Rda")
+df_img
+
 
 rs_dat <- read_csv("assets/generic_types_RSDB_new.csv") |> 
     janitor::clean_names()
@@ -15,7 +21,7 @@ rs_dat <- rs_dat |>
     filter(regime_shift_name != "Invasive floating to invasive submerged plant dominance") |>
     mutate(filename = str_replace(filename, "\\.Rmd", "\\.html")) |> 
     # create links here, so there is links for RS without cases
-    mutate(href = paste0("https://regimeshifts.org/", filename))
+    mutate(href = paste0("https://regimeshifts.netlify.app/", filename))
 
 df_img <- df_img |> 
     filter(str_detect(href, "rs/rs-")) |> 
@@ -46,7 +52,12 @@ df_img <- df_img |>
     select(-href) |> 
     left_join(rs_dat |> select(type = regime_shift_name, href))
 
+df_img$priority <- p
+
 ### save to CSV so you can prioritize manually the pictures intead of a random sample
 write_csv(df_img, file = "assets/rs_images.csv")
 
-
+## correct links:
+df_img <- read_csv2(file = "assets/rs_images.csv")
+p <- df_img$priority
+df_imgdf_img <- read_csv2(file = "assets/rs_images.csv")

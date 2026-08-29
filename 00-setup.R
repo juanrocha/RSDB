@@ -15,7 +15,7 @@ rs_only <- fls |> str_subset(pattern = "^cs|^_", negate = TRUE) |>
 tic()
 walk(rs_only, render_site)
 toc() 
-# 225.253 sec (3.75min) elapsed, basic website with 31 generic regime shifts
+# 144.224 sec elapsed (2.5min) elapsed, basic website with 30 generic regime shifts
 # including all case studies 3711.352 sec elapsed = 1hr
 
 tic()
@@ -26,11 +26,11 @@ toc()
 library(future)
 library(furrr)
 
-plan(multisession)
+plan(multisession, workers = 10)
 
 tic()
 future_walk(.x = here::here(), .f = render_site, .progress = TRUE)
-toc() #
+toc() # 50min, ~3800 webpages
 
 plan(sequential)
 

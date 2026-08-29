@@ -1,10 +1,10 @@
 ---
 output: 
   html_document:
-    toc: true
+    toc: false
     toc_depth: 3
     toc_float: true
-
+bibliography: "assets/bibliography/rs22.bib"
 params:
   j: 22
 ---
@@ -25,13 +25,55 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
 
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
 # Common pool resource harvesting
 
-**Main contributors**: Maja Schlüter, Steven Lade
 
-**Other contributors**: Alessandro Tavoni, Simon Levin
+- **Main contributors**: Maja Schlüter, Steven Lade
 
-Last update: 2014-09-18
+- **Other contributors**: Alessandro Tavoni, Simon Levin
+
+- Last update: 2014-09-18
+
+A community derives ecosystem services by extracting from a renewable resource such as water, fish, or forest. If a harvester is overharvesting (a defector), he/she is ostracised by the community, for example by obstructing their access to necessary machinery or to market, which encourages the defector to co-operate by harvesting at a lower, socially optimal level. The alternative regimes are (1) high co-operation and resource levels and (2) overharvesting. Key drivers include resource inflow, the effectiveness of the ostracism norm, and the cost of harvesting. Key impacts include degradation in the state of the resource and harvester payoff and wellbeing. Evidence is currently confined to modelling studies.
+
+
+
+:::
+
+:::{style='width: 5%;'}
+
+:::
+
+:::{style='width: 45%;'}
+
+```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
+
+
+
+library(htmltools)
+library(bsplus)
+
+w <- 'https://www.juanrocha.se/'
+bs_carousel(id = 'rs22', use_indicators = TRUE)|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/Slide1.JPG'), alt = 'Common pool resource harvesting'),
+    caption = bs_carousel_caption(title = 'Common pool resource harvesting'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/Slide11.JPG'), alt = 'Common pool resource harvesting'),
+    caption = bs_carousel_caption(title = 'Common pool resource harvesting'))
+
+```
+
+:::
+::::
+
+## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
 
@@ -41,7 +83,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -50,13 +92,88 @@ m <- leaflet(cs) |>
 m
 ```
 
-### Summary
+**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
 
-A community derives ecosystem services by extracting from a renewable resource such as water, fish, or forest. If a harvester is overharvesting (a defector), he/she is ostracised by the community, for example by obstructing their access to necessary machinery or to market, which encourages the defector to co-operate by harvesting at a lower, socially optimal level. The alternative regimes are (1) high co-operation and resource levels and (2) overharvesting. Key drivers include resource inflow, the effectiveness of the ostracism norm, and the cost of harvesting. Key impacts include degradation in the state of the resource and harvester payoff and wellbeing. Evidence is currently confined to modelling studies.
+## Analysis {.tabset .tabset-pills}
+
+### General information
+
+#### Alternative regimes
+
+**Co-operation and sustainable resource levels**
+
+ Harvesters extract from the resource at rates that are socially optimal, ensuring that resource levels stay at their most productive level and the community-average payoff is high. Social capital exists within the community, ensuring any defectors are ostracised.
+
+  **Over-harvesting** 
+
+ Harvesters exert high efforts in extracting the resource, leading to depletion of the resource and low payoffs for the community. Social capital is absent and defectors are not ostracised.
 
 
 
-### Categorical attributes
+#### Drivers and causes of the regime shift
+
+**Shift from ‘Co-operation and sustainable resource levels’ to ‘Over-harvesting’**
+
+ The regime shift occurs when ostracism ceases to be an effective mechanism for encouraging defectors to co-operate, because the benefits of overharvesting begin to outweigh the disadvantages of ostracism. A number of factors could drive this shift. Increasing resource level, for example due to increased inflow, can lead to ineffective ostracism because at higher resource levels defection becomes more attractive by providing higher gains from resource over-extraction. Increasing defector payoff compared to ostracism, for example due to decreased costs or decreased ostracism strength, could also lead to defection becoming increasingly attractive.
+
+ **Shift from ‘Over-harvesting’ to ‘Co-operation and sustainable resource levels’** 
+
+ Reversal of any of the above trends can cause a shift from over-harvesting to co-operation: decrease in resource levels, for example due to decreased inflow; increased costs; or increased ostracism strength.
+
+
+
+#### Impacts on ecosystem services and human well-being
+
+The ability of the natural system to provide resources for harvesting is lost with the regime shift from co-operation to over-harvesting (gained for over-harvesting to co-operation). Depending on context, loss of other ecosystem services many accompany the decline in resources. The income that members of the harvesting community obtain by harvesting is severely decreased by this regime shift. Income may even no longer exceed the costs of harvesting and the community may need to find other means of survival.
+
+
+
+#### Management options
+
+**Options for preventing regime shift to over-harvesting**
+
+ Management actions that stop the drivers discussed above reaching their thresholds may help to prevent regime shifts. Activities that strengthen social norms and trust in the community and thus enhance cooperation and decrease the incentive to defect and overharvest for the individual benefit (hence increasing the strength of the ostracism).
+
+ **Options for restoration of co-operation:**
+
+ Introducing measures that build trust in the community and disincentivise free riding. 
+
+
+
+### In-depth analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+
+library(ggiraph)
+library(htmlwidgets)
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    # create the html obj: sizing not working
+    girafe(ggobj = gg) |> 
+        girafe_options(
+            opts_tooltip(opacity = 0.7), opts_zoom(min =0.5, max =2),
+        sizingPolicy(defaultWidth='100px', defaultHeight='50px'),
+        opts_hover(css = 'fill:red;stroke:orange;r:5pt;'))
+    }
+
+
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+### Categorical summary
 
 ::::{style='display: flex;'}
 
@@ -71,7 +188,7 @@ A community derives ecosystem services by extracting from a renewable resource s
 - Temperate & boreal forests
 - Tropical forests
 - Moist savannas & woodlands
-- Drylands & deserts (below ~500mm rainfall/year)
+- Drylands & deserts 
 - Mediterranean shrub (Fynbos)
 - Grasslands
 - Tundra
@@ -126,34 +243,19 @@ NA
 
 **Key drivers**:
 
-- Harvest and resource consumption
-- Environmental shocks (e.g. fire
-- floods
-- droughts)
+- Harvest and resource consumption or Environmental shocks (e.g. fire or floods or droughts)
 
 
 **Land use**:
 
-- Urban
-- Small-scale subsistence crop cultivation
-- Large-scale commercial crop cultivation
-- Intensive livestock production (e.g. feedlots
-- dairies)
-- Extensive livestock production (natural rangelands)
-- Timber production
-- Fisheries
-- Mining
-- Conservation
-- Tourism
+- Urban or Small-scale subsistence crop cultivation or Large-scale commercial crop cultivation or Intensive livestock production (e.g. feedlots or dairies) or Extensive livestock production (natural rangelands) or Timber production or Fisheries or Mining or Conservation or Tourism
 
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake
-- catchment
-- community)
+- Local/landscape (e.g. lake or catchment or community)
 
 
 **Time scale**:
@@ -188,78 +290,12 @@ NA
 
 ::::
 
-### Detail information
-
-#### Alternative regimes
-
-**Co-operation and sustainable resource levels**
-
- Harvesters extract from the resource at rates that are socially optimal, ensuring that resource levels stay at their most productive level and the community-average payoff is high. Social capital exists within the community, ensuring any defectors are ostracised.
-
-  **Over-harvesting** 
-
- Harvesters exert high efforts in extracting the resource, leading to depletion of the resource and low payoffs for the community. Social capital is absent and defectors are not ostracised.
-
-
-
-#### Drivers and causes of the regime shift
-
-**Shift from ‘Co-operation and sustainable resource levels’ to ‘Over-harvesting’**
-
- The regime shift occurs when ostracism ceases to be an effective mechanism for encouraging defectors to co-operate, because the benefits of overharvesting begin to outweigh the disadvantages of ostracism. A number of factors could drive this shift. Increasing resource level, for example due to increased inflow, can lead to ineffective ostracism because at higher resource levels defection becomes more attractive by providing higher gains from resource over-extraction. Increasing defector payoff compared to ostracism, for example due to decreased costs or decreased ostracism strength, could also lead to defection becoming increasingly attractive.
-
- **Shift from ‘Over-harvesting’ to ‘Co-operation and sustainable resource levels’** 
-
- Reversal of any of the above trends can cause a shift from over-harvesting to co-operation: decrease in resource levels, for example due to decreased inflow; increased costs; or increased ostracism strength.
-
-
-
-#### Impacts on ecosystem services and human well-being
-
-The ability of the natural system to provide resources for harvesting is lost with the regime shift from co-operation to over-harvesting (gained for over-harvesting to co-operation). Depending on context, loss of other ecosystem services many accompany the decline in resources. The income that members of the harvesting community obtain by harvesting is severely decreased by this regime shift. Income may even no longer exceed the costs of harvesting and the community may need to find other means of survival.
-
-
-
-#### Management options
-
-**Options for preventing regime shift to over-harvesting**
-
- Management actions that stop the drivers discussed above reaching their thresholds may help to prevent regime shifts. Activities that strengthen social norms and trust in the community and thus enhance cooperation and decrease the incentive to defect and overharvest for the individual benefit (hence increasing the strength of the ostracism).
-
- **Options for restoration of co-operation:**
-
- Introducing measures that build trust in the community and disincentivise free riding. 
-
-
-
-### Regime shift Analysis
-
-```{r cld, error = FALSE, message = FALSE, out.width='80%'}
-
-source('tools.R')
-load('assets/clds.Rda')
-
-if (rs$regime_shift_name %in% clds$regime_shift) {
-    gg <- rs_net(clds, rs$regime_shift_name) |> 
-    plot_net()
-    girafe(ggobj = gg)}
-```
-
-```{r}
-
-load('assets/rs_analysis_text.Rda')
-
-if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
-    rs_analysis[[rs$regime_shift_name]] |> writeLines()
-```
-
-## Citation
-
- Acknowledge this review as:
-
-<small> Maja Schlüter, Steven Lade, Alessandro Tavoni, Simon Levin. Common pool resource harvesting. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2014-09-18</small>
-
 ### References
+
+::: {#refs}
+
+:::
+### References old [Delete]
 
 <small>
 
@@ -268,3 +304,28 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 </small>
 
+## Citation
+Acknowledge this review as:
+
+<tiny> 
+``` {style='color: gray;'}
+Maja Schlüter, Steven Lade, Alessandro Tavoni, Simon Levin. Common pool resource harvesting. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2014-09-18
+```
+
+</tiny>
+
+BibTeX citation:
+
+<tiny><tiny> 
+``` {style='color: gray;'}
+@misc{
+  author = {Maja Schlüter and Steven LadeAlessandro Tavoni and Simon Levin},
+  title = {Common pool resource harvesting},
+  url = {www.regimeshifts.org},
+  howpublished = {Regime Shifts Database},
+  publisher = {Stockholm Resilience Centre},
+  institution = {Stockholm University}
+}
+```
+
+</tiny>

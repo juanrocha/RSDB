@@ -1,10 +1,10 @@
 ---
 output: 
   html_document:
-    toc: true
+    toc: false
     toc_depth: 3
     toc_float: true
-
+bibliography: "assets/bibliography/rs29.bib"
 params:
   j: 29
 ---
@@ -25,13 +25,47 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
 
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
 # Primary production Arctic Ocean
 
-**Main contributors**: Patricia  Villarrubia Gomez, Helene Albinus Søgaard, Karl Samuelsson, Sophie Laggan
 
-**Other contributors**: Thorsten Blenckner
+- **Main contributors**: Patricia  Villarrubia Gomez, Helene Albinus Søgaard, Karl Samuelsson, Sophie Laggan
 
-Last update: 2015-05-09
+- **Other contributors**: Thorsten Blenckner
+
+- Last update: 2015-05-09
+
+A shift from polar to temperate primary production (PP) patterns has been detected in the Arctic Ocean. Following a regime shift in the North Atlantic in 1995, similar structural changes are now occurring in Arctic waters. Rapid warming of atmospheric and oceanic temperatures has caused a near year-on-year decline in the extent and thickness of summer sea ice since 1979 (NSIDC 2014). Anthropogenic climatic change has extended the growing season and delayed august freeze-up through a decline in albedo reflectivity and enhanced wind-driven vertical mixing. Natural modes of variability at the lower latitudes has also led to poleward shifts of temperate marine species and caused pronounced phenological changes to primary producers. The difference in the temporal scale of these forcing mechanisms makes it hard to predict which event is causing changes to PP. It is uncertain what impact this change will have on the food web of this ecosystem.
+
+
+
+:::
+
+:::{style='width: 5%;'}
+
+:::
+
+:::{style='width: 45%;'}
+
+```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
+
+
+
+library(htmltools)
+library(bsplus)
+
+w <- 'https://www.juanrocha.se/'
+bs_carousel(id = 'rs29', use_indicators = TRUE)
+
+```
+
+:::
+::::
+
+## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
 
@@ -41,7 +75,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -50,136 +84,11 @@ m <- leaflet(cs) |>
 m
 ```
 
-### Summary
+**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
 
-A shift from polar to temperate primary production (PP) patterns has been detected in the Arctic Ocean. Following a regime shift in the North Atlantic in 1995, similar structural changes are now occurring in Arctic waters. Rapid warming of atmospheric and oceanic temperatures has caused a near year-on-year decline in the extent and thickness of summer sea ice since 1979 (NSIDC 2014). Anthropogenic climatic change has extended the growing season and delayed august freeze-up through a decline in albedo reflectivity and enhanced wind-driven vertical mixing. Natural modes of variability at the lower latitudes has also led to poleward shifts of temperate marine species and caused pronounced phenological changes to primary producers. The difference in the temporal scale of these forcing mechanisms makes it hard to predict which event is causing changes to PP. It is uncertain what impact this change will have on the food web of this ecosystem.
+## Analysis {.tabset .tabset-pills}
 
-
-
-### Categorical attributes
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
-#### Impacts
-
-**Ecosystem type**:'
-
-- Marine & coastal
-- Polar
-
-
-**Key ecosystem processes**:
-
-- Primary production
-- Nutrient cycling
-
-
-**Biodiversity**:
-
-- Biodiversity
-
-
-**Provisioning services**:
-
-- Fisheries
-- Wild animal and plant products
-
-
-**Regulating services**:
-
-- Climate regulation
-- Natural hazard regulation
-
-
-**Cultural services**:
-
-- Recreation
-- Aesthetic values
-- Knowledge and educational values
-
-
-**Human well-being**:
-
-- Food and nutrition
-- Health (e.g. toxins
-- disease)
-- Livelihoods and economic activity
-- Cultural
-- Aesthetic and recreational values
-
-
-**Links to other regime shifts**:
-
-- Arctic benthos borealisation
-- Arctic sea-ice loss
-- Marine food webs
-- Tundra to forest
-
-
-:::
-
-:::{style='width: 50%;'}
-
-#### Drivers
-
-**Key drivers**:
-
-- External inputs (e.g. fertilizers
-- pest control
-- irrigation)
-- Environmental shocks (e.g. fire
-- floods
-- droughts)
-- Global climate change
-
-
-**Land use**:
-
-- Fisheries
-
-
-#### Key attributes
-
-**Spatial scale**:
-
-- Sub-continental (e.g. southern Africa
-- Amazon basin)
-
-
-**Time scale**:
-
-- Unknown
-
-
-**Reversibility**:
-
-- Unknown
-
-
-**Evidence**:
-
-- Models
-- Paleo-observation
-- Contemporary observations
-
-
-**Confidence: existence of the regime shift**
-
-- Contested – Reasonable evidence both for and against the existence of RS
-
-
-**Confidence: mechanisms underlying the regime shift**
-
-- Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
-
-
-:::
-
-::::
-
-### Detail information
+### General information
 
 #### Alternative regimes
 
@@ -226,17 +135,29 @@ From the point of view of PP, it is unclear how the regime shift would affect th
 
 
 
-### Regime shift Analysis
+### In-depth analysis
 
 ```{r cld, error = FALSE, message = FALSE, out.width='80%'}
 
+#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+
+library(ggiraph)
+library(htmlwidgets)
 source('tools.R')
 load('assets/clds.Rda')
 
 if (rs$regime_shift_name %in% clds$regime_shift) {
     gg <- rs_net(clds, rs$regime_shift_name) |> 
     plot_net()
-    girafe(ggobj = gg)}
+    # create the html obj: sizing not working
+    girafe(ggobj = gg) |> 
+        girafe_options(
+            opts_tooltip(opacity = 0.7), opts_zoom(min =0.5, max =2),
+        sizingPolicy(defaultWidth='100px', defaultHeight='50px'),
+        opts_hover(css = 'fill:red;stroke:orange;r:5pt;'))
+    }
+
+
 ```
 
 ```{r}
@@ -247,13 +168,123 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
 
-## Citation
+### Categorical summary
 
- Acknowledge this review as:
+::::{style='display: flex;'}
 
-<small> Patricia  Villarrubia Gomez, Helene Albinus Søgaard, Karl Samuelsson, Sophie Laggan, Thorsten Blenckner. Primary production Arctic Ocean. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2015-05-09</small>
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Marine & coastal
+- Polar
+
+
+**Key ecosystem processes**:
+
+- Primary production
+- Nutrient cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Fisheries
+- Wild animal and plant products
+
+
+**Regulating services**:
+
+- Climate regulation
+- Natural hazard regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+- Knowledge and educational values
+
+
+**Human well-being**:
+
+- Food and nutrition or Health (e.g. toxins or disease) or Livelihoods and economic activity or Cultural or Aesthetic and recreational values
+
+
+**Links to other regime shifts**:
+
+- Arctic benthos borealisation
+- Arctic sea-ice loss
+- Marine food webs
+- Tundra to forest
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- External inputs (e.g. fertilizers or pest control or irrigation) or Environmental shocks (e.g. fire or floods or droughts) or Global climate change
+
+
+**Land use**:
+
+- Fisheries
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Sub-continental (e.g. southern Africa or Amazon basin)
+
+
+**Time scale**:
+
+- Unknown
+
+
+**Reversibility**:
+
+- Unknown
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+
+
+**Confidence: existence of the regime shift**
+
+- Contested – Reasonable evidence both for and against the existence of RS
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
+
+
+:::
+
+::::
 
 ### References
+
+::: {#refs}
+
+:::
+### References old [Delete]
 
 <small>
 
@@ -302,3 +333,28 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 </small>
 
+## Citation
+Acknowledge this review as:
+
+<tiny> 
+``` {style='color: gray;'}
+Patricia  Villarrubia Gomez, Helene Albinus Søgaard, Karl Samuelsson, Sophie Laggan, Thorsten Blenckner. Primary production Arctic Ocean. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2015-05-09
+```
+
+</tiny>
+
+BibTeX citation:
+
+<tiny><tiny> 
+``` {style='color: gray;'}
+@misc{
+  author = {Patricia  Villarrubia Gomez and Helene Albinus Søgaard and Karl Samuelsson and Sophie LagganThorsten Blenckner},
+  title = {Primary production Arctic Ocean},
+  url = {www.regimeshifts.org},
+  howpublished = {Regime Shifts Database},
+  publisher = {Stockholm Resilience Centre},
+  institution = {Stockholm University}
+}
+```
+
+</tiny>

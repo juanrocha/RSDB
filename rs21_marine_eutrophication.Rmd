@@ -1,10 +1,10 @@
 ---
 output: 
   html_document:
-    toc: true
+    toc: false
     toc_depth: 3
     toc_float: true
-
+bibliography: "assets/bibliography/rs21.bib"
 params:
   j: 21
 ---
@@ -25,13 +25,53 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
 
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
 # Marine eutrophication
 
-**Main contributors**: Thorsten Blenckner, Johanna Yletyinen
 
-**Other contributors**: NA
+- **Main contributors**: Thorsten Blenckner, Johanna Yletyinen
 
-Last update: 2013-10-28
+- **Other contributors**: NA
+
+- Last update: 2013-10-28
+
+Eutrophication is a complex process that turns low-nutrient, clear water sea to a murky, high-nutrient sea. Marine eutrophication processes differ from lakes due to the open physical structure of the sea, higher diversity of biotic habitats and more complex hydrological structure. Increases in nutrients (both nitrogen and phosphorus) increase primary production, leading to a higher turbidity, and may threat ecosystem stability and animal as well as human health. Decomposition of the increased biomass results in increased consumption of oxygen in deep water, which may lead to hypoxia and anoxic bottoms with severe consequences for benthic organisms. Light availability can become too low to sustain macroalgae and/or submerged plants.
+
+ Scientific knowledge on the eutrophication is considerable and major commitments have been made to reduce eutrophication. These include institutional arrangements, nutrient reduction goals, assessment of progress and second-generation goals. Coastal marine eutrophication has occurred for instance in the Baltic Sea and Chesapeake Bay.
+
+
+
+:::
+
+:::{style='width: 5%;'}
+
+:::
+
+:::{style='width: 45%;'}
+
+```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
+
+
+
+library(htmltools)
+library(bsplus)
+
+w <- 'https://www.juanrocha.se/'
+bs_carousel(id = 'rs21', use_indicators = TRUE)|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/CaspianSea.A2003162.0710.1km.jpg'), alt = 'Marine eutrophication'),
+    caption = bs_carousel_caption(title = 'Marine eutrophication'))
+
+```
+
+:::
+::::
+
+## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
 
@@ -41,7 +81,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -50,129 +90,11 @@ m <- leaflet(cs) |>
 m
 ```
 
-### Summary
+**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
 
-Eutrophication is a complex process that turns low-nutrient, clear water sea to a murky, high-nutrient sea. Marine eutrophication processes differ from lakes due to the open physical structure of the sea, higher diversity of biotic habitats and more complex hydrological structure. Increases in nutrients (both nitrogen and phosphorus) increase primary production, leading to a higher turbidity, and may threat ecosystem stability and animal as well as human health. Decomposition of the increased biomass results in increased consumption of oxygen in deep water, which may lead to hypoxia and anoxic bottoms with severe consequences for benthic organisms. Light availability can become too low to sustain macroalgae and/or submerged plants.
+## Analysis {.tabset .tabset-pills}
 
- Scientific knowledge on the eutrophication is considerable and major commitments have been made to reduce eutrophication. These include institutional arrangements, nutrient reduction goals, assessment of progress and second-generation goals. Coastal marine eutrophication has occurred for instance in the Baltic Sea and Chesapeake Bay.
-
-
-
-### Categorical attributes
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
-#### Impacts
-
-**Ecosystem type**:'
-
-- Marine & coastal
-
-
-**Key ecosystem processes**:
-
-- Primary production
-- Nutrient cycling
-
-
-**Biodiversity**:
-
-- Biodiversity
-
-
-**Provisioning services**:
-
-- Fisheries
-
-
-**Regulating services**:
-
-- Water purification
-
-
-**Cultural services**:
-
-- Recreation
-- Aesthetic values
-
-
-**Human well-being**:
-
-- Food and nutrition
-- Health (e.g. toxins
-- disease)
-- Livelihoods and economic activity
-- Cultural
-- Aesthetic and recreational values
-
-
-**Links to other regime shifts**:
-
-- Freshwater eutrophication
-
-
-:::
-
-:::{style='width: 50%;'}
-
-#### Drivers
-
-**Key drivers**:
-
-- External inputs (e.g. fertilizers
-- pest control
-- irrigation)
-
-
-**Land use**:
-
-- Fisheries
-- Land use impacts are primarily off-site (e.g. dead zones)
-
-
-#### Key attributes
-
-**Spatial scale**:
-
-- Sub-continental (e.g. southern Africa
-- Amazon basin)
-
-
-**Time scale**:
-
-- Decades
-
-
-**Reversibility**:
-
-- Irreversible (on 100 year time scale)
-
-
-**Evidence**:
-
-- Models
-- Contemporary observations
-- Experiments
-- Other
-
-
-**Confidence: existence of the regime shift**
-
-- Well established – Wide agreement in the literature that the RS exists
-
-
-**Confidence: mechanisms underlying the regime shift**
-
-- Well established – Wide agreement on the underlying mechanism
-
-
-:::
-
-::::
-
-### Detail information
+### General information
 
 #### Alternative regimes
 
@@ -220,17 +142,29 @@ In eutrophic systems nutrient availability regulates primary production levels. 
 
 
 
-### Regime shift Analysis
+### In-depth analysis
 
 ```{r cld, error = FALSE, message = FALSE, out.width='80%'}
 
+#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+
+library(ggiraph)
+library(htmlwidgets)
 source('tools.R')
 load('assets/clds.Rda')
 
 if (rs$regime_shift_name %in% clds$regime_shift) {
     gg <- rs_net(clds, rs$regime_shift_name) |> 
     plot_net()
-    girafe(ggobj = gg)}
+    # create the html obj: sizing not working
+    girafe(ggobj = gg) |> 
+        girafe_options(
+            opts_tooltip(opacity = 0.7), opts_zoom(min =0.5, max =2),
+        sizingPolicy(defaultWidth='100px', defaultHeight='50px'),
+        opts_hover(css = 'fill:red;stroke:orange;r:5pt;'))
+    }
+
+
 ```
 
 ```{r}
@@ -241,13 +175,117 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
 
-## Citation
+### Categorical summary
 
- Acknowledge this review as:
+::::{style='display: flex;'}
 
-<small> NA</small>
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Marine & coastal
+
+
+**Key ecosystem processes**:
+
+- Primary production
+- Nutrient cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Fisheries
+
+
+**Regulating services**:
+
+- Water purification
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+
+
+**Human well-being**:
+
+- Food and nutrition or Health (e.g. toxins or disease) or Livelihoods and economic activity or Cultural or Aesthetic and recreational values
+
+
+**Links to other regime shifts**:
+
+- Freshwater eutrophication
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- External inputs (e.g. fertilizers or pest control or irrigation)
+
+
+**Land use**:
+
+- Fisheries or Land use impacts are primarily off-site (e.g. dead zones)
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Sub-continental (e.g. southern Africa or Amazon basin)
+
+
+**Time scale**:
+
+- Decades
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+
+
+**Evidence**:
+
+- Models
+- Contemporary observations
+- Experiments
+- Other
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
 
 ### References
+
+::: {#refs}
+
+:::
+### References old [Delete]
 
 <small>
 
@@ -279,3 +317,28 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 </small>
 
+## Citation
+Acknowledge this review as:
+
+<tiny> 
+``` {style='color: gray;'}
+NA
+```
+
+</tiny>
+
+BibTeX citation:
+
+<tiny><tiny> 
+``` {style='color: gray;'}
+@misc{
+  author = {NA},
+  title = {Marine eutrophication},
+  url = {www.regimeshifts.org},
+  howpublished = {Regime Shifts Database},
+  publisher = {Stockholm Resilience Centre},
+  institution = {Stockholm University}
+}
+```
+
+</tiny>

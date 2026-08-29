@@ -1,10 +1,10 @@
 ---
 output: 
   html_document:
-    toc: true
+    toc: false
     toc_depth: 3
     toc_float: true
-
+bibliography: "assets/bibliography/rs6.bib"
 params:
   j: 6
 ---
@@ -25,13 +25,55 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
 
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
 # Soil salinization
 
-**Main contributors**: Reinette (Oonsie) Biggs, Garry Peterson, Juan Carlos Rocha, Christine Hammond, Matteo Giusti
 
-**Other contributors**: Brian Walker
+- **Main contributors**: Reinette (Oonsie) Biggs, Garry Peterson, Juan Carlos Rocha, Christine Hammond, Matteo Giusti
 
-Last update: 2011-02-27
+- **Other contributors**: Brian Walker
+
+- Last update: 2011-02-27
+
+Soil salinization is a serious and difficult to reverse form of soil degradation.  Salinization occurs when dissolved salts in water tables rise to the soil surface and accumulate as water evaporates.  Often rise in a water table is due to the replacement of deep-rooted vegetation, such as trees, with shallower rooted vegetation, such as grasses.  Application of irrigation water or heavy rainfall can also cause water tables to rise.  Topsoil salts can greatly reduce agricultural productivity, erode infrastructure, and impose long-term limitations on land productivity.  Soils containing high levels of salts are much more likely to experience this regime shift.
+
+
+
+:::
+
+:::{style='width: 5%;'}
+
+:::
+
+:::{style='width: 45%;'}
+
+```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
+
+
+
+library(htmltools)
+library(bsplus)
+
+w <- 'https://www.juanrocha.se/'
+bs_carousel(id = 'rs6', use_indicators = TRUE)|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/Salinity.jpg'), alt = 'Soil salinization'),
+    caption = bs_carousel_caption(title = 'Soil salinization'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/Soil_Salinity2.jpg'), alt = 'Soil salinization'),
+    caption = bs_carousel_caption(title = 'Soil salinization'))
+
+```
+
+:::
+::::
+
+## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
 
@@ -41,7 +83,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -50,147 +92,11 @@ m <- leaflet(cs) |>
 m
 ```
 
-### Summary
+**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
 
-Soil salinization is a serious and difficult to reverse form of soil degradation.  Salinization occurs when dissolved salts in water tables rise to the soil surface and accumulate as water evaporates.  Often rise in a water table is due to the replacement of deep-rooted vegetation, such as trees, with shallower rooted vegetation, such as grasses.  Application of irrigation water or heavy rainfall can also cause water tables to rise.  Topsoil salts can greatly reduce agricultural productivity, erode infrastructure, and impose long-term limitations on land productivity.  Soils containing high levels of salts are much more likely to experience this regime shift.
+## Analysis {.tabset .tabset-pills}
 
-
-
-### Categorical attributes
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
-#### Impacts
-
-**Ecosystem type**:'
-
-- Drylands & deserts (below ~500mm rainfall/year)
-- Grasslands
-- Agro-ecosystems
-
-
-**Key ecosystem processes**:
-
-- Soil formation
-- Primary production
-- Nutrient cycling
-- Water cycling
-
-
-**Biodiversity**:
-
-- Biodiversity
-
-
-**Provisioning services**:
-
-- Freshwater
-- Food crops
-- Livestock
-- Wild animal and plant products
-- Fuel and fiber crops
-- Wild animal and plant foods
-
-
-**Regulating services**:
-
-- Water purification
-- Water regulation
-- Regulation of soil erosion
-
-
-**Cultural services**:
-
-- Recreation
-- Aesthetic values
-
-
-**Human well-being**:
-
-- Food and nutrition
-- Livelihoods and economic activity
-- Cultural
-- Aesthetic and recreational values
-
-
-**Links to other regime shifts**:
-
-- Forest to Cropland
-- Bush encroachment
-- Dryland degradation
-
-
-:::
-
-:::{style='width: 50%;'}
-
-#### Drivers
-
-**Key drivers**:
-
-- Vegetation conversion and habitat fragmentation
-- Harvest and resource consumption
-- External inputs (e.g. fertilizers
-- pest control
-- irrigation)
-- Environmental shocks (e.g. fire
-- floods
-- droughts)
-
-
-**Land use**:
-
-- Large-scale commercial crop cultivation
-- Extensive livestock production (natural rangelands)
-
-
-#### Key attributes
-
-**Spatial scale**:
-
-- Local/landscape (e.g. lake
-- catchment
-- community)
-
-
-**Time scale**:
-
-- Months
-- Years
-- Decades
-
-
-**Reversibility**:
-
-- Irreversible (on 100 year time scale)
-- Hysteretic (difficult to reverse)
-
-
-**Evidence**:
-
-- Models
-- Paleo-observation
-- Contemporary observations
-- Experiments
-
-
-**Confidence: existence of the regime shift**
-
-- Well established – Wide agreement in the literature that the RS exists
-
-
-**Confidence: mechanisms underlying the regime shift**
-
-- Well established – Wide agreement on the underlying mechanism
-
-
-:::
-
-::::
-
-### Detail information
+### General information
 
 #### Alternative regimes
 
@@ -240,17 +146,29 @@ Cultivated drylands are especially vulnerable to soil salinization, especially r
 
 
 
-### Regime shift Analysis
+### In-depth analysis
 
 ```{r cld, error = FALSE, message = FALSE, out.width='80%'}
 
+#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+
+library(ggiraph)
+library(htmlwidgets)
 source('tools.R')
 load('assets/clds.Rda')
 
 if (rs$regime_shift_name %in% clds$regime_shift) {
     gg <- rs_net(clds, rs$regime_shift_name) |> 
     plot_net()
-    girafe(ggobj = gg)}
+    # create the html obj: sizing not working
+    girafe(ggobj = gg) |> 
+        girafe_options(
+            opts_tooltip(opacity = 0.7), opts_zoom(min =0.5, max =2),
+        sizingPolicy(defaultWidth='100px', defaultHeight='50px'),
+        opts_hover(css = 'fill:red;stroke:orange;r:5pt;'))
+    }
+
+
 ```
 
 ```{r}
@@ -261,13 +179,133 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
 
-## Citation
+### Categorical summary
 
- Acknowledge this review as:
+::::{style='display: flex;'}
 
-<small> Reinette (Oonsie) Biggs, Garry Peterson, Juan Carlos Rocha, Christine Hammond, Matteo Giusti, Brian Walker. Soil salinization. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-27</small>
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Drylands & deserts 
+- Grasslands
+- Agro-ecosystems
+
+
+**Key ecosystem processes**:
+
+- Soil formation
+- Primary production
+- Nutrient cycling
+- Water cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Freshwater
+- Food crops
+- Livestock
+- Wild animal and plant products
+- Fuel and fiber crops
+- Wild animal and plant foods
+
+
+**Regulating services**:
+
+- Water purification
+- Water regulation
+- Regulation of soil erosion
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+
+
+**Human well-being**:
+
+- Food and nutrition or Livelihoods and economic activity or Cultural or Aesthetic and recreational values
+
+
+**Links to other regime shifts**:
+
+- Forest to Cropland
+- Bush encroachment
+- Dryland degradation
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Vegetation conversion and habitat fragmentation or Harvest and resource consumption or External inputs (e.g. fertilizers or pest control or irrigation) or Environmental shocks (e.g. fire or floods or droughts)
+
+
+**Land use**:
+
+- Large-scale commercial crop cultivation or Extensive livestock production (natural rangelands)
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake or catchment or community)
+
+
+**Time scale**:
+
+- Months
+- Years
+- Decades
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+- Hysteretic (difficult to reverse)
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+- Experiments
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
 
 ### References
+
+::: {#refs}
+
+:::
+### References old [Delete]
 
 <small>
 
@@ -288,3 +326,28 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 </small>
 
+## Citation
+Acknowledge this review as:
+
+<tiny> 
+``` {style='color: gray;'}
+Reinette (Oonsie) Biggs, Garry Peterson, Juan Carlos Rocha, Christine Hammond, Matteo Giusti, Brian Walker. Soil salinization. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-27
+```
+
+</tiny>
+
+BibTeX citation:
+
+<tiny><tiny> 
+``` {style='color: gray;'}
+@misc{
+  author = {Reinette (Oonsie) Biggs and Garry Peterson and Juan Carlos Rocha and Christine Hammond and Matteo GiustiBrian Walker},
+  title = {Soil salinization},
+  url = {www.regimeshifts.org},
+  howpublished = {Regime Shifts Database},
+  publisher = {Stockholm Resilience Centre},
+  institution = {Stockholm University}
+}
+```
+
+</tiny>

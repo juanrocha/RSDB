@@ -177,6 +177,8 @@ dat <- dat |> rename(type = regime_shift_type_value) |>
 
 write_csv(dat, file = "assets/rsdb_clean_260625.csv")
 
+## correct the link to netlify so it does not go to the hacked server:
+dat <- read_csv("assets/rsdb_clean_260625.csv")
 
 world + 
     geom_point(data = rs_types, aes(x = long, y = lat, color = type),
@@ -197,6 +199,23 @@ world +
 ggsave(
     file = "rsdb_map_260625.png", device = "png", width = 12, height = 9,
     bg = "white", dpi = 500
+)
+
+### Simple version for prentations (ERC)
+ggplot(map_data("world"), aes(x = long, y = lat)) +
+    geom_polygon(aes(group = group), color = "#f9f9f9",
+                 fill = "grey25", linewidth = 0.05) +
+    #coord_map(projection = "mercator" ) #
+    coord_quickmap() +
+    geom_point(
+        data = dat |> select(type , long, lat ), 
+        aes(x = long, y = lat), color = "orange",
+        alpha = 0.4, size = 0.5, show.legend = FALSE) +
+    theme_void() + theme(panel.background = element_rect(fill = "black")) 
+
+ggsave(
+    file = "rsdb_map_260828_dark.png", device = "png", width = 12, height = 7,
+    bg = "black", dpi = 500
 )
 
 # dat |> 
@@ -222,7 +241,7 @@ dat <- dat |> select(-id) |>
         )
     ) |> 
     mutate(
-        links = paste0("https://regimeshifts.org/", links)
+        links = paste0("https://regimeshifts.netlify.app/", links)
     )
 
 
@@ -249,7 +268,7 @@ rs_dat <- rs_dat |>
     mutate(filename = str_replace(filename, "\\.Rmd", "\\.html")) |> 
     # create links here, so there is links for RS without cases
     mutate(link_rs = paste0(
-        "<a href=", "'", "https://regimeshifts.org/", filename, "'",
+        "<a href=", "'", "https://regimeshifts.netlify.app/", filename, "'",
         " target='_blank'",">", regime_shift_name, "</a>"))
 
 rs_dat$regime_shift_name |> levels()
@@ -282,7 +301,7 @@ dat <- dat |>
     mutate(type_link = case_when(
         is.na(filename) ~ type, 
         .default = paste0(
-            "<a href=", "'", "https://regimeshifts.org/", filename, "'",
+            "<a href=", "'", "https://regimeshifts.netlify.app/", filename, "'",
             " target='_blank'", ">", type, "</a>"))) 
 
 names(dat)

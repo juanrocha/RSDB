@@ -1,10 +1,10 @@
 ---
 output: 
   html_document:
-    toc: true
+    toc: false
     toc_depth: 3
     toc_float: true
-
+bibliography: "assets/bibliography/rs8.bib"
 params:
   j: 8
 ---
@@ -25,13 +25,53 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
 
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
 # Forest to savanna
 
-**Main contributors**: Juan Carlos Rocha
 
-**Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
+- **Main contributors**: Juan Carlos Rocha
 
-Last update: 2011-02-28
+- **Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
+
+- Last update: 2011-02-28
+
+Forest to savannas is a regime shift typical from tropical areas. Several feedback play an important role including albedo effects, evapotranspiration and clouds forming, fragmentation and fire-prone areas expansion, change in ocean circulation and self organizing vegetation patterns. However, not always these feedbacks are strong enough to produce alternative regimes; and in some areas shifts are expected to occur under stochastic events like ENSO droughts or unlikely events like Earth orbit change.
+
+:::
+
+:::{style='width: 5%;'}
+
+:::
+
+:::{style='width: 45%;'}
+
+```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
+
+
+
+library(htmltools)
+library(bsplus)
+
+w <- 'https://www.juanrocha.se/'
+bs_carousel(id = 'rs8', use_indicators = TRUE)|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/5359398-PPT.jpg'), alt = 'Forest to savanna'),
+    caption = bs_carousel_caption(title = 'Forest to savanna'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/800px-Kiang_West_savanna.jpg'), alt = 'Forest to savanna'),
+    caption = bs_carousel_caption(title = 'Forest to savanna'))
+
+```
+
+:::
+::::
+
+## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
 
@@ -41,7 +81,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -50,11 +90,85 @@ m <- leaflet(cs) |>
 m
 ```
 
-### Summary
+**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
 
-Forest to savannas is a regime shift typical from tropical areas. Several feedback play an important role including albedo effects, evapotranspiration and clouds forming, fragmentation and fire-prone areas expansion, change in ocean circulation and self organizing vegetation patterns. However, not always these feedbacks are strong enough to produce alternative regimes; and in some areas shifts are expected to occur under stochastic events like ENSO droughts or unlikely events like Earth orbit change.
+## Analysis {.tabset .tabset-pills}
 
-### Categorical attributes
+### General information
+
+#### Alternative regimes
+
+**Forest regime**  
+Forest are ecosystems typically dominated by trees, perennial plants taller than 5 meters. Tropical forest includes moist and dry forest (MA, 2005). A mature tropical forest contain at least four layers: emergent layer up to 45 - 80 meters tall, the canopy among 35 - 45 meters tall, the understory layer and the floor layer. Such structure gives a variety of habitats that host roughly half of the known plants and animals biodiversity (MA, 2005).   
+  
+Forest provides a wide range of ecosystem services. Besides being hot spots of biodiversity, forest provides soil and water protection, it prevents soil erosion, floods and landslides. For example, soil erosion may be 10-20 times higher on areas cleared of forest (MA, 2005). Depending on soil conditions, at the local scale forest can also regulate the hydrological cycles by increasing precipitation and decreasing evaporation. They regulate below grown runoff and smoothing seasonal extreme events: heavy rainfalls or dry spells. Due to its regulating function in the water cycle, forested watersheds provides water supply to one third of the world’s largest cities (MA, 2005).   
+  
+Forest sustain about 200 million people belonging to indigenous groups, who depend on forest not only as source of resources (food, fiber, fuel) but also their culture and religious traditions (MA, 2005). Forest also maintain the agroforestry industry which, including temperate forests, produces 3.3 billion cubic meters of wood (MA, 2005).   
+  
+**Savanna regime**  
+Savannas, on the other hand, are drylands dominated by a mixture of grasslands and shrublands. The canopy in savannas never closes, and the floor layer is dominated by grass, especially C4 species. Savannas, dry forest and shrublands conform 40% of the world’s land area and host up to 42% of human population (Reynolds et al. 2007, Falkenmark and Rockström 2008). About 25% of drylands, including savannas, are covered by croplands and they sustain 50% of world’s livestock (MA, 2005).   
+  
+Fire dynamics and grazing maintain the savanna regime. The feedbacks that maintain both regimes includes the lifting condensation level feedback, evapotranspiration feedback, roughness feedback, and self-organized patchiness. However, the most important feedbacks underlying change are fire feedbacks at the local scale and albedo-moisture feedback in the regional scale.   
+ * Albedo feedback (regional, well stablished): Albedo is the amount of energy (light - heat) that is reflected to the atmosphere by earth surface. Forested areas absorb more heat than bare soil or savannas, increasing the gradient among land and ocean temperature. Such gradient facilitates monsoon circulation which bring humidity from the oceans to the land, increasing rainfall and therefore, optimal forest conditions (Scheffer 2009). When tropical forest is replaced by less vegetated cover like savannas, or ultimately by sand in deserts, net radiation at the top of the atmosphere decreases inducing subsidence that inhibits precipitation (Oyama and Nobre 2004). While in the tropics land clearing affects the water balance and as consequence warms up the climate, in boreal forest such clearing affects mainly albedo and as results cools down climate (Foley et al. 2005). The albedo feedback is strengthen by changes in land cover, typically induced by deforestation for logging or agriculture activities.
+* Lifting condensation level feedback (regional, well stablished): Lifting condensation level (LCL) (or cloud base height, CBH) is the altitude at which cloud formation is initiated. Warmer temperature and drier atmospheres, such as in savanna regime, result in an increase in LCL that reduces the opportunity of cloud formation and therefore the likelihood of rainfalls (Pinto et al. 2009). To some extent, vegetation cover can modulate rainfall variability (Los et al. 2006).
+* Evapotranspiration or physiological feedback (local, contested): Plants that do not have enough water responds reducing transpiration and photosynthesis, interrupting the supply of water vapor that contribute to the recycled component of precipitation (Oyama and Nobre 2004, Saleska et al. 2007). When transpiration reduction of each plant is aggregated to the forest, less evapotranspiration blocks the inland propagation of cold fronts responsible for precipitation, increasing in turn the dry season length (Oyama and Nobre 2003, Pinto et al. 2009). In such case, savanna vegetation is better adapted to dry environments. Grasses usually have C4 photosynthesis type, a chemical pathway that reduces water consumption and helps to cope with nitrogen or CO2 limitations. Evapotranspiration depends on soil moisture and biomass. Thus, for instance, droughts frequency or grazing reduce biomass, weakening in turn the feedback effect (Dekker et al. 2007, Dekker et al. 2010). In addition, the spatial distribution of rainfall is affected by both the land-cover type and topography. Thus, in the Amazon for example, massively deforested regions produce decrease of precipitation, but near the edge at elevated regions like Los Andes, precipitation increases (Da Silva et al. 2008). Besides, during El Niño (ENSO) events, the system is more prone to rainfall reduction through evapotranspiration feedback than during wet years, where the feedback is not strong enough to produce such effect on climate (Da Silva et al. 2008). In Dekker et al. (2007) model for instance, bistability is only possible through stochastic disturbance (e.g. ENSO), inner dynamics are not strong enough to produce alternative regimes.
+* Roughness feedback (regional, well stablished): Roughness length is the height at which wind speed is zero. It has to be with the surface elements that stop wind and it is approximately one tenth of the hight of such elements. Hence, forest roughness is higher than savanna roughness. Reduction on roughness length in forests results in less mass convergence around surface low pressure centers, decreasing the upward moisture transport that feeds into convective precipitation clouds (Oyama and Nobre 2004).
+* Fire feedbacks (Local, well stablished): At the local scale, fire frequency can be easily altered. Deforestation produce landscape fragmentation, which in turn creates fire-prone habitats in patch edges. Hence, cattle pastures and regrowth forest areas become increasingly prone to frequent fires. In such zones fire can be produced after few days of dry conditions. On the regional scale, fire smoke may reduce rainfall by trapping moisture and inhibiting raindrops formation (Laurance and Williamson 2001). Fire plays a fundamental role in the shift from forest to savanna since it is a feedback that actually maintain savanna state (Laurance and Williamson 2001, Hutyra et al. 2005)
+* Self-organizing patchiness in arid ecosystems (local, well stablished): Rietkerk et al. (2004) describe a couple of feedbacks that explains self-organized patchiness in ecosystems as a scale-dependent mechanism. It is most likely to happen in water-limited systems, including savannas. The first feedback mechanism is a positive one in the short spatial range where higher vegetation density allows lower evaporation and higher water infiltration through shading and root penetration respectively. These conditions allow plant recruitment. The negative feedback emerge in the long spatial range where bare or poor soils do not allow vegetation to establish. Therefore, it maintain dry states and inhibits the reestablishment of forest. Further regime shifts among dry states may happen when the islands of fertility are cleared because the chance to recolonize are minimal. Hence, deforestation, fire, land degradation, and grazing are disturbances that may interact and shift the system to drier regimes.
+
+
+#### Drivers and causes of the regime shift
+
+The most widely recognized driver is deforestation and consequently fragmentation of forest landscape, which reduces rainfall and increases surface temperature (Da Silva et al. 2008, Nobre et al. 2009). Reduction of forest cover accelerates albedo effect, loss of evapotranspiration and roughness length (Sternberg 2001), activate fire feedback, change ocean circulation and warms up sea surface in the Amazon case, and ultimately change the spatial organization of vegetation.   
+  
+Deforestation and forest degradation is in turn driven by a complex, case specific interaction of social and economic drivers. The most important reported drivers are agriculture expansion, infrastructure development, the logging industry and fast population growth; standing out in most cases (Geist and Lambin 2002, MA, 2005). For example, in the Amazon, illegal logging is a critical threat that besides its damage to the forest, bring with them secondary effects like expansion of hunting areas, slash-and-burn farms, mining, the establishment of new road networks and therefore more logging facilities. The MA (2005) reports that 70 countries have problems with illegal logging leading to national income losses of $5 billions and total economic losses of about $10 billion. By 2001, Laurance and Williamson (2001) reported that 80% of brazilian logging activity were illegal; however, government counterintuitively sponsored colonization through cattle ranching projects.   
+  
+On the other hand, population growth seems to play a dual role. While colonialism (in-migration) prevail in Latin American cases, in Asia and Africa fast local population growth is what intensifies logging and forest pressure (Geist and Lambin 2002). Deforestation responds to social feedbacks characterized by poverty traps. The gap among rich and poor people left some of them with the only alternative to find livelihoods by exploiting primary resources such as forest. Furthermore, illegal markets accelerate such dependency by creating the opportunity to trade wood.   
+  
+Climate change and global warming are expected to enhance the regime shift; and the loss of forest areas are expected to exacerbate climate change (Laurance and Williamson 2001, Bonan 2008). While Laurance and Williamson (2001) report that forest like Amazon apparently change from carbon sinks to carbon sources during ENSO events; Nobre et al. (2009) suggest that deforestation of Amazon may actually increase ENSO variability; and Bonan (2008) confirms that deforestation would enhance global warming by decrease of evaporative cooling and release of carbon dioxide.
+
+#### Impacts on ecosystem services and human well-being
+
+NA
+
+#### Management options
+
+Managerial options for the forest to savanna regime shifts target its main drivers: deforestation and landscape fragmentation. Controlling illegal logging and implementing sustainable logging plans are part of the strategy. Sustainable logging needs to take into consideration reducing fragmentation and allow deforested patches to regrowth. Likewise, the expansion of agricultural frontier and grazing areas needs to be controlled; and when unavoidable, it needs to be planned in order to prevent fragmentation. The fire frequency feedback accelerates the shift from forest to savanna regime. Laurance and Williamson (2001) suggest fundamental changes in prevailing land-use practices and development policies to avoid wildfires. Such changes include the management of logging and grazing areas in order to reduce fragmentation and therefore it would reduce the fire risk. Hence, fire and fragmentation management need to be coupled strategies.
+
+### In-depth analysis
+
+```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+
+#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+
+library(ggiraph)
+library(htmlwidgets)
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    # create the html obj: sizing not working
+    girafe(ggobj = gg) |> 
+        girafe_options(
+            opts_tooltip(opacity = 0.7), opts_zoom(min =0.5, max =2),
+        sizingPolicy(defaultWidth='100px', defaultHeight='50px'),
+        opts_hover(css = 'fill:red;stroke:orange;r:5pt;'))
+    }
+
+
+```
+
+```{r}
+
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```
+
+### Categorical summary
 
 ::::{style='display: flex;'}
 
@@ -111,14 +225,7 @@ Forest to savannas is a regime shift typical from tropical areas. Several feedba
 
 **Human well-being**:
 
-- Food and nutrition
-- Health (e.g. toxins
-- disease)
-- Livelihoods and economic activity
-- Security of housing & infrastructure
-- Cultural
-- Aesthetic and recreational values
-- Social conflict
+- Food and nutrition or Health (e.g. toxins or disease) or Livelihoods and economic activity or Security of housing & infrastructure or Cultural or Aesthetic and recreational values or Social conflict
 
 
 **Links to other regime shifts**:
@@ -133,30 +240,19 @@ NA
 
 **Key drivers**:
 
-- Vegetation conversion and habitat fragmentation
-- Harvest and resource consumption
-- Infrastructure development (e.g. roads
-- pipelines)
-- Soil erosion & land degradation
-- Environmental shocks (e.g. fire
-- floods
-- droughts)
-- Global climate change
+- Vegetation conversion and habitat fragmentation or Harvest and resource consumption or Infrastructure development (e.g. roads or pipelines) or Soil erosion & land degradation or Environmental shocks (e.g. fire or floods or droughts) or Global climate change
 
 
 **Land use**:
 
-- Small-scale subsistence crop cultivation
-- Extensive livestock production (natural rangelands)
-- Timber production
+- Small-scale subsistence crop cultivation or Extensive livestock production (natural rangelands) or Timber production
 
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Sub-continental (e.g. southern Africa
-- Amazon basin)
+- Sub-continental (e.g. southern Africa or Amazon basin)
 
 
 **Time scale**:
@@ -190,75 +286,12 @@ NA
 
 ::::
 
-### Detail information
-
-#### Alternative regimes
-
-**Forest regime**  
-Forest are ecosystems typically dominated by trees, perennial plants taller than 5 meters. Tropical forest includes moist and dry forest (MA, 2005). A mature tropical forest contain at least four layers: emergent layer up to 45 - 80 meters tall, the canopy among 35 - 45 meters tall, the understory layer and the floor layer. Such structure gives a variety of habitats that host roughly half of the known plants and animals biodiversity (MA, 2005).   
-  
-Forest provides a wide range of ecosystem services. Besides being hot spots of biodiversity, forest provides soil and water protection, it prevents soil erosion, floods and landslides. For example, soil erosion may be 10-20 times higher on areas cleared of forest (MA, 2005). Depending on soil conditions, at the local scale forest can also regulate the hydrological cycles by increasing precipitation and decreasing evaporation. They regulate below grown runoff and smoothing seasonal extreme events: heavy rainfalls or dry spells. Due to its regulating function in the water cycle, forested watersheds provides water supply to one third of the world’s largest cities (MA, 2005).   
-  
-Forest sustain about 200 million people belonging to indigenous groups, who depend on forest not only as source of resources (food, fiber, fuel) but also their culture and religious traditions (MA, 2005). Forest also maintain the agroforestry industry which, including temperate forests, produces 3.3 billion cubic meters of wood (MA, 2005).   
-  
-**Savanna regime**  
-Savannas, on the other hand, are drylands dominated by a mixture of grasslands and shrublands. The canopy in savannas never closes, and the floor layer is dominated by grass, especially C4 species. Savannas, dry forest and shrublands conform 40% of the world’s land area and host up to 42% of human population (Reynolds et al. 2007, Falkenmark and Rockström 2008). About 25% of drylands, including savannas, are covered by croplands and they sustain 50% of world’s livestock (MA, 2005).   
-  
-Fire dynamics and grazing maintain the savanna regime. The feedbacks that maintain both regimes includes the lifting condensation level feedback, evapotranspiration feedback, roughness feedback, and self-organized patchiness. However, the most important feedbacks underlying change are fire feedbacks at the local scale and albedo-moisture feedback in the regional scale.   
- * Albedo feedback (regional, well stablished): Albedo is the amount of energy (light - heat) that is reflected to the atmosphere by earth surface. Forested areas absorb more heat than bare soil or savannas, increasing the gradient among land and ocean temperature. Such gradient facilitates monsoon circulation which bring humidity from the oceans to the land, increasing rainfall and therefore, optimal forest conditions (Scheffer 2009). When tropical forest is replaced by less vegetated cover like savannas, or ultimately by sand in deserts, net radiation at the top of the atmosphere decreases inducing subsidence that inhibits precipitation (Oyama and Nobre 2004). While in the tropics land clearing affects the water balance and as consequence warms up the climate, in boreal forest such clearing affects mainly albedo and as results cools down climate (Foley et al. 2005). The albedo feedback is strengthen by changes in land cover, typically induced by deforestation for logging or agriculture activities.
-* Lifting condensation level feedback (regional, well stablished): Lifting condensation level (LCL) (or cloud base height, CBH) is the altitude at which cloud formation is initiated. Warmer temperature and drier atmospheres, such as in savanna regime, result in an increase in LCL that reduces the opportunity of cloud formation and therefore the likelihood of rainfalls (Pinto et al. 2009). To some extent, vegetation cover can modulate rainfall variability (Los et al. 2006).
-* Evapotranspiration or physiological feedback (local, contested): Plants that do not have enough water responds reducing transpiration and photosynthesis, interrupting the supply of water vapor that contribute to the recycled component of precipitation (Oyama and Nobre 2004, Saleska et al. 2007). When transpiration reduction of each plant is aggregated to the forest, less evapotranspiration blocks the inland propagation of cold fronts responsible for precipitation, increasing in turn the dry season length (Oyama and Nobre 2003, Pinto et al. 2009). In such case, savanna vegetation is better adapted to dry environments. Grasses usually have C4 photosynthesis type, a chemical pathway that reduces water consumption and helps to cope with nitrogen or CO2 limitations. Evapotranspiration depends on soil moisture and biomass. Thus, for instance, droughts frequency or grazing reduce biomass, weakening in turn the feedback effect (Dekker et al. 2007, Dekker et al. 2010). In addition, the spatial distribution of rainfall is affected by both the land-cover type and topography. Thus, in the Amazon for example, massively deforested regions produce decrease of precipitation, but near the edge at elevated regions like Los Andes, precipitation increases (Da Silva et al. 2008). Besides, during El Niño (ENSO) events, the system is more prone to rainfall reduction through evapotranspiration feedback than during wet years, where the feedback is not strong enough to produce such effect on climate (Da Silva et al. 2008). In Dekker et al. (2007) model for instance, bistability is only possible through stochastic disturbance (e.g. ENSO), inner dynamics are not strong enough to produce alternative regimes.
-* Roughness feedback (regional, well stablished): Roughness length is the height at which wind speed is zero. It has to be with the surface elements that stop wind and it is approximately one tenth of the hight of such elements. Hence, forest roughness is higher than savanna roughness. Reduction on roughness length in forests results in less mass convergence around surface low pressure centers, decreasing the upward moisture transport that feeds into convective precipitation clouds (Oyama and Nobre 2004).
-* Fire feedbacks (Local, well stablished): At the local scale, fire frequency can be easily altered. Deforestation produce landscape fragmentation, which in turn creates fire-prone habitats in patch edges. Hence, cattle pastures and regrowth forest areas become increasingly prone to frequent fires. In such zones fire can be produced after few days of dry conditions. On the regional scale, fire smoke may reduce rainfall by trapping moisture and inhibiting raindrops formation (Laurance and Williamson 2001). Fire plays a fundamental role in the shift from forest to savanna since it is a feedback that actually maintain savanna state (Laurance and Williamson 2001, Hutyra et al. 2005)
-* Self-organizing patchiness in arid ecosystems (local, well stablished): Rietkerk et al. (2004) describe a couple of feedbacks that explains self-organized patchiness in ecosystems as a scale-dependent mechanism. It is most likely to happen in water-limited systems, including savannas. The first feedback mechanism is a positive one in the short spatial range where higher vegetation density allows lower evaporation and higher water infiltration through shading and root penetration respectively. These conditions allow plant recruitment. The negative feedback emerge in the long spatial range where bare or poor soils do not allow vegetation to establish. Therefore, it maintain dry states and inhibits the reestablishment of forest. Further regime shifts among dry states may happen when the islands of fertility are cleared because the chance to recolonize are minimal. Hence, deforestation, fire, land degradation, and grazing are disturbances that may interact and shift the system to drier regimes.
-
-
-#### Drivers and causes of the regime shift
-
-The most widely recognized driver is deforestation and consequently fragmentation of forest landscape, which reduces rainfall and increases surface temperature (Da Silva et al. 2008, Nobre et al. 2009). Reduction of forest cover accelerates albedo effect, loss of evapotranspiration and roughness length (Sternberg 2001), activate fire feedback, change ocean circulation and warms up sea surface in the Amazon case, and ultimately change the spatial organization of vegetation.   
-  
-Deforestation and forest degradation is in turn driven by a complex, case specific interaction of social and economic drivers. The most important reported drivers are agriculture expansion, infrastructure development, the logging industry and fast population growth; standing out in most cases (Geist and Lambin 2002, MA, 2005). For example, in the Amazon, illegal logging is a critical threat that besides its damage to the forest, bring with them secondary effects like expansion of hunting areas, slash-and-burn farms, mining, the establishment of new road networks and therefore more logging facilities. The MA (2005) reports that 70 countries have problems with illegal logging leading to national income losses of $5 billions and total economic losses of about $10 billion. By 2001, Laurance and Williamson (2001) reported that 80% of brazilian logging activity were illegal; however, government counterintuitively sponsored colonization through cattle ranching projects.   
-  
-On the other hand, population growth seems to play a dual role. While colonialism (in-migration) prevail in Latin American cases, in Asia and Africa fast local population growth is what intensifies logging and forest pressure (Geist and Lambin 2002). Deforestation responds to social feedbacks characterized by poverty traps. The gap among rich and poor people left some of them with the only alternative to find livelihoods by exploiting primary resources such as forest. Furthermore, illegal markets accelerate such dependency by creating the opportunity to trade wood.   
-  
-Climate change and global warming are expected to enhance the regime shift; and the loss of forest areas are expected to exacerbate climate change (Laurance and Williamson 2001, Bonan 2008). While Laurance and Williamson (2001) report that forest like Amazon apparently change from carbon sinks to carbon sources during ENSO events; Nobre et al. (2009) suggest that deforestation of Amazon may actually increase ENSO variability; and Bonan (2008) confirms that deforestation would enhance global warming by decrease of evaporative cooling and release of carbon dioxide.
-
-#### Impacts on ecosystem services and human well-being
-
-NA
-
-#### Management options
-
-Managerial options for the forest to savanna regime shifts target its main drivers: deforestation and landscape fragmentation. Controlling illegal logging and implementing sustainable logging plans are part of the strategy. Sustainable logging needs to take into consideration reducing fragmentation and allow deforested patches to regrowth. Likewise, the expansion of agricultural frontier and grazing areas needs to be controlled; and when unavoidable, it needs to be planned in order to prevent fragmentation. The fire frequency feedback accelerates the shift from forest to savanna regime. Laurance and Williamson (2001) suggest fundamental changes in prevailing land-use practices and development policies to avoid wildfires. Such changes include the management of logging and grazing areas in order to reduce fragmentation and therefore it would reduce the fire risk. Hence, fire and fragmentation management need to be coupled strategies.
-
-### Regime shift Analysis
-
-```{r cld, error = FALSE, message = FALSE, out.width='80%'}
-
-source('tools.R')
-load('assets/clds.Rda')
-
-if (rs$regime_shift_name %in% clds$regime_shift) {
-    gg <- rs_net(clds, rs$regime_shift_name) |> 
-    plot_net()
-    girafe(ggobj = gg)}
-```
-
-```{r}
-
-load('assets/rs_analysis_text.Rda')
-
-if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
-    rs_analysis[[rs$regime_shift_name]] |> writeLines()
-```
-
-## Citation
-
- Acknowledge this review as:
-
-<small> Juan Carlos Rocha, Reinette (Oonsie) Biggs, Garry Peterson. Forest to savanna. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-28</small>
-
 ### References
+
+::: {#refs}
+
+:::
+### References old [Delete]
 
 <small>
 
@@ -285,3 +318,28 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 </small>
 
+## Citation
+Acknowledge this review as:
+
+<tiny> 
+``` {style='color: gray;'}
+Juan Carlos Rocha, Reinette (Oonsie) Biggs, Garry Peterson. Forest to savanna. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-28
+```
+
+</tiny>
+
+BibTeX citation:
+
+<tiny><tiny> 
+``` {style='color: gray;'}
+@misc{
+  author = {Juan Carlos RochaReinette (Oonsie) Biggs and Garry Peterson},
+  title = {Forest to savanna},
+  url = {www.regimeshifts.org},
+  howpublished = {Regime Shifts Database},
+  publisher = {Stockholm Resilience Centre},
+  institution = {Stockholm University}
+}
+```
+
+</tiny>

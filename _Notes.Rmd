@@ -14,7 +14,9 @@ output: html_document
 [1] "1621" "524"  "527"  "530"  "335"  "525"  "526"  "531" 
  [9] "3736" "3588"
 3. Re-run 99-images to correct links [not necessary, only once I think]
-4. 
+4. Run 99-genericRS.R: new version with new layout.
+5. Note you need to manually open rs_images.csv and provide a ranking, priority == 1 for the cover pic
+
 
 
 **260827**

@@ -1,10 +1,10 @@
 ---
 output: 
   html_document:
-    toc: true
+    toc: false
     toc_depth: 3
     toc_float: true
-
+bibliography: "assets/bibliography/rs1.bib"
 params:
   j: 1
 ---
@@ -25,13 +25,67 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
 
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
 # Freshwater eutrophication
 
-**Main contributors**: Juan Rocha, Reinette (Oonsie) Biggs, Garry Peterson
 
-**Other contributors**: Steve Carpenter
+- **Main contributors**: Juan Rocha, Reinette (Oonsie) Biggs, Garry Peterson
 
-Last update: 2011-02-15
+- **Other contributors**: Steve Carpenter
+
+- Last update: 2011-02-15
+
+Freshwater eutrophication refers to the excessive growth of aquatic plants or algal blooms, due to high levels of nutrients in freshwater ecosystems such as lakes, reservoirs and rivers. The main driver of freshwater eutrophication is nutrient pollution in the form of phosphorous from agricultural fertilizers, sewage effluent and urban storm water runoff. Beyond a certain threshold of phosphorous accumulation, a recycling mechanism is activated which can keep the system locked in a eutrophic state even when nutrient inputs are substantially reduced. Freshwater eutrophication can substantially impact ecosystem services affecting fisheries, recreation, aesthetics, and health.
+
+
+
+:::
+
+:::{style='width: 5%;'}
+
+:::
+
+:::{style='width: 45%;'}
+
+```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
+
+
+
+library(htmltools)
+library(bsplus)
+
+w <- 'https://www.juanrocha.se/'
+bs_carousel(id = 'rs1', use_indicators = TRUE)|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/bluegreen-algae-lake226-1973.jpg'), alt = 'Freshwater eutrophication'),
+    caption = bs_carousel_caption(title = 'Freshwater eutrophication'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/overall_eutrophication_causes.gif'), alt = 'Freshwater eutrophication'),
+    caption = bs_carousel_caption(title = 'Freshwater eutrophication'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/Lake227_1975.jpg'), alt = 'Freshwater eutrophication'),
+    caption = bs_carousel_caption(title = 'Freshwater eutrophication'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/Lake227_1994.jpg'), alt = 'Freshwater eutrophication'),
+    caption = bs_carousel_caption(title = 'Freshwater eutrophication'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/cld-eutrophication.001.jpg'), alt = 'Freshwater eutrophication'),
+    caption = bs_carousel_caption(title = 'Freshwater eutrophication'))
+
+```
+
+:::
+::::
+
+## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
 
@@ -41,7 +95,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -50,145 +104,11 @@ m <- leaflet(cs) |>
 m
 ```
 
-### Summary
+**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
 
-Freshwater eutrophication refers to the excessive growth of aquatic plants or algal blooms, due to high levels of nutrients in freshwater ecosystems such as lakes, reservoirs and rivers. The main driver of freshwater eutrophication is nutrient pollution in the form of phosphorous from agricultural fertilizers, sewage effluent and urban storm water runoff. Beyond a certain threshold of phosphorous accumulation, a recycling mechanism is activated which can keep the system locked in a eutrophic state even when nutrient inputs are substantially reduced. Freshwater eutrophication can substantially impact ecosystem services affecting fisheries, recreation, aesthetics, and health.
+## Analysis {.tabset .tabset-pills}
 
-
-
-### Categorical attributes
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
-#### Impacts
-
-**Ecosystem type**:'
-
-- Freshwater lakes & rivers
-
-
-**Key ecosystem processes**:
-
-- Primary production
-- Nutrient cycling
-
-
-**Biodiversity**:
-
-- Biodiversity
-
-
-**Provisioning services**:
-
-- Freshwater
-- Fisheries
-- Wild animal and plant foods
-
-
-**Regulating services**:
-
-- Water purification
-- Pest & disease regulation
-
-
-**Cultural services**:
-
-- Recreation
-- Aesthetic values
-
-
-**Human well-being**:
-
-- Food and nutrition
-- Health (e.g. toxins
-- disease)
-- Livelihoods and economic activity
-- Cultural
-- Aesthetic and recreational values
-- Social conflict
-
-
-**Links to other regime shifts**:
-
-- Hypoxia
-- Fisheries collapse
-- Bivalves collapse
-- Coral transitions
-
-
-:::
-
-:::{style='width: 50%;'}
-
-#### Drivers
-
-**Key drivers**:
-
-- Vegetation conversion and habitat fragmentation
-- External inputs (e.g. fertilizers
-- pest control
-- irrigation)
-- Species introduction or removal
-- Soil erosion & land degradation
-
-
-**Land use**:
-
-- Urban
-- Large-scale commercial crop cultivation
-- Intensive livestock production (e.g. feedlots
-- dairies)
-- Fisheries
-- Land use impacts are primarily off-site (e.g. dead zones)
-
-
-#### Key attributes
-
-**Spatial scale**:
-
-- Local/landscape (e.g. lake
-- catchment
-- community)
-
-
-**Time scale**:
-
-- Years
-- Decades
-
-
-**Reversibility**:
-
-- Irreversible (on 100 year time scale)
-- Hysteretic (difficult to reverse)
-- Readily reversible
-
-
-**Evidence**:
-
-- Models
-- Paleo-observation
-- Contemporary observations
-- Experiments
-
-
-**Confidence: existence of the regime shift**
-
-- Well established – Wide agreement in the literature that the RS exists
-
-
-**Confidence: mechanisms underlying the regime shift**
-
-- Well established – Wide agreement on the underlying mechanism
-
-
-:::
-
-::::
-
-### Detail information
+### General information
 
 #### Alternative regimes
 
@@ -255,17 +175,29 @@ The main causes of lake eutrophication is excess nutrients inputs, especially ph
 
 
 
-### Regime shift Analysis
+### In-depth analysis
 
 ```{r cld, error = FALSE, message = FALSE, out.width='80%'}
 
+#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+
+library(ggiraph)
+library(htmlwidgets)
 source('tools.R')
 load('assets/clds.Rda')
 
 if (rs$regime_shift_name %in% clds$regime_shift) {
     gg <- rs_net(clds, rs$regime_shift_name) |> 
     plot_net()
-    girafe(ggobj = gg)}
+    # create the html obj: sizing not working
+    girafe(ggobj = gg) |> 
+        girafe_options(
+            opts_tooltip(opacity = 0.7), opts_zoom(min =0.5, max =2),
+        sizingPolicy(defaultWidth='100px', defaultHeight='50px'),
+        opts_hover(css = 'fill:red;stroke:orange;r:5pt;'))
+    }
+
+
 ```
 
 ```{r}
@@ -276,13 +208,126 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
 
-## Citation
+### Categorical summary
 
- Acknowledge this review as:
+::::{style='display: flex;'}
 
-<small> Juan Rocha, Reinette (Oonsie) Biggs, Garry Peterson, Steve Carpenter. Freshwater eutrophication. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-15</small>
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Freshwater lakes & rivers
+
+
+**Key ecosystem processes**:
+
+- Primary production
+- Nutrient cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Freshwater
+- Fisheries
+- Wild animal and plant foods
+
+
+**Regulating services**:
+
+- Water purification
+- Pest & disease regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+
+
+**Human well-being**:
+
+- Food and nutrition or Health (e.g. toxins or disease) or Livelihoods and economic activity or Cultural or Aesthetic and recreational values or Social conflict
+
+
+**Links to other regime shifts**:
+
+- Hypoxia
+- Fisheries collapse
+- Bivalves collapse
+- Coral transitions
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Vegetation conversion and habitat fragmentation or External inputs (e.g. fertilizers or pest control or irrigation) or Species introduction or removal or Soil erosion & land degradation
+
+
+**Land use**:
+
+- Urban or Large-scale commercial crop cultivation or Intensive livestock production (e.g. feedlots or dairies) or Fisheries or Land use impacts are primarily off-site (e.g. dead zones)
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake or catchment or community)
+
+
+**Time scale**:
+
+- Years
+- Decades
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+- Hysteretic (difficult to reverse)
+- Readily reversible
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+- Experiments
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
 
 ### References
+
+::: {#refs}
+
+:::
+### References old [Delete]
 
 <small>
 
@@ -300,3 +345,28 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 </small>
 
+## Citation
+Acknowledge this review as:
+
+<tiny> 
+``` {style='color: gray;'}
+Juan Rocha, Reinette (Oonsie) Biggs, Garry Peterson, Steve Carpenter. Freshwater eutrophication. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-15
+```
+
+</tiny>
+
+BibTeX citation:
+
+<tiny><tiny> 
+``` {style='color: gray;'}
+@misc{
+  author = {Juan Rocha and Reinette (Oonsie) Biggs and Garry PetersonSteve Carpenter},
+  title = {Freshwater eutrophication},
+  url = {www.regimeshifts.org},
+  howpublished = {Regime Shifts Database},
+  publisher = {Stockholm Resilience Centre},
+  institution = {Stockholm University}
+}
+```
+
+</tiny>

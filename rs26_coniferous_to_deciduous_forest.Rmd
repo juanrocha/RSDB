@@ -1,10 +1,10 @@
 ---
 output: 
   html_document:
-    toc: true
+    toc: false
     toc_depth: 3
     toc_float: true
-
+bibliography: "assets/bibliography/rs26.bib"
 params:
   j: 26
 ---
@@ -25,13 +25,53 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
 
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
 # Coniferous to deciduous forest
 
-**Main contributors**: Katja Malmborg, Linda Lindström Lindström, Lara D. Mateos
 
-**Other contributors**: Garry Peterson, Juan Carlos Rocha
+- **Main contributors**: Katja Malmborg, Linda Lindström Lindström, Lara D. Mateos
 
-Last update: 2014-10-21
+- **Other contributors**: Garry Peterson, Juan Carlos Rocha
+
+- Last update: 2014-10-21
+
+The regime shift is the boreal forest, where the coniferous dominated forest is slowly being replaced by deciduous trees due to recent climate warming and changes in the wildfire regime.  Coniferous trees thrive in cold, moist soil conditions, and enhance these conditions by accumulating a deep soil organic layer. The moisture of the soil prevents frequent fires from occurring, but when they do, the soil organic layer is rarely consumed in its entirety due to the high water content (Johnstone et al., 2010). Coniferous trees regenerate well in organic soil, which means that only really severe fires that consume the whole soil organic layer will alter the coniferous-promoting soil conditions (Hollingsworth et al., 2013). Deciduous trees, on the other hand, thrive in nutrient rich, dry and warm soils, which are conditions that they reinforce by keeping the decomposition rate high, making the soil organic layer shallow. Fires tend to be more frequent than in coniferous dominated forests, but not as intense. However, since the soil organic layer is so shallow, it tends to be consumed by the fire, exposing the mineral soil (Johnstone et al., 2010). Deciduous trees have well developed strategies for regenerating in mineral soil, which means that deciduous trees tend to return to these areas after a wildfire (Hollingsworth et al., 2013). A severe fire can get the system to shift from one regime to the other, while changes in climate (i.e. mainly temperature or precipitation) can change the underlying conditions to make each regime less resilient (Johnstone et al., 2010). It has been well studied in interior Alaska (Wolken et al., 2011).  Currently, warmer temperatures are decreasing the relative humidity in the boreal forest in Interior Alaska, which is both causing more frequent and severe fires, as well as altering temperature and moisture conditions in the soil to favour deciduous tree regeneration (Mann et al., 2012).  The productivity of the boreal forest in Interior Alaska is expected to decrease due to drought stress in the new regime (Beck et al., 2011).  The provisioning of wild products such as berries and game is expected to shift as some species and decrease for others, but it is unclear what the net changes will be (Chapin et al., 2008). The boreal forest is likely to become a net source of carbon to the atmosphere (McGuire et al., 2009; Schuur et al., 2009), while the air quality is expected to decrease periodically due to the increase in fire frequency (Chapin et al., 2008). Because the main driver of the regime shift is climate warming, decreasing  emissions of greenhouse gasses into the atmosphere would be the most powerful way to prevent or reverse the regime shift.  Reducing greenhouse gas emissions is a difficult and challenging intervention that requires substantial coordinated global action that seems unlikely to occur in the near future.  Fire suppression could potentially slow down the rate of change in parts of the forest, but fire supression is not feasible in most of the boreal forest.
+
+  
+
+
+
+:::
+
+:::{style='width: 5%;'}
+
+:::
+
+:::{style='width: 45%;'}
+
+```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
+
+
+
+library(htmltools)
+library(bsplus)
+
+w <- 'https://www.juanrocha.se/'
+bs_carousel(id = 'rs26', use_indicators = TRUE)|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/800px-Taiga_Alaska.jpg'), alt = 'Coniferous to deciduous forest'),
+    caption = bs_carousel_caption(title = 'Coniferous to deciduous forest'))
+
+```
+
+:::
+::::
+
+## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
 
@@ -41,7 +81,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -50,143 +90,11 @@ m <- leaflet(cs) |>
 m
 ```
 
-### Summary
+**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
 
-The regime shift is the boreal forest, where the coniferous dominated forest is slowly being replaced by deciduous trees due to recent climate warming and changes in the wildfire regime.  Coniferous trees thrive in cold, moist soil conditions, and enhance these conditions by accumulating a deep soil organic layer. The moisture of the soil prevents frequent fires from occurring, but when they do, the soil organic layer is rarely consumed in its entirety due to the high water content (Johnstone et al., 2010). Coniferous trees regenerate well in organic soil, which means that only really severe fires that consume the whole soil organic layer will alter the coniferous-promoting soil conditions (Hollingsworth et al., 2013). Deciduous trees, on the other hand, thrive in nutrient rich, dry and warm soils, which are conditions that they reinforce by keeping the decomposition rate high, making the soil organic layer shallow. Fires tend to be more frequent than in coniferous dominated forests, but not as intense. However, since the soil organic layer is so shallow, it tends to be consumed by the fire, exposing the mineral soil (Johnstone et al., 2010). Deciduous trees have well developed strategies for regenerating in mineral soil, which means that deciduous trees tend to return to these areas after a wildfire (Hollingsworth et al., 2013). A severe fire can get the system to shift from one regime to the other, while changes in climate (i.e. mainly temperature or precipitation) can change the underlying conditions to make each regime less resilient (Johnstone et al., 2010). It has been well studied in interior Alaska (Wolken et al., 2011).  Currently, warmer temperatures are decreasing the relative humidity in the boreal forest in Interior Alaska, which is both causing more frequent and severe fires, as well as altering temperature and moisture conditions in the soil to favour deciduous tree regeneration (Mann et al., 2012).  The productivity of the boreal forest in Interior Alaska is expected to decrease due to drought stress in the new regime (Beck et al., 2011).  The provisioning of wild products such as berries and game is expected to shift as some species and decrease for others, but it is unclear what the net changes will be (Chapin et al., 2008). The boreal forest is likely to become a net source of carbon to the atmosphere (McGuire et al., 2009; Schuur et al., 2009), while the air quality is expected to decrease periodically due to the increase in fire frequency (Chapin et al., 2008). Because the main driver of the regime shift is climate warming, decreasing  emissions of greenhouse gasses into the atmosphere would be the most powerful way to prevent or reverse the regime shift.  Reducing greenhouse gas emissions is a difficult and challenging intervention that requires substantial coordinated global action that seems unlikely to occur in the near future.  Fire suppression could potentially slow down the rate of change in parts of the forest, but fire supression is not feasible in most of the boreal forest.
+## Analysis {.tabset .tabset-pills}
 
-  
-
-
-
-### Categorical attributes
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
-#### Impacts
-
-**Ecosystem type**:'
-
-- Temperate & boreal forests
-
-
-**Key ecosystem processes**:
-
-- Soil formation
-- Primary production
-- Nutrient cycling
-- Water cycling
-
-
-**Biodiversity**:
-
-- Biodiversity
-
-
-**Provisioning services**:
-
-- Freshwater
-- Wild animal and plant products
-- Timber
-- Woodfuel
-
-
-**Regulating services**:
-
-- Air quality regulation
-- Climate regulation
-- Water purification
-- Regulation of soil erosion
-- Pest & disease regulation
-
-
-**Cultural services**:
-
-- Recreation
-- Aesthetic values
-
-
-**Human well-being**:
-
-- Food and nutrition
-- Health (e.g. toxins
-- disease)
-- Livelihoods and economic activity
-- Security of housing & infrastructure
-- Cultural
-- Aesthetic and recreational values
-
-
-**Links to other regime shifts**:
-
-NA
-
-:::
-
-:::{style='width: 50%;'}
-
-#### Drivers
-
-**Key drivers**:
-
-- Environmental shocks (e.g. fire
-- floods
-- droughts)
-- Global climate change
-
-
-**Land use**:
-
-- Timber production
-- Conservation
-- Tourism
-
-
-#### Key attributes
-
-**Spatial scale**:
-
-- Local/landscape (e.g. lake
-- catchment
-- community)
-- National (country)
-
-
-**Time scale**:
-
-- Decades
-- Centuries
-
-
-**Reversibility**:
-
-- Irreversible (on 100 year time scale)
-- Hysteretic (difficult to reverse)
-
-
-**Evidence**:
-
-- Models
-- Paleo-observation
-- Contemporary observations
-
-
-**Confidence: existence of the regime shift**
-
-- Well established – Wide agreement in the literature that the RS exists
-
-
-**Confidence: mechanisms underlying the regime shift**
-
-- Well established – Wide agreement on the underlying mechanism
-
-
-:::
-
-::::
-
-### Detail information
+### General information
 
 #### Alternative regimes
 
@@ -248,17 +156,29 @@ The primary tactic used for reducing impacts of fire and enhance resilience (i.e
 
 
 
-### Regime shift Analysis
+### In-depth analysis
 
 ```{r cld, error = FALSE, message = FALSE, out.width='80%'}
 
+#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+
+library(ggiraph)
+library(htmlwidgets)
 source('tools.R')
 load('assets/clds.Rda')
 
 if (rs$regime_shift_name %in% clds$regime_shift) {
     gg <- rs_net(clds, rs$regime_shift_name) |> 
     plot_net()
-    girafe(ggobj = gg)}
+    # create the html obj: sizing not working
+    girafe(ggobj = gg) |> 
+        girafe_options(
+            opts_tooltip(opacity = 0.7), opts_zoom(min =0.5, max =2),
+        sizingPolicy(defaultWidth='100px', defaultHeight='50px'),
+        opts_hover(css = 'fill:red;stroke:orange;r:5pt;'))
+    }
+
+
 ```
 
 ```{r}
@@ -269,13 +189,126 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
 
-## Citation
+### Categorical summary
 
- Acknowledge this review as:
+::::{style='display: flex;'}
 
-<small> Katja Malmborg, Linda Lindström Lindström, Lara D. Mateos, Garry Peterson, Juan Carlos Rocha. Coniferous to deciduous forest. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2014-10-21</small>
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Temperate & boreal forests
+
+
+**Key ecosystem processes**:
+
+- Soil formation
+- Primary production
+- Nutrient cycling
+- Water cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Freshwater
+- Wild animal and plant products
+- Timber
+- Woodfuel
+
+
+**Regulating services**:
+
+- Air quality regulation
+- Climate regulation
+- Water purification
+- Regulation of soil erosion
+- Pest & disease regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+
+
+**Human well-being**:
+
+- Food and nutrition or Health (e.g. toxins or disease) or Livelihoods and economic activity or Security of housing & infrastructure or Cultural or Aesthetic and recreational values
+
+
+**Links to other regime shifts**:
+
+NA
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Environmental shocks (e.g. fire or floods or droughts) or Global climate change
+
+
+**Land use**:
+
+- Timber production or Conservation or Tourism
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake or catchment or community) or National (country)
+
+
+**Time scale**:
+
+- Decades
+- Centuries
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+- Hysteretic (difficult to reverse)
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
 
 ### References
+
+::: {#refs}
+
+:::
+### References old [Delete]
 
 <small>
 
@@ -303,3 +336,28 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 </small>
 
+## Citation
+Acknowledge this review as:
+
+<tiny> 
+``` {style='color: gray;'}
+Katja Malmborg, Linda Lindström Lindström, Lara D. Mateos, Garry Peterson, Juan Carlos Rocha. Coniferous to deciduous forest. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2014-10-21
+```
+
+</tiny>
+
+BibTeX citation:
+
+<tiny><tiny> 
+``` {style='color: gray;'}
+@misc{
+  author = {Katja Malmborg and Linda Lindström Lindström and Lara D. MateosGarry Peterson and Juan Carlos Rocha},
+  title = {Coniferous to deciduous forest},
+  url = {www.regimeshifts.org},
+  howpublished = {Regime Shifts Database},
+  publisher = {Stockholm Resilience Centre},
+  institution = {Stockholm University}
+}
+```
+
+</tiny>

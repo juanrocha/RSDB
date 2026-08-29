@@ -1,10 +1,10 @@
 ---
 output: 
   html_document:
-    toc: true
+    toc: false
     toc_depth: 3
     toc_float: true
-
+bibliography: "assets/bibliography/rs9.bib"
 params:
   j: 9
 ---
@@ -25,13 +25,55 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
 
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
 # Kelp transitions
 
-**Main contributors**: Juan Carlos Rocha
 
-**Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
+- **Main contributors**: Juan Carlos Rocha
 
-Last update: 2011-02-28
+- **Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
+
+- Last update: 2011-02-28
+
+Kelp forests are marine coastal ecosystems located in shallow areas where large macroalgae ecologically engineer the environment to produce a coastal marine environmental substantially different from the same are without kelp.  Kelp forests can undergo a regime shift to turf-forming algae or urchin barrens. These shift leads to loss of habitat and ecological complexity. Shifts to turf algae are related to nutrient input, while shifts to urchin barrens are related to trophic-level changes. The consequent loss of habitat complexity may affect commercially important fisheries. Managerial options include restoring biodiversity and installing wastewater treatment plants in coastal zones.
+
+
+
+:::
+
+:::{style='width: 5%;'}
+
+:::
+
+:::{style='width: 45%;'}
+
+```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
+
+
+
+library(htmltools)
+library(bsplus)
+
+w <- 'https://www.juanrocha.se/'
+bs_carousel(id = 'rs9', use_indicators = TRUE)|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/379px-Kelp-forest-Monterey.jpg'), alt = 'Kelp transitions'),
+    caption = bs_carousel_caption(title = 'Kelp transitions'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/Sea_urchins_DSC005931.JPG'), alt = 'Kelp transitions'),
+    caption = bs_carousel_caption(title = 'Kelp transitions'))
+
+```
+
+:::
+::::
+
+## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
 
@@ -41,7 +83,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -50,135 +92,11 @@ m <- leaflet(cs) |>
 m
 ```
 
-### Summary
+**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
 
-Kelp forests are marine coastal ecosystems located in shallow areas where large macroalgae ecologically engineer the environment to produce a coastal marine environmental substantially different from the same are without kelp.  Kelp forests can undergo a regime shift to turf-forming algae or urchin barrens. These shift leads to loss of habitat and ecological complexity. Shifts to turf algae are related to nutrient input, while shifts to urchin barrens are related to trophic-level changes. The consequent loss of habitat complexity may affect commercially important fisheries. Managerial options include restoring biodiversity and installing wastewater treatment plants in coastal zones.
+## Analysis {.tabset .tabset-pills}
 
-
-
-### Categorical attributes
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
-#### Impacts
-
-**Ecosystem type**:'
-
-- Marine & coastal
-
-
-**Key ecosystem processes**:
-
-- Primary production
-
-
-**Biodiversity**:
-
-- Biodiversity
-
-
-**Provisioning services**:
-
-- Fisheries
-- Wild animal and plant products
-- Other crops (eg cotton)
-
-
-**Regulating services**:
-
-- Natural hazard regulation
-
-
-**Cultural services**:
-
-- Recreation
-- Aesthetic values
-
-
-**Human well-being**:
-
-- Food and nutrition
-- Livelihoods and economic activity
-- Cultural
-- Aesthetic and recreational values
-
-
-**Links to other regime shifts**:
-
-- Freshwater eutrophication
-- Fisheries collapse
-- Hypoxia
-
-
-:::
-
-:::{style='width: 50%;'}
-
-#### Drivers
-
-**Key drivers**:
-
-- Harvest and resource consumption
-- External inputs (e.g. fertilizers
-- pest control
-- irrigation)
-- Global climate change
-
-
-**Land use**:
-
-- Large-scale commercial crop cultivation
-- Fisheries
-- Conservation
-- Land use impacts are primarily off-site (e.g. dead zones)
-
-
-#### Key attributes
-
-**Spatial scale**:
-
-- Local/landscape (e.g. lake
-- catchment
-- community)
-
-
-**Time scale**:
-
-- Months
-- Years
-
-
-**Reversibility**:
-
-- Hysteretic (difficult to reverse)
-- Readily reversible
-
-
-**Evidence**:
-
-- Models
-- Paleo-observation
-- Contemporary observations
-- Experiments
-
-
-**Confidence: existence of the regime shift**
-
-- Well established – Wide agreement in the literature that the RS exists
-
-
-**Confidence: mechanisms underlying the regime shift**
-
-- Well established – Wide agreement on the underlying mechanism
-
-
-:::
-
-::::
-
-### Detail information
+### General information
 
 #### Alternative regimes
 
@@ -237,17 +155,29 @@ This regime shift is driven by two key direct drivers: reducing populations func
 
 
 
-### Regime shift Analysis
+### In-depth analysis
 
 ```{r cld, error = FALSE, message = FALSE, out.width='80%'}
 
+#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+
+library(ggiraph)
+library(htmlwidgets)
 source('tools.R')
 load('assets/clds.Rda')
 
 if (rs$regime_shift_name %in% clds$regime_shift) {
     gg <- rs_net(clds, rs$regime_shift_name) |> 
     plot_net()
-    girafe(ggobj = gg)}
+    # create the html obj: sizing not working
+    girafe(ggobj = gg) |> 
+        girafe_options(
+            opts_tooltip(opacity = 0.7), opts_zoom(min =0.5, max =2),
+        sizingPolicy(defaultWidth='100px', defaultHeight='50px'),
+        opts_hover(css = 'fill:red;stroke:orange;r:5pt;'))
+    }
+
+
 ```
 
 ```{r}
@@ -258,13 +188,122 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
 
-## Citation
+### Categorical summary
 
- Acknowledge this review as:
+::::{style='display: flex;'}
 
-<small> Juan Carlos Rocha, Reinette (Oonsie) Biggs, Garry Peterson. Kelp transitions. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-28</small>
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Marine & coastal
+
+
+**Key ecosystem processes**:
+
+- Primary production
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Fisheries
+- Wild animal and plant products
+- Other crops (eg cotton)
+
+
+**Regulating services**:
+
+- Natural hazard regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Aesthetic values
+
+
+**Human well-being**:
+
+- Food and nutrition or Livelihoods and economic activity or Cultural or Aesthetic and recreational values
+
+
+**Links to other regime shifts**:
+
+- Freshwater eutrophication
+- Fisheries collapse
+- Hypoxia
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Harvest and resource consumption or External inputs (e.g. fertilizers or pest control or irrigation) or Global climate change
+
+
+**Land use**:
+
+- Large-scale commercial crop cultivation or Fisheries or Conservation or Land use impacts are primarily off-site (e.g. dead zones)
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Local/landscape (e.g. lake or catchment or community)
+
+
+**Time scale**:
+
+- Months
+- Years
+
+
+**Reversibility**:
+
+- Hysteretic (difficult to reverse)
+- Readily reversible
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+- Experiments
+
+
+**Confidence: existence of the regime shift**
+
+- Well established – Wide agreement in the literature that the RS exists
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Well established – Wide agreement on the underlying mechanism
+
+
+:::
+
+::::
 
 ### References
+
+::: {#refs}
+
+:::
+### References old [Delete]
 
 <small>
 
@@ -283,3 +322,28 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 </small>
 
+## Citation
+Acknowledge this review as:
+
+<tiny> 
+``` {style='color: gray;'}
+Juan Carlos Rocha, Reinette (Oonsie) Biggs, Garry Peterson. Kelp transitions. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-28
+```
+
+</tiny>
+
+BibTeX citation:
+
+<tiny><tiny> 
+``` {style='color: gray;'}
+@misc{
+  author = {Juan Carlos RochaReinette (Oonsie) Biggs and Garry Peterson},
+  title = {Kelp transitions},
+  url = {www.regimeshifts.org},
+  howpublished = {Regime Shifts Database},
+  publisher = {Stockholm Resilience Centre},
+  institution = {Stockholm University}
+}
+```
+
+</tiny>

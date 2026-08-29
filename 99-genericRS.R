@@ -14,8 +14,14 @@ library(fs)
 rs_dat <- read_csv("assets/generic_types_RSDB_new.csv") |> 
     janitor::clean_names()
 
-img <- read_csv("assets/rs_images.csv")
+pblm <- c("key_attributes_typical_spatial_scale", "drivers_key_direct_drivers", "drivers_land_use",
+          "impacts_human_well_being")
 
+rs_dat <- rs_dat |> 
+    mutate(across(.cols = all_of(pblm), 
+                  \(x) str_replace_all(x, pattern = ", ", replacement = " or "))) |> 
+    mutate(impacts_ecosystem_type = str_remove(
+        impacts_ecosystem_type, pattern = "\\(below ~500mm rainfall\\/year\\)"))
 
 
 # correct Monsoon, not moonson
@@ -29,6 +35,22 @@ rs_dat <- rs_dat |>
 
 ## change name so the rest of the scipt works:
 dat <- rs_dat
+
+## function to produce carousel code
+img <- read_csv2("assets/rs_images.csv")
+
+txt_img <- function(i, dat, img){
+    img <- img |> filter(type == dat$regime_shift_name[i])
+
+    glue::glue_data(img, " |>
+    bs_append(
+        content = bs_carousel_image(
+            src = paste0(w, '{file}'), alt = '{type}'),
+        caption = bs_carousel_caption(title = '{type}'))")
+
+}
+## TODO: Fix attribution later, it's not consistently reported, so I need to edit img manually.
+txt_img(3, dat,img)
 
 rs_txt <- function(i, dat, img){
     txt <- c(
@@ -68,6 +90,9 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 "- **Main contributors**: ", dat$main_contributors[i], "\n\n",
 "- **Other contributors**: ", dat$other_contributors[i], "\n\n",
 "- Last update: ", as.character(dat$date[i]) , "\n\n",
+# summary
+dat$summary[i], "\n\n",
+
 
 ":::\n\n:::{style='width: 5%;'}\n\n",
 ":::\n\n:::{style='width: 45%;'}\n\n",
@@ -78,14 +103,14 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 library(htmltools)
 library(bsplus)
 
-w <- 'https://www.juanrocha.se/img/'
-bs_carousel(id = rs",i, ", use_indicators = TRUE) |>
-",
+w <- 'https://www.juanrocha.se/'
+bs_carousel(id = 'rs",i, "', use_indicators = TRUE)", txt_img(i, dat,img),
+"\n\n",
 
-#### Voy aqui ### creando una funcion que repita el bs_apend para cada foto en el carrusel
+"```\n\n",
+":::\n::::\n\n",
 
-
-
+"## Evidence\n\n",
 
 
 ## Map
@@ -96,7 +121,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -104,12 +129,58 @@ m <- leaflet(cs) |>
     setView(5,10, zoom = 2) 
 m
 ```\n\n",
-# summary
-"### Summary\n\n",
-dat$summary[i], "\n\n",
+"**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.\n\n",
 
-# categorical attributes
-"### Categorical attributes\n\n",
+"## Analysis {.tabset .tabset-pills}\n\n",
+
+"### General information\n\n",
+"#### Alternative regimes\n\n",
+dat$alternate_regimes[i] |> str_remove_all(pattern = "\\<br \\/\\>"), "\n\n" ,
+"#### Drivers and causes of the regime shift\n\n",
+dat$drivers_and_causes_of_the_regime_shift[i] |> 
+    str_remove_all(pattern = "\\<p\\>\\&nbsp\\;\\<\\/p\\>"), "\n\n",
+"#### Impacts on ecosystem services and human well-being\n\n", 
+
+dat$impacts_on_ecosystem_services_and_human_well_being[i], "\n\n",
+"#### Management options\n\n",
+dat$management_options[i], "\n\n",
+
+"### In-depth analysis\n\n",
+
+
+## cld
+"```{r cld, error = FALSE, message = FALSE, out.width='80%'}\n
+#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+
+library(ggiraph)
+library(htmlwidgets)
+source('tools.R')
+load('assets/clds.Rda')
+
+if (rs$regime_shift_name %in% clds$regime_shift) {
+    gg <- rs_net(clds, rs$regime_shift_name) |> 
+    plot_net()
+    # create the html obj: sizing not working
+    girafe(ggobj = gg) |> 
+        girafe_options(
+            opts_tooltip(opacity = 0.7), opts_zoom(min =0.5, max =2),
+        sizingPolicy(defaultWidth='100px', defaultHeight='50px'),
+        opts_hover(css = 'fill:red;stroke:orange;r:5pt;'))
+    }
+
+
+```\n\n",
+
+# rs analysis
+"```{r}\n
+load('assets/rs_analysis_text.Rda')
+
+if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+```\n\n",
+
+
+"### Categorical summary\n\n",
 
 "::::{style='display: flex;'}\n\n",
 ":::{style='width: 50%;'}\n\n",
@@ -168,50 +239,14 @@ dat$key_attributes_confidence_mechanism_underlying_rs[i]  %>% str_c("- ", . , "\
 
 # "{.tabset}\n--------------------------------------------------\n\n",
 
-"### Detail information\n\n",
-"#### Alternative regimes\n\n",
-dat$alternate_regimes[i] |> str_remove_all(pattern = "\\<br \\/\\>"), "\n\n" ,
-"#### Drivers and causes of the regime shift\n\n",
-dat$drivers_and_causes_of_the_regime_shift[i] |> 
-    str_remove_all(pattern = "\\<p\\>\\&nbsp\\;\\<\\/p\\>"), "\n\n",
-"#### Impacts on ecosystem services and human well-being\n\n", 
-
-dat$impacts_on_ecosystem_services_and_human_well_being[i], "\n\n",
-"#### Management options\n\n",
-dat$management_options[i], "\n\n",
-
-"### Regime shift Analysis\n\n",
-
-## cld
-"```{r cld, error = FALSE, message = FALSE, out.width='80%'}\n
-source('tools.R')
-load('assets/clds.Rda')
-
-if (rs$regime_shift_name %in% clds$regime_shift) {
-    gg <- rs_net(clds, rs$regime_shift_name) |> 
-    plot_net()
-    girafe(ggobj = gg)}
-```\n\n",
-
-# rs analysis
-"```{r}\n
-load('assets/rs_analysis_text.Rda')
-
-if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
-    rs_analysis[[rs$regime_shift_name]] |> writeLines()
-```\n\n",
 
 
-"## Citation\n\n ",
-
-"Acknowledge this review as:\n\n",
-    
-    
-"<small> ", 
-str_c(dat$main_contributors[i], ", ",  dat$other_contributors[i], ". ", dat$regime_shift_name[i], '. In: Regime Shift Database, www.regimeshifts.org. Last revised: ', dat$date[i]), "</small>", "\n\n", 
+"### References\n\n",
+"::: {#refs}\n
+:::\n",
 
 
-"### References\n\n", 
+"### References old [Delete]\n\n", 
 
 "<small>\n\n", 
 dat$references[i] |> 
@@ -219,14 +254,37 @@ dat$references[i] |>
     map(~str_c("- ", ., "\n")) |> 
     unlist() |> 
     str_remove(pattern = "- \\\n"),
-"\n", "</small>", "\n\n"
-    )
+"\n", "</small>", "\n\n",
+
+"## Citation\n",
+
+"Acknowledge this review as:\n\n",
+    
+    
+"<tiny> \n``` {style='color: gray;'}\n", 
+str_c(dat$main_contributors[i], ", ",  dat$other_contributors[i], ". ", dat$regime_shift_name[i], '. In: Regime Shift Database, www.regimeshifts.org. Last revised: ', dat$date[i]),"\n```\n\n",
+
+"</tiny>", "\n\n", "BibTeX citation:\n\n<tiny>",
+"<tiny> \n``` {style='color: gray;'}\n", 
+"@misc{\n",
+"  author = {", 
+str_c(dat$main_contributors[i] |> str_replace_all(", ", " and "),
+    dat$other_contributors[i] |> str_replace_all(", ", " and ")),"},\n",
+"  title = {", dat$regime_shift_name[i], "},\n",
+"  url = {www.regimeshifts.org},\n",
+"  howpublished = {Regime Shifts Database},\n",
+"  publisher = {Stockholm Resilience Centre},\n",
+"  institution = {Stockholm University}\n",
+"}\n```\n\n",
+"</tiny>"
+)
+
     return(txt)
 }
 
 
 # test
-txt2 <- rs_txt(1, dat)
+txt2 <- rs_txt(1, dat, img)
 
 ## Create suitable file names
 dat <- dat |> 
@@ -248,15 +306,15 @@ dat$filename
 ## Create one markdown file for every regime shift
 
 tic()
-for (i in seq_along(dat$id)){
-    txt <- rs_txt(i, dat)
+for (i in seq_along(dat)){
+    txt <- rs_txt(i, dat, img)
     capture.output(
         cat(txt, sep = ""),
         file = dat$filename[i],
         append = FALSE
     )
 }
-toc() #27s all case studies!
+toc() #0.5s all RS!
 
 
 

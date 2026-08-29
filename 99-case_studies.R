@@ -8,8 +8,8 @@ load("assets/cases_db.Rda")
 ## For cleaning old versions
 fls <- dir_ls()
 
-fls |> str_subset(pattern = "^cs") |> 
-    file_delete()
+# fls |> str_subset(pattern = "^cs") |> 
+#     file_delete()
 
 
 
@@ -22,7 +22,17 @@ i = 2
 # remove: () in deserts.
 dat <- dat |> 
     mutate(
-        ecosystem_type = str_remove(ecosystem_type, pattern = "\\(below ~500mm rainfall\\/year\\)")) #|> pull(ecosystem_type) |> unique()
+        ecosystem_type = str_remove(ecosystem_type, pattern = "\\(below ~500mm rainfall\\/year\\)")) 
+
+pblm <- c("spatial_scale", "key_direct_drivers", "land_uses",
+          "impacts_human_well_being")
+
+dat <- dat |> 
+    mutate(across(.cols = all_of(pblm), 
+                  \(x) str_replace_all(x, pattern = ", ", replacement = " or "))) |> 
+    mutate(ecosystem_type = str_remove(
+        ecosystem_type, pattern = "\\(below ~500mm rainfall\\/year\\)"))
+
 
 # template text for case studies without regime shift analysis
 cs_txt <- function(i, dat){
@@ -49,7 +59,7 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ## Map
 "```{r map, out.width='100%', out.height='300px', results = 'markup'}\n
 m <- leaflet(cs ) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |>
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addMarkers(cs$long, cs$lat) |> 
     setView(cs$long, cs$lat, zoom = 4)
 m
@@ -86,7 +96,7 @@ dat$summary[i], "\n\n",
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 "**Key ecosystem processes**:\n\n",
-  dat$impacts_on_key_ecosystem_processes[i] |> 
+  dat$impacts_ecosystem_processes[i] |> 
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 # "**Biodiversity**:\n\n",
@@ -94,19 +104,19 @@ dat$summary[i], "\n\n",
 #       str_split(pattern = ", ") |> 
 #       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 "**Provisioning services**:\n\n",
-  dat$impacts_on_provisioning_services[i] |>
+  dat$impacts_provisioning_services[i] |>
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 "**Regulating services**:\n\n",
-  dat$impacts_on_regulating_services[i] |> 
+  dat$impacts_regulating_services[i] |> 
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist() , "\n\n",
 "**Cultural services**:\n\n",
-  dat$impacts_on_cultural_services[i] |> 
+  dat$impacts_cultural_services[i] |> 
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist(), "\n\n",
 "**Human well-being**:\n\n",
-  dat$impacts_on_human_well_being[i] |> 
+  dat$impacts_human_well_being[i] |> 
       str_split(pattern = ", ") |> 
       map(~str_c("- ", ., "\n")) |> unlist() , "\n\n",
 ":::\n\n:::{style='width: 50%;'}\n\n",
@@ -184,8 +194,7 @@ dat <- dat |>
     ) 
 
 ## Create one markdown file for every case study
-
-i = 1:length(dat$id)
+#i = 1:length(dat$id)
 
 tic()
 for (i in seq_along(dat$id)){

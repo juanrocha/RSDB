@@ -1,10 +1,10 @@
 ---
 output: 
   html_document:
-    toc: true
+    toc: false
     toc_depth: 3
     toc_float: true
-
+bibliography: "assets/bibliography/rs19.bib"
 params:
   j: 19
 ---
@@ -25,13 +25,75 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
 
+::::{style='display: flex;'}
+
+:::{style='width: 50%;'}
+
 # West Antarctic ice sheet collapse
 
-**Main contributors**: Johanna Yletyinen
 
-**Other contributors**: Garry Peterson
+- **Main contributors**: Johanna Yletyinen
 
-Last update: 2013-09-09
+- **Other contributors**: Garry Peterson
+
+- Last update: 2013-09-09
+
+Indication exists for a possible regime shift of collapsed West Antarctic Ice Sheet (WAIS) due to the warming climate. As the atmosphere and ocean warm as an effect of the global warming, ice sheets are predicted to shrink in size, resulting in raised sea level. The WAIS is a marine ice sheet: it is surrounded by floating ice shelves and the main part of the sheet is below sea-level (Oppenheimer 1998). It is considered to be capable of past and future collapses bringing about several meters sea level rise (Mercer 1978; Oppenheimer & Alley 2004). The two WAIS regimes consist of the intact ice sheet and disintegrated WAIS. The global warming-induced future WAIS collapse could cause a sea level rise of approximately 3-5 meters with significant societal and economic impacts. Marine fauna that is adapted to sea ice dynamics would be directly impacted through habitat changes, food web interaction alterations and shifts in marine isotherms (Rogers et al. 2012; Clarke et al. 2007). Many uncertainties remain about the mechanisms of the WAIS system, drivers of the observed change and future scenarios. It is suggested that the warming of the oceanic deep water currently causes significant basal melting and thinning of the ice sheet. A basin-scale ice model study, published in 2014, provides strong evidence that the collapse has already begun (Joughin, Smith & Medley, 2014.)
+
+
+
+:::
+
+:::{style='width: 5%;'}
+
+:::
+
+:::{style='width: 45%;'}
+
+```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
+
+
+
+library(htmltools)
+library(bsplus)
+
+w <- 'https://www.juanrocha.se/'
+bs_carousel(id = 'rs19', use_indicators = TRUE)|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/6054677382_ba0daefc3a_b.jpg'), alt = 'West Antarctic ice sheet collapse'),
+    caption = bs_carousel_caption(title = 'West Antarctic ice sheet collapse'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/5914271720_769f0cef11_b.jpg'), alt = 'West Antarctic ice sheet collapse'),
+    caption = bs_carousel_caption(title = 'West Antarctic ice sheet collapse'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/800px-Adelie_penguin_on_an_iceberg_near_the_Antarctic_Peninsula-1.jpg'), alt = 'West Antarctic ice sheet collapse'),
+    caption = bs_carousel_caption(title = 'West Antarctic ice sheet collapse'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/Screen_Shot_2013-09-13_at_19.03.10.png'), alt = 'West Antarctic ice sheet collapse'),
+    caption = bs_carousel_caption(title = 'West Antarctic ice sheet collapse'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/Screen_Shot_2013-09-13_at_19.07.57.png'), alt = 'West Antarctic ice sheet collapse'),
+    caption = bs_carousel_caption(title = 'West Antarctic ice sheet collapse'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/600px-Antarctica.svg.png'), alt = 'West Antarctic ice sheet collapse'),
+    caption = bs_carousel_caption(title = 'West Antarctic ice sheet collapse'))|>
+bs_append(
+    content = bs_carousel_image(
+        src = paste0(w, 'img/5917162769_f5dd98c2f5_b.jpg'), alt = 'West Antarctic ice sheet collapse'),
+    caption = bs_carousel_caption(title = 'West Antarctic ice sheet collapse'))
+
+```
+
+:::
+::::
+
+## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
 
@@ -41,7 +103,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png') |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -50,121 +112,11 @@ m <- leaflet(cs) |>
 m
 ```
 
-### Summary
+**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
 
-Indication exists for a possible regime shift of collapsed West Antarctic Ice Sheet (WAIS) due to the warming climate. As the atmosphere and ocean warm as an effect of the global warming, ice sheets are predicted to shrink in size, resulting in raised sea level. The WAIS is a marine ice sheet: it is surrounded by floating ice shelves and the main part of the sheet is below sea-level (Oppenheimer 1998). It is considered to be capable of past and future collapses bringing about several meters sea level rise (Mercer 1978; Oppenheimer & Alley 2004). The two WAIS regimes consist of the intact ice sheet and disintegrated WAIS. The global warming-induced future WAIS collapse could cause a sea level rise of approximately 3-5 meters with significant societal and economic impacts. Marine fauna that is adapted to sea ice dynamics would be directly impacted through habitat changes, food web interaction alterations and shifts in marine isotherms (Rogers et al. 2012; Clarke et al. 2007). Many uncertainties remain about the mechanisms of the WAIS system, drivers of the observed change and future scenarios. It is suggested that the warming of the oceanic deep water currently causes significant basal melting and thinning of the ice sheet. A basin-scale ice model study, published in 2014, provides strong evidence that the collapse has already begun (Joughin, Smith & Medley, 2014.)
+## Analysis {.tabset .tabset-pills}
 
-
-
-### Categorical attributes
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
-#### Impacts
-
-**Ecosystem type**:'
-
-- Polar
-
-
-**Key ecosystem processes**:
-
-- Water cycling
-
-
-**Biodiversity**:
-
-- Biodiversity
-
-
-**Provisioning services**:
-
-- Fisheries
-
-
-**Regulating services**:
-
-- Climate regulation
-
-
-**Cultural services**:
-
-- Recreation
-- Knowledge and educational values
-
-
-**Human well-being**:
-
-- Livelihoods and economic activity
-- Security of housing & infrastructure
-- Social conflict
-
-
-**Links to other regime shifts**:
-
-- Greenland ice sheet collapse
-
-
-:::
-
-:::{style='width: 50%;'}
-
-#### Drivers
-
-**Key drivers**:
-
-- Global climate change
-
-
-**Land use**:
-
-- Conservation
-- Tourism
-- Land use impacts are primarily off-site (e.g. dead zones)
-
-
-#### Key attributes
-
-**Spatial scale**:
-
-- Sub-continental (e.g. southern Africa
-- Amazon basin)
-
-
-**Time scale**:
-
-- Centuries
-
-
-**Reversibility**:
-
-- Irreversible (on 100 year time scale)
-
-
-**Evidence**:
-
-- Models
-- Paleo-observation
-- Contemporary observations
-
-
-**Confidence: existence of the regime shift**
-
-- Speculative – Regime shift has been proposed, but little evidence as yet
-
-
-**Confidence: mechanisms underlying the regime shift**
-
-- Speculative – Mechanisms have been proposed, but little evidence as yet
-
-
-:::
-
-::::
-
-### Detail information
+### General information
 
 #### Alternative regimes
 
@@ -208,17 +160,29 @@ Options for preventing regime shift
 
 
 
-### Regime shift Analysis
+### In-depth analysis
 
 ```{r cld, error = FALSE, message = FALSE, out.width='80%'}
 
+#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+
+library(ggiraph)
+library(htmlwidgets)
 source('tools.R')
 load('assets/clds.Rda')
 
 if (rs$regime_shift_name %in% clds$regime_shift) {
     gg <- rs_net(clds, rs$regime_shift_name) |> 
     plot_net()
-    girafe(ggobj = gg)}
+    # create the html obj: sizing not working
+    girafe(ggobj = gg) |> 
+        girafe_options(
+            opts_tooltip(opacity = 0.7), opts_zoom(min =0.5, max =2),
+        sizingPolicy(defaultWidth='100px', defaultHeight='50px'),
+        opts_hover(css = 'fill:red;stroke:orange;r:5pt;'))
+    }
+
+
 ```
 
 ```{r}
@@ -229,13 +193,115 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
 
-## Citation
+### Categorical summary
 
- Acknowledge this review as:
+::::{style='display: flex;'}
 
-<small> Johanna Yletyinen, Garry Peterson. West Antarctic ice sheet collapse. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2013-09-09</small>
+:::{style='width: 50%;'}
+
+#### Impacts
+
+**Ecosystem type**:'
+
+- Polar
+
+
+**Key ecosystem processes**:
+
+- Water cycling
+
+
+**Biodiversity**:
+
+- Biodiversity
+
+
+**Provisioning services**:
+
+- Fisheries
+
+
+**Regulating services**:
+
+- Climate regulation
+
+
+**Cultural services**:
+
+- Recreation
+- Knowledge and educational values
+
+
+**Human well-being**:
+
+- Livelihoods and economic activity or Security of housing & infrastructure or Social conflict
+
+
+**Links to other regime shifts**:
+
+- Greenland ice sheet collapse
+
+
+:::
+
+:::{style='width: 50%;'}
+
+#### Drivers
+
+**Key drivers**:
+
+- Global climate change
+
+
+**Land use**:
+
+- Conservation or Tourism or Land use impacts are primarily off-site (e.g. dead zones)
+
+
+#### Key attributes
+
+**Spatial scale**:
+
+- Sub-continental (e.g. southern Africa or Amazon basin)
+
+
+**Time scale**:
+
+- Centuries
+
+
+**Reversibility**:
+
+- Irreversible (on 100 year time scale)
+
+
+**Evidence**:
+
+- Models
+- Paleo-observation
+- Contemporary observations
+
+
+**Confidence: existence of the regime shift**
+
+- Speculative – Regime shift has been proposed, but little evidence as yet
+
+
+**Confidence: mechanisms underlying the regime shift**
+
+- Speculative – Mechanisms have been proposed, but little evidence as yet
+
+
+:::
+
+::::
 
 ### References
+
+::: {#refs}
+
+:::
+### References old [Delete]
 
 <small>
 
@@ -308,3 +374,28 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 </small>
 
+## Citation
+Acknowledge this review as:
+
+<tiny> 
+``` {style='color: gray;'}
+Johanna Yletyinen, Garry Peterson. West Antarctic ice sheet collapse. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2013-09-09
+```
+
+</tiny>
+
+BibTeX citation:
+
+<tiny><tiny> 
+``` {style='color: gray;'}
+@misc{
+  author = {Johanna YletyinenGarry Peterson},
+  title = {West Antarctic ice sheet collapse},
+  url = {www.regimeshifts.org},
+  howpublished = {Regime Shifts Database},
+  publisher = {Stockholm Resilience Centre},
+  institution = {Stockholm University}
+}
+```
+
+</tiny>
