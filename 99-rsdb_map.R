@@ -199,23 +199,6 @@ ggsave(
     bg = "white", dpi = 500
 )
 
-### Simple version for prentations (ERC)
-ggplot(map_data("world"), aes(x = long, y = lat)) +
-    geom_polygon(aes(group = group), color = "#f9f9f9",
-                 fill = "grey25", linewidth = 0.05) +
-    #coord_map(projection = "mercator" ) #
-    coord_quickmap() +
-    geom_point(
-        data = dat |> select(type , long, lat ), 
-        aes(x = long, y = lat), color = "orange",
-        alpha = 0.4, size = 0.5, show.legend = FALSE) +
-    theme_void() + theme(panel.background = element_rect(fill = "black")) 
-
-ggsave(
-    file = "rsdb_map_260828_dark.png", device = "png", width = 12, height = 7,
-    bg = "black", dpi = 500
-)
-
 # dat |> 
 #     ggplot(aes(threshold_variable, threshold_value)) +
 #     geom_point(aes(color = type)) +
