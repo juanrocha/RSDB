@@ -4,7 +4,7 @@ title: "About the Regime Shifts Database"
 
 ```{r echo = FALSE, warning=FALSE, message=FALSE}
 library(tidyverse, quietly = TRUE)
-rs_dat <- read_csv("assets/generic_types_RSDB_new.csv")
+rs_dat <- read_csv2("assets/generic_types_RSDB_new.csv")
 load("assets/cases_db.Rda")
 
 

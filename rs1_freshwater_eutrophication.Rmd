@@ -9,14 +9,13 @@ params:
   j: 1
 ---
 
-
 ```{r include = FALSE}
 library(tidyverse)
 library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -24,32 +23,26 @@ rs <- dat |> filter(id== x)
 knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+:::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 # Freshwater eutrophication
 
+-   **Main contributors**: Juan Rocha, Reinette (Oonsie) Biggs, Garry Peterson
 
-- **Main contributors**: Juan Rocha, Reinette (Oonsie) Biggs, Garry Peterson
+-   **Other contributors**: Steve Carpenter
 
-- **Other contributors**: Steve Carpenter
+-   Last update: 2011-02-15
 
-- Last update: 2011-02-15
-
-Freshwater eutrophication refers to the excessive growth of aquatic plants or algal blooms, due to high levels of nutrients in freshwater ecosystems such as lakes, reservoirs and rivers. The main driver of freshwater eutrophication is nutrient pollution in the form of phosphorous from agricultural fertilizers, sewage effluent and urban storm water runoff. Beyond a certain threshold of phosphorous accumulation, a recycling mechanism is activated which can keep the system locked in a eutrophic state even when nutrient inputs are substantially reduced. Freshwater eutrophication can substantially impact ecosystem services affecting fisheries, recreation, aesthetics, and health.
-
-
-
+Freshwater eutrophication refers to the excessive growth of aquatic plants or algal blooms, due to high levels of nutrients in freshwater ecosystems such as lakes, reservoirs and rivers.
+The main driver of freshwater eutrophication is nutrient pollution in the form of phosphorous from agricultural fertilizers, sewage effluent and urban storm water runoff.
+Beyond a certain threshold of phosphorous accumulation, a recycling mechanism is activated which can keep the system locked in a eutrophic state even when nutrient inputs are substantially reduced.
+Freshwater eutrophication can substantially impact ecosystem services affecting fisheries, recreation, aesthetics, and health.
 :::
 
-:::{style='width: 5%;'}
-
+::: {style="width: 5%;"}
 :::
 
-:::{style='width: 45%;'}
-
+::: {style="width: 45%;"}
 ```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
 
 
@@ -81,21 +74,17 @@ bs_append(
     caption = bs_carousel_caption(title = 'Freshwater eutrophication'))
 
 ```
-
 :::
-::::
+::::::
 
 ## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
-
-
-
 cs <- cases |> 
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -104,7 +93,9 @@ m <- leaflet(cs) |>
 m
 ```
 
-**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
+**Fig 1 \| Empirical evidence.** The database currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world.
+Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift.
+You can learn more from each case by hovering and clicking on the case of interest.
 
 ## Analysis {.tabset .tabset-pills}
 
@@ -112,68 +103,113 @@ m
 
 #### Alternative regimes
 
-The shift from oligotrophic to eutrophic conditions occurs when a body of water – a lake, river or reservoir – accumulates excessive nutrients. This process can happen naturally over several centuries as a lake ages and accumulates sediments and nutrients from the surrounding landscape. Alternatively, human activities, especially the use of fertilizers, causes freshwater eutrophication to occur much more rapidly and extensively than in the past.
+The shift from oligotrophic to eutrophic conditions occurs when a body of water – a lake, river or reservoir – accumulates excessive nutrients [@hilt2010].
+This process can happen naturally over several centuries as a lake ages and accumulates sediments and nutrients from the surrounding landscape [@smith1998].
+Alternatively, human activities, especially the use of fertilizers, causes freshwater eutrophication to occur much more rapidly and extensively than in the past.
 
- **Low Nutrient Clear water/Oligotrophic**
+**Low Nutrient Clear water/Oligotrophic**
 
- In the clear water regime, phosphorous inputs, phytoplankton biomass (algae), and phosphorous recycling from lake or river sediments are typically low, and the water is clear. Such systems are called oligotrophic. Oligotrophic lakes are associated with the provision of services such as freshwater, fisheries and food for wild animals. It is also related with pest and disease regulation as well as water purification. Clear water lakes are also used for recreation and their aesthetic values.
+In the clear water regime, phosphorous inputs, phytoplankton biomass (algae), and phosphorous recycling from lake or river sediments are typically low, and the water is clear.
+Such systems are called oligotrophic.
+Oligotrophic lakes are associated with the provision of services such as freshwater, fisheries and food for wild animals.
+It is also related with pest and disease regulation as well as water purification.
+Clear water lakes are also used for recreation and their aesthetic values.
 
- **High Nutrient Turbid Water/Eutrophic**
+**High Nutrient Turbid Water/Eutrophic**
 
- In the eutrophic regime, phosphorous inputs, phytoplankton biomass, and phosphorous recycling from sediments are usually high, and the water is turbid or murky. Such systems are called eutrophic or nutrient rich (Carpenter 2003, Smith and Schindler 2009).
+In the eutrophic regime, phosphorous inputs, phytoplankton biomass, and phosphorous recycling from sediments are usually high, and the water is turbid or murky.
+Such systems are called eutrophic or nutrient rich [@carpenter1999; @carpenter1998; @smith2009; @carpenter2003].
 
- Eutrophic lakes have significant impacts on fisheries, both commercial and recreational. Murky water and unpleasant odors cause loss of aesthetic value. Toxin produced by algae may affect livestock, mussels, oyster and even humans when water is used for drinking (Lawton and Codd 1991).
+Eutrophic lakes have significant impacts on fisheries, both commercial and recreational.
+Murky water and unpleasant odors cause loss of aesthetic value.
+Toxin produced by algae may affect livestock, mussels, oyster and even humans when water is used for drinking [@lawton1991].
 
+#### How the regime shift works
 
+Clear water or oligotrophic freshwater occur when nutrient inputs are low and nutrient concentrations are maintained at low levels by flora and fauna of the lake.
+The vegetation, for example, consumes phosphorous from the water column, and its roots immobilize phosphorous in the lake sediments by stabilizing the sediments.
+Phosphorous is also trapped in sediment or in inorganic forms making biologically unavailable for small algae.
+
+Increasing nutrients input can overwhelm the capacity of plants to control phosphorous levels both by consumption and immobilization in sediment.
+The ability of a freshwater ecosystem to regulate nutrients depends upon is number of ecological and geographic factors.
+Ecological factors include the structure of the food web (the amount of predation on algae), the presence of vegetation (which shades or stabilizes the sediment), and the presence of sediment disturbing biota (which mobilizes nutrients).
+While geographic factors include degree to which the lake is mixed by wind, temperature, and depth.
+Increased mixing and temperature can decrease the resilience of the clear water regime by encouraging algae growth.
+
+A lake can be maintained in a eutrophic or high nutrient regime, by changes in the food web that favour algae, continuation of sediment disturbance, or the mobilization of stored phosphorus due to chemical recycling due to low oxygen conditions in the sediment.
 
 #### Drivers and causes of the regime shift
 
-The main causes of lake eutrophication is excess nutrients inputs, especially phosphorous. Over enrichment of phosphorous often leads to algae blooms and change both the trophic structure of the lake and the chemical environment. Consequences include depletion of oxygen in the water and increase of turbidity, creating harsh conditions for fish and plants to survive.
+The main causes of lake eutrophication is excess nutrients inputs, especially phosphorous.
+Over enrichment of phosphorous often leads to algae blooms and change both the trophic structure of the lake and the chemical environment.
+Consequences include depletion of oxygen in the water and increase of turbidity, creating harsh conditions for fish and plants to survive.
 
- Nutrients inputs are driven by the use of fertilizers in agriculture. Therefore, indirect drivers such as food demand and population growth exacerbate the problem. Rainfall variability also plays a synergistic role with land use change, allowing further erosion of soils and leaking of the nutrients not used by crops. Urban growth often increases the flux of nutrients by changing the landscape surface by one less permeable, increasing leakage and sewage production.  Untreated sewage is often a major cause of eutrophication near cities or towns.
-
-
+Nutrients inputs are driven by the use of fertilizers in agriculture.
+Therefore, indirect drivers such as food demand and population growth exacerbate the problem.
+Rainfall variability also plays a synergistic role with land use change, allowing further erosion of soils and leaking of the nutrients not used by crops.
+Urban growth often increases the flux of nutrients by changing the landscape surface by one less permeable, increasing leakage and sewage production.
+Untreated sewage is often a major cause of eutrophication near cities or towns.
 
 #### Impacts on ecosystem services and human well-being
 
 **Shift from Oligotrophic to Eutrophic lake**
 
- Eutrophication induces large changes in ecological communities and hence in the configuration of food webs. Primary producers (algae) experience massive population increases, while fish and shellfish may suffer large population declines due to lack of oxygen. Consequently less energy is captured by higher trophic levels, and more by the lower. Rooted aquatic plants tend to be lost due to shading by algae. The loss of macrophytes has cascading effects on zooplankton and other organisms that depend on these plants for habitat and food (Carpenter  2003).  These food web changes are accompanied by changes in the phosphorous and carbon cycles of the affected ecosystems: larger quantities of phosphorous and carbon are cycled through the ecosystem at higher rates. In addition, large swings in the amount of dissolved oxygen in the water may take place (Carpenter 2003).
+Eutrophication induces large changes in ecological communities and hence in the configuration of food webs.
+Primary producers (algae) experience massive population increases, while fish and shellfish may suffer large population declines due to lack of oxygen.
+Consequently less energy is captured by higher trophic levels, and more by the lower.
+Rooted aquatic plants tend to be lost due to shading by algae.
+The loss of macrophytes has cascading effects on zooplankton and other organisms that depend on these plants for habitat and food.
+These food web changes are accompanied by changes in the phosphorous and carbon cycles of the affected ecosystems: larger quantities of phosphorous and carbon are cycled through the ecosystem at higher rates.
+In addition, large swings in the amount of dissolved oxygen in the water may take place [@carpenter2003].
 
- Changes in the ecological communities resulting from eutrophication can make a system more vulnerable to invasion by new species or to disease outbreaks. Nutrient-rich waters are a good environment for the development of pathogens like cholera (Smith and Schindler 2009). Some algal blooms produce toxic compounds, such as neurotoxins, that can move up the food chain resulting in illness or death when consumed by animals or humans (Lawton and Codd 1991).
+Changes in the ecological communities resulting from eutrophication can make a system more vulnerable to invasion by new species or to disease outbreaks.
+Nutrient-rich waters are a good environment for the development of pathogens like cholera [@smith2009].
+Some algal blooms produce toxic compounds, such as neurotoxins, that can move up the food chain resulting in illness or death when consumed by animals or humans [@lawton1991].
 
- Eutrophication has several direct consequences for human well-being (Carpenter et al. 1998, Postel and Carpenter 1998):
+Eutrophication has several direct consequences for human well-being [@carpenter1998; @postel1997]:
 
- * Loss of fish species from eutrophic ecosystems impact commercial, subsistence, and recreational fishing;
-* Recreational use of water bodies for swimming, boating and angling are reduced,
-* The value of lakeside properties and recreational areas are reduced due to unpleasant odours and murky water,
-* The costs of water treatment for domestic, industrial and agricultural uses increases,
-* Toxins produced by certain algal blooms may cause death of livestock (and humans) if eutrophic water is used for drinking,
-* Biotoxins produced by algae may be taken up by shellfish such as mussels and oysters, and can lead to the poisoning of humans when consumed (Lawton and Codd 1991).
+-   Loss of fish species from eutrophic ecosystems impact commercial, subsistence, and recreational fishing;
+-   Recreational use of water bodies for swimming, boating and angling are reduced,
+-   The value of lakeside properties and recreational areas are reduced due to unpleasant odours and murky water,
+-   The costs of water treatment for domestic, industrial and agricultural uses increases,
+-   Toxins produced by certain algal blooms may cause death of livestock (and humans) if eutrophic water is used for drinking,
+-   Biotoxins produced by algae may be taken up by shellfish such as mussels and oysters, and can lead to the poisoning of humans when consumed [@lawton1991].
 
- **Shift from eutrophic to oligotrophic lake**
+**Shift from eutrophic to oligotrophic lake**
 
- The degree of reversibility from eutrophic to oligotrophic conditions varies greatly. In some lakes oligotrophic conditions have been restored rapidly after reduction of phosphorous inputs, while in other cases lakes have remained eutrophic despite prolonged reductions in phosphorous inputs and even dredging of the lake sediments (Carpenter et al. 1999, Carpenter 2003).
+The degree of reversibility from eutrophic to oligotrophic conditions varies greatly.
+In some lakes oligotrophic conditions have been restored rapidly after reduction of phosphorous inputs, while in other cases lakes have remained eutrophic despite prolonged reductions in phosphorous inputs and even dredging of the lake sediments [@carpenter1998; @carpenter2003].
+In some cases, lakes can develop cycles between eutrophic and oligothrophic states [@vannes2007].
 
- Ecosystem services may recover once the system shift back to oligotrophic regime. However, some species may never come back to initial abundance and the food web may change drastically. Consequently, the impact of eutrophication on fisheries depends upon the species being fished. Other services related with aesthetic and recreational values including tourism can fully recover.
-
-
+Ecosystem services may recover once the system shift back to oligotrophic regime.
+However, some species may never come back to initial abundance and the food web may change drastically.
+Consequently, the impact of eutrophication on fisheries depends upon the species being fished.
+Other services related with aesthetic and recreational values including tourism can fully recover.
 
 #### Management options
 
 **Options for enhancing resilience**
 
- Freshwater ecosystems react in different ways to increases and reductions in nutrient loading, depending on their shape, water current patterns, and biological characteristics. Different strategies for managing eutrophication will therefore be required in different settings (Smith 2003).
+Freshwater ecosystems react in different ways to increases and reductions in nutrient loading, depending on their shape, water current patterns, and biological characteristics.
+Different strategies for managing eutrophication will therefore be required in different settings [@smith2003].
 
- The main management option, both for prevention and restoration, is to reduce phosphorous inputs. Developing technology and economic incentives to close the nutrient cycle at the local (farm) level is crucial (Diaz and Rosenberg 2008). Reforestation of watersheds can help buffer the impact of rainstorms on soil erosion and phosphorous runoff. Importantly, phosphorous sources tend to be concentrated spatially in the landscape. Reducing runoff from a small number of high source areas can have a major impact on water quality, and should be a priority.
+The main management option, both for prevention and restoration, is to reduce phosphorous inputs.
+Developing technology and economic incentives to close the nutrient cycle at the local (farm) level is crucial [@diaz2008].
+Reforestation of watersheds can help buffer the impact of rainstorms on soil erosion and phosphorous runoff.
+Importantly, phosphorous sources tend to be concentrated spatially in the landscape.
+Reducing runoff from a small number of high source areas can have a major impact on water quality, and should be a priority.
 
- **Options for reducing resilience to encourage restoration or transformation**
+**Options for reducing resilience to encourage restoration or transformation**
 
- Active intervention may be needed to reverse eutrophic conditions. For instance, lake floor sediments can be dredged, or phosphorus can be immobilized by adding aluminium sulphate (Carpenter 2003). Bottom-feeding fish such as carp, which physically stir up lake-floor sediments when feeding, can also be removed.
+Active intervention may be needed to reverse eutrophic conditions.
+For instance, lake floor sediments can be dredged, or phosphorus can be immobilized by adding aluminium sulphate [@carpenter2003].
+Bottom-feeding fish such as carp, which physically stir up lake-floor sediments when feeding, can also be removed.
 
- Another option for managing eutrophication is through ''biomanipulation'' of food webs (Scheffer 1997). This involves increasing the population of predatory fish such as bass, pike and walleye through stocking or reduced angling quotas. Increased populations of these predators leads to a decrease in the level of zooplanktivores. This in turn allows an increase in the population of planktivores that graze on the algae, helping to reduce the algal density. Results from biomanipulation studies have given rise to the idea that, to reduce eutrophication, lakes should be managed to contain an even, rather than odd, number of trophic levels (Smith and Schindler 2009).
-
-
+Another option for managing eutrophication is through ''biomanipulation'' of food webs [@scheffer2004].
+This involves increasing the population of predatory fish such as bass, pike and walleye through stocking or reduced angling quotas.
+Increased populations of these predators leads to a decrease in the level of zooplanktivores.
+This in turn allows an increase in the population of planktivores that graze on the algae, helping to reduce the algal density.
+Results from biomanipulation studies have given rise to the idea that, to reduce eutrophication, lakes should be managed to contain an even, rather than odd, number of trophic levels [@smith2009] .
 
 ### In-depth analysis
 
@@ -202,154 +238,184 @@ if (rs$regime_shift_name %in% clds$regime_shift) {
 
 ```{r}
 
-load('assets/rs_analysis_text.Rda')
-
-if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
-    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+# load('assets/rs_analysis_text.Rda')
+# 
+# if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+#     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
+
+#### Feedback mechanisms
+
+##### Eutrophic lake
+
+-   *Phosphorous recycling feedback (local - well established):* In shallow lakes and rivers, the sediments on the lake or river floor typically contain high levels of phosphorous that have accumulated from the settling out of decomposing algae and other organisms.
+    Under eutrophic conditions, the loss of the rooted plants means that the sediments can easily become resuspended due to wave action or the activities of bottom-feeding fish.
+    The resuspended nutrients then become available, promoting further growth of algae, and thereby reinforcing the eutrophic state [@scheffer1993; @scheffer1998].
+
+-   *Phosphate solubility feedback (local - well established):* In deep lakes, the eutrophic state is maintained by a different mechanism.
+    In deep lakes temperature gradients create different layers of water: the epilimnion or upper layer is warm and well oxygenated, while the hypolimnion is a lower and colder water layer [@carpenter2003].
+    When the hypolimnion is oxygenated, phosphorous is captured by iron molecules in an insoluble form.
+    Thus, it is not available to primary producers such as algae.
+    However, algal blooms lead to the depletion of oxygen levels in the lower water layers through the decay of organic matter.
+    When oxygen levels become depleted, phosphate is released in a soluble form that can be used by algae.
+    Algal blooms thereby trigger the recycling of phosphorous in a way that reinforces the eutrophic state [@carpenter2003].
+
+##### Oligotrophic lake
+
+-   *Phosphorous recycling feedback (local - well established):* In oligotrophic regime, the phosphorous recycling feedback is weak due to the dominance of macro algae in water bottoms. These plants help absorb excess phosphorous from the water column and also stabilize the sediments on the lake floor. Then, phosphorous is kept trapped unavailable for algae [@carpenter2003].
+
+#### Drivers
+
+##### Shift from Oligotrophic to Eutrophic lakes
+
+Important **shocks** (eg droughts, floods) that contribute to the regime shift include:
+
+-   *Floods (local, speculative):* Floods are shocks for lake eutrophication since they bring unusual amount of sediments and make the lake turbid. Turbidity reinforce the phosphorous recycling feedback by blocking light to reach the bottom macro-algae vegetation.
+
+The main external **direct drivers** that contribute to the shift include:
+
+-   *Nutrients input (local, well established):* Excess phosphorous inputs to freshwater systems typically derive from fertilizers applied to agricultural lands, urban storm water runoff, and untreated sewage disposal [@carpenter2003]. The excess of nutrients in water often cause algal blooms. The excessive rates of plant growth and decay that characterize algal blooms lead to depletion of oxygen levels in the water. When oxygen levels fall below the levels needed for respiration, it may lead to widespread kills of fish and shellfish. In addition, algal blooms prevent sunlight from penetrating to rooted plants (macrophytes) growing on the bottom of lakes or rivers.
+
+The main external **indirect drivers** that contribute to the shift include:
+
+-   *Food demand (local-regional, speculative):* Higher food demands usually stimulate intense agriculture, both as expansion of agricultural frontier or increase of fertilizers use to increase yield.
+
+-   *Agriculture (regional, well established)*: Agriculture often requires the use of fertilizers.
+    When soils are eroded or washed, fertilizers run downstream increasing nutrients input into lakes and rivers.
+
+-   *Urban growth (global, well established):* Urban growth increase the production of sewage which is also rich in nutrients.
+    It also increase the water runoff on the urban landscape.
+
+-   *Deforestation (regional, well established):* Deforestation and poor agricultural management can accelerate, in magnitude and frequency, the runoff of phosphorous from agricultural lands [@smith2009; @smith1998].
+    Deforestation increase landscape fragmentation and facilitates landscape conversion to agriculture.
+    Both reduce the capacity of the landscape to retain water in the soil, accelerating erosive processes and runoff of nutrients.
+
+-   *Rainfall variability (regional, speculative)*: Rainfall variability is expected to change with climate change in some areas of the world.
+    Although it is not clear where or to what extent, it is definitely likely to influence the frequency of flood events and exacerbate erosion in the watershed.
+
+-   *Global warming (global, speculative):* global warming is expected to decrease the resilience of lakes to eutrophication due to increased strong rainfall and higher temperatures.
+    In higher latitudes in the Arctic, eutrophication has been observed due to earlier break of the ice and higher mixing of the water column induced by stronger winds, both of them result of climate change [@smol2005].
+
+**Slow internal system changes** that contribute to the regime shift include:
+
+-   *Phosphorous in water (Local, well established):* The accumulation of phosphorous in the water column usually triggers excessive production of phytoplankton (i.e., algal blooms). In faster-flowing rivers, phytoplankton tends to be washed downstream, and excessive growth of plants such as water hyacinth (*Eichhornia*), duckweed (*Lemna*) or water fern (*Azolla*) may be stimulated instead [@scheffer1998]. Algal blooms, in turn, trigger larger ecosystem changes. The excessive rates of plant growth and decay that characterize algal blooms lead to depletion of oxygen levels in the water. When oxygen levels fall below the levels needed for respiration, it may lead to widespread kills of fish and shellfish. In addition, algal blooms prevent sunlight from penetrating to rooted plants (macrophytes) growing on the bottom of lakes or rivers
 
 ### Categorical summary
 
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 #### Impacts
 
 **Ecosystem type**:'
 
-- Freshwater lakes & rivers
-
+-   Freshwater lakes & rivers
 
 **Key ecosystem processes**:
 
-- Primary production
-- Nutrient cycling
-
+-   Primary production
+-   Nutrient cycling
 
 **Biodiversity**:
 
-- Biodiversity
-
+-   Biodiversity
 
 **Provisioning services**:
 
-- Freshwater
-- Fisheries
-- Wild animal and plant foods
-
+-   Freshwater
+-   Fisheries
+-   Wild animal and plant foods
 
 **Regulating services**:
 
-- Water purification
-- Pest & disease regulation
-
+-   Water purification
+-   Pest & disease regulation
 
 **Cultural services**:
 
-- Recreation
-- Aesthetic values
-
+-   Recreation
+-   Aesthetic values
 
 **Human well-being**:
 
-- Food and nutrition or Health (e.g. toxins or disease) or Livelihoods and economic activity or Cultural or Aesthetic and recreational values or Social conflict
-
+-   Food and nutrition
+-   Health (e.g. toxins or disease)
+-   Livelihoods and economic activity
+-   Cultural
+-   Aesthetic and recreational values
+-   Social conflict
 
 **Links to other regime shifts**:
 
-- Hypoxia
-- Fisheries collapse
-- Bivalves collapse
-- Coral transitions
-
-
+-   Hypoxia
+-   Fisheries collapse
+-   Bivalves collapse
+-   Coral transitions
 :::
 
-:::{style='width: 50%;'}
-
+::: {style="width: 50%;"}
 #### Drivers
 
 **Key drivers**:
 
-- Vegetation conversion and habitat fragmentation or External inputs (e.g. fertilizers or pest control or irrigation) or Species introduction or removal or Soil erosion & land degradation
-
+-   Vegetation conversion and habitat fragmentation
+-   External inputs (e.g. fertilizers or pest control and irrigation)
+-   Species introduction or removal
+-   Soil erosion & land degradation
 
 **Land use**:
 
-- Urban or Large-scale commercial crop cultivation or Intensive livestock production (e.g. feedlots or dairies) or Fisheries or Land use impacts are primarily off-site (e.g. dead zones)
-
+-   Urban
+-   Large-scale commercial crop cultivation
+-   Intensive livestock production (e.g. feedlots or dairies)
+-   Fisheries
+-   Land use impacts are primarily off-site (e.g. dead zones)
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake or catchment or community)
-
+-   Local/landscape (e.g. lake catchment or community)
 
 **Time scale**:
 
-- Years
-- Decades
-
+-   Years
+-   Decades
 
 **Reversibility**:
 
-- Irreversible (on 100 year time scale)
-- Hysteretic (difficult to reverse)
-- Readily reversible
-
+-   Irreversible (on 100 year time scale)
+-   Hysteretic (difficult to reverse)
+-   Readily reversible
 
 **Evidence**:
 
-- Models
-- Paleo-observation
-- Contemporary observations
-- Experiments
-
+-   Models
+-   Paleo-observation
+-   Contemporary observations
+-   Experiments
 
 **Confidence: existence of the regime shift**
 
-- Well established – Wide agreement in the literature that the RS exists
-
+-   Well established – Wide agreement in the literature that the RS exists
 
 **Confidence: mechanisms underlying the regime shift**
 
-- Well established – Wide agreement on the underlying mechanism
-
-
+-   Well established – Wide agreement on the underlying mechanism
 :::
-
-::::
+:::::
 
 ### References
 
 ::: {#refs}
-
 :::
-### References old [Delete]
-
-<small>
-
-- Carpenter S, Ludwig D & Brock W. 1999. Management of eutrophication for lakes subject to potentially irreversible change. Ecological Applications 9(3), 751-771. 
-- Carpenter SR, Bolgrien D, Lathrop RC, Stow CA, Reed T & Wilson MA. 1998. Ecological and economic analysis of lake eutrophication by nonpoint pollution. Australian Journal of Ecology 23, 68-79. 
-- Carpenter, S. R. 2003. Regime shifts in lake ecosystems: pattern and variation. Book 15 in O. Kinne, editor. Excellence in ecology series. Ecology Institute, Oldendorf/Luhe, Germany. 
-- Hilt S, Köhler J, Kozerski H-P, van Nes EH & Scheffer M. 2011. Abrupt regime shifts in space and time along rivers and connected lake systems. Oikos 120: 766–775. doi: 10.1111/j.1600-0706.2010.18553.x 
-- Lawton LA & Codd GA. 1991. Cyanobacterial (blue-green algae) toxins and their significance in UK and European waters. Journal of Soil and Water Conservation 40, 87-97. 
-- Postel SL & Carpenter SR. 1997. Freshwater ecosystem services. In: Nature's Services. Daily GC (ed), pp. 195-214. Washington DC, USA. 
-- Scheffer M, Hosper SH, Meijer M-L, Moss B. & Jeppesen E. 1993. Alternative equilibria in shallow lakes. Trends in Ecology and Evolution 8, 275-279. 
-- Scheffer M. 1997. The ecology of shallow lakes. London: Chapman and Hall. 
-- Smith VH & Schindler DW. 2009. Eutrophication science: where do we go from here? Trends in Ecology & Evolution 24(4), 201-207. 
-- Smith VH. 1998. Cultural eutrophication of inland, estuarine and coastal waters. In: Successes, limitations and frontiers in ecosystem science. Pace ML & Groffman PM (eds). pp.7-49. New York, USA: Springer-Verlag. 
-- Smith VH. 2003. Eutrophication of freshwater and coastal marine ecosystems. Environmental Science and Pollution Research 10, 126-139.
-
-</small>
 
 ## Citation
+
 Acknowledge this review as:
 
-<tiny> 
-``` {style='color: gray;'}
+<tiny>
+
+``` {style="color: gray;"}
 Juan Rocha, Reinette (Oonsie) Biggs, Garry Peterson, Steve Carpenter. Freshwater eutrophication. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-15
 ```
 
@@ -357,10 +423,11 @@ Juan Rocha, Reinette (Oonsie) Biggs, Garry Peterson, Steve Carpenter. Freshwater
 
 BibTeX citation:
 
-<tiny><tiny> 
-``` {style='color: gray;'}
+<tiny>
+
+``` {style="color: gray;"}
 @misc{
-  author = {Juan Rocha and Reinette (Oonsie) Biggs and Garry PetersonSteve Carpenter},
+  author = {Juan Rocha and Reinette (Oonsie) Biggs and Garry Peterson and Steve Carpenter},
   title = {Freshwater eutrophication},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

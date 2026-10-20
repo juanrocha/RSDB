@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -39,8 +39,6 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 - Last update: 2011-02-28
 
 A regime shift may be perceived in Thermohaline circulation (THC) as it might stop due to the increasing depletion of Arctic ice resulting in a catastrophic release of freshwater to the North Atlantic Ocean. This would balance out the differences in water salinity and density between Southern and Northern Atlantic Ocean. Therefore this would lead to collapse of water transport from tropical Atlantic to North Atlantic. Thus the high latitudes of the North Atlantic Ocean are perceived as key regions for triggering the collapse of THC. The regime shift is initiated by the main driver - input of Greenhouse gases in atmosphere. Particularly CO2 continues to increase the atmospheric temperatures thus leading to decrease in Arctic ice volumes. Therefore the amount of freshwater entering the ocean waters decline the salinity and density of the water which weakens the density driven water transport. Several essential mechanisms such as freshwater-overturning mechanism, water temperature-density mechanism and evaporation-salinity mechanism are proposed to weaken the THC. Current management strategies primarily relate to the decrease of greenhouse gas emissions on a global scale.
-
-
 
 :::
 
@@ -111,13 +109,9 @@ Thermohaline circulation is complex, but can be summarised as a global scale dee
 
  This regime is characterized by weak formation of the dense and saline high latitude deep waters due to the increased influx of freshwater. The decreased salinity of the deep waters is weakening the density driven water movement towards south. The transport of less dense and saline waters from south towards north is decreased causing additional atmospheric temperature increase in tropical areas.
 
-
-
 #### Drivers and causes of the regime shift
 
 Increasing greenhouse gas concentration from anthropogenic sources is predicted to cause a rise in global mean temperatures [Cubasch et al. 2001]. One of the most common anthropogenic greenhouse gases is carbon dioxide (CO2). It is considered to be the main driver for this regime shift and is typically operating in global scale due to the global input of CO2 in the atmosphere. Increasing CO2 levels in atmosphere slowly enhance the mean atmospheric temperature. This results in weakening ice-albedo mechanism for the initial regime as a result of increased atmospheric temperatures and changes in albedo. The increasing freshwater influx from loss of ice is initiating the two main mechanisms for the new regime: freshwater-overturning mechanism and the precipitation-river runoff mechanism. Thus, new processes such as increased evaporation, river runoff, changes in water salinity and density are activated causing the system to shift to a new regime. The influence of this driver is well established. Another cause for the regime to shift is the burning of fossil fuels such as coal and natural gas. It is occurring regionally but has global impact and is well established in the literature.
-
-
 
 #### Impacts on ecosystem services and human well-being
 
@@ -125,13 +119,9 @@ The weakening of THC has influence on global water regulation as water circulati
 
  Food crisis and emigration are potential threats in the regions that are subjected to the loss of these services (Barnett and Adger, 2007). In addition to the above impacts, regional changes in sea level would project sea level rise of up to 80 cm in the North Atlantic [Knutti et al. 2002]. This could affect the coastlines of the United States, Canada, and Europe causing coastal erosion and affecting security of housing and infrastructure [Delworth et al. 2008]. The marine biodiversity of flora and fauna would change as the salinity and temperature would drive the introduction of new species that are able to live in the new environment. This would affect the livelihoods and economic activity of local fishermen as they would have to adapt to new circumstances. Schmittner et al. (2007) show that changes in Atlantic circulation can have large effects on marine ecosystems and biogeochemical cycles, even in areas remote from the Atlantic, such as the Indian and North Pacific Oceans. Although loss of THC could plunge Western Europe into conditions much colder than our current climate, on the basis of our current understanding of the climate system, such a scenario appears very unlikely. On the multidecadal to century time scale, it is very likely that Europe and North America will warm in response to increasing greenhouse gases (although natural variability and regional shifts could lead to periods of decadal-scale cooling in some regions) [Delworth et al. 2008]. A warmer and more stratified North Atlantic would also take up less anthropogenic CO2, thus adding to the climate warming [Clark et al. 2002]. Substantial warming would occur over the United States and Mexico, with weaker warming over Western Europe [Schmittner et al. 2007; Broecker et al. 1997].
 
-
-
 #### Management options
 
 The options for potentially preventing regime shift or restoring the desirable regime overlap. This potential regime shift mainly relate to the increase of greenhouse gas input (the main driver) in to the atmosphere at a global scale. Therefore decrease in CO2 emissions and other greenhouse gases has to be achieved in order to prevent further climate warming leading to large influx of freshwater from the depletion of Arctic ice. In the best-case scenario, it may be possible to avert a regime change in a situation where the underlying driver(s) of change are amenable to fast manipulation through management, and where there are not substantial lags in ecosystem response. In the case of the THC neither of these factors hold: the underlying causes of global warming appear very difficult to address through rapid changes in management, and there are substantial inertias in ecosystem response to changes in the driving factors. Therefore an early warning system primarily would be useful in providing advance warning of a substantial coming change in ecosystem conditions, but is unlikely to be useful in averting the regime change.
-
-
 
 ### In-depth analysis
 
@@ -208,7 +198,10 @@ NA
 
 **Human well-being**:
 
-- Food and nutrition or Livelihoods and economic activity or Security of housing & infrastructure or Social conflict
+- Food and nutrition
+- Livelihoods and economic activity
+- Security of housing & infrastructure
+- Social conflict
 
 
 **Links to other regime shifts**:
@@ -236,7 +229,8 @@ NA
 
 **Spatial scale**:
 
-- Sub-continental (e.g. southern Africa or Amazon basin) or Global
+- Sub-continental (e.g. southern Africa or Amazon basin)
+- Global
 
 
 **Time scale**:
@@ -323,7 +317,7 @@ BibTeX citation:
 <tiny><tiny> 
 ``` {style='color: gray;'}
 @misc{
-  author = {Juan Carlos Rocha and Rolands SadauskisReinette (Oonsie) Biggs and Garry Peterson},
+  author = {Juan Carlos Rocha and Rolands Sadauskis and Reinette (Oonsie) Biggs and Garry Peterson},
   title = {Thermohaline circulation},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

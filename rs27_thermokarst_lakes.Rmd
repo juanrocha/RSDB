@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -38,9 +38,7 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 
 - Last update: 2014-11-19
 
-Thermokarst lake dominated landscapes are transforming into terrestrial ecosystems (e.g.: tundra). There is a natural fluctuation between these two ecosystems. However, the rate and scale at which those fluctuations are occurring are increasing due to permafrost melting caused by the increasing atmospheric temperatures associated with climate change. Warmer air temperature increases soil temperature, which melts permafrost (permanently frozen soils found in Arctic regions). The shift in ecosystems occurs when permafrost degradation becomes severe enough for the lakes to get permanently drained, creating the necessary conditions for vegetation to establish. The increased rate and scales of these land cover changes has extensive impacts on food and freshwater provisioning, but its greatest impact is on carbon sequestration. The melting of permafrost releases greenhouse gases, i.e. carbon dioxide (CO2) and methane (CH4), which further increase climate change, creating a powerful reinforcing feedback. 
-
-
+Thermokarst lake dominated landscapes are transforming into terrestrial ecosystems (e.g.: tundra). There is a natural fluctuation between these two ecosystems. However, the rate and scale at which those fluctuations are occurring are increasing due to permafrost melting caused by the increasing atmospheric temperatures associated with climate change. Warmer air temperature increases soil temperature, which melts permafrost (permanently frozen soils found in Arctic regions). The shift in ecosystems occurs when permafrost degradation becomes severe enough for the lakes to get permanently drained, creating the necessary conditions for vegetation to establish. The increased rate and scales of these land cover changes has extensive impacts on food and freshwater provisioning, but its greatest impact is on carbon sequestration. The melting of permafrost releases greenhouse gases, i.e. carbon dioxide (CO2) and methane (CH4), which further increase climate change, creating a powerful reinforcing feedback.
 
 :::
 
@@ -110,13 +108,9 @@ Due to thermokarst processes such as permafrost melting, numerous areas of the A
 
   Driven by external and internal factors, Arctic lakes are drying up at an unnatural speed within the region. This shift is accompanied by changes in vegetation, for example, increased shrub- and graminord abundance and a decrease in the cover of mosses and lichens through a broad expanse of the Arctic (Hinzman et al. 2005, 286). The changes in vegetation may then further transform the landscape through sequential effects on foraging mammals and birds, as well as aquatic fauna and insects (Hinzman et al 2005, 286).
 
-
-
 #### Drivers and causes of the regime shift
 
- 
-
- **Shift from thermokarst lakes to terrestrial ecosystem**
+**Shift from thermokarst lakes to terrestrial ecosystem**
 
  The main external driver of this regime shift is climate change, which is caused by elevated greenhouse gas emissions (IPCC 2007, 97). Increased temperatures warm the soil and precipitates permafrost to thaw. As the permafrost thaws, greenhouse gasses such as CO2 and CH4 that are trapped in the ice are emitted into the atmosphere, further increasing the effects of climate change (Hinzman 2005, 260; Karlsson et al. 2011, np). At a local scale, the effects of climate change are incremental. However, as this interaction is happening over large areas, the effects are aggregated and self-reinforcing, which is significant since permafrost and seasonally frozen grounds store about 25 per cent of the total global soil carbon stock (IPCC 2007, 110).
 
@@ -125,8 +119,6 @@ Due to thermokarst processes such as permafrost melting, numerous areas of the A
  **Shift from terrestrial ecosystem to thermokarst lake ecosystem**
 
  Heightened air- and soil temperatures melt the ice-rich soils and permafrost on which forests in the Arctic region develop, changing the physical conditions for the forest growing on top of it. When the roots of the trees get flooded, the trees die and ponds and lakes eventually replace the forest (Hinzman. 2005, 262). However, it is important to note that the shift from a terrestrial ecosystem to a lake dominated one is not as frequent as the shift from lakes to terrestrial ecosystems. The reason for this are the reinforcing feedbacks as mentioned above.
-
-
 
 #### Impacts on ecosystem services and human well-being
 
@@ -162,8 +154,6 @@ Due to thermokarst processes such as permafrost melting, numerous areas of the A
 
    [2]“The zone of thaw beneath a lake, called a talik or thaw bulb, is an anaerobic environment in which microbes readily decompose organic matter that was locked up in permafrost for tens of thousands of years. This thawing results in the rapid production and emission of methane and carbon dioxide predominately in the form of ebullition (bubbling) and with radiocarbon ages of 30 000–43 000 years. Given the tremendous size of the permafrost carbon pool, which is more than twice the size of the atmospheric carbon pool, permafrost thaw associated with thermokarst lake cycles could result in the release of more than 50 000 teragrams of 14C-depleted methane in the future. This is more than ten times the amount of methane in the current atmosphere. The release of this potent greenhouse gas from thermokarst lakes sets up a positive feedback cycle in which methane causes global climate warming, which in turn causes permafrost to thaw, and more methane to be formed and released” (Vincent et al. 2013, 32).
 
-
-
 #### Management options
 
 There are few management options available to maintain the thermokarst lake ecosystems due to the long time scale at which permafrost melts and the natural dynamics within this system e.g. hydraulic fluctuations or site-specific soil conditions. One management option is to continue to reduce the emissions of greenhouse gases while simultaneously investigating further opportunities for carbon offsetting schemes. 
@@ -175,8 +165,6 @@ There are few management options available to maintain the thermokarst lake ecos
  Fisheries management plans will also need to be adapted to the changes in migration and productivity of northern fish populations with ongoing climate change (Vincent et al. 2013, 36).
 
  These essential resources require the development of integrated freshwater management plans, which include consideration of alternate water sources as traditional supplies change in quantity or quality (Vincent et al. 2011, 36). The Arctic will require increasing vigilance and appropriate water management strategies to avoid and minimize the impacts of changing water impacts in the future (Vincent et al. 2013, 36).
-
-
 
 ### In-depth analysis
 
@@ -288,7 +276,8 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake or catchment or community) or Sub-continental (e.g. southern Africa or Amazon basin)
+- Local/landscape (e.g. lake catchment or community)
+- Sub-continental (e.g. southern Africa or Amazon basin)
 
 
 **Time scale**:
@@ -374,7 +363,7 @@ BibTeX citation:
 <tiny><tiny> 
 ``` {style='color: gray;'}
 @misc{
-  author = {Elinor Holén and Hannah Griffiths and Jessica Spijkers and Hannah Griffiths and Elinor Holén and Jessica SpijkersReinette (Oonsie) Biggs and Juan Carlos Rocha},
+  author = {Elinor Holén and Hannah Griffiths and Jessica Spijkers and Hannah Griffiths and Elinor Holén and Jessica Spijkers and Reinette (Oonsie) Biggs and Juan Carlos Rocha},
   title = {Thermokarst lakes},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

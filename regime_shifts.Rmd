@@ -55,7 +55,7 @@ Regime shifts result from a change in the dominant feedbacks. All complex system
 ```{r tabel, warning=FALSE, message=FALSE, echo = FALSE, out.width="100%"}
 library(DT)
 options(DT.options = list(pageLength = 50))
-rs_dat <- read_csv("assets/generic_types_RSDB_new.csv")
+rs_dat <- read_csv2("assets/generic_types_RSDB_new.csv")
 
 rs_dat |> 
     arrange(regime_shift_name) |> 

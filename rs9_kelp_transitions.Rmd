@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -108,12 +108,7 @@ Kelps are marine coastal ecosystems dominated by macroalgae typically found in t
 
   **Urchin barrens** are an alternative regime in which there is no kelp forest and substantial populations of urchins on the sea bed. This regime has low or no populations of apex predators and large populations of herbivores that keep macroalgae a very low population levels, preventing the regrowth of the kelp forest which is important habitat for apex predators (Steneck, R., et al. 2004). Ecosystem services related to apex predator fisheries and recreational activities are substantially reduced. However populations of bottom dwelling species can increase. In some places urchins have themselves become a valuable fishery. While in others, populations other harvested species such as lobster and crab have increased.
 
- **Turf-forming algae** regime is similar to urchin barrens in that there is no kelp forest, however rather than dominance by urchins the seabed is dominated by turf forming algae. This regime also lacks apex predators (Gorman, D., et al. 2009). Ecosystem services related to fisheries and recreational activities are substantially reduced. However, populations of invertebrate species such as lobster and crab can be higher.This regime shift is associated with a change in habitat in shallow marine coastal ecosystems. Three different self-reinforcing regimes can be identified:   
-  
-  
-
-
-
+ **Turf-forming algae** regime is similar to urchin barrens in that there is no kelp forest, however rather than dominance by urchins the seabed is dominated by turf forming algae. This regime also lacks apex predators (Gorman, D., et al. 2009). Ecosystem services related to fisheries and recreational activities are substantially reduced. However, populations of invertebrate species such as lobster and crab can be higher.This regime shift is associated with a change in habitat in shallow marine coastal ecosystems. Three different self-reinforcing regimes can be identified:
 
 #### Drivers and causes of the regime shift
 
@@ -122,8 +117,6 @@ This regime shift is driven by two key direct drivers: reducing populations func
   
 
  Other drivers can also contribute to this regime shift. Pollution discharges and sedimentation may play a synergetic role as stressors. In Tasmania for example, global warming has favored the reproduction of urchins which acting in synergy with lobster fishing has reduced kelp resilience (Ling et al. 2009). El Niño events and global warming can generate water stratification. As consequence, nitrogen concentration declines and kelp forest growth becomes limited by the availability of nitrogen (Steneck et al 2002).
-
-
 
 #### Impacts on ecosystem services and human well-being
 
@@ -136,8 +129,6 @@ This regime shift is driven by two key direct drivers: reducing populations func
   **Shift from urchin barrens or turfs back to kelp forest.**
 
  The recovery of kelp forest increases habitat complexity and is expected to increase biodiversity. On the other hand, the benefits gained by urchin and lobster fisheries may be diminished, since the recovery of functional groups and increasing biodiversity will control their populations. However, other species of commercial fisheries and tourism may recover, although it is not always the case.
-
-
 
 #### Management options
 
@@ -152,8 +143,6 @@ This regime shift is driven by two key direct drivers: reducing populations func
   **Options for reducing resilience to encourage restoration or transformation**
 
  Transplantation of kelp-forming species has been proposed as a restoration strategy in highly fragmented seascapes. This strategy is likely to increase the supply of kelp propagules to colonize new areas and maintain free substratum for canopy recruitment (Gorman, D., and Connell, S. 2009). However this strategy has not been tested.
-
-
 
 ### In-depth analysis
 
@@ -231,7 +220,10 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Human well-being**:
 
-- Food and nutrition or Livelihoods and economic activity or Cultural or Aesthetic and recreational values
+- Food and nutrition
+- Livelihoods and economic activity
+- Cultural
+- Aesthetic and recreational values
 
 
 **Links to other regime shifts**:
@@ -249,19 +241,24 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Key drivers**:
 
-- Harvest and resource consumption or External inputs (e.g. fertilizers or pest control or irrigation) or Global climate change
+- Harvest and resource consumption
+- External inputs (e.g. fertilizers or pest control and irrigation)
+- Global climate change
 
 
 **Land use**:
 
-- Large-scale commercial crop cultivation or Fisheries or Conservation or Land use impacts are primarily off-site (e.g. dead zones)
+- Large-scale commercial crop cultivation
+- Fisheries
+- Conservation
+- Land use impacts are primarily off-site (e.g. dead zones)
 
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake or catchment or community)
+- Local/landscape (e.g. lake catchment or community)
 
 
 **Time scale**:
@@ -337,7 +334,7 @@ BibTeX citation:
 <tiny><tiny> 
 ``` {style='color: gray;'}
 @misc{
-  author = {Juan Carlos RochaReinette (Oonsie) Biggs and Garry Peterson},
+  author = {Juan Carlos Rocha and Reinette (Oonsie) Biggs and Garry Peterson},
   title = {Kelp transitions},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

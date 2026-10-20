@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -39,8 +39,6 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 - Last update: 2014-09-18
 
 A community derives ecosystem services by extracting from a renewable resource such as water, fish, or forest. If a harvester is overharvesting (a defector), he/she is ostracised by the community, for example by obstructing their access to necessary machinery or to market, which encourages the defector to co-operate by harvesting at a lower, socially optimal level. The alternative regimes are (1) high co-operation and resource levels and (2) overharvesting. Key drivers include resource inflow, the effectiveness of the ostracism norm, and the cost of harvesting. Key impacts include degradation in the state of the resource and harvester payoff and wellbeing. Evidence is currently confined to modelling studies.
-
-
 
 :::
 
@@ -243,19 +241,29 @@ NA
 
 **Key drivers**:
 
-- Harvest and resource consumption or Environmental shocks (e.g. fire or floods or droughts)
+- Harvest and resource consumption
+- Environmental shocks (e.g. fire or floods and droughts)
 
 
 **Land use**:
 
-- Urban or Small-scale subsistence crop cultivation or Large-scale commercial crop cultivation or Intensive livestock production (e.g. feedlots or dairies) or Extensive livestock production (natural rangelands) or Timber production or Fisheries or Mining or Conservation or Tourism
+- Urban
+- Small-scale subsistence crop cultivation
+- Large-scale commercial crop cultivation
+- Intensive livestock production (e.g. feedlots or dairies)
+- Extensive livestock production (natural rangelands)
+- Timber production
+- Fisheries
+- Mining
+- Conservation
+- Tourism
 
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake or catchment or community)
+- Local/landscape (e.g. lake catchment or community)
 
 
 **Time scale**:
@@ -319,7 +327,7 @@ BibTeX citation:
 <tiny><tiny> 
 ``` {style='color: gray;'}
 @misc{
-  author = {Maja Schlüter and Steven LadeAlessandro Tavoni and Simon Levin},
+  author = {Maja Schlüter and Steven Lade and Alessandro Tavoni and Simon Levin},
   title = {Common pool resource harvesting},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

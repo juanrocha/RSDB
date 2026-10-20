@@ -18,6 +18,20 @@ output: html_document
 5. Note you need to manually open rs_images.csv and provide a ranking, priority == 1 for the cover pic
 
 
+**261003**
+
+To-Dos:
+
+[] Add caption to CLD
+[] Discover a bug on my code: the section "How the regime shift works?" is missing from all RS on the database. Exist on my back up of the previous online version. Need to correct manually all.
+[] Only 2 cases of soil salinizaiton!! Needs updating
+[] Update Arctic Sea ice, would be nice to have a polar coords map.
+[] Monsoon and soil salinizaiton are missing RS analysis, CLD exist
+[] There is an error (extra `=`) on the url with api key for carto-maps. Correcting as I do bibliographies
+[] expand cases for Greenland, Monsoon, WAIS, or Arctic in a way that reflect local possible shifts. So the map will also collect papers with evidence for it, currently only the generic case study which is outdated from 2011
+
+Idea: Change maps to have large dots if regional tipping (e.g. Monsoon) versus local.
+Idea: Change the default projection of Leaflet for a equal area. But this could mess up the coordinages. You can do it with `leaflet(map, options = leafletOptions(crs = leafletCRS( crsClass = "L.CRS.EPSG4326")))` for example.
 
 **260827**
 

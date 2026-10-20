@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -38,9 +38,7 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 
 - Last update: 2012-03-16
 
-In freshwater lake and river systems, a river channel position regime shift occurs when the main channel of a river abruptly changes its course to a new river channel. Meandering and braided rivers are especially vulnerable to such shifts. The actual shift of the channel usually follows a large flood event, but other factors make the system susceptible to the shift. Most commonly, sediment buildup blocks the riverflow due to changes in current and riverbed gradient. In other cases, a cutoff occurs at the meandering neck in rivers with high channel sinuosity. Human activities such as land clearance and artificial channel widening can also make the river system vulnerable to a sudden course change. A shift in river channel position has large impacts on the ecology, economy and society, especially through impacts on water availability which is important for agriculture and transportation. On a 100 year time-scale the shift is irreversible. Only enormous engineering efforts can prevent a river from switching to a new channel, or restore a former river course. However, such efforts are very complex and costly. 
-
-
+In freshwater lake and river systems, a river channel position regime shift occurs when the main channel of a river abruptly changes its course to a new river channel. Meandering and braided rivers are especially vulnerable to such shifts. The actual shift of the channel usually follows a large flood event, but other factors make the system susceptible to the shift. Most commonly, sediment buildup blocks the riverflow due to changes in current and riverbed gradient. In other cases, a cutoff occurs at the meandering neck in rivers with high channel sinuosity. Human activities such as land clearance and artificial channel widening can also make the river system vulnerable to a sudden course change. A shift in river channel position has large impacts on the ecology, economy and society, especially through impacts on water availability which is important for agriculture and transportation. On a 100 year time-scale the shift is irreversible. Only enormous engineering efforts can prevent a river from switching to a new channel, or restore a former river course. However, such efforts are very complex and costly.
 
 :::
 
@@ -130,9 +128,7 @@ Freshwater river systems experience river channel position regime shifts when th
 
 The main direct driver of the regime shift is strong floods, associated with large rainfall events. Such events cause the river to shift its course because they have enough power to break through a natural river levee or dyke, and to breach defense infrastructure such as a spillway that tries to control the riverflow (see Mississippi Case Study).
 
- Human activities such as artificial channel widening, removal of debris, changes in the river course or cutting of vegetation play an important role in making a river more susceptible to channel shifts. The reason is that people may change the actual channel to improve transport or create a shortcut to decrease travel time and costs. Often, these activities might start very small by (e.g. removal of debris) and then slowly grow (e.g. by digging of a channel to make a shortcut) until a critical threshold has been reached and the river suddenly changes its course. In the case of the Ucayali River in Peru, an inconspicuous ditch of approximately one meter width was slowly but systematically widened which eventually led to a 71 kilometer cutoff after a strong flood event (see Ucayali River case study) with large negative impacts for the people living in the region. The destruction of dykes or levees can also cause a river channel to shift its position. For instance, a dyke at the Yellow River was destroyed to check the advance of the Jin army in China in 1128, leading to a shift in the river's course (see Yellow River Case Study). 
-
-
+ Human activities such as artificial channel widening, removal of debris, changes in the river course or cutting of vegetation play an important role in making a river more susceptible to channel shifts. The reason is that people may change the actual channel to improve transport or create a shortcut to decrease travel time and costs. Often, these activities might start very small by (e.g. removal of debris) and then slowly grow (e.g. by digging of a channel to make a shortcut) until a critical threshold has been reached and the river suddenly changes its course. In the case of the Ucayali River in Peru, an inconspicuous ditch of approximately one meter width was slowly but systematically widened which eventually led to a 71 kilometer cutoff after a strong flood event (see Ucayali River case study) with large negative impacts for the people living in the region. The destruction of dykes or levees can also cause a river channel to shift its position. For instance, a dyke at the Yellow River was destroyed to check the advance of the Jin army in China in 1128, leading to a shift in the river's course (see Yellow River Case Study).
 
 #### Impacts on ecosystem services and human well-being
 
@@ -240,7 +236,10 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Human well-being**:
 
-- Food and nutrition or Livelihoods and economic activity or Security of housing & infrastructure or Social conflict
+- Food and nutrition
+- Livelihoods and economic activity
+- Security of housing & infrastructure
+- Social conflict
 
 
 **Links to other regime shifts**:
@@ -255,19 +254,27 @@ NA
 
 **Key drivers**:
 
-- Infrastructure development (e.g. roads or pipelines) or Soil erosion & land degradation or Environmental shocks (e.g. fire or floods or droughts)
+- Infrastructure development (e.g. roads or pipelines)
+- Soil erosion & land degradation
+- Environmental shocks (e.g. fire or floods and droughts)
 
 
 **Land use**:
 
-- Urban or Small-scale subsistence crop cultivation or Large-scale commercial crop cultivation or Intensive livestock production (e.g. feedlots or dairies) or Extensive livestock production (natural rangelands) or Fisheries
+- Urban
+- Small-scale subsistence crop cultivation
+- Large-scale commercial crop cultivation
+- Intensive livestock production (e.g. feedlots or dairies)
+- Extensive livestock production (natural rangelands)
+- Fisheries
 
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake or catchment or community) or Sub-continental (e.g. southern Africa or Amazon basin)
+- Local/landscape (e.g. lake catchment or community)
+- Sub-continental (e.g. southern Africa or Amazon basin)
 
 
 **Time scale**:
@@ -340,7 +347,7 @@ BibTeX citation:
 <tiny><tiny> 
 ``` {style='color: gray;'}
 @misc{
-  author = {Henning NolzenReinette (Oonsie) Biggs and Garry Peterson},
+  author = {Henning Nolzen and Reinette (Oonsie) Biggs and Garry Peterson},
   title = {River channel change},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

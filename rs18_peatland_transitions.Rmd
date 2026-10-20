@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -122,8 +122,6 @@ Peatlands are characterized by often deep accumulations of incompletely decompos
 
  Vascular plants also alter the environment in ways that negatively affect Sphagnum mosses. So an increase in vascular plant cover beyond critical thresholds inevitably leads to a decrease in Sphagnum (Berendse et al., 2001). Some of the mechanisms involved in this process act by preventing or even reversing ombrotrophication, in favor of minerotropic conditions. While other mechanisms might operate in bogs prompting the development of particular microtopography and associated vegetation spatial patterns. Such microtopography is also believed to be very stable (references in Eppinga et al 2007 and in Limpens et al 2008). This regime is characterized by an increasingly dense and connected vascular plants cover, exhibiting spatial patterns (strings-flarks on slopes and maze on flat landscapes) consisting of densely vegetated bands (hummocks forming ridges), alternating with wetter zones that are more sparsely vegetated (hollows forming pools) (Rietkerk et al 2004).
 
-
-
 #### Drivers and causes of the regime shift
 
 **Shift from Bogs to Fens**
@@ -135,8 +133,6 @@ Peatlands are characterized by often deep accumulations of incompletely decompos
  In high latitude peatlands an increase in temperature implies a longer growing season for vascular plants and increases mineralization rates. As vascular plants presence increases and Sphagnum cover reduces, the temperature feedback in regime 1 weakens, allowing for even warmer conditions in the rooting zone further increasing the growing season of vascular plants (references in Eppinga et al 2007).
 
  In regards to precipitation and temperature changes, it is worth mentioning that Eppinga et al (2007) highlight that the response of peatlands to this type of future changes is not straightforwardly determined, since the relative importance of different processes possibly inducing vegetation switches is yet to be more properly understood. And moreover, the relative importance of these different processes is probably site-specific, making predictions even more difficult. In the case of northern peatlands, an example is permafrost melting, which is considered to have far-reaching consequences, but still remains poorly understood (Limpens et al 2008). However, having made this clear, a causal-loop diagram synthesizing the mechanistic understanding compiled here has been included in this template.
-
-
 
 #### Impacts on ecosystem services and human well-being
 
@@ -150,13 +146,9 @@ Peatlands are characterized by often deep accumulations of incompletely decompos
 
  A reduction in species richness and the loss of agriculturally suitable lands are potential impacts of the shift to sphagnum-dominated peatlands.
 
-
-
 #### Management options
 
 Damming or blocking ditches are common management practices aimed at raising the water table.  More direct practices to recover or sustain sphagnum vegetation is to establish rafts of floating brush or clumps of peat for floating mosses settle, as well as the creation of suitable microclimates through techniques such as applying a layer of straw mulch, and carving depressions that promote carpet or lawn level Sphagnum (references in Limpens et al 2008 and in Rydin & Jeglum, 2006).
-
-
 
 ### In-depth analysis
 
@@ -250,19 +242,24 @@ NA
 
 **Key drivers**:
 
-- External inputs (e.g. fertilizers or pest control or irrigation) or Environmental shocks (e.g. fire or floods or droughts) or Global climate change
+- External inputs (e.g. fertilizers or pest control and irrigation)
+- Environmental shocks (e.g. fire or floods and droughts)
+- Global climate change
 
 
 **Land use**:
 
-- Small-scale subsistence crop cultivation or Large-scale commercial crop cultivation or Extensive livestock production (natural rangelands) or Land use impacts are primarily off-site (e.g. dead zones)
+- Small-scale subsistence crop cultivation
+- Large-scale commercial crop cultivation
+- Extensive livestock production (natural rangelands)
+- Land use impacts are primarily off-site (e.g. dead zones)
 
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake or catchment or community)
+- Local/landscape (e.g. lake catchment or community)
 
 
 **Time scale**:
@@ -345,7 +342,7 @@ BibTeX citation:
 <tiny><tiny> 
 ``` {style='color: gray;'}
 @misc{
-  author = {Daniel OspinaHelen Moor},
+  author = {Daniel Ospina and Helen Moor},
   title = {Peatland transitions},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

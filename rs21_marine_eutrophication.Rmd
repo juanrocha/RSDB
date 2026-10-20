@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -108,23 +108,17 @@ m
 
  Eutrophic regime causes economic losses due to restoration and damaged goods and health threats to humans exposed to algal toxins. Water clarity is reduced and humans perceive the water overall as less aesthetic.
 
-
-
 #### Drivers and causes of the regime shift
 
 Eutrophication commonly takes place in marine coastal waters (Smith et al. 1999; Cloern 2001). The primary cause of marine eutrophication is excessive increase in nutrient concentration (Nixon 1995) from riverine loads, originating from fertilized agricultural areas, urban sewage and industrial wastewaters (e.g. Bonsdorff et al. 1997). The nutrient loads from land to sea have been successively increased as a result of land clearing, population growth, industrial development, increased use of fossil fuels and increased use of fertilizers in agriculture (Boesch 2002). In addition, oceanic upwelling transports nutrient-rich waters to water surface and atmospheric nitrogen can enter the ocean (Boesch 2002; Paerl 1997). Estuaries may be naturally eutrophic as the nutrient loads from land are concentrated in confined channels, but cultural eutrophication often increases the nutrients significantly. In marine systems nitrogen is usually the key limiting nutrient (Borysova et al. 2005), but the limiting nutrient might differ between locations.
 
  Also other human impacts contribute to the changes observed in many coastal areas (Cloern 2001), such as fishing (removal of top-predators causing food web reorganizations). For instance in the Black Sea the intense eutrophication is suggested to result from the combination of nutrient inputs, low grazing pressure on phytoplankton and favorable climatic influences (Llope et al. 2011). Climate change is projected to intensify eutrophication by potentially increasing the water temperature and thereby strengthening the vertical stratification potentially leading to larger deep anoxic water volumes or by increasing the discharge due to higher rainfalls (Justic et al. 2009). Local characteristics of the sea, such as water residence time, stratification and tides affect the intensity of eutrophication and the ecosystem vulnerability to it (Cloern 2001; Justic et al. 2009).
 
-
-
 #### Impacts on ecosystem services and human well-being
 
 In eutrophic systems nutrient availability regulates primary production levels. The increased occurrence of harmful algal blooms are of great concern in marine systems (Smith et al. 1999). Provisioning ecosystem services are lost when toxins cause mortality of both wild and farmed fish as well as shellfish, and other animals. The composition and structure of food webs may be altered (Caddy 1993; Smith et al. 2006), potentially affecting the resilience of the coastal ecosystem. Damage and destruction of habitats (e.g. Kemp et al. 2005; Walker et al. 2001; Andersen & Rydberg 1988) and weakened quality of nursery and spawning grounds (Borysova et al., 2005) cause commercial fish species to migrate away or die.
 
  Over half of the world population lives within coastal areas and most of the world's fisheries are connected to estuaries and near-shore habitats (Smith 2003 ref. Hobbie 2000), making the marine eutrophication a serious problem. Humans experience illness or even mortality due to contaminated fish and seafood and harmful algal blooms. Economic losses are caused by water quality problems, expenditures undertaken to reduce or avoid the damaging effects, damage on market goods and decreased tourism (Committee on the Causes and Management of Eutrophication, Ocean Studies Board, Water Science and Technology Board 2000; Cloern 2001).
-
-
 
 #### Management options
 
@@ -139,8 +133,6 @@ In eutrophic systems nutrient availability regulates primary production levels. 
  Different ecosystems need separate, specific management frameworks including several sectors. Local to regional nutrient reduction programs are formed in combination of scientific knowledge and politics. Reductions can be done through wastewater treatment, emission regulations, increased efficiency of nutrient use in agriculture, reduced fertilizer use, manure management, enhancement of nutrient sinks and reduction of urban runoff (Boesch 2002).
 
  Estimation of progress requires observations, continuous monitoring of the nutrient sources and tracking the changes in the sea back to the particular action. A time lag of years may occur before the management effects can be seen in the sea, in particular as internal phosphorus loading from sediments continues.  Modeling enables forecasting the future consequences for nutrient reduction for, for instance, water clarity, algal blooms and oxygen levels. (Boesch 2002)
-
-
 
 ### In-depth analysis
 
@@ -217,7 +209,11 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Human well-being**:
 
-- Food and nutrition or Health (e.g. toxins or disease) or Livelihoods and economic activity or Cultural or Aesthetic and recreational values
+- Food and nutrition
+- Health (e.g. toxins or disease)
+- Livelihoods and economic activity
+- Cultural
+- Aesthetic and recreational values
 
 
 **Links to other regime shifts**:
@@ -233,12 +229,13 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Key drivers**:
 
-- External inputs (e.g. fertilizers or pest control or irrigation)
+- External inputs (e.g. fertilizers or pest control and irrigation)
 
 
 **Land use**:
 
-- Fisheries or Land use impacts are primarily off-site (e.g. dead zones)
+- Fisheries
+- Land use impacts are primarily off-site (e.g. dead zones)
 
 
 #### Key attributes

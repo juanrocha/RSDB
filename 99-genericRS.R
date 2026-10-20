@@ -11,15 +11,15 @@ library(fs)
 #     file_delete()
 
 
-rs_dat <- read_csv("assets/generic_types_RSDB_new.csv") |> 
+rs_dat <- read_csv2("assets/generic_types_RSDB_new.csv") |> 
     janitor::clean_names()
 
-pblm <- c("key_attributes_typical_spatial_scale", "drivers_key_direct_drivers", "drivers_land_use",
-          "impacts_human_well_being")
+# pblm <- c("key_attributes_typical_spatial_scale", "drivers_key_direct_drivers", "drivers_land_use",
+#           "impacts_human_well_being")
 
 rs_dat <- rs_dat |> 
-    mutate(across(.cols = all_of(pblm), 
-                  \(x) str_replace_all(x, pattern = ", ", replacement = " or "))) |> 
+    # mutate(across(.cols = all_of(pblm), 
+    #               \(x) str_replace_all(x, pattern = ", ", replacement = " or "))) |> 
     mutate(impacts_ecosystem_type = str_remove(
         impacts_ecosystem_type, pattern = "\\(below ~500mm rainfall\\/year\\)"))
 
@@ -37,7 +37,7 @@ rs_dat <- rs_dat |>
 dat <- rs_dat
 
 ## function to produce carousel code
-img <- read_csv2("assets/rs_images.csv")
+img <- read_csv("assets/rs_images.csv")
 
 txt_img <- function(i, dat, img){
     img <- img |> filter(type == dat$regime_shift_name[i])
@@ -74,7 +74,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -129,7 +129,7 @@ m <- leaflet(cs) |>
     setView(5,10, zoom = 2) 
 m
 ```\n\n",
-"**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.\n\n",
+"**Fig 1 | Empirical evidence.** The database currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.\n\n",
 
 "## Analysis {.tabset .tabset-pills}\n\n",
 
@@ -268,7 +268,7 @@ str_c(dat$main_contributors[i], ", ",  dat$other_contributors[i], ". ", dat$regi
 "<tiny> \n``` {style='color: gray;'}\n", 
 "@misc{\n",
 "  author = {", 
-str_c(dat$main_contributors[i] |> str_replace_all(", ", " and "),
+str_c(dat$main_contributors[i] |> str_replace_all(", ", " and "), " and ",
     dat$other_contributors[i] |> str_replace_all(", ", " and ")),"},\n",
 "  title = {", dat$regime_shift_name[i], "},\n",
 "  url = {www.regimeshifts.org},\n",

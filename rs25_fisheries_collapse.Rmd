@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -104,9 +104,7 @@ During the 20th century global fisheries greatly expanded in terms of effort and
 
  **Low abundance of the commercial fish species.** 
 
- This regime is characterized by a substantially reduced abundance of the valuable fish species. In cases where the valuable fish species performs key ecological functions, it can lead to trophic cascades that lead to an overabundance of planktivorous fish or primary producers such as seagrass, macroalgae, sponge or phytoplankton (Jackson et al. 2001). With low fish abundance, food production is the most immediate ecosystem services affected. While industrial fishermen often can move and harvest new areas or new species, artisanal fishermen often can lose their livelihoods and traditions.  
-
-
+ This regime is characterized by a substantially reduced abundance of the valuable fish species. In cases where the valuable fish species performs key ecological functions, it can lead to trophic cascades that lead to an overabundance of planktivorous fish or primary producers such as seagrass, macroalgae, sponge or phytoplankton (Jackson et al. 2001). With low fish abundance, food production is the most immediate ecosystem services affected. While industrial fishermen often can move and harvest new areas or new species, artisanal fishermen often can lose their livelihoods and traditions.
 
 #### Drivers and causes of the regime shift
 
@@ -115,8 +113,6 @@ There are two key direct drivers of fisheries collapse: overfishing as a top-dow
  Overfishing reduce the population size of commercial fish species, reduce their ability to perform their functional role in the ecosystem, can destabilize their population dynamics (Anderson et al. 2008), and ultimately could change the structure of the food web. Nutrient inputs, on the other hand, affect fisheries by increasing the abundance of lower trophic levels e.g. phytoplankton and zooplanktivores such as jellyfish (Daskalov et al. 2007). Such changes in food web configuration can reduce the energy transfer to fish and hence reduce fishing productivity. These drivers can reduce the resilience of a regime making it more vulnerable to other types of regime shift, such as climate driven food web reorganization [see: Climate & Marine Food Webs]. The indirect drivers that explain overfishing and changes in nutrient input interact in synergistic ways, making their identification a challenging process (Ocean Studies Board 2006, Kirby et al. 2009).
 
  Indirect drivers of overfishing include oversupply of fishing boats, inflexible fishing quotas, demand for fish, the development of new fishing technologies, the facilitation of trade (market connectivity), governance failures such as the failure of regulation to halt illegal fishing, and market failures such as subsidies or perverse incentives. Nutrient enrichment of marine ecosystems is also indirectly driven by runoff of fertilizer nutrients from agriculture and sewage from urban areas (Diaz and Rosenberg 2008).
-
-
 
 #### Impacts on ecosystem services and human well-being
 
@@ -127,8 +123,6 @@ There are two key direct drivers of fisheries collapse: overfishing as a top-dow
  **Shift from low to high abundance of commercial fish species**
 
  An abundant fish population regime will likely better maintain marine biodiversity and will be more resilience to climate variation and climate change. Society will benefit of high abundance regime in terms of high primary productivity that translate in more food, jobs and livelihoods in small coastal communities. It will also better regulate marine hypoxia.
-
-
 
 #### Management options
 
@@ -145,8 +139,6 @@ A review of marine fisheries in the Millennium Ecosystem Assessment offer a synt
  Indirect resilience building efforts include efficient regulation and policing of fishing can reduce illegal fishing, while comprehensive fisheries policies at the international and national level can also build resilience if they result in fisheries policies that reinforce one another. Indirect resilience building strategies include improving the ability of fishers to exit fisheries.
 
  Good management of fishing pressure has been able to restore fisheries stocks. For example, in the US fishing closures and implementation of management measures for bottom fishing have enabled the restoration of George Bank haddock, Atlantic scallops, George Bank yellowtail flounder, Atlantic stripped bass, Atlantic Arcadian redfish, Pacific chub mackerel, and Pacific sardine. However, there is no clear strategy that works across many ecosystems or nations (Beddington et al. 2007).
-
-
 
 ### In-depth analysis
 
@@ -225,7 +217,11 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Human well-being**:
 
-- Food and nutrition or Livelihoods and economic activity or Cultural or Aesthetic and recreational values or Cultural identity
+- Food and nutrition
+- Livelihoods and economic activity
+- Cultural
+- Aesthetic and recreational values
+- Cultural identity
 
 
 **Links to other regime shifts**:
@@ -245,7 +241,12 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Key drivers**:
 
-- Harvest and resource consumption or External inputs (e.g. fertilizers or pest control or irrigation) or Adoption of new technology (e.g. new fishing nets) or Species introduction or removal or Disease or Global climate change
+- Harvest and resource consumption
+- External inputs (e.g. fertilizers or pest control and irrigation)
+- Adoption of new technology (e.g. new fishing nets)
+- Species introduction or removal
+- Disease
+- Global climate change
 
 
 **Land use**:
@@ -257,7 +258,9 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake or catchment or community) or National (country) or Sub-continental (e.g. southern Africa or Amazon basin)
+- Local/landscape (e.g. lake catchment or community)
+- National (country)
+- Sub-continental (e.g. southern Africa or Amazon basin)
 
 
 **Time scale**:
@@ -356,7 +359,7 @@ BibTeX citation:
 <tiny><tiny> 
 ``` {style='color: gray;'}
 @misc{
-  author = {Garry Peterson and Juan Carlos RochaHenrik Österblom and Reinette (Oonsie) Biggs},
+  author = {Garry Peterson and Juan Carlos Rocha and Henrik Österblom and Reinette (Oonsie) Biggs},
   title = {Fisheries collapse},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

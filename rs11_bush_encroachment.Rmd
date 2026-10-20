@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -110,17 +110,13 @@ Savannas are systems that consist of a mixture of woody vegetation (trees or shr
 
  **Closed, woody savanna regime**
 
- In this regime the landscape is dominated by woody shrubs or trees. Once established, woody vegetation is stable because adult trees are seldom killed by herbivory or fire. These alternate regimes can occur at a range of spatial scales. Sometimes larger areas (e.g. an entire cattle ranch) may shift from a grass-dominated to a persistent woody-dominated state (Dublin et al. 1990, Walker 1993). In other cases, the alternate regimes are expressed as a mosaic of small patches of trees or bush interspersed with patches of grass, where the respective patches are highly persistent over time (Rietkerk et al. 2004).   
-
-
+ In this regime the landscape is dominated by woody shrubs or trees. Once established, woody vegetation is stable because adult trees are seldom killed by herbivory or fire. These alternate regimes can occur at a range of spatial scales. Sometimes larger areas (e.g. an entire cattle ranch) may shift from a grass-dominated to a persistent woody-dominated state (Dublin et al. 1990, Walker 1993). In other cases, the alternate regimes are expressed as a mosaic of small patches of trees or bush interspersed with patches of grass, where the respective patches are highly persistent over time (Rietkerk et al. 2004).
 
 #### Drivers and causes of the regime shift
 
 Bush encroachment refers to a shift from a grassy system to a persistently woody system. It typically occurs in areas used for free-range cattle ranching, and is usually caused by a combination of grazing and fire management practices. Bush encroachment involves a change in the outcome of the competitive interaction between woody vegetation (shrubs and trees) and herbaceous vegetation (grasses and herbs), mediated by nutrients, grazing, fire, rainfall variability and use of the either the woody or grassy components by humans (Anderies et al. 2002, Janssen et al. 2004, Wiegand et al. 2006). The encroachment typically occurs in episodes rather than continuously, and involves a particular set of encroaching species rather than the entire woody community.
 
- Bush encroachment typically occurs in areas used for commercial cattle ranching (as opposed to subsistence, communal, or nomadic) and may follow episodes of sustained severe overgrazing, though not necessarily so. It may also occur under other land uses (Wiegand et al. 2006). It tends to be an episodic phenomenon, where the tree cohorts can often be linked to issues in the ranching enterprise – such as drought-induced debt or downturns in the cattle price cycle (Scholes 2003, Wiegand et al. 2006). 
-
-
+ Bush encroachment typically occurs in areas used for commercial cattle ranching (as opposed to subsistence, communal, or nomadic) and may follow episodes of sustained severe overgrazing, though not necessarily so. It may also occur under other land uses (Wiegand et al. 2006). It tends to be an episodic phenomenon, where the tree cohorts can often be linked to issues in the ranching enterprise – such as drought-induced debt or downturns in the cattle price cycle (Scholes 2003, Wiegand et al. 2006).
 
 #### Impacts on ecosystem services and human well-being
 
@@ -129,8 +125,6 @@ Bush encroachment refers to a shift from a grassy system to a persistently woody
  Woody encroachment brings a relatively rapid change, over a decade or two, from a highly productive grass layer to a sparse and unproductive grass component. Since cattle are grass-eaters, this change substantially reduces cattle productivity (Anderies et al. 2002, Scholes 2003), with major impacts on cattle ranchers. Difficulties in mustering the cattle in dense bush are a contributing factor. Therefore, wood encroachment leads to economic losses for cattle ranchers in what is frequently an economically marginal area for other agricultural uses such as croplands. 
 
  On the other hand, encroachment increases the supply of tree-based ecosystem services, such as wood for fuel, charcoal-making and building material. This is somewhat dependent on the species involved. The increase in woody cover could potentially also have macro and micro-climatic effects through impacts on albedo and CO2 uptake, in addition to the decrease in methane emissions from cattle.
-
-
 
 #### Management options
 
@@ -143,8 +137,6 @@ Bush encroachment refers to a shift from a grassy system to a persistently woody
  Bush encroachment is expensive to reverse, since rapid results rely on arboricides or repeated mechanical or manual clearing. A common method involves the manual removal of woody vegetation, with repeated follow-up control and the use of fire to enhance the establishment and competitive advantage of grasses (Scholes 1985, 2003). Attempts to reverse bush encroachment often have poor results, either due to the rapid resprouting of the trees or the conversion of the grass layer to less desirable species in the process. 
 
  There are anecdotal reports of widespread mortality of near-dominant encroaching species after several decades, possibly related to disease, prolonged drought or simply old age, which provides windows for grass establishment and fuel load for intense fires.
-
-
 
 ### In-depth analysis
 
@@ -223,7 +215,8 @@ NA
 
 **Human well-being**:
 
-- Food and nutrition or Livelihoods and economic activity
+- Food and nutrition
+- Livelihoods and economic activity
 
 
 **Links to other regime shifts**:
@@ -240,19 +233,23 @@ NA
 
 **Key drivers**:
 
-- Harvest and resource consumption or Species introduction or removal or Environmental shocks (e.g. fire or floods or droughts)
+- Harvest and resource consumption
+- Species introduction or removal
+- Environmental shocks (e.g. fire or floods and droughts)
 
 
 **Land use**:
 
-- Extensive livestock production (natural rangelands) or Conservation or Tourism
+- Extensive livestock production (natural rangelands)
+- Conservation
+- Tourism
 
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake or catchment or community)
+- Local/landscape (e.g. lake catchment or community)
 
 
 **Time scale**:
@@ -333,7 +330,7 @@ BibTeX citation:
 <tiny><tiny> 
 ``` {style='color: gray;'}
 @misc{
-  author = {Bob Scholes and Reinette (Oonsie) Biggs and Juan Carlos Rocha and Linda LuvunoGarry Peterson},
+  author = {Bob Scholes and Reinette (Oonsie) Biggs and Juan Carlos Rocha and Linda Luvuno and Garry Peterson},
   title = {Bush encroachment},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

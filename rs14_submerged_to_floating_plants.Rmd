@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -224,7 +224,12 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Human well-being**:
 
-- Food and nutrition or Health (e.g. toxins or disease) or Livelihoods and economic activity or Security of housing & infrastructure or Cultural or Aesthetic and recreational values
+- Food and nutrition
+- Health (e.g. toxins or disease)
+- Livelihoods and economic activity
+- Security of housing & infrastructure
+- Cultural
+- Aesthetic and recreational values
 
 
 **Links to other regime shifts**:
@@ -241,19 +246,23 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Key drivers**:
 
-- External inputs (e.g. fertilizers or pest control or irrigation) or Species introduction or removal or Environmental shocks (e.g. fire or floods or droughts)
+- External inputs (e.g. fertilizers or pest control and irrigation)
+- Species introduction or removal
+- Environmental shocks (e.g. fire or floods and droughts)
 
 
 **Land use**:
 
-- Large-scale commercial crop cultivation or Intensive livestock production (e.g. feedlots or dairies) or Land use impacts are primarily off-site (e.g. dead zones)
+- Large-scale commercial crop cultivation
+- Intensive livestock production (e.g. feedlots or dairies)
+- Land use impacts are primarily off-site (e.g. dead zones)
 
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake or catchment or community)
+- Local/landscape (e.g. lake catchment or community)
 
 
 **Time scale**:
@@ -320,7 +329,7 @@ BibTeX citation:
 <tiny><tiny> 
 ``` {style='color: gray;'}
 @misc{
-  author = {Henning NolzenReinette (Oonsie) Biggs and Garry Peterson},
+  author = {Henning Nolzen and Reinette (Oonsie) Biggs and Garry Peterson},
   title = {Submerged to floating plants},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

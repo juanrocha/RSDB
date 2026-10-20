@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -39,10 +39,6 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 - Last update: 2014-10-21
 
 The regime shift is the boreal forest, where the coniferous dominated forest is slowly being replaced by deciduous trees due to recent climate warming and changes in the wildfire regime.  Coniferous trees thrive in cold, moist soil conditions, and enhance these conditions by accumulating a deep soil organic layer. The moisture of the soil prevents frequent fires from occurring, but when they do, the soil organic layer is rarely consumed in its entirety due to the high water content (Johnstone et al., 2010). Coniferous trees regenerate well in organic soil, which means that only really severe fires that consume the whole soil organic layer will alter the coniferous-promoting soil conditions (Hollingsworth et al., 2013). Deciduous trees, on the other hand, thrive in nutrient rich, dry and warm soils, which are conditions that they reinforce by keeping the decomposition rate high, making the soil organic layer shallow. Fires tend to be more frequent than in coniferous dominated forests, but not as intense. However, since the soil organic layer is so shallow, it tends to be consumed by the fire, exposing the mineral soil (Johnstone et al., 2010). Deciduous trees have well developed strategies for regenerating in mineral soil, which means that deciduous trees tend to return to these areas after a wildfire (Hollingsworth et al., 2013). A severe fire can get the system to shift from one regime to the other, while changes in climate (i.e. mainly temperature or precipitation) can change the underlying conditions to make each regime less resilient (Johnstone et al., 2010). It has been well studied in interior Alaska (Wolken et al., 2011).  Currently, warmer temperatures are decreasing the relative humidity in the boreal forest in Interior Alaska, which is both causing more frequent and severe fires, as well as altering temperature and moisture conditions in the soil to favour deciduous tree regeneration (Mann et al., 2012).  The productivity of the boreal forest in Interior Alaska is expected to decrease due to drought stress in the new regime (Beck et al., 2011).  The provisioning of wild products such as berries and game is expected to shift as some species and decrease for others, but it is unclear what the net changes will be (Chapin et al., 2008). The boreal forest is likely to become a net source of carbon to the atmosphere (McGuire et al., 2009; Schuur et al., 2009), while the air quality is expected to decrease periodically due to the increase in fire frequency (Chapin et al., 2008). Because the main driver of the regime shift is climate warming, decreasing  emissions of greenhouse gasses into the atmosphere would be the most powerful way to prevent or reverse the regime shift.  Reducing greenhouse gas emissions is a difficult and challenging intervention that requires substantial coordinated global action that seems unlikely to occur in the near future.  Fire suppression could potentially slow down the rate of change in parts of the forest, but fire supression is not feasible in most of the boreal forest.
-
-  
-
-
 
 :::
 
@@ -114,10 +110,6 @@ The boreal forest in northern Interior Alaska is approximately 48 million hectar
 
  A deciduous dominated forest, mainly consisting of aspen and birch trees in Interior Alaska, prefers and reinforces dry and warm soil conditions. Although these forests have a high organic litter production, the fast decomposition rate and the subsequent fast nutrient turnover, leaves a shallow soil organic layer and a nutrient rich mineral soil that favours deciduous tree regeneration. The warm and dry conditions in the forest lead to a comparatively high fire frequency, but due to the low flammability of the deciduous trees, the fires rarely become very severe (Johnstone et al., 2010). However, because of the shallow pre-fire soil organic layer, the fires tend to expose the mineral soil, which favours the post-fire reproduction of deciduous trees (Hollingsworth et al., 2013).
 
-  
-
-
-
 #### Drivers and causes of the regime shift
 
 **Shift from coniferous to deciduous-dominated forest**
@@ -127,8 +119,6 @@ The boreal forest in northern Interior Alaska is approximately 48 million hectar
  **Shift from deciduous-dominated **to******coniferous **forest****
 
  In order to shift from regime 2 to regime 1, a prolonged climatic cooling would be necessary. A slow change of the environmental conditions towards those that favour a coniferous boreal forest could, if the forest is left undisturbed for a sufficiently long time, lead to late successional coniferous species, like the black spruce, replacing early successional deciduous species (Rupp et al., 2002). Although the spatial scale considered is of extreme importance, sufficiently large external shocks, such as deciduous-specific insect outbreaks, could clear sufficiently large areas to advance the dominance of coniferous trees. In such hypothetical events, coniferous trees could get the opportunity to sprout and start altering the soil conditions to their own favour.
-
-
 
 #### Impacts on ecosystem services and human well-being
 
@@ -142,9 +132,7 @@ The boreal forest in northern Interior Alaska is approximately 48 million hectar
 
  **Shift from deciduous-dominated **to******coniferous **forest****
 
- A future shift from regime 2 to regime 1 could occur if the environmental and climatic conditions became colder and moist again. However, this is an unlikely scenario in the near future. As discussed previously, the climatic conditions alter the soil characteristics, which in turn influence the vegetation cover and the fire regime of the forest. 
-
-
+ A future shift from regime 2 to regime 1 could occur if the environmental and climatic conditions became colder and moist again. However, this is an unlikely scenario in the near future. As discussed previously, the climatic conditions alter the soil characteristics, which in turn influence the vegetation cover and the fire regime of the forest.
 
 #### Management options
 
@@ -153,8 +141,6 @@ The primary tactic used for reducing impacts of fire and enhance resilience (i.e
  Reducing air temperature is essential to be able to restore regime 1. Alaska itself accounts for a miniscule proportion of global greenhouse gas emissions and consequently to climate warming (Chapin et al., 2008). Therefore, reducing Alaska’s emissions will not have a major impact on global climate change. Global abatement of emissions is the long-term solution. Regardless of global greenhouse gas emission policies, it is highly likely that recent warming and wildfire frequency will continue for several decades in Alaska due to the multidecadal lag in the climate system (IPCC, 2007). This makes the reduction of emissions an inefficient short-term solution.  Secondary challenges that face efforts to achieve reduced emissions include restricting the economy and changing the focus of developed nations on a continued economic but sustainable growth. Educating global public about the social impacts of climate change in Alaska and other parts of the world (e.g. reduction in ecosystem services) may promote the willingness to reduce emissions (Chapin et al., 2008). 
 
  In summary, this means that the regime shift from coniferous to deciduous dominated forest in theory could be reversible through manipulation of e.g. soil conditions or local climate. However, due to projected global socio-economic development and climate change, it is highly unlikely that reversing the regime shift will be possible during the next 100 years.
-
-
 
 ### In-depth analysis
 
@@ -240,7 +226,12 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Human well-being**:
 
-- Food and nutrition or Health (e.g. toxins or disease) or Livelihoods and economic activity or Security of housing & infrastructure or Cultural or Aesthetic and recreational values
+- Food and nutrition
+- Health (e.g. toxins or disease)
+- Livelihoods and economic activity
+- Security of housing & infrastructure
+- Cultural
+- Aesthetic and recreational values
 
 
 **Links to other regime shifts**:
@@ -255,19 +246,23 @@ NA
 
 **Key drivers**:
 
-- Environmental shocks (e.g. fire or floods or droughts) or Global climate change
+- Environmental shocks (e.g. fire or floods and droughts)
+- Global climate change
 
 
 **Land use**:
 
-- Timber production or Conservation or Tourism
+- Timber production
+- Conservation
+- Tourism
 
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake or catchment or community) or National (country)
+- Local/landscape (e.g. lake catchment or community)
+- National (country)
 
 
 **Time scale**:
@@ -351,7 +346,7 @@ BibTeX citation:
 <tiny><tiny> 
 ``` {style='color: gray;'}
 @misc{
-  author = {Katja Malmborg and Linda Lindström Lindström and Lara D. MateosGarry Peterson and Juan Carlos Rocha},
+  author = {Katja Malmborg and Linda Lindström Lindström and Lara D. Mateos and Garry Peterson and Juan Carlos Rocha},
   title = {Coniferous to deciduous forest},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

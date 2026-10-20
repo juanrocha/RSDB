@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -39,8 +39,6 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 - Last update: 2015-05-09
 
 A shift from polar to temperate primary production (PP) patterns has been detected in the Arctic Ocean. Following a regime shift in the North Atlantic in 1995, similar structural changes are now occurring in Arctic waters. Rapid warming of atmospheric and oceanic temperatures has caused a near year-on-year decline in the extent and thickness of summer sea ice since 1979 (NSIDC 2014). Anthropogenic climatic change has extended the growing season and delayed august freeze-up through a decline in albedo reflectivity and enhanced wind-driven vertical mixing. Natural modes of variability at the lower latitudes has also led to poleward shifts of temperate marine species and caused pronounced phenological changes to primary producers. The difference in the temporal scale of these forcing mechanisms makes it hard to predict which event is causing changes to PP. It is uncertain what impact this change will have on the food web of this ecosystem.
-
-
 
 :::
 
@@ -102,8 +100,6 @@ Anthropogenic climate change is largely responsible for the observed changes in 
 
  Summer air temperatures over the Arctic have continued to increase since 1800 (Dicks et al. 2011). The associated decline in sea ice extent and thickness has allowed light to penetrate the upper water column, while the exposure of year-round sea water has increased storminess and the upwelling of nutrients. In some cases, this has led to two annual bloom events and an extent of single annual blooms in areas previously characterized by flat patterns at the sea-ice boundary (Ardyna et al. 2014).
 
-
-
 #### Drivers and causes of the regime shift
 
 Global warming is well documented as the main driver of warmer air temperatures over the Arctic (Dicks et al. 2011). Warming is causing sea ice to melt and is extending the amount of year-round and seasonal open water (Ardyna et al. 2014). This darker surface is reducing albedo reflexivity and increasing sea surface temperatures (SST). The IPCC AR5 states that warming must be kept below 1°C to prevent irreversible changes of the Arctic system.
@@ -111,8 +107,6 @@ Global warming is well documented as the main driver of warmer air temperatures 
  Natural variations in Arctic SST are observed through Atlantic Multidecadal Oscillation (AMO) and North Atlantic Oscillation (NAO) internal forcing mechanisms, both modes of climate variability that originate in the lower latitudes. The latter enhances westerly winds, while the combination of both the NAO and a positive AMO enhance ocean advection and storm events (Schlesinger & Ramankutty 1994). This phase of activity has been observed since the mid-1990s, enhancing the poleward movement of warm, saline waters to the eastern Arctic (Chylek et al. 2009).
 
  The amount of water masses entering into the Arctic is highly influenced by the strength of Subpolar gyre (Hátún et al. 2009), which itself is influenced by the AMO mode. Since 1995, the North Atlantic Subpolar gyre has been weakening (Häkkinen & Rhines 2004). Together, the AMO and Subpolar gyre have enhanced the observed melting of sea ice in the Arctic and the calving events of the Greenland Ice Sheet (GIS, Straneo & Heinback 2009). However, freshwater inflow from Greenland and Siberian runoff reduces the density of the water column and enhances stratification with the denser saline layer below. It is uncertain how this inflow might counter the observed increase in bloom events, but a change in Siberian forest cover could enhance nutrient inputs and thus promote further PP, where rates of PP have already increased by 135% from 1998 to 2009 (Frey et al. 2007).
-
-
 
 #### Impacts on ecosystem services and human well-being
 
@@ -123,8 +117,6 @@ Global warming is well documented as the main driver of warmer air temperatures 
    
  Due to their highly adapted way of live, the loss of provisioning ES could indirectly impact indigenous wellbeing and livelihoods (Arctic Council 2013). Contrarily, this shift to a temperate regime could bring shorter-term gains to tourism (eg. whale watching) and commercial fishing, helped by easier navigation in ice-free waters, although the benefit will be felt by mainly non-Arctic residents (Hassan et al. 2005). Human health is at risk due to the consumption of high level fish and mammal from the Arctic by the bioaccumulation of pollutants (Butler and Oluoch-Kosura 2006). Changes in the Arctic will also have spillover effects in Atlantic waters, reducing PP and food provisioning (Arctic Council 2013).
 
-
-
 #### Management options
 
 From the point of view of PP, it is unclear how the regime shift would affect the ecosystem and the services people derive from it (Moore & Huntington 2008; Greene et al. 2008; Li et al. 2011). However, the regime shift is connected to other changes with possibly catastrophic implications, such as reduced Albedo negatively influencing the Arctic Ocean’s temperature regulating ability, or the loss of habitat for Arctic-specific species. Considering these implications of a regime shift, from a global perspective polar conditions are clearly preferable.
@@ -132,8 +124,6 @@ From the point of view of PP, it is unclear how the regime shift would affect th
  It is essential to cut global emissions of greenhouse gases (GHG) in order to prevent further sea ice loss and the kicking-in of feedback mechanisms that risk putting the Arctic in a permanent temperate state. Equally important is to prevent deforestation, as this reduces the biosphere’s ability to sequester atmospheric carbon. Especially important, in the polar region, ceased deforestation could reduce primary production by decreasing the discharge of nutrients into the Arctic Ocean. For carrying this out, international agreements on emissions and land use are necessary.However, it might not be enough to prevent a regime shift considering observed changes and the time lag of global climate processes. Management options for reversing the regime shift are essentially the same as for preventing it, but a reversal is likely to take a long time, as several feedback mechanisms will drive the system towards temperate conditions.
 
  Although highly criticised, geoengineering has been proposed as a way to speed up the reversal of the regime shift (Heckendorn et al. 2009). A scheme often put forward is to reflect some solar radiation back into space by introducing aerosols into the stratosphere. Though economically viable, this is highly controversial due to its ethically challenging nature, the many possible ecological side effects and the impossibility to reverse action once implemented.
-
-
 
 ### In-depth analysis
 
@@ -214,7 +204,11 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Human well-being**:
 
-- Food and nutrition or Health (e.g. toxins or disease) or Livelihoods and economic activity or Cultural or Aesthetic and recreational values
+- Food and nutrition
+- Health (e.g. toxins or disease)
+- Livelihoods and economic activity
+- Cultural
+- Aesthetic and recreational values
 
 
 **Links to other regime shifts**:
@@ -233,7 +227,9 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Key drivers**:
 
-- External inputs (e.g. fertilizers or pest control or irrigation) or Environmental shocks (e.g. fire or floods or droughts) or Global climate change
+- External inputs (e.g. fertilizers or pest control and irrigation)
+- Environmental shocks (e.g. fire or floods and droughts)
+- Global climate change
 
 
 **Land use**:
@@ -348,7 +344,7 @@ BibTeX citation:
 <tiny><tiny> 
 ``` {style='color: gray;'}
 @misc{
-  author = {Patricia  Villarrubia Gomez and Helene Albinus Søgaard and Karl Samuelsson and Sophie LagganThorsten Blenckner},
+  author = {Patricia  Villarrubia Gomez and Helene Albinus Søgaard and Karl Samuelsson and Sophie Laggan and Thorsten Blenckner},
   title = {Primary production Arctic Ocean},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

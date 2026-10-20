@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -110,9 +110,7 @@ The hypoxia regime shift involves a radical change in oxygen concentration in aq
 
  On the hypoxic regime fisheries productivity collapses; regulating services like water purification and pest control are lost while cultural services like recreation is substantially diminished. Decomposing fish from dead zones may bring bad odors and disease. Overabundance of jelly fish, high turbidity and odors during early stages (eutrophication) can discourage tourism.
 
- **Anoxia:** Anoxia occurs when hypoxia is exacerbated to DO levels under 0.2 ml per liter (Diaz and Rosenberg 2008). Under such conditions, benthic animals suffer from mass mortality and decay processes are carried out by microbial metabolism. As result, hydrogen sulfide is released changing water acidity (pH) and then further favoring bacteria habitat. 
-
-
+ **Anoxia:** Anoxia occurs when hypoxia is exacerbated to DO levels under 0.2 ml per liter (Diaz and Rosenberg 2008). Under such conditions, benthic animals suffer from mass mortality and decay processes are carried out by microbial metabolism. As result, hydrogen sulfide is released changing water acidity (pH) and then further favoring bacteria habitat.
 
 #### Drivers and causes of the regime shift
 
@@ -132,9 +130,7 @@ Hypoxia is driven by increasing nutrients input, both natural and anthropogenic.
 
  **Shift from Hypoxia to Normoxia**
 
- When hypoxia is not severe, the system is likely to return to normoxia regime. It implies the recovery of fisheries when species hasn't been extinct locally. However, food webs not always fully recover, and usually top predators are lost. With the recovery of the system, fishing, recreational and touristic activities recover too, although not necessary to the same configuration than before the regime shift. 
-
-
+ When hypoxia is not severe, the system is likely to return to normoxia regime. It implies the recovery of fisheries when species hasn't been extinct locally. However, food webs not always fully recover, and usually top predators are lost. With the recovery of the system, fishing, recreational and touristic activities recover too, although not necessary to the same configuration than before the regime shift.
 
 #### Management options
 
@@ -146,9 +142,7 @@ Hypoxia is driven by increasing nutrients input, both natural and anthropogenic.
 
  Only 4% of the reported cases of hypoxia have shown improvement, principally due to the reduction of organic and nutrient loading, stratification strength, and freshwater runoff(Diaz and Rosenberg 2008).
 
- Managers could take advantage of windows of opportunity provided by these variables. For example, in the Baltic Sea the stratification of the water column is determined by input of saltwater from the North Sea(Conley et al. 2009). A policy of nutrient load reduction would therefore be more effective in years when saltwater input is low and it is a particularly rainy year. While nutrient loading is largely periodic and rain dependent, stratification and freshwater runoff rely more on physical processes and climate variability. Finally, it has been suggested that an appropriate goal is the reduction of nutrient loads to the level of the mid-1900s(Diaz and Rosenberg 2008). 
-
-
+ Managers could take advantage of windows of opportunity provided by these variables. For example, in the Baltic Sea the stratification of the water column is determined by input of saltwater from the North Sea(Conley et al. 2009). A policy of nutrient load reduction would therefore be more effective in years when saltwater input is low and it is a particularly rainy year. While nutrient loading is largely periodic and rain dependent, stratification and freshwater runoff rely more on physical processes and climate variability. Finally, it has been suggested that an appropriate goal is the reduction of nutrient loads to the level of the mid-1900s(Diaz and Rosenberg 2008).
 
 ### In-depth analysis
 
@@ -226,7 +220,9 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Human well-being**:
 
-- Food and nutrition or Health (e.g. toxins or disease) or Livelihoods and economic activity
+- Food and nutrition
+- Health (e.g. toxins or disease)
+- Livelihoods and economic activity
 
 
 **Links to other regime shifts**:
@@ -244,7 +240,8 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Key drivers**:
 
-- External inputs (e.g. fertilizers or pest control or irrigation) or Global climate change
+- External inputs (e.g. fertilizers or pest control and irrigation)
+- Global climate change
 
 
 **Land use**:
@@ -256,7 +253,8 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake or catchment or community) or Sub-continental (e.g. southern Africa or Amazon basin)
+- Local/landscape (e.g. lake catchment or community)
+- Sub-continental (e.g. southern Africa or Amazon basin)
 
 
 **Time scale**:
@@ -322,7 +320,7 @@ BibTeX citation:
 <tiny><tiny> 
 ``` {style='color: gray;'}
 @misc{
-  author = {Juan Carlos RochaRutger Rosenberg and Reinette (Oonsie) Biggs and Garry Peterson},
+  author = {Juan Carlos Rocha and Rutger Rosenberg and Reinette (Oonsie) Biggs and Garry Peterson},
   title = {Hypoxia},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

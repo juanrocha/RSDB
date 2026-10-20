@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -114,9 +114,7 @@ When discussing the two different regimes we will focus on the archetypes for co
 
  Urban sprawl can be defined as ''unplanned, uncontrolled, and uncoordinated single use development that does not provide for a functional mix of uses and/or is not functionally related to surrounding land uses and which variously appears as low-density ...development'' (Arbury 2005). The European Environment Agency (EEA) has described sprawl as the physical pattern of low-density expansion of large urban areas, under market conditions, mainly into the surrounding agricultural areas. Low-density, single-use and automobile dependent type of development has been the key attributes with lack of planning and control being the key enablers for urban sprawl.  
 
- Unfortunately, there is not one single measurement for compact city or sprawling city. It requires a set of indicators that incorporate economic, social and environmental attributes of city development. Furthermore, defining what is desirable is quite subjective to preferences held by residents of different cities, which implies what may be desirable for one city might be undesirable for others. 
-
-
+ Unfortunately, there is not one single measurement for compact city or sprawling city. It requires a set of indicators that incorporate economic, social and environmental attributes of city development. Furthermore, defining what is desirable is quite subjective to preferences held by residents of different cities, which implies what may be desirable for one city might be undesirable for others.
 
 #### Drivers and causes of the regime shift
 
@@ -128,9 +126,7 @@ When discussing the two different regimes we will focus on the archetypes for co
 
  **From sprawling city to compact city**
 
- The negative consequences of sprawling cities are what eventually drive the government to strive for more compact development. In the long-term these consequences will have an impact on the human well-being of the urban population. 
-
-
+ The negative consequences of sprawling cities are what eventually drive the government to strive for more compact development. In the long-term these consequences will have an impact on the human well-being of the urban population.
 
 #### Impacts on ecosystem services and human well-being
 
@@ -146,9 +142,7 @@ When discussing the two different regimes we will focus on the archetypes for co
 
  Going towards a more compact development means less of the costs connected to sprawl. However, if a city is made more compact, green areas and open spaces are sometimes removed, which affects cultural ecosystem services such as recreation and aesthetic values. Biodiversity loss means less carbon sequestration and pollination, both examples of regulating services.  
 
- The compact city model encourages people to use public transportation and to walk and bike more, which have a positive impact on human health. However, city life is often considered stressful and can contribute to mental strains. 
-
-
+ The compact city model encourages people to use public transportation and to walk and bike more, which have a positive impact on human health. However, city life is often considered stressful and can contribute to mental strains.
 
 #### Management options
 
@@ -156,9 +150,7 @@ Without city planning, there will always be economic, social and environmental d
 
  However, in order to restore a sprawled city back to a compact city, a comprehensive and balanced approach that fundamentally reverse all drivers and feedbacks are necessary (EEA 2006). Another possible approach will be to establish new feedbacks that lead to compact city structure. Foremost, inner city building structures should be transformed into mixed-use structure so that affordable inner-city housing becomes more accessible. City planners should be on the lookout for ''windows of opportunity'', i.e. brownfield projects, to turn unattractive urban areas into mixed used housing or urban green areas. Governments should work actively to prevent inner-city crime and improve environmental conditions in order to make living in the city more safe and attractive (Ewing 2008).  
 
- Governments have an important role to play to ensure that feedback mechanisms enabling sprawling cities to develop are effectively addressed. Important first step is to formulate and enforce a city plan with wide public support (EEA 2006). Bold steps can be taken to abolish subsidies and other government support on outskirt road construction and ''new town'' developments. Full cost of providing public utilities, i.e. electricity, water and sanitation supply and waste treatment can be incurred to residents in newly developed areas (EEA 2006). Full cost of externalities from private automobile use can also be incurred through tax on vehicle ownership, fuel price and other schemes such as city tolls. Public finance from these resources along with savings from less road construction can be invested to promote inner-city mobility, such as investment on public transportation and bicycle and pedestrian roads. 
-
-
+ Governments have an important role to play to ensure that feedback mechanisms enabling sprawling cities to develop are effectively addressed. Important first step is to formulate and enforce a city plan with wide public support (EEA 2006). Bold steps can be taken to abolish subsidies and other government support on outskirt road construction and ''new town'' developments. Full cost of providing public utilities, i.e. electricity, water and sanitation supply and waste treatment can be incurred to residents in newly developed areas (EEA 2006). Full cost of externalities from private automobile use can also be incurred through tax on vehicle ownership, fuel price and other schemes such as city tolls. Public finance from these resources along with savings from less road construction can be invested to promote inner-city mobility, such as investment on public transportation and bicycle and pedestrian roads.
 
 ### In-depth analysis
 
@@ -254,7 +246,13 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Human well-being**:
 
-- Food and nutrition or Health (e.g. toxins or disease) or Livelihoods and economic activity or Security of housing & infrastructure or Cultural or Aesthetic and recreational values or Social conflict
+- Food and nutrition
+- Health (e.g. toxins or disease)
+- Livelihoods and economic activity
+- Security of housing & infrastructure
+- Cultural
+- Aesthetic and recreational values
+- Social conflict
 
 
 **Links to other regime shifts**:
@@ -270,7 +268,8 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Key drivers**:
 
-- Infrastructure development (e.g. roads or pipelines) or Environmental shocks (e.g. fire or floods or droughts)
+- Infrastructure development (e.g. roads or pipelines)
+- Environmental shocks (e.g. fire or floods and droughts)
 
 
 **Land use**:
@@ -282,7 +281,7 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake or catchment or community)
+- Local/landscape (e.g. lake catchment or community)
 
 
 **Time scale**:
@@ -356,7 +355,7 @@ BibTeX citation:
 <tiny><tiny> 
 ``` {style='color: gray;'}
 @misc{
-  author = {Beom-Sik Yoo and Maja Berggren and Anneli SundinReinette (Oonsie) Biggs and Juan Carlos Rocha},
+  author = {Beom-Sik Yoo and Maja Berggren and Anneli Sundin and Reinette (Oonsie) Biggs and Juan Carlos Rocha},
   title = {Sprawling vs compact city},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

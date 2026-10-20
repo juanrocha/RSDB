@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -39,8 +39,6 @@ knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 - Last update: 2016-09-15
 
 Steppe (a grassland) to tundra (mosses and shrubs growing in waterlogged soils) is a regime shift that can occur in cold terrestrial ecosystems.  Tundra and steppe regime shift is typically found where permafrost occurs.  Steppe and tundra are primarily found in the Arctic, north of the tree line, where mean temperature below 10-12 C for the warmest month (Jonasson et al. 2000). Climate change and changes in the density of large herbivores are the main drivers of regime shifts between steppe and tundra. Climate changes that reduce soil moisture can favor steppe over tundra, and vice versa. Tundra is favored by moss growth, which is more limited by water than by nutrients. Steppe is favored by grass growth, which is improved by drier soils with available nutrients. Large herbivores can shape ecosystems through their impact on vegetation species composition, soil structure, and ecological dynamics. Large herbivore trampling and grazing can slow moss growth and convert tundra to steppe vegetation. At the end of the last ice age (12,000 yr BP), human hunting greatly reduced populations of large herbivores which may have contributed to a shift from grass-dominated steppe to moss-dominated tundra. In the 21st century, climate change together with the presence of horses, bison, and musk oxen could lead to shifts between steppe and tundra vegetation.
-
-
 
 :::
 
@@ -108,8 +106,6 @@ m
 
  The tundra vegetation coverage is dominated by mosses and shrub such as dwarf birches and willows growing in waterlogged soils. The ecosystem has lower primary production and nutrient cycling thus the growth rate is slow. Moss growth is limited by moisture so the moist and nutrient low soil promote and sustain moss growth.
 
-
-
 #### Drivers and causes of the regime shift
 
 Climate and herbivory are the two direct drivers of shifts between steppe and tundra.
@@ -117,8 +113,6 @@ Climate and herbivory are the two direct drivers of shifts between steppe and tu
  Herbivory has caused large-scale vegetation changes across the Arctic (Speed et al., 2009; Bråthen et al., 2007; van der Wal, 2005; Srivastava & Jefferies, 1996). Herbivores trample the vegetation and deposit feces to nutrient limited soils which promotes grass growth sustaining herbivore population. In the absence of herbivory, grass litter increases causing soil moisture to increase which reduces nutrient availability promoting the growth of unpalatable mosses.
 
  Climate can act as a driver by changing air temperatures which is associated with changes in soil moisture. Soil moisture is key component in sustaining moss or grass coverage. Moss growth is more limited by water than by nutrients; however, nutrients are more available in drier soils which promote grass growth. Currently, climate is changing, in the long term whether steppe, tundra or another regime will dominate Arctic ecosystems in uncertain.
-
-
 
 #### Impacts on ecosystem services and human well-being
 
@@ -146,8 +140,6 @@ Climate and herbivory are the two direct drivers of shifts between steppe and tu
 
  Cultural ecosystem services. Conservation of indigenous knowledge, practices and believes related to tundra would be lost, affecting the well being of t he Nenets, Enets, Sami, Nganasans and Selkups (Huntington, 2013).
 
-
-
 #### Management options
 
 **Preventing tundra-steppe regime shift**
@@ -159,8 +151,6 @@ Climate and herbivory are the two direct drivers of shifts between steppe and tu
  **Supporting tundra-steppe regime shift**
 
  Attempts are being made today to restore the Pleistocene steppe ecosystem on a limited spatial extent in Siberia. Sergey Zimov's Pleistonce Park, 160 km2, attempts to reestablish the steppe ecosystem by reintroducing megafauna to Northern Siberia (Republic of Yakutia). Zimov (2005) and colleagues tried to test if the 'key-herbivore´ hypothesis can be verified, as today's Holocene climate should be optimal for the Pleistocene steppe vegetation. The megafauna consisting of reindeer, moose, Yakutian horses, musk oxen and bison would influence the vegetation and soil composition, by trampling on grassland and returning nutrients to the soil through their manure (Zimov 2005). The grass root systems stabilize the soil and trampling reduces the albedo, exposing ground to colder temperatures, both would prevent permafrost from melting.
-
-
 
 ### In-depth analysis
 
@@ -241,7 +231,13 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Human well-being**:
 
-- Food and nutrition or Health (e.g. toxins or disease) or Livelihoods and economic activity or Security of housing & infrastructure or Cultural or Aesthetic and recreational values or Social conflict
+- Food and nutrition
+- Health (e.g. toxins or disease)
+- Livelihoods and economic activity
+- Security of housing & infrastructure
+- Cultural
+- Aesthetic and recreational values
+- Social conflict
 
 
 **Links to other regime shifts**:
@@ -260,7 +256,9 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Key drivers**:
 
-- Harvest and resource consumption or Species introduction or removal or Global climate change
+- Harvest and resource consumption
+- Species introduction or removal
+- Global climate change
 
 
 **Land use**:
@@ -361,7 +359,7 @@ BibTeX citation:
 <tiny><tiny> 
 ``` {style='color: gray;'}
 @misc{
-  author = {Johanna Mård Karlsson and Nicole Reid and Rodrigo Martínez-PeñaGarry Peterson and Juan Carlos Rocha},
+  author = {Johanna Mård Karlsson and Nicole Reid and Rodrigo Martínez-Peña and Garry Peterson and Juan Carlos Rocha},
   title = {Steppe to tundra},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

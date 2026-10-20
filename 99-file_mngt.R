@@ -19,11 +19,12 @@ dat |>
     file_create()
 
 ## see the refs to format text
-rs <- read_csv(file = "assets/generic_types_RSDB_new.csv")
+rs <- read_csv2(file = "assets/generic_types_RSDB_new.csv")
 rs |> 
-    filter(regime_shift_name == "Coral transitions") |> 
+    #filter(regime_shift_name == "Greenland ice sheet collapse") |> 
+    filter(id == 4) |> # you can get the id from file name, faster than copying rs_name
     select(references, new_ref_format) |> pull(new_ref_format) |> #jsonlite::parse_json()
-    jsonlite::fromJSON() |> as_tibble() |> select(doi, authors, title)
+    jsonlite::fromJSON() |> as_tibble() |> select(doi, authors, year, title)
 
 
 

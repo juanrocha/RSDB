@@ -9,14 +9,13 @@ params:
   j: 7
 ---
 
-
 ```{r include = FALSE}
 library(tidyverse)
 library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -24,32 +23,26 @@ rs <- dat |> filter(id== x)
 knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+:::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 # Tundra to forest
 
+-   **Main contributors**: Rolands Sadauskis, Juan Carlos Rocha
 
-- **Main contributors**: Juan Carlos Rocha, Rolands Sadauskis
+-   **Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
 
-- **Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
+-   Last update: 2011-02-28
 
-- Last update: 2011-02-28
-
-The main driver behind the shift is the increasingly warm climate due to high concentrations of carbon in atmosphere, allowing pioneer shrubs associated with the boreal forest regime to increase significantly. The actual shift to boreal forest with spruce and pine as the dominant species is unlikely to occur this century due to time lags involved with species migration. Shrub expansion in the Arctic tundra is the first phase of this regime shift, which is reinforced by carbon release due to permafrost degradation, which in turn increases climate warming and microbial activity enhancing shrub growth. Sufficient numbers of herbivores can limit shrub expansion and potentially maintain the shrub state on a long term basis.
-
-
-
+The main driver behind the shift is the increasingly warm climate due to high concentrations of carbon in atmosphere, allowing pioneer shrubs associated with the boreal forest regime to increase significantly.
+The actual shift to boreal forest with spruce and pine as the dominant species is unlikely to occur this century due to time lags involved with species migration.
+Shrub expansion in the Arctic tundra is the first phase of this regime shift, which is reinforced by carbon release due to permafrost degradation, which in turn increases climate warming and microbial activity enhancing shrub growth.
+Sufficient numbers of herbivores can limit shrub expansion and potentially maintain the shrub state on a long term basis.
 :::
 
-:::{style='width: 5%;'}
-
+::: {style="width: 5%;"}
 :::
 
-:::{style='width: 45%;'}
-
+::: {style="width: 45%;"}
 ```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
 
 
@@ -73,9 +66,8 @@ bs_append(
     caption = bs_carousel_caption(title = 'Tundra to forest'))
 
 ```
-
 :::
-::::
+::::::
 
 ## Evidence
 
@@ -87,16 +79,18 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
         popup = ~popups) |> 
-    setView(5,10, zoom = 2) 
+    setView(0,70, zoom = 1.5) 
 m
 ```
 
-**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
+**Fig 1 \| Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world.
+Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift.
+You can learn more from each case by hovering and clicking on the case of interest.
 
 ## Analysis {.tabset .tabset-pills}
 
@@ -104,41 +98,58 @@ m
 
 #### Alternative regimes
 
-This regime shift entails extensive change in biodiversity and soil structure in the Arctic tundra due to increased climate warming. To date shrub invasion has been the main indicator of a potential regime shift.
+This regime shift entails extensive change in biodiversity and soil structure in the Arctic tundra due to increased climate warming.
+To date shrub invasion has been the main indicator of a potential regime shift.
 
-  **Arctic tundra regime**
+**Arctic tundra regime**
 
- This regime is characterized by low atmospheric temperatures that enable the formation of a layer of permanently frozen subsoil (permafrost) consisting mostly of gravel and finer material. The ecosystem has a low rate of primary production due to impeded mineral nutrient cycling. The short growing season in summer influences the vegetation and its root systems by limiting vertical expansion. Only plant species (lichens, liverworts, mosses) that are adapted to sweeping winds and soil disturbance can survive in these conditions. The atmospheric cold and existing permafrost restrains the plant growth ensuring that their roots are shallow and surface parts are low growing due to the frozen ground underneath the permafrost. Snow does not accumulate keeping the soil temperature low thus not allowing for permafrost to thaw and release carbon into atmosphere keeping the atmosphere cold.
+This regime is characterized by low atmospheric temperatures that enable the formation of a layer of permanently frozen subsoil (permafrost) consisting mostly of gravel and finer material.
+The ecosystem has a low rate of primary production due to impeded mineral nutrient cycling.
+The short growing season in summer influences the vegetation and its root systems by limiting vertical expansion.
+Only plant species (lichens, liverworts, mosses) that are adapted to sweeping winds and soil disturbance can survive in these conditions.
+The atmospheric cold and existing permafrost restrains the plant growth ensuring that their roots are shallow and surface parts are low growing due to the frozen ground underneath the permafrost.
+Snow does not accumulate keeping the soil temperature low, thus not allowing for permafrost to thaw and release carbon into atmosphere keeping the atmosphere cold.
 
- **Boreal forest regime** 
+**Boreal forest regime**
 
- This regime is characterized by Flora that consist mostly of cold-tolerant evergreen conifers, such as the evergreen spruce (Picea), fir (Abies), and pine (Pinus), and the deciduous larch or tamarack (Larix). Before these species are established in a region, there is an increased canopy component of early-successional species such as aspen and paper birch (Frelich et al. 1995). Dwarf shrubs (e.g., Vaccinium uliginosum, Ledum decumbens, Betula nana and Cassiope tetragona) and low shrubs (e.g., Betula glandulosa, Salix glauca) act as pioneers that colonize the tundra before trees are able to establish (CAVM Team 2003). The shift to boreal forest can occur over a long time period varying from several decades to centuries depending on the migration time lag for each species and the occurrence of favorable conditions for seedling establishment.
-
-
+This regime is characterized by flora that consist mostly of cold-tolerant evergreen conifers, such as the evergreen spruce (*Picea sp.*), fir (*Abies sp.*), and pine (*Pinus sp.*), and the deciduous larch or tamarack (*Larix sp.*).
+Before these species are established in a region, there is an increased canopy component of early-successional species such as aspen and paper birch [@frelich1995].
+Dwarf shrubs (e.g., *Vaccinium uliginosum, Ledum decumbens, Betula nana* and *Cassiope tetragona*) and low shrubs (e.g., *Betula glandulosa, Salix glauca*) act as pioneers that colonize the tundra before trees are able to establish.
+The shift to boreal forest can occur over a long time period varying from several decades to centuries depending on the migration time lag for each species and the occurrence of favorable conditions for seedling establishment.
 
 #### Drivers and causes of the regime shift
 
-**Tundra to boreal regime** 
+**Tundra to boreal regime**
 
- The main external driver of this regime shift is CO2 emissions that increase climate warming (IPCC 2007), leading to changes in the composition and abundance of arctic vegetation, animals and soil structure (Olofsson et al. 2009). Anthropogenic activities that elevate atmospheric greenhouse gas concentrations are generally considered to be the primary cause for this driver. Carbon release from anthropogenic sources is projected to continue and increase during the coming decades (IPCC 2007). This global driver is well established and could be looked as irreversible in the scale of next hundred years.
-
-
+The main external driver of this regime shift is CO2 emissions that increase climate warming [@solomon2007climate], leading to changes in the composition and abundance of arctic vegetation, animals and soil structure [@olofsson2009].
+Anthropogenic activities that elevate atmospheric greenhouse gas concentrations are generally considered to be the primary cause for this driver.
+Carbon release from anthropogenic sources is projected to continue and increase during the coming decades [@solomon2007climate].
+This global driver is well established and could be looked as irreversible in the scale of next hundred years.
 
 #### Impacts on ecosystem services and human well-being
 
-**Tundra to Boreal forest regime** 
+**Tundra to Boreal forest regime**
 
- This regime provides biodiversity of different animal and plant species that characterize tundra ecosystem. For local population this regime provides traditional recreation opportunities and contains their knowledge and educational as well as spiritual and religious values. The shift from tundra to boreal forest is projected to occur over large geographic areas throughout the tundra zone, with substantial impacts on the landscape and biodiversity (Bonan 1992, Scheffer). Changes in vegetation are also likely to affect composition of foraging mammals and birds (Hinzman et al., 2005). In addition to modifying wildlife habitat, increased woody shrub abundance will make traversing tundra more difficult for caribou, subsistence hunters and communities that rely on caribou for food, as well as hikers. Herbivores such as reindeers and microtine rodents can also be influenced by the shift towards woody vegetation as they prefer lichens, dwarf shrubs graminoids and deciduous shrubs over tall woody shrubs (Sturm et al. 2005). Increased expansion of woody vegetation may therefore result in tundra species extinctions or radical decrease in numbers. The loss of the climate regulating ecosystem service is a major concern as permafrost thawing is reducing the carbon sink service.
+This regime provides biodiversity of different animal and plant species that characterize tundra ecosystem.
+For local population this regime provides traditional recreation opportunities and contains their knowledge and educational as well as spiritual and religious values.
+The shift from tundra to boreal forest is projected to occur over large geographic areas throughout the tundra zone, with substantial impacts on the landscape and biodiversity [@bonan1992; @scheffer2012].
+Changes in vegetation are also likely to affect composition of foraging mammals and birds [@hinzman2005].
+In addition to modifying wildlife habitat, increased woody shrub abundance will make traversing tundra more difficult for caribou, subsistence hunters and communities that rely on caribou for food, as well as hikers.
+Herbivores such as reindeers and microtine rodents can also be influenced by the shift towards woody vegetation as they prefer lichens, dwarf shrubs graminoids and deciduous shrubs over tall woody shrubs [@sturm2005].
+Increased expansion of woody vegetation may therefore result in tundra species extinctions or radical decrease in numbers.
+The loss of the climate regulating ecosystem service is a major concern as permafrost thawing is reducing the carbon sink service.
 
- The change in biodiversity could provide new ecosystem services such as timber production and different wild animals and plant foods. This would benefit loggers as they would increase their income from tree cutting and local communities from goods that come from forest.
-
-
+The change in biodiversity could provide new ecosystem services such as timber production and different wild animals and plant foods.
+This would benefit loggers as they would increase their income from tree cutting and local communities from goods that come from forest.
 
 #### Management options
 
-In order to prevent or reverse this regime shift it is essential that the input of carbon to the atmosphere be reduced in order to prevent further climate warming. The suggestion of a planetary boundary of 350 ppm for CO2 levels is a first step in this direction (Rockstrom et al. 2009). Increased understanding of the influence of climate change on the complexity of arctic systems is essential for informing the adaptation of social, economic, and cultural systems to the changes taking place in the Arctic (Hinzman et al. 2005). Technology transfer could be a good initiative from developed countries as they can provide more advanced technological solutions to developing countries to help accelerate the learning curve on GHG emissions. A Global response particularly from developed nations that are using the majority of the world's resources on a per capita basis should be in place to deal with such complex system. Nevertheless, discussions about desirable management strategies and outcomes will be essential as there will be stakeholders who stand to lose from this regime shift (e.g. caribou herders) while others may see the change as desirable and beneficial (e.g. timber production, game hunting).
-
-
+In order to prevent or reverse this regime shift it is essential that the input of carbon to the atmosphere be reduced in order to prevent further climate warming.
+The suggestion of a planetary boundary of 350 ppm for CO~2~ levels is a first step in this direction [@rockstrom2009planetary].
+Increased understanding of the influence of climate change on the complexity of Arctic systems is essential for informing the adaptation of social, economic, and cultural systems to the changes taking place in the Arctic [@hinzman2005].
+Technology transfer could be a good initiative from developed countries as they can provide more advanced technological solutions to developing countries to help accelerate the learning curve on GHG emissions.
+A global response particularly from developed nations that are using the majority of the world's resources on a per capita basis should be in place to deal with such complex system.
+Nevertheless, discussions about desirable management strategies and outcomes will be essential as there will be stakeholders who stand to lose from this regime shift (e.g. caribou herders) while others may see the change as desirable and beneficial (e.g. timber production, game hunting).
 
 ### In-depth analysis
 
@@ -167,166 +178,211 @@ if (rs$regime_shift_name %in% clds$regime_shift) {
 
 ```{r}
 
-load('assets/rs_analysis_text.Rda')
-
-if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
-    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+# load('assets/rs_analysis_text.Rda')
+# 
+# if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+#     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
+
+#### Feedback mechanisms
+
+##### Tundra regime
+
+-   *The shrub-microbial activity mechanism (regional; well established):* This mechanism is perceived to be essential to manage in order to avoid the regime shift to boreal forest. The low temperatures in Arctic regions are maintaining low soil temperatures that results in low microbial activity throughout the seasons. As a result there are few nutrients available in the soil thus affecting shrub growth. Drifting snow is common in the tundra, but without shrub expansion there are few deep drifts and thus avoiding insulation of the soil below. The lack of soil insulation further ensures low soil temperature therefore locking up the feedback mechanism. This mechanism creates a reinforcing feedback that promotes tundra establishment, maintaining the structure and the function of the tundra ecosystems.
+
+##### Boreal regime
+
+-   *The shrub-surface albedo mechanism (local/regional; well established ):* Shrub patches are expanding throughout the Arctic tundra as a result of Arctic warming and the influence of the altered shrub-microbial activity mechanism that is causing an increase in the length of the growing season.
+    The establishment of shrubs and trees have a significant impact on seasonal and annual land surface energy exchange.
+    Their primary effect is to mask the high albedo of snow, but they also partition net radiation into sensible and latent heat in summer months, thus warming the climate even further [@bonan1992].
+
+-   *The shrub-microbial activity mechanism (regional; well established):* Changes in this mechanism are initially behind the introduction in other feedback mechanism that maintain the new boreal forest regime.
+    The increasing shrub patches in tundra as a result of increasing atmospheric temperatures are causing changes in other processes in this mechanism.
+    Drifting snow is common in the tundra, and deep drifts often surround and extend downwind from shrub patches.
+    The shrub patches therefore help trap and hold the snow, increasing the insulation of the soil below [@sturm2005].
+    This insulation elevates the soil temperature allowing microbial activity to continue during the frigid arctic winter, producing enough critical nutrients – particularly nitrogen that stimulates shrub growth - to utilize the following summer and further increase shrub abundance [@chapin2005].
+    This mechanism creates a reinforcing feedback that promotes shrub establishment, altering both the structure and the function of the tundra ecosystems [@myers-smith2009].
+
+-   *The shrub-permafrost mechanism (regional; well established):* This mechanism is closely related to shrub-microbial activity mechanism and is well established.
+    The warming atmospheric temperatures and increasing soil temperatures and shrub expansion are also part of this mechanism.
+    Elevated soil temperatures under the snow lead to permafrost degradation [@zimov2006].
+    Thawing permafrost can release carbon trapped in tundra soils, thereby contributing to climate warming which further accelerates the rate of carbon release [@welker2000].
+
+-   *The soil drainage-woody vegetation mechanism (regional; contested):* Increasing abundance in shrubs and resulting increase in soil temperatures also create areas of improved subsurface drainage due to improved vertical flow of water through the soil.
+    This significantly enhances the establishment of tall woody vegetation in level terrain underlain by permafrost as they require on well-drained soils [@lloyd2003].
+    Reindeer can preserve open heathlands by inhibiting the expansion of shrubs and trees through grazing [@olofsson2009].
+    However, the lichen and other tundra plants favored by caribou are gradually being replaced by woody shrubs and trees that are not consumed by caribou.
+    Given sufficient abundance of reindeer and other large herbivores, this suggests the possibility for the transitional shrub state to persist without shifting to successional boreal forest species such as birch and aspen.
+    This mechanism is still contested and must be further studied in order to understand the affect of woody vegetation on the diet of caribou and other factors that affect caribou population.
+
+#### Drivers
+
+##### Tundra to Boreal regime
+
+Important **shocks** (eg droughts, floods) that contribute to the regime shift include:
+
+-   *Droughts (local/regional, contested):* Dry conditions in Arctic is directly having an effect on this regime as drying of tundra soils in parts of Alaska have already changed the carbon status of this area from sink to source [@callaghan2005arctic].
+
+The main **external direct drivers** that contribute to the shift include:
+
+-   *Greenhouse gas emissions (global, well established):* This driver is well established and initially affects the shrub-microbial activity mechanism by increasing the soil temperature as the time period of warmer atmospheric temperatures increase, thus enhancing microbial activity. Carbon release from both anthropogenic and natural sources (due to permafrost degradation) is projected to continue and increase [@solomon2007climate], which will lead to further climate warming and more rapid expansion of woody vegetation.
+
+Slow **internal system changes** that contribute to the regime shift include:
+
+-   *Atmospheric temperatures (global; well established):* This variable mainly affects ice volume variations throughout the year and in case of continuous depletion of Arctic sea ice it triggers various mechanisms that maintain the new regime of Arctic without summer sea ice.
+
+-   Carbon accumulation
+
+#### Key thresholds
+
+##### Tundra to Boreal forest regime
+
+-   *Atmospheric temperature:* threshold at which thermal balance is established for promoting permafrost depleting conditions, high microbial activity and nutrient availability in soil throughout the seasons.
+
+-   *Soil temperature:* threshold at which the microbial activity and nutrient availability in soil is sufficient for the invasion of shrubs and other pioneer species of boreal forest.
+
+##### Boreal forest to Tundra regime
+
+-   *Atmospheric temperature (global, well established):* threshold at which thermal balance is established for promoting permafrost enhancing conditions and low microbial activity and nutrient availability in soil throughout the seasons.
+
+-   *Soil temperature (regional, well established):* threshold at which the microbial activity and nutrient availability in soil is insufficient for the invasion of shrubs and other pioneer species of boreal forest.
+
+#### Leverage points
+
+-   *Atmospheric CO~2~:* Both atmospheric and soil temperature could be manage by reducing CO~2~ emissions.
+    It is crucial to manage increasing atmospheric temperatures as this event is altering the other processes that occur in this regime shift.
+    Soil temperatures on the other hand result in changes in soil structure and permafrost degradation.
+
+-   *Low albedo (local/regional, well established)*: increases absorption of solar radiation thus adding to the temperature increase.
+    Thus increasing albedo by using bright materials that reflect solar radiation and covering rooftops and dark surfaces could increase albedo reflecting more solar radiation therefore cooling the surface temperature.
+
+#### Ecosystem service impacts
+
+Ecosystem services associated with the tundra regime are biodiversity and climate regulation.
+Tundra is also ensuring the provision of typical wild animal and plant foods.
+Tundra can contribute to knowledge and educational as well as aesthetic values.
+It also embeds spiritual and religious values.
 
 ### Categorical summary
 
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 #### Impacts
 
 **Ecosystem type**:'
 
-- Tundra
-
+-   Tundra
 
 **Key ecosystem processes**:
 
-- Primary production
-- Nutrient cycling
-- Water cycling
-
+-   Primary production
+-   Nutrient cycling
+-   Water cycling
 
 **Biodiversity**:
 
-- Biodiversity
-
+-   Biodiversity
 
 **Provisioning services**:
 
-- Livestock
-- Wild animal and plant products
-- Timber
-
+-   Livestock
+-   Wild animal and plant products
+-   Timber
 
 **Regulating services**:
 
-- Climate regulation
-
+-   Climate regulation
 
 **Cultural services**:
 
-- Recreation
-- Aesthetic values
-- Knowledge and educational values
-- Spiritual and religious
-
+-   Recreation
+-   Aesthetic values
+-   Knowledge and educational values
+-   Spiritual and religious
 
 **Human well-being**:
 
-- Food and nutrition or Livelihoods and economic activity or Cultural or Aesthetic and recreational values
-
+-   Food and nutrition
+-   Livelihoods and economic activity
+-   Cultural
+-   Aesthetic and recreational values
 
 **Links to other regime shifts**:
 
-- Thermohaline circulation
-
-
+-   Thermohaline circulation
 :::
 
-:::{style='width: 50%;'}
-
+::: {style="width: 50%;"}
 #### Drivers
 
 **Key drivers**:
 
-- Global climate change
-
+-   Global climate change
 
 **Land use**:
 
-- Extensive livestock production (natural rangelands) or Conservation or Tourism
-
+-   Extensive livestock production (natural rangelands)
+-   Conservation
+-   Tourism
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake or catchment or community) or Sub-continental (e.g. southern Africa or Amazon basin)
-
+-   Local/landscape (e.g. lake catchment or community)
+-   Sub-continental (e.g. southern Africa or Amazon basin)
 
 **Time scale**:
 
-- Decades
-- Centuries
-
+-   Decades
+-   Centuries
 
 **Reversibility**:
 
-- Irreversible (on 100 year time scale)
-- Unknown
-
+-   Irreversible (on 100 year time scale)
+-   Unknown
 
 **Evidence**:
 
-- Models
-- Paleo-observation
-- Contemporary observations
-- Experiments
-
+-   Models
+-   Paleo-observation
+-   Contemporary observations
+-   Experiments
 
 **Confidence: existence of the regime shift**
 
-- Speculative – Regime shift has been proposed, but little evidence as yet
-
+-   Speculative – Regime shift has been proposed, but little evidence as yet
 
 **Confidence: mechanisms underlying the regime shift**
 
-- Well established – Wide agreement on the underlying mechanism
-
-
+-   Well established – Wide agreement on the underlying mechanism
 :::
-
-::::
+:::::
 
 ### References
 
 ::: {#refs}
-
 :::
-### References old [Delete]
-
-<small>
-
-- Bonan GB, Pollard D, and Thompson SL. 1992. Effects of Boreal Forest Vegetation on Global Climate. Nature 359,716-18 
-- CAVM Team: Circumpolar Arctic Vegetation. Arctic Portal. http://web.arcticportal.org/uploads/OY/RT/OYRTN1ieqI5IVfPL2U3SqA/side1_031016.pdf.  Last visited: 1 Apr. 2010  
-- Chapin III FS. et al. 2005. Role of land-surface changes in Arctic summer warming. Science 310,657-660. 
-- Frelich LE, and Reich PB. 1995. Spatial patterns and succession in a Minnesota southern boreal forest. Ecological Monographs 65(3),325-346. 
-- Hinzman LD, et al. 2005. Evidence and Implications of Recent Climate Change in Northern Alaska and Other Arctic Regions. Climatic Change  72(3). 
-- IPCC 2007. Climate Change 2007: The Physical Science Basis. Cambridge University Press, New York. 
-- Lloyd AH. 2003. Effects of Permafrost Degradation on Woody Vegetation at Arctic Treeline on the Seward Peninsula, Alaska. Permafrost Periglac. Process. 14,93–101. 
-- Myers-Smith I. 2007. Shrub line advance in alpine tundra of the Kluane Region: mechanisms of expansion and ecosystem impacts. Arctic 60(4),447-451. 
-- Olofsson J, Oksanen L, Callaghan T, Hulme PE, Oksanen T, Suominen O. 2009. Herbivores inhibit climate-driven shrub expansion on the tundra. Global Change Biology 15(11),2681 – 2693. 
-- Rockström J. et al. 2009. Planetary Boundaries: Exploring the Safe Operating Space for Humanity. Ecology and Society 14(2),32. 
-- Sturm M, Schimel J, Michaelson G, Welker JM, Oberbauer SF, Liston GE, Fahnestock J, and Romanovsky VE. 2005. Winter biological processes could help convert arctic tundra to shrubland. Bioscience 55(1),17-26. 
-- UCMP: The tundra biome. University of California Museum of Paleontology.  http://www.ucmp.berkeley.edu/exhibits/biomes/tundra.php Last visited: 26 Jan. 2010. 
-- Welker JM, Fahnestock JT, Jones MH. 2000. Annual CO, flux from dry and moist arctic tundra: Field responses to increases in summer temperature and winter snow depth. Climatic Change 44(1-2),139-150.  
-- Zimov SA, Schuur EAG, Chapin III SF. 2006. Permafrost and the Global Carbon Budget. Science 312(16),1612-1613.
-
-</small>
 
 ## Citation
+
 Acknowledge this review as:
 
-<tiny> 
-``` {style='color: gray;'}
-Juan Carlos Rocha, Rolands Sadauskis, Reinette (Oonsie) Biggs, Garry Peterson. Tundra to forest. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-28
+<tiny>
+
+``` {style="color: gray;"}
+Rolands Sadauskis, Juan Carlos Rocha, Reinette (Oonsie) Biggs, Garry Peterson. Tundra to forest. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-28
 ```
 
 </tiny>
 
 BibTeX citation:
 
-<tiny><tiny> 
-``` {style='color: gray;'}
+<tiny>
+
+``` {style="color: gray;"}
 @misc{
-  author = {Juan Carlos Rocha and Rolands SadauskisReinette (Oonsie) Biggs and Garry Peterson},
+  author = {Rolands Sadauskis and Juan Carlos Rocha and Reinette (Oonsie) Biggs and Garry Peterson},
   title = {Tundra to forest},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

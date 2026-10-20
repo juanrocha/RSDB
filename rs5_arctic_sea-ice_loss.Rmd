@@ -9,14 +9,13 @@ params:
   j: 5
 ---
 
-
 ```{r include = FALSE}
 library(tidyverse)
 library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -24,32 +23,28 @@ rs <- dat |> filter(id== x)
 knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+:::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 # Arctic sea-ice loss
 
+-   **Main contributors**: Rolands Sadauskis
 
-- **Main contributors**: Rolands Sadauskis
+-   **Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson, Juan Carlos Rocha
 
-- **Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson, Juan Carlos Rocha
+-   Last update: 2011-02-27
 
-- Last update: 2011-02-27
-
-A regime shift towards a summer ice-free Arctic is occurring in response to Arctic warming that is demonstrated by reductions in sea ice surface area and ice volume during the summers. A summer ice-loss threshold, if not already passed, is expected to occur well within 21st century. The main driver behind the shift is the increased concentrations of greenhouse gases in the atmosphere – particularly CO2 that is contributing to the increase in average global temperature. Several feedback mechanisms have been proposed that may help maintain the reductions in Arctic ice under the new regime. The primary and best understood is the ice-albedo feedback mechanism where greenhouse gases are causing increased air temperature near the ground/ice surface leading to rapid decrease in ice surface area and volume. Current management strategies primarily relate to the decrease of greenhouse gas emissions on a global scale.
-
-
-
+A regime shift towards a summer ice-free Arctic is occurring in response to Arctic warming that is demonstrated by reductions in sea ice surface area and ice volume during the summers.
+A summer ice-loss threshold, if not already passed, is expected to occur well within 21^st^ century.
+The main driver behind the shift is the increased concentrations of greenhouse gases in the atmosphere – particularly CO~2~ that is contributing to the increase in average global temperature.
+Several feedback mechanisms have been proposed that may help maintain the reductions in Arctic ice under the new regime.
+The primary and best understood is the ice-albedo feedback mechanism where greenhouse gases are causing increased air temperature near the ground/ice surface leading to rapid decrease in ice surface area and volume.
+Current management strategies primarily relate to the decrease of greenhouse gas emissions on a global scale.
 :::
 
-:::{style='width: 5%;'}
-
+::: {style="width: 5%;"}
 :::
 
-:::{style='width: 45%;'}
-
+::: {style="width: 45%;"}
 ```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
 
 
@@ -69,9 +64,8 @@ bs_append(
     caption = bs_carousel_caption(title = 'Arctic sea-ice loss'))
 
 ```
-
 :::
-::::
+::::::
 
 ## Evidence
 
@@ -83,16 +77,18 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
         popup = ~popups) |> 
-    setView(5,10, zoom = 2) 
+    setView(0,75, zoom = 2) 
 m
 ```
 
-**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
+**Fig 1 \| Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world.
+Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift.
+You can learn more from each case by hovering and clicking on the case of interest.
 
 ## Analysis {.tabset .tabset-pills}
 
@@ -100,41 +96,75 @@ m
 
 #### Alternative regimes
 
-The system is defined by the ice volume and the territory it covers in the Arctic Ocean and the regional/global processes that ensure the existence of ice in this area. The loss of surface area and thinning of Arctic sea ice has not occurred at a linear rate which may be indicative of a systematic change towards an alternate regime.
+The system is defined by the ice volume and the territory it covers in the Arctic Ocean and the regional processes that ensure the existence of ice in this area.
+The loss of surface area and thinning of Arctic sea ice has not occurred at a linear rate which may be indicative of a systematic change towards an alternate regime.
 
- **Arctic with summer ice**
+**Arctic with summer ice**
 
- Under this regime, the Arctic Ocean has an abundance of sea ice.  It is characterized by very long and cold winters, during which the ice surface area and thickness reach their maximum. The low winter temperatures and short summer help to maximize the sea ice surface area and volume over time.
+Under this regime, the Arctic Ocean has an abundance of sea ice.
+It is characterized by very long and cold winters, during which the ice surface area and thickness reach their maximum.
+The low winter temperatures and short summer help to maximize the sea ice surface area and volume over time.
 
- **Arctic without summer ice**
+**Arctic without summer ice**
 
- In this regime the surface area and volume of summer sea ice in the Arctic rapidly decreases due to atmospheric warming caused by greenhouse gases. In summer when open water surface area is greater, the albedo is reduced, which causes greater absorption of solar radiation.  This raises the temperature of the water and ice, which facilitates greater losses in sea ice surface area and volume. Several models predict that ice free Arctic conditions in summer will be reached within this century (Arzel et al. 2006). Several authors have suggested that the system has already surpassed a tipping point, but convincing evidence is lacking (Lenton et al. 2008).
+In this regime the surface area and volume of summer sea ice in the Arctic rapidly decreases due to atmospheric warming caused by greenhouse gases.
+In summer when open water surface area is greater, the albedo is reduced, which causes greater absorption of solar radiation. 
+This raises the temperature of the water and ice, which facilitates greater losses in sea ice surface area and volume.
+Several models predict that ice free Arctic conditions in summer will be reached within this century [@arzel2006; @holland2006; @stroeve2007; @zhang2006].
+Several authors have suggested that the system has already surpassed a tipping point, but convincing evidence is lacking [@lenton2008].
 
+#### How the regime shift work
 
+The Arctic with summer ice regime is maintained by permanent low surface air temperatures (SAT) that maintain the thermal balance, thus ensuring balanced heat exchange between the atmosphere, sea ice, and water.
+The result is maintained sea ice volume, thickness and surface area.
+This occurs due to ensuring high albedo (a measure of reflectance) level as the dark ocean surface absorbs more solar radiation than the sea ice [@lindsay2005].
+This means that the high albedo reflects more radiation avoiding surface temperature increase.
+Avoiding increased absorption of solar energy promotes lower air, ice, water and land temperatures which lead towards maintaining sea ice.
+In the end, the low temperatures further promote ice maintaining arctic conditions.
+
+There is near universal agreement that the extent of Arctic sea ice will decline through the 21^st^ century in response to increasing atmospheric greenhouse gas (GHG) concentrations [@zhang2006].
+The resulting increase in surface air temperatures (SAT) change the thermal balance which means that the heat exchange between the atmosphere, sea ice, and water is changed.
+The result is a decrease in sea ice volume, thickness and surface area.
+The increased area of open water in summer decreases the albedo as the dark ocean surface absorbs more solar radiation than the sea ice [@lindsay2005].
+Increased absorption of solar energy promotes higher air, ice, water and land temperatures which lead towards degrading sea ice volume [@rigor2002; @holland2006].
+In the end, the increasing temperatures and accumulated heat further promote warming arctic conditions
+
+Changes in the summer extent of Arctic sea ice are not solely forced by SATs, but could also be affected by fluctuations of atmospheric pressure at sea level that controls the strength and direction of windsin the region.
+More probably these changes could be driven by a combination of these (and/or other) forcing [@kinnard2011].
 
 #### Drivers and causes of the regime shift
 
-The main driver of this regime shift is elevated greenhouse gas concentrations in the atmosphere causing an increase in arctic air temperatures. This global driver is well established and could be looked as irreversible in the scale of next hundred years. In regards to the loss of sea ice in the Arctic, the regime shift is generally considered to be irreversible unless the main driver (increased atmospheric temperatures resulting from climate change) is changed in the near future.
+The main driver of this regime shift is elevated greenhouse gas concentrations in the atmosphere causing an increase in arctic air temperatures.
+This global driver is well established and could be looked as irreversible in the scale of next hundred years.
+In regards to the loss of sea ice in the Arctic, the regime shift is generally considered to be irreversible unless the main driver (increased atmospheric temperatures resulting from climate change) is changed in the near future.
 
- Anthropogenic activities that elevate atmospheric greenhouse gas concentrations are generally considered to be the primary driver of climate change (IPCC 2007; Kinnard et. al 2011). Carbon release from anthropogenic sources is projected to continue and increase during the coming decades (IPCC 2007). This is expected to contribute to an increase in average global temperatures and more rapid decrease in sea ice cover and thickness in the Arctic. This driver initially affects the main ice-albedo mechanism thus changing the processes that characterize its initial state. Once the main mechanism has shifted the driver and the altered ice-albedo mechanism initiates change in other parts of the system.
-
-
+Anthropogenic activities that elevate atmospheric greenhouse gas concentrations are generally considered to be the primary driver of climate change [@solomon2007climate].
+Carbon release from anthropogenic sources is projected to continue and increase during the coming decades [@solomon2007climate].
+This is expected to contribute to an increase in average global temperatures and more rapid decrease in sea ice cover and thickness in the Arctic.
+This driver initially affects the main ice-albedo mechanism thus changing the processes that characterize its initial state.
+Once the main mechanism has shifted the driver and the altered ice-albedo mechanism initiates change in other parts of the system.
 
 #### Impacts on ecosystem services and human well-being
 
-Local knowledge and spiritual values might be lost as the local communities have to adapt to the new circumstances and thus their lifestyle. In addition to concerns about the security of infrastructure and impacts on human well being, ice free Arctic summers have important impacts on ecosystems. One such impact is that loss of ice cover could affectthe Arctic's freshwater system and surface energy budget, andmanifest in middle latitudes as altered patternsin atmospheric circulation and precipitation (Serreze et al. 2007). This presents the way how water and atmospheric circulations could be altered as ecosystem services.
+Local knowledge and spiritual values might be lost as the local communities have to adapt to the new circumstances and thus their lifestyle.
+In addition to concerns about the security of infrastructure and impacts on human well being, ice free Arctic summers have important impacts on ecosystems.
+One such impact is that loss of ice cover could affect the Arctic's freshwater system and surface energy budget, and manifest in middle latitudes as altered patterns in atmospheric circulation and precipitation [@serreze2007].
+This presents the way how water and atmospheric circulations could be altered as ecosystem services.
 
- Summer sea ice concentration is important for navigation, and may have implications for the transport of sediments and pollutants across the Arctic. Most of the sea ice formed in the Arctic Ocean is exported through the Fram Strait into the Greenland Sea and to the North Atlantic where the ice may affect the global thermohaline circulation (Rigor et al. 2002). Sea ice also blocks the solar flux to the water and hence is a major control factor phytoplankton to seals, walrus, and polar bears while limiting access to the surface for seals and whales (Lindsay et al. 2005).
+Summer sea ice concentration is important for navigation, and may have implications for the transport of sediments and pollutants across the Arctic.
+Most of the sea ice formed in the Arctic Ocean is exported through the Fram Strait into the Greenland Sea and to the North Atlantic where the ice may affect the global thermohaline circulation [@rigor2002].
+Sea ice also blocks the solar flux to the water and hence is a major control factor phytoplankton to seals, walrus, and polar bears while limiting access to the surface for seals and whales [@lindsay2005].
 
- The rapidly melting sea ice in the Arctic Ocean has increased political and economic interest in the region's resource extraction and in the potential for more accessible shipping routes. By opening the Northwest passage, shipping route through the northern Canadian waters, could result in a positive economic impact. Although this also could potentially result in ecological disasters as the possibility of oil spills and other disasters associated with development would increase.
-
-
+The rapidly melting sea ice in the Arctic Ocean has increased political and economic interest in the region's resource extraction and in the potential for more accessible shipping routes.
+By opening the Northwest passage, shipping route through the northern Canadian waters, could result in a positive economic impact.
+Although this also could potentially result in ecological disasters as the possibility of oil spills and other disasters associated with development would increase.
 
 #### Management options
 
-The options for preventing or reversing the loss of summer sea ice in the Arctic primarily relate to the decrease of greenhouse gas emissions on a global scale to reduce climatic warming. As atmospheric greenhouse gas concentrations increase, it is essential to understand local and regional actions that may influence the feedback mechanisms influencing the shift to an ice free summer Arctic. Technology transfer could be a good initiative from developed countries as they can provide more advanced technological solutions to developing countries to help accelerate the learning curve on GHG emissions. A Global response particularly from developed nations that are using the majority of the world’s resources on a per capita basis should be in place to deal with such complex system.
-
-
+The options for preventing or reversing the loss of summer sea ice in the Arctic primarily relate to the decrease of greenhouse gas emissions on a global scale to reduce climatic warming.
+As atmospheric greenhouse gas concentrations increase, it is essential to understand local and regional actions that may influence the feedback mechanisms influencing the shift to an ice free summer Arctic.
+Technology transfer could be a good initiative from developed countries as they can provide more advanced technological solutions to developing countries to help accelerate the learning curve on GHG emissions.
+A Global response particularly from developed nations that are using the majority of the world’s resources on a per capita basis should be in place to deal with such complex system.
 
 ### In-depth analysis
 
@@ -163,76 +193,154 @@ if (rs$regime_shift_name %in% clds$regime_shift) {
 
 ```{r}
 
-load('assets/rs_analysis_text.Rda')
-
-if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
-    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+# load('assets/rs_analysis_text.Rda')
+# 
+# if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+#     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
+
+#### Feedback mechanisms
+
+##### Arctic with summer ice
+
+-   *The ice-albedo mechanism (reinforcing, regional, well established):* The permanent low surface air temperatures maintain the thermal balance, thus ensuring balanced heat exchange between the atmosphere, sea ice, and water. The result is maintained sea ice volume, thickness and surface area. This occurs due to ensuring high albedo level as the dark ocean surface absorbs more solar radiation than the sea ice. This means that the high albedo reflects more radiation avoiding surface temperature increase. Avoiding increased absorption of solar energy promotes lower air, ice, water and land temperatures which lead towards maintaining sea ice. In the end, the low temperatures further promote ice maintaining arctic conditions.
+
+##### Arctic without summer ice
+
+-   *The ice-albedo mechanism (reinforcing, regional, well established):* Increased atmospheric greenhouse gas concentrations in atmosphere increase surface air temperatures that change the thermal balance.
+    The result is a decrease in sea ice volume, thickness and surface area.
+    The increased area of open water in summer decreases the albedo as the dark ocean surface absorbs more solar radiation than the sea ice.
+    Increased absorption of solar energy promotes higher air, ice, water and land temperatures which lead towards degrading sea ice.
+    In the end, the increasing temperatures and accumulated heat further promote warming arctic conditions.
+
+-   *The wind-ice circulation mechanism (reinforcing, regional/global, well established):* Ice circulation patterns develop in response to wind and ocean currents.
+    Retreating ice cover and increasing open water surface area generates a longer fetch for winds over the water surface [@bitz2004].
+    These altered surface winds result in morecyclonic motion of the ice and an enhanced transport of ice awayfrom the Siberian and Alaskan coasts.
+    This change in circulation fosters openings in the ice cover along the coasts.
+    Although these openings quickly refreeze in response to low winter surface air temperatures, coastal areas in spring are left with an anomalous coverage of young, thin ice.
+    This thin ice then usually melts completely during the summer promoting stronger heat fluxes to the atmosphere, which fosters higher surface air temperatures in the spring andearlier melt onset [@rigor2004].
+
+-   *The wind-CHL mechanism (reinforcing, regional, not well understood):* The loss of ice volume and resulting increase in open surface water are allowing increased wind fetch.
+    The cold halocline layer (CHL) effectively shields the surface from heat stored at intermediate depths in the Atlantic layer [@steele1998].
+    A study has shown a changing trend in wind patterns that cause a different distribution pattern of river water into the ocean [@johnson2001].
+    The relatively low input of river water into the Arctic Ocean can result in anomalously high salinities in the water that that links with the retreat of CHL.
+    When warm Atlantic watersenter the Arctic Ocean, they form an intermediate layer of warm water as they subduct below the colder, fresher (less dense) arctic surface waters.
+    The CHL separates the Atlantic and surface waters and largely insulates the ice from the heat of the Atlantic layer.
+    The retreat of CHL is proposed toincrease Atlantic layer heat loss and ice-ocean heat exchange affecting the surface energy and mass balance of sea ice in Arctic.
+
+-   *The ice-currents mechanism (reinforcing, regional, speculative):* A relationship between ice loss and oceanic warm water flux through the Bering Strait has been proposed [@dickson2000].
+    Delayed winter ice formation allows for more efficient coupling between the ocean and wind forcing - a process that drives general circulation in Oceans.
+    This redirects warm surface water from the Pacific Ocean from the shelf slope along Alaska into the Arctic Ocean, where it may retard winter ice formation [@zhang2000].
+    In contrast, studies of river hydrographs document strong variability of river inflows into the Arctic without showing a distinctive long-term trend.
+
+-   *The precipitation-CHL mechanism (balancing, regional, contested):* Increasing atmospheric temperatures and the following reduction of ice volume in Northern Hemisphere determine that the space of ice free water expands.
+    Thus the evaporation from extended open water bodies increase leading to precipitation increase.
+    If precipitation exceeds evaporation it leads to increased river runoff thus providing additional freshwater forcing.
+    The CHL is strengthened by the cold freshwater input from the river runoff [@prange2003].
+    Nevertheless as a result of wind energy input over large areas of open water internal wave induced mixing is enhanced that results in removing the CHL.
+    This is proposed to increase Atlantic layer heat loss and ice-ocean heat exchange affecting the surface energy and mass balance of sea ice in Arctic.
+    Thus increased precipitation and river runoff that strengthen the CHL could slow the depletion of Arctic ice by avoiding the warm Atlantic waters to intervene with the ice sheet.
+    This is a balancing mechanism which means that after maintaining ice volume the open water surface will decline thus affecting precipitation and weakening CHL that further declines ice volume.
+    Therefore other mechanisms could be dominating while this mechanism is in the balancing phase of ice decline instead of ice increase.
+    If the wind-CHL mechanism is dominant over this mechanism then the loss of ice volume due to absence of CHL would still increase.
+
+#### Drivers
+
+The main driver of this regime shift is elevated greenhouse gas concentrations in the atmosphere causing an increase in arctic air temperatures [@solomon2007climate].
+This global driver is well established and could be looked as irreversible in the scale of next hundred years.
+In regards to the loss of sea ice in the Arctic, the regime shift is generally considered to be irreversible unless the main driver (increased atmospheric temperatures resulting from climate change) is changed in the near future.
+Anthropogenic activities that elevate atmospheric greenhouse gas concentrations are generally considered to be the primary driver of climate change [@solomon2007climate].
+Carbon release from anthropogenic sources is projected to continue and increase during the coming decades [@solomon2007climate].
+This is expected to contribute to an increase in average global temperatures and more rapid decrease in sea ice cover and thickness in the Arctic [@holland2006].
+This driver initially affects the main ice-albedo mechanism thus changing the processes that characterize its initial state.
+Once the main mechanism has shifted the driver and the altered ice-albedo mechanism initiates change in other parts of the system.
+Greenhouse gas concentrations in the atmosphere and increasing temperatures are considered to be slow variables underlying this regime shift.
+The decrease in albedo and the resulting increase in the absorption of solar energy are the fast variables that are directly resulting in the decrease in Arctic sea ice.
+
+The main external direct drivers that contribute to the shift include:
+
+-   *Greenhouse gas emissions (global; well established):* Resulting increase in average global temperatures extend the area of open water in summer which in turn decreases the albedo that affects the absorption of solar energy therefore further degrading sea ice.
+
+Slow internal system changes that contribute to the regime shift include:
+
+-   *Atmospheric temperatures (global; well established)* This variable mainly affects ice volume variations throughout the year and in case of continuous depletion of Arctic sea ice it triggers various mechanisms that maintain the new regime of Arctic without summer sea ice.
+
+#### Key thresholds
+
+-   *Atmospheric temperatures:* threshold at which thermal balance is established for promoting ice depleting or maintenance of arctic conditions
+
+#### Leverage points
+
+-   *Atmospheric temperature (global, well established):* It is essential to alter increasing atmospheric temperatures as this event is ensuring the other processes that occur in this regime shift
+
+-   *River runoff (regional, ?):* essential to alter in order to minimize the freshwater input in cold halocline layer and thus further decline of ice volume.
+
+-   *Albedo (local/regional, well established):* altering low albedo would decrease the absorbtion of solar radiation thus avoiding atmospheric temperature increase and continuous loss of arctic ice.
+
+#### Ecosystem service impacts
+
+Local knowledge and spiritual and aesthetic values might be lost as the local communities have to adapt to the new circumstances and thus their lifestyle.
+Local wild animal and plant food diversity and fisheries would be affected as warmer conditions and less saline water would alter biodiversity and certain species would be extinct.
+
+On the other hand, summer ice free Arctic would provide the access to new fisheries.
+The loss of ice cover could affect the Arctic’s freshwater system and surface energy budget, and manifest in middle latitudes as altered patterns in atmospheric circulation and precipitation [@francis2012].
+This presents the way how water and atmospheric circulations could be altered as ecosystem services.
 
 ### Categorical summary
 
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 #### Impacts
 
 **Ecosystem type**:'
 
-- Marine & coastal
-- Polar
-
+-   Marine & coastal
+-   Polar
 
 **Key ecosystem processes**:
 
-- Water cycling
-
+-   Water cycling
 
 **Biodiversity**:
 
-- Biodiversity
-
+-   Biodiversity
 
 **Provisioning services**:
 
-- Fisheries
-- Wild animal and plant foods
-
+-   Fisheries
+-   Wild animal and plant foods
 
 **Regulating services**:
 
-- Climate regulation
-- Water regulation
-
+-   Climate regulation
+-   Water regulation
 
 **Cultural services**:
 
-- Aesthetic values
-- Knowledge and educational values
-- Spiritual and religious
-
+-   Aesthetic values
+-   Knowledge and educational values
+-   Spiritual and religious
 
 **Human well-being**:
 
-- Food and nutrition or Livelihoods and economic activity or Security of housing & infrastructure or Cultural or Aesthetic and recreational values
-
+-   Food and nutrition
+-   Livelihoods and economic activity
+-   Security of housing & infrastructure
+-   Cultural
+-   Aesthetic and recreational values
 
 **Links to other regime shifts**:
 
-- Thermohaline circulation
-- Greenland ice sheet collapse
-
-
+-   Thermohaline circulation
+-   Greenland ice sheet collapse
 :::
 
-:::{style='width: 50%;'}
-
+::: {style="width: 50%;"}
 #### Drivers
 
 **Key drivers**:
 
-- Global climate change
-
+-   Global climate change
 
 **Land use**:
 
@@ -242,75 +350,45 @@ NA
 
 **Spatial scale**:
 
-- Sub-continental (e.g. southern Africa or Amazon basin)
-
+-   Sub-continental (e.g. southern Africa or Amazon basin)
 
 **Time scale**:
 
-- Decades
-
+-   Decades
 
 **Reversibility**:
 
-- Irreversible (on 100 year time scale)
-- Unknown
-
+-   Irreversible (on 100 year time scale)
+-   Unknown
 
 **Evidence**:
 
-- Models
-- Paleo-observation
-- Contemporary observations
-
+-   Models
+-   Paleo-observation
+-   Contemporary observations
 
 **Confidence: existence of the regime shift**
 
-- Contested – Reasonable evidence both for and against the existence of RS
-
+-   Contested – Reasonable evidence both for and against the existence of RS
 
 **Confidence: mechanisms underlying the regime shift**
 
-- Well established – Wide agreement on the underlying mechanism
-
-
+-   Well established – Wide agreement on the underlying mechanism
 :::
-
-::::
+:::::
 
 ### References
 
 ::: {#refs}
-
 :::
-### References old [Delete]
-
-<small>
-
-- Arzel O, Fichefet T, Goosse H. 2006. Sea ice evolution over the 20th and 21st centuries as simulated by current AOGCMs. Ocean Model 12,401. 
-- Bitz CM, and Roe GH. 2004. A mechanism for the high rate of sea ice thinning in the Arctic Ocean. J. Climate 17,3622–3631. 
-- Dickson RR, Osborn TJ, Hurrell JW, Meincke J, Blindheim J, Adlandsvik B, Vinje T, Alekseev G, Maslowski W. 2000. The Arctic Ocean Response to the North Atlantic Oscillation. J. Clim. 13,2671. 
-- Francis, J. A. & Vavrus, S. J. Evidence linking Arctic amplification to extreme weather in mid-latitudes. Geophys Res Lett 39, L06801– (2012). 
-- Holland MM, Bitz CM, and Tremblay B. 2006. Future abrupt reductions in the summer Arctic sea ice. Geophys. Res. Lett. 33 
-- IPCC 2007. Climate Change 2007: The Physical Science Basis. Cambridge University Press, New York. 
-- Johnson MA, and Polyakov IV. 2001. The Laptev Sea as a source for recent Arctic Ocean salinity changes, Geophys. Res. Lett., 28,2017-2020. 
-- Lenton TM, Held H, Kriegler E, Hall JW, Lucht W, Rahmstorf S, and Schellnhuber HJ. 2008.Tipping elements in the Earth’s climate system. PNAS 105(6),1786-1793. 
-- Lindsay RW, and Zhang. 2005. The Thinning of Arctic Sea Ice, 1988–2003: Have We Passed a Tipping Point? Journal of Climate 18(22),4879-4894. 
-- Prange M, and Lohman G. 2003. Effects of mid-Holocene river runoff on the Arctic ocean/sea-ice system: a numerical model study. The Holocene 13,335–342. 
-- Rigor IG, Wallace JM, and Colony RL. 2002. Response of sea ice to the Arctic Oscillation. J. Climate 15,2648–2668. 
-- Rigor IG, and Wallace JM. 2004. Variations in the age of sea-ice and summer sea-ice extent. Geophys. Res. Lett. 31. 
-- Serreze MC, Holland MM, Stroeve J. 2007. Perspectives on the Arctic's Shrinking Sea-Ice Cover. Science 315(5818),1533 - 1536. 
-- Steele M, and Boyd T. 1998. Retreat of the cold halocline layer in the Arctic Ocean. J.Geophys. Res 103,10419–10435. 
-- Stroeve J, Holland MM, Meier W, Scambos T, and Serreze M. 2007. Arctic sea ice decline: Faster than forecast. Geophysical research letters 34. 
-- Zhang J, Rothrock D, and Steele M. 2000. Recent changes in Arctic sea ice: The interplay between ice dynamics and thermodynamics. J. Climate 13,3099–3114. 
-- Zhang X, and Walsh JE. 2006. Towards a seasonally ice-covered Arctic Ocean: Scenarios from the IPCC AR4 simulations. Journal of Climate 19,1730– 1747.
-
-</small>
 
 ## Citation
+
 Acknowledge this review as:
 
-<tiny> 
-``` {style='color: gray;'}
+<tiny>
+
+``` {style="color: gray;"}
 Rolands Sadauskis, Reinette (Oonsie) Biggs, Garry Peterson, Juan Carlos Rocha. Arctic sea-ice loss. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-27
 ```
 
@@ -318,10 +396,11 @@ Rolands Sadauskis, Reinette (Oonsie) Biggs, Garry Peterson, Juan Carlos Rocha. A
 
 BibTeX citation:
 
-<tiny><tiny> 
-``` {style='color: gray;'}
+<tiny>
+
+``` {style="color: gray;"}
 @misc{
-  author = {Rolands SadauskisReinette (Oonsie) Biggs and Garry Peterson and Juan Carlos Rocha},
+  author = {Rolands Sadauskis and Reinette (Oonsie) Biggs and Garry Peterson and Juan Carlos Rocha},
   title = {Arctic sea-ice loss},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},

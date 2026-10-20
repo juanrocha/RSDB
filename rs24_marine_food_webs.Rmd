@@ -16,7 +16,7 @@ library(leaflet)
 
 load('assets/cases_db.Rda')
 cases <- dat
-dat <- read_csv('assets/generic_types_RSDB_new.csv') |> 
+dat <- read_csv2('assets/generic_types_RSDB_new.csv') |> 
     janitor::clean_names()
 
 x <- dat$id[params$j]
@@ -106,15 +106,11 @@ This regime shift involves an abrupt reorganization of an aquatic food web due t
 
  Ecosystems in this regime are characterized by low predatory fish, high planktivorous fish, low zooplankton and high phytoplankton abundance. In extreme cases the actual number of trophic levels (TLs) can decrease. Ecosystems with lower trophic level dominance are more vulnerable to eutrophication due to lowered grazing pressure on phytoplankton, as well as invasion of planktivore organisms like jellyfish. A planktivore-dominated food web can affect the fluxes of carbon, transforming aquatic systems -coastal and lakes- from sinks to sources of green house gases(Bakun et al. 2010, Estes et al. 2011). Other ecosystem services like fisheries and recreation are expected to be significantly reduced.
 
-
-
 #### Drivers and causes of the regime shift
 
 Trophic cascades are usually initiated by fishing pressure that have direct or indirect impacts on the abundance of top predators. The response time to these drivers varies across ecosystems. In the case of coastal areas it has been found that the ecosystem response time to overfishing can vary from decades to centuries where multiple predators exist(Jackson et al. 2001).
 
  Other factors that affect the regime shift are global warming and demand of food and fiber. Global warming have effects on upwelling, water circulatory systems that bring nutrients from the bottom of the sea towards the surface. By altering upwellings, food webs receive either too much or too little nutrients. In both cases the energy transferred towards higher trophic levels diminish as nutrients input variability increase. Demand of food strongly drives fishing, being the main cause of lost of top predators over the world.
-
-
 
 #### Impacts on ecosystem services and human well-being
 
@@ -123,8 +119,6 @@ Trophic cascades are usually initiated by fishing pressure that have direct or i
  Commercial fish stocks that are locked into a regime where they are maintained at low levels of abundance has obvious economic consequences on fisheries industry. However, these fisheries related shifts are not always negative, as for example a decrease in top predators can increase the catches of mid-level prey (e.g. shrimps and clupeids) (Frank et al. 2005). When an ecosystem-wide regime shift occurs it affects not only targeted groups, such as commercial fish(Daskalov et al. 2007) but also impacts other ecosystem functions. Biodiversity as well as ecosystem resilience may be reduced by a shift from an ecosystem with high top predator diversity and dominance to a system with lower trophic level dominance. This means that ecosystem may become more vulnerable to both climatic and anthropogenic change. Such ecosystems may more easily suffer from eutrophication, hypoxia and invasion by non-native species. Eutrophication and hypoxia in turn lead to increased algal blooms and decrease the recreational values of water bodies.
 
  Predators and commercial fisheries stocks have remained at under 10% of their previous sizes even after decades of fishing closure(Ainley and Blight 2009). Food production, primary productivity, pest regulation, and cultural services are the ecosystem services most affected by the reduction of food webs, which in turn increase the risk of fisheries collapse. Depletion of fish stocks has been estimated to have affected the employment of roughly 14 million fishermen, 12 million of which correspond to artisanal fisheries(M Hassan et al. 2005). Fish catches are projected to further decrease in the 21st century affecting protein sources for people, especially in poor regions(M Hassan et al. 2005). The estimated current contribution of fisheries to human protein consumption is 29 million tons produced industrially and 24 million tons in small-scale fisheries(M Hassan et al. 2005).
-
-
 
 #### Management options
 
@@ -135,8 +129,6 @@ Trophic cascades are usually initiated by fishing pressure that have direct or i
  **Options for reducing resilience to encourage restoration or transformation** 
 
  In addition, in small closed food webs systems (3 to 4 trophic levels), biomanipulation has been suggested to manage one of the symptoms of degraded marine environments, namely eutrophication. This involves increasing the population of predatory fish such as bass, pike and walleye through stocking or reduced angling quotas. Increased populations of these predators leads to a decrease in the level of zooplanktivores. This in turn allows an increase in the population of planktivores that graze on the algae and zooplanckton, helping to reduce the algal density and phytoplankton respectively(Smith and Schindler 2009). This option, however, has limited reach when it comes to open marine foodwebs, where seasonal migrations and metapopulation dynamics are common.
-
-
 
 ### In-depth analysis
 
@@ -212,7 +204,11 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Human well-being**:
 
-- Food and nutrition or Livelihoods and economic activity or Cultural or Aesthetic and recreational values or Cultural identity
+- Food and nutrition
+- Livelihoods and economic activity
+- Cultural
+- Aesthetic and recreational values
+- Cultural identity
 
 
 **Links to other regime shifts**:
@@ -230,7 +226,9 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Key drivers**:
 
-- Harvest and resource consumption or External inputs (e.g. fertilizers or pest control or irrigation) or Global climate change
+- Harvest and resource consumption
+- External inputs (e.g. fertilizers or pest control and irrigation)
+- Global climate change
 
 
 **Land use**:
@@ -242,7 +240,9 @@ if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not h
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake or catchment or community) or National (country) or Sub-continental (e.g. southern Africa or Amazon basin)
+- Local/landscape (e.g. lake catchment or community)
+- National (country)
+- Sub-continental (e.g. southern Africa or Amazon basin)
 
 
 **Time scale**:
@@ -327,7 +327,7 @@ BibTeX citation:
 <tiny><tiny> 
 ``` {style='color: gray;'}
 @misc{
-  author = {Susa Niiranen and Reinette (Oonsie) Biggs and Garry Peterson and Juan Carlos RochaHenrik Österblom},
+  author = {Susa Niiranen and Reinette (Oonsie) Biggs and Garry Peterson and Juan Carlos Rocha and Henrik Österblom},
   title = {Marine food webs},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},
