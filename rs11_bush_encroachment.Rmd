@@ -9,7 +9,6 @@ params:
   j: 11
 ---
 
-
 ```{r include = FALSE}
 library(tidyverse)
 library(leaflet)
@@ -24,32 +23,27 @@ rs <- dat |> filter(id== x)
 knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+:::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 # Bush encroachment
 
+-   **Main contributors**: Juan Carlos Rocha, Linda Luvuno
 
-- **Main contributors**: Bob Scholes, Reinette (Oonsie) Biggs, Juan Carlos Rocha, Linda Luvuno
+-   **Other contributors**: Bob Scholes, Reinette (Oonsie) Biggs, Garry Peterson
 
-- **Other contributors**: Garry Peterson
+-   Last update: 2011-02-28
 
-- Last update: 2011-02-28
-
-Woody encroachment occurs when a grassy landscape with a relatively low cover of woody plants rapidly and apparently irreversibly increases in tree or shrub cover. Encroachment typically occurs when savanna landscapes formerly under wild herbivores or nomadic pastoralism are converted to commercial cattle ranching, involving fencing, water provision for livestock, a fixed (sometimes high) stocking rate, and intentional or unintentional grass fire suppression. Encroachment reduces the grass productivity and can make access by cattle difficult, with substantial negative economic impacts on ranchers. Woody encroachment is usually very difficult and costly to reverse. Managerial recommendations therefore focus on avoidance through moderate grazing and fires of sufficient intensity and frequency to prevent the recruitment of young trees. 
-
-
-
+Woody encroachment occurs when a grassy landscape with a relatively low cover of woody plants rapidly and apparently irreversibly increases in tree or shrub cover.
+Encroachment typically occurs when savanna landscapes formerly under wild herbivores or nomadic pastoralism are converted to commercial cattle ranching, involving fencing, water provision for livestock, a fixed (sometimes high) stocking rate, and intentional or unintentional grass fire suppression.
+Encroachment reduces the grass productivity and can make access by cattle difficult, with substantial negative economic impacts on ranchers.
+Woody encroachment is usually very difficult and costly to reverse.
+Managerial recommendations therefore focus on avoidance through moderate grazing and fires of sufficient intensity and frequency to prevent the recruitment of young trees.
 :::
 
-:::{style='width: 5%;'}
-
+::: {style="width: 5%;"}
 :::
 
-:::{style='width: 45%;'}
-
+::: {style="width: 45%;"}
 ```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
 
 
@@ -69,21 +63,17 @@ bs_append(
     caption = bs_carousel_caption(title = 'Bush encroachment'))
 
 ```
-
 :::
-::::
+::::::
 
 ## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
-
-
-
 cs <- cases |> 
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -92,7 +82,9 @@ m <- leaflet(cs) |>
 m
 ```
 
-**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
+**Fig 1 \| Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world.
+Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift.
+You can learn more from each case by hovering and clicking on the case of interest.
 
 ## Analysis {.tabset .tabset-pills}
 
@@ -100,43 +92,78 @@ m
 
 #### Alternative regimes
 
-Savannas are systems that consist of a mixture of woody vegetation (trees or shrubs) and grasses. Savannas, dry forest and shrublands cover 40% of the world's land area, host up to 42% of the world's human population (Reynolds et al. 2007, Falkenmark and Rockström 2008), and together with drylands sustain 50% of the world's livestock (Millennium Ecosystem Assessment 2005).
+Savannas are systems that consist of a mixture of woody vegetation (trees or shrubs) and grasses.
+Savannas, dry forest and shrublands cover 40% of the world's land area, host up to 42% of the world's human population [@reynolds2007; @falkenmark2008], and together with drylands sustain 50% of the world's livestock [@millennium2005ecosystems].
 
- At small scales (up to about 10 km2) savanna systems, especially those used for extensive cattle ranching, may stabilize in two different self-reinforcing regimes (Walker 1993, Scheffer et al. 2001, Scholes 2003):  
+At small scales (up to about 10 km^2^) savanna systems, especially those used for extensive cattle ranching, may stabilize in two different self-reinforcing regimes [@walker1995; @scheffer2001; @scholes2003]:
 
- **Open, grassy savanna regime**
+**Open, grassy savanna**
 
- In this regime the landscape has a productive grass layer with few mature trees. The canopy in savannas never closes, and the floor layer is dominated by grass, especially C4 species. Most young trees are unable to establish because, while often numerous, seedlings are constantly knocked back to ground level by herbivory and fire. There is enough grass after grazing to support a fire with flame-length taller than the young saplings sufficiently often to keep them in a 'fire trap' (Dublin et al. 1990, Roques et al. 2001b, a). Open savanna systems are suitable for ranching, and are maintained by fire dynamics and grazing.
+In this regime the landscape has a productive grass layer with few mature trees.
+The canopy in savannas never closes, and the floor layer is dominated by grass, especially C~4~ species.
+Most young trees are unable to establish because, while often numerous, seedlings are constantly knocked back to ground level by herbivory and fire.
+There is enough grass after grazing to support a fire with flame-length taller than the young saplings sufficiently often to keep them in a 'fire trap' [@dublin1990; @roques2001].
+Open savanna systems are suitable for ranching, and are maintained by fire dynamics and grazing.
 
- **Closed, woody savanna regime**
+**Closed, woody savanna**
 
- In this regime the landscape is dominated by woody shrubs or trees. Once established, woody vegetation is stable because adult trees are seldom killed by herbivory or fire. These alternate regimes can occur at a range of spatial scales. Sometimes larger areas (e.g. an entire cattle ranch) may shift from a grass-dominated to a persistent woody-dominated state (Dublin et al. 1990, Walker 1993). In other cases, the alternate regimes are expressed as a mosaic of small patches of trees or bush interspersed with patches of grass, where the respective patches are highly persistent over time (Rietkerk et al. 2004).
+In this regime the landscape is dominated by woody shrubs or trees.
+Once established, woody vegetation is stable because adult trees are seldom killed by herbivory or fire.
+These alternate regimes can occur at a range of spatial scales.
+Sometimes larger areas (e.g. an entire cattle ranch) may shift from a grass-dominated to a persistent woody-dominated state [@dublin1990; @walker1995].
+In other cases, the alternate regimes are expressed as a mosaic of small patches of trees or bush interspersed with patches of grass, where the respective patches are highly persistent over time [@rietkerk2004].
+
+#### How the regime shift works
+
+Savannas are drylands dominated by a mixture of grasslands and shrublands.
+The canopy in savannas never closes, and the floor layer is dominated by grass, especially C~4~ species.
+Fire dynamics and grazing maintain the savanna regime.
+
+Bush encroachment refers to a shift from a grassy system to a persistently woody system.
+Bush encroachment typically occurs in areas used for commercial (as opposed to subsistence, communal, or nomadic) cattle ranching and may follow episodes of sustained severe overgrazing, though not necessarily so.
+It may also occur under other land uses [@wiegand2006].
+Ranches are affected by encroachment since grass productivity is reduced and access to feeding grounds becomes difficult.
+
+High moisture, grazing and suppression of fire are conditions under which bush encroachment is maintained.
+Woody plants might out compete grass for light, water and nutrients.
+As result, grazing is concentrated in the remaining grass areas, reducing the accumulation of fuel for fire.
+In water limited environments, plants can self organize by developing deep rooting and shadowing the surrounding soil in such a way that moisture and nutrients are accumulated in areas where they grow [@rietkerk2004].
 
 #### Drivers and causes of the regime shift
 
-Bush encroachment refers to a shift from a grassy system to a persistently woody system. It typically occurs in areas used for free-range cattle ranching, and is usually caused by a combination of grazing and fire management practices. Bush encroachment involves a change in the outcome of the competitive interaction between woody vegetation (shrubs and trees) and herbaceous vegetation (grasses and herbs), mediated by nutrients, grazing, fire, rainfall variability and use of the either the woody or grassy components by humans (Anderies et al. 2002, Janssen et al. 2004, Wiegand et al. 2006). The encroachment typically occurs in episodes rather than continuously, and involves a particular set of encroaching species rather than the entire woody community.
-
- Bush encroachment typically occurs in areas used for commercial cattle ranching (as opposed to subsistence, communal, or nomadic) and may follow episodes of sustained severe overgrazing, though not necessarily so. It may also occur under other land uses (Wiegand et al. 2006). It tends to be an episodic phenomenon, where the tree cohorts can often be linked to issues in the ranching enterprise – such as drought-induced debt or downturns in the cattle price cycle (Scholes 2003, Wiegand et al. 2006).
+Bush encroachment typically occurs in areas used for free-range cattle ranching, and is usually caused by a combination of grazing and fire management practices.
+Bush encroachment involves a change in the outcome of the competitive interaction between woody vegetation (shrubs and trees) and herbaceous vegetation (grasses and herbs), mediated by nutrients, grazing, fire, rainfall variability and use of the either the woody or grassy components by humans [@anderies2002; @janssen2004; @wiegand2006].
+ The encroachment typically occurs in episodes rather than continuously, and involves a particular set of encroaching species rather than the entire woody community.
+Bush encroachment tends to be an episodic phenomenon, where the tree cohorts can often be linked to issues in the ranching enterprise – such as drought-induced debt or downturns in the cattle price cycle [@scholes2003; @wiegand2006].
 
 #### Impacts on ecosystem services and human well-being
 
-**Shift from grassy to woody savanna** 
+**Shift from grassy to woody savanna**
 
- Woody encroachment brings a relatively rapid change, over a decade or two, from a highly productive grass layer to a sparse and unproductive grass component. Since cattle are grass-eaters, this change substantially reduces cattle productivity (Anderies et al. 2002, Scholes 2003), with major impacts on cattle ranchers. Difficulties in mustering the cattle in dense bush are a contributing factor. Therefore, wood encroachment leads to economic losses for cattle ranchers in what is frequently an economically marginal area for other agricultural uses such as croplands. 
+Woody encroachment brings a relatively rapid change, over a decade or two, from a highly productive grass layer to a sparse and unproductive grass component.
+Since cattle are grass-eaters, this change substantially reduces cattle productivity [@anderies2002; @scholes2003], with major impacts on cattle ranchers.
+Difficulties in mustering the cattle in dense bush are a contributing factor.
+Therefore, wood encroachment leads to economic losses for cattle ranchers in what is frequently an economically marginal area for other agricultural uses such as croplands. 
 
- On the other hand, encroachment increases the supply of tree-based ecosystem services, such as wood for fuel, charcoal-making and building material. This is somewhat dependent on the species involved. The increase in woody cover could potentially also have macro and micro-climatic effects through impacts on albedo and CO2 uptake, in addition to the decrease in methane emissions from cattle.
+On the other hand, encroachment increases the supply of tree-based ecosystem services, such as wood for fuel, charcoal-making and building material.
+This is somewhat dependent on the species involved.
+The increase in woody cover could potentially also have macro and micro-climatic effects through impacts on albedo and CO~2~ uptake, in addition to the decrease in methane emissions from cattle.
+In the Mediterranean region, bush encroachment has been associated with increases in ecotourism based on bird watching.
 
 #### Management options
 
 **Options for enhancing resilience**
 
- There is some agreement among researchers and extension workers that encroachment can be avoided by stocking lightly and burning frequently to prevent the establishment of trees and maintain grass crowns - the productive part of the grass that is less affected by fires (Roques et al. 2001b, Janssen et al. 2004). However, this is seldom reflected in management practice. 
+There is some agreement among researchers and extension workers that encroachment can be avoided by stocking lightly and burning frequently to prevent the establishment of trees and maintain grass crowns - the productive part of the grass that is less affected by fires [@roques2001; @janssen2004].
+However, this is seldom reflected in management practice. 
 
- **Options for reducing resilience to encourage restoration or transformation**
+**Options for reducing resilience to encourage restoration or transformation**
 
- Bush encroachment is expensive to reverse, since rapid results rely on arboricides or repeated mechanical or manual clearing. A common method involves the manual removal of woody vegetation, with repeated follow-up control and the use of fire to enhance the establishment and competitive advantage of grasses (Scholes 1985, 2003). Attempts to reverse bush encroachment often have poor results, either due to the rapid resprouting of the trees or the conversion of the grass layer to less desirable species in the process. 
+Bush encroachment is expensive to reverse, since rapid results rely on arboricides or repeated mechanical or manual clearing.
+A common method involves the manual removal of woody vegetation, with repeated follow-up control and the use of fire to enhance the establishment and competitive advantage of grasses [@scholes1985guide, @scholes2003].
+Attempts to reverse bush encroachment often have poor results, either due to the rapid resprouting of the trees or the conversion of the grass layer to less desirable species in the process.
 
- There are anecdotal reports of widespread mortality of near-dominant encroaching species after several decades, possibly related to disease, prolonged drought or simply old age, which provides windows for grass establishment and fuel load for intense fires.
+There are anecdotal reports of widespread mortality of near-dominant encroaching species after several decades, possibly related to disease, prolonged drought or simply old age, which provides windows for grass establishment and fuel load for intense fires.
 
 ### In-depth analysis
 
@@ -165,49 +192,105 @@ if (rs$regime_shift_name %in% clds$regime_shift) {
 
 ```{r}
 
-load('assets/rs_analysis_text.Rda')
-
-if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
-    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+# load('assets/rs_analysis_text.Rda')
+# 
+# if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+#     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
+
+#### Feedback mechanisms
+
+##### Grassy regime
+
+-   *Fire feedback (local, established):* The more grassland, the more fire, which in turn opens space for more grassland colonization.
+
+##### Woody regime:
+
+-   *Grazing feedback (local, well established):* If grazing pressure is high, there is not enough fuel left to carry fires of sufficient intensity and frequency to keep the seedlings from escaping above the flame zone.
+
+-   *Self-organizing patchiness (local, well established):* Rietkerk et al. [-@rietkerk2004] describe several feedbacks that explain self-organized patchiness in ecosystems as a scale-dependent mechanism.
+    Established trees may trap and retain nutrients, and create microclimates that further improve the conditions for tree establishment and growth.
+    Higher vegetation density allows lower evaporation and higher water infiltration through shading and root penetration respectively.
+    These conditions allow plant recruitment.
+
+#### Drivers
+
+There are several different hypotheses regarding the mechanism by which bush encroachment occurs and how their drivers interact.
+Different mechanisms (or combinations of mechanisms) may be important in different places.
+
+##### Shift from grassy to woody savannas
+
+Important **shocks** that contribute to the regime shift include:
+
+-   *Droughts (regional, well established):* In savanna ecosystems, droughts play an important role in increasing the likelihood of fires as well as decreasing the water content of the soil.
+    While increasing fire would favor grass over shrubs, dry soils in its superficial layers would be an advantage for shrubs which have deeper rooting than grass.
+
+-   *Floods (regional, well established):* Contrary to droughts, floods are shocks that increase the water content in the soil and potentially suppress fire.
+
+The main **external direct drivers** that contribute to the shift include:
+
+-   *Grazing (local, well established):* In the sustained presence of high numbers of grazers (typically cattle) accumulation of grass fuel is reduced.
+    This leads to a period without intense fire, that for long enough, enables woody plants to grow beyond the fire-susceptible stage.
+    This in turn suppresses grass production and fires, further enhancing the establishment of woody vegetation [@higgins2000; @staver2009].
+
+-   *Browsing (local, well-established):* elimination of browsers (especially very large browsers such as elephant and giraffe, but also the more-numerous small browsers) from the system when cattle are introduced [@dublin1990] can affect fire regimes and the competitive balance between grass and trees, in a way that favours trees [@vandekoppel2000].
+    Similarly alien species, such as *Prosopis spp* in South Africa or *Acacia nilotica* in Australia, both deliberately introduced, can play an important role in bush encroachment by affecting fire regimes [@poynton1990].
+
+-   *Water availability (regional, well established):* both shrublands and grasslands are types of drylands characterized as water limited.
+    Slight increases in water availability, both from rainfall or subterrain, favors tree development; while shortages favors development of grass.
+    Grasses are thought to be more shallowly-rooted than trees, so if grass cover is reduced by overgrazing, more water available for trees, which promotes their growth and establishment, further suppressing grass growth [@noy-meir1982].
+
+-   *Atmospheric CO~2~ (global, speculative):* The underlying mechanism is still debated, but several possibilities have been proposed: i) that rising CO~2~ levels favour C~3~ (woody plant) photosynthesis relative to C~4~ (tropical grass) photosynthesis; ii) elevated CO~2~ may reduce transpiration of grasses, leading to greater water percolation and therefore favoring deeper rooted woody species; iii) faster growth of woody plants due to CO~2~ enrichment, and therefore faster escape of seedlings from susceptibility to fire; and iv) investments in carbon-based defense compounds such as tannins, which are the main defense compounds in many encroaching trees but not in grasses [@midgley2001; @wiegand2006].
+
+The main **external indirect drivers** that contribute to the shift:
+
+-   *Global warming (global, well established):* Global warming not only maintains high concentrations of atmospheric CO~2~; it also increase the likelihood and intensity of droughts in certain areas of the globe.
+
+-   *Demand for food (global - regional, speculative)*: As human population grows, food demand increase incentives to increase efficiency of cattle ranching, particularly density.
+    At high densities, cattle can reduce fire frequency opening a window of opportunity for shrubs to grow enough and esscape the effects of fire flames.
+
+-   *Agriculture (regional, proposed):* Food demand also increase agriculture incentives to increase productivity.
+    Sometimes it implies the intensification of irrigation use and new water structures that reduce aquifers.
+    When deep soil water content is reduced, grass acquire an advantage over shrubs in its competition for water and nutrients.
+
+Slow **internal system changes** that contribute to the regime shift include:
+
+-   *Shrub density (local, well established):* Shrub density change slowly but it is the best indicator of the regime shift.
+    It responds to self-organizing patchiness feedback [@rietkerk2004].
+
+-   *Fire frequency (regional, well established):* Fire is influenced by climate, rain variability, grazing, and direct management actions [@cavelier1998].
+    However, its frequency change slowly as response of the landscape configuration and the memory of past burning events [@peterson2002].
 
 ### Categorical summary
 
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 #### Impacts
 
 **Ecosystem type**:'
 
-- Moist savannas & woodlands
-- Drylands & deserts 
-- Grasslands
-
+-   Moist savannas & woodlands
+-   Drylands & deserts
+-   Grasslands
 
 **Key ecosystem processes**:
 
-- Primary production
-- Nutrient cycling
-
+-   Primary production
+-   Nutrient cycling
 
 **Biodiversity**:
 
-- Biodiversity
-
+-   Biodiversity
 
 **Provisioning services**:
 
-- Livestock
-- Wild animal and plant products
-- Woodfuel
-
+-   Livestock
+-   Wild animal and plant products
+-   Woodfuel
 
 **Regulating services**:
 
-- Climate regulation
-
+-   Climate regulation
 
 **Cultural services**:
 
@@ -215,111 +298,83 @@ NA
 
 **Human well-being**:
 
-- Food and nutrition
-- Livelihoods and economic activity
-
+-   Food and nutrition
+-   Livelihoods and economic activity
 
 **Links to other regime shifts**:
 
-- Forest to savanna
-- Desertification
-
-
+-   Forest to savanna
+-   Desertification
 :::
 
-:::{style='width: 50%;'}
-
+::: {style="width: 50%;"}
 #### Drivers
 
 **Key drivers**:
 
-- Harvest and resource consumption
-- Species introduction or removal
-- Environmental shocks (e.g. fire or floods and droughts)
-
+-   Harvest and resource consumption
+-   Species introduction or removal
+-   Environmental shocks (e.g. fire or floods and droughts)
 
 **Land use**:
 
-- Extensive livestock production (natural rangelands)
-- Conservation
-- Tourism
-
+-   Extensive livestock production (natural rangelands)
+-   Conservation
+-   Tourism
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake catchment or community)
-
+-   Local/landscape (e.g. lake catchment or community)
 
 **Time scale**:
 
-- Years
-- Decades
-
+-   Years
+-   Decades
 
 **Reversibility**:
 
-- Hysteretic (difficult to reverse)
-
+-   Hysteretic (difficult to reverse)
 
 **Evidence**:
 
-- Models
-- Paleo-observation
-- Contemporary observations
-- Experiments
-
+-   Models
+-   Paleo-observation
+-   Contemporary observations
+-   Experiments
 
 **Confidence: existence of the regime shift**
 
-- Contested – Reasonable evidence both for and against the existence of RS
-
+-   Contested – Reasonable evidence both for and against the existence of RS
 
 **Confidence: mechanisms underlying the regime shift**
 
-- Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
-
-
+-   Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
 :::
-
-::::
+:::::
 
 ### References
 
 ::: {#refs}
-
 :::
+
 ### References old [Delete]
 
-<small>
-
-- Anderies, J.M.; Janssen, M.A; ans Walker, B. 2002. Grazing management, resilience, and the dynamics of a fire-driven rangeland system. Ecosystems  5 (1): 23-44. 
-- Cavelier, J., T. Aide, C. Santos, A. Eusse, and J. Dupuy. 1998. The savannization of moist forests in the Sierra Nevada de Santa Marta, Colombia. Journal of Biogeography:901-912. 
-- Dublin, H. T., Sinclair, A. R. and McGlade, J. (1990). Elephants and fire as causes of multiple stable states in the Serengeti-Mara woodlands. Journal of Animal Ecology 59, 1147-1164. 
-- Higgins S. I., W. J. Bond, and W. S. W. Trollope. 2000. Fire, resprouting and variability: a recipe for grass-tree coexistence in savanna. Journal of Ecology, 88:213-229. 
-- Janssen, M.A; Anderies, J.M; and Walker, B. 2004. Robust strategies for managing rangelands with multiple stable attractors. Journal of Environmental Economics and Management 
-- Midgley, J. J. and Bond, W. J. (2001). A synthesis of the demography of African acacias. Journal of Tropical Ecology 17, 871-886. 
-- Noy-Meir, I. (1982). Stability of plant-herbivore models and possible applications to savanna. In: Ecology of Tropical Savannas (Huntley, B. J. and Walker, B. H. ed.), pp.591-609. Berlin: Springer. 
-- Poynton, R.J. 1990. The genus Prosopis in South Africa. S. Afr. For. J. 152: 62–66. 
-- Rietkerk, M., Dekker, S. C., de Ruiter, P. C. and van de Koppel, J. (2004). Self-organized patchiness and catastrophic shifts in ecosystems. Science 305, 1926-1929. 
-- Roques, K.G; O’Connor, T.G; Watkinson, A.R. 2001. Dynamics of shrub encroachment in an African savanna: relative influences of fire, herbivory, rainfall and density dependence. J Appl Ecol 38 (2): 268-280 
-- Scheffer, M., Carpenter, S. R., Foley, J. A., Folke, C. and Walker, B. H. (2001). Catastrophic shifts in ecosystems. Nature 413, 591-596. 
-- Scholes R. J. 2003. Convex Relationships in Ecosystems Containing Mixtures of Trees and Grass. Environmental and Resource Economics, 26:559-574. 
-- Scholes R.J. 1985. A Guide to Bush Clearing in the Eastern Transvaal Lowveld. Occasional Report of the Resource Ecology Group, University of the Witwatersrand. 50 pp. 
-- Scholes, RJ & S. Archer. 1997. Tree-grass interactions in savannas. Annual Review of Ecology and Systematics 28, 517-44. 
-- Staver A. C., W. J. Bond, W. D. Stock, S. J. van Rensburg, and M. S. Waldram. 2009. Browsing and fire interact to suppress tree density in an African savanna. Ecological Applications, 19:1909-1919. 
-- Walker, B.H. 1993. Rangeland ecology: understanding and managing change. Ambio 22: 2-3. 
-- Wiegand, K; Saitz, D; and Ward, D. 2006.  A patch-dynamics approach to savanna dynamics and woody plant encroachment - Insights from an arid savanna. Perspect Plant Ecol 7 (4): 229-242 
-- van de Koppel, J. and Rietkerk, M. 2000. Herbivore regulation and irreversible vegetation change in semi-arid grazing systems. Oikos 90 (2): 253-260
+-   
+-   Cavelier, J., T. Aide, C. Santos, A. Eusse, and J. Dupuy. 1998. The savannization of moist forests in the Sierra Nevada de Santa Marta, Colombia. Journal of Biogeography:901-912.
+-   
+-   van de Koppel, J. and Rietkerk, M. 2000. Herbivore regulation and irreversible vegetation change in semi-arid grazing systems. Oikos 90 (2): 253-260
 
 </small>
 
 ## Citation
+
 Acknowledge this review as:
 
-<tiny> 
-``` {style='color: gray;'}
+<tiny>
+
+``` {style="color: gray;"}
 Bob Scholes, Reinette (Oonsie) Biggs, Juan Carlos Rocha, Linda Luvuno, Garry Peterson. Bush encroachment. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-28
 ```
 
@@ -327,8 +382,9 @@ Bob Scholes, Reinette (Oonsie) Biggs, Juan Carlos Rocha, Linda Luvuno, Garry Pet
 
 BibTeX citation:
 
-<tiny><tiny> 
-``` {style='color: gray;'}
+<tiny><tiny>
+
+``` {style="color: gray;"}
 @misc{
   author = {Bob Scholes and Reinette (Oonsie) Biggs and Juan Carlos Rocha and Linda Luvuno and Garry Peterson},
   title = {Bush encroachment},

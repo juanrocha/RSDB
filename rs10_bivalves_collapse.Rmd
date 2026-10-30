@@ -68,14 +68,11 @@ bs_append(
 ## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
-
-
-
 cs <- cases |> 
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -118,6 +115,21 @@ The turbid water conditions are in turn reinforced by low bivalve abundance [@we
 The regime of low bivalve abundance is expected to reduce fish populations, water cleansing and the ability of the ecosystem to maintain biodiversity.
 Such effects would have an impact on fisheries, human health, and recreation.
 
+#### How the regime shift works
+
+Bivalves are a class of mollusks containing over 30,000 species which include scallops, clams, oysters, and mussels.
+Bivalve mollusks, like corals, are often referred to as “ecosystem engineers” because they engineer the physical and hydrodynamic structures of the ecosystems they occupy in a way that produces conditions that support their own population growth.
+
+Bivalves live on the sediment surface, where they form reefs that provide increased surface area and habitat for a variety of species.
+They filter nutrients from the pelagic zone and transfer it to the benthic zone, maintaining the system in a clear water state.
+If bivalves are not able to maintain clear water, due to declines in bivalve populations or increases in low water quality, the ecosystem can shift to a turbid water state.
+The main drivers of this shift is direct anthropogenic over-harvesting of the bivalves, followed by a gradual increase of nutrients discharge from agricultural activities and coastal urban settlements.
+
+Once mollusk abundance is reduced, plankton and filamentous algae populations can substantially increase.
+As result, oxygen and light available in the water column is reduced, while nutrients levels accumulate due to the lack of filtration.
+These processes produce conditions which favour algae over bivalves.
+If nutrient inputs are substantial, eutrophication and areas of hypoxia (low oxygen) are likely to appear in areas dominated by plankton instead of mollusks.
+
 #### Drivers and causes of the regime shift
 
 Mechanized anthropogenic over-harvesting of bivalve mollusks is the main driver of the shift from high to low abundance [@thrush2002; @thrush2014].
@@ -128,10 +140,10 @@ When populations are weakened by eutrophication and anoxia, they become physiolo
 
 #### Impacts on ecosystem services and human well-being
 
-**Shift from high to low bivalve mollusk abundance regime**
+**Shift from high to low bivalve mollusk abundance**
 
 The loss of abundant bivalve mollusk reefs threatens diverse ecosystem services.
-The most direct impact is the loss of valuable shellfisheries.
+The most direct impact is the loss of valuable shell fisheries.
 A secondary, but potentially substantial impact is the loss of the filtering service provided by bivalves.
 In urbanized estuaries, it can necessitate the installation of costly synthetic water filtration technology [@gren2009].
 In other areas it can lead to declines in water quality that shift populations and reduce recreation opportunities, and potentially the value of waterfront property.
@@ -141,7 +153,7 @@ Both structural and functional biodiversity is threatened by loss of bivalve abu
 The regime of low bivalve abundance is expected to reduce fisheries, water cleansing and the ability of the ecosystem to maintain biodiversity.
 Such effects would have an impact on fishing productivity and human health.
 
-The loss of bivalve nutrient filtration can lead to other regime shifts, such as eutrophication and hypoxia, which can produce unproductive and undesirable ecosystems (see Hypoxia and Eutrophication regime shifts).
+The loss of bivalve nutrient filtration can lead to other regime shifts, such as eutrophication and hypoxia, which can produce unproductive and undesirable ecosystems (see [Hypoxia](https://regimeshifts.org/rs12_hypoxia) and [Eutrophication]([https://regimeshifts.org/rs1](https://regimeshifts.org/rs12_hypoxia)\_freshwater_eutrophication) regime shifts).
 
 #### Management options
 
@@ -155,12 +167,12 @@ Newer research stresses the need to address natural resources as part of complex
 Rather than addressing problems on a species-by-species basis, multi-species management has shown to have synergistic effects.
 For example, in Chesapeake bay, fisheries management looks at oyster, blue crab, striped bass and shad together [@boesch2006].
 
-Taking this approach further, Ecosystem-based fishery management efforts focus on recognizing interactions between multiple species and environmental stressors, such as low dissolved oxygen levels.
+Taking this approach further, ecosystem-based fishery management efforts focus on recognizing interactions between multiple species and environmental stressors, such as low dissolved oxygen levels.
 Success is measured by the degree to which management efforts include ecosystem-based approaches, rather than by an assessment of fishing stocks [@lotze2006].
 
 **Options for reducing resilience to encourage restoration or transformation**
 
-The main option exercised for preventing or reversing a regime shift regarding bivalve abundance is to import bivalve mollusks from another region for aquaculture [@vandekoppel2008; @norkko2006] .
+The main option exercised for preventing or reversing a regime shift regarding bivalve abundance is to import bivalve mollusks from another region for aquaculture [@vandekoppel2008; @norkko2006].
 Another practice commonly used is to hang bivalves from the surface or build artificial reefs to elevate bivalves in order to avoid the hypoxic conditions in deeper water [@carlsson2009; @loo1989].
 
 ### In-depth analysis
@@ -205,9 +217,9 @@ if (rs$regime_shift_name %in% clds$regime_shift) {
     Clearer water favors the growth of bivalves populations as well as other species, bivalve reefs by creating habitat structural complexity and increasing dissolved oxygen in the water.
 
 -   *Competition feedback (local, well established):* This feedback capture the competition between bivalves and plankton and filamentous algae for resources, in this case nutrients.
-    Both group of species depend on nutrients for survival, however, by dominating the ecosystem both reinforce the conditions favouring their growth.
+    Both group of species depend on nutrients for survival, however, by dominating the ecosystem both reinforce the conditions favoring their growth.
 
--   *Herbivourous fish feedback (local, proposed):* Reefs provide habitat for fish that can graze on algal populations, decreasing the growth of algae and enabling the continued maintenance of bivalves.
+-   *Herbivorous fish feedback (local, proposed):* Reefs provide habitat for fish that can graze on algal populations, decreasing the growth of algae and enabling the continued maintenance of bivalves.
 
 ##### The low bivalve mollusk density regime
 
@@ -238,7 +250,7 @@ The main external **indirect drivers** that contribute to the shift are:
 
 -   *Technology (regional, well established):* Technology increase the efficiency of fishing effort, both for fish and oyster fisheries.
 
--   *Food demand* increase fishing pressure locally, as well as incentives to increase agricultural productivity.
+-   *Food demand (regional, well established):* increase fishing pressure locally, as well as incentives to increase agricultural productivity.
     The later may include the use of fertilizers or the expansion of the agricultural frontier, both leading to increase leaking of nutrients into water bodies.
 
 -   *Urbanization (regional, well established):* urban development in coastal areas increase the production of sewage and the leakage of nutrients and sediments into water bodies.
