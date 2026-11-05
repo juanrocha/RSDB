@@ -9,7 +9,6 @@ params:
   j: 12
 ---
 
-
 ```{r include = FALSE}
 library(tidyverse)
 library(leaflet)
@@ -24,36 +23,29 @@ rs <- dat |> filter(id== x)
 knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+:::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 # Hypoxia
 
+-   **Main contributors**: Juan Carlos Rocha
 
-- **Main contributors**: Juan Carlos Rocha
+-   **Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson, Rutger Rosenberg
 
-- **Other contributors**: Rutger Rosenberg, Reinette (Oonsie) Biggs, Garry Peterson
+-   Last update: 2011-02-28
 
-- Last update: 2011-02-28
-
-The critical variable in the hypoxia regime shift is dissolved oxygen in the water (DO). Different self-reinforcing regimes can be identified as normoxia, hypoxia and anoxia. Hypoxia is typically associated with eutrophication, and related to excess nutrient inputs from fertilizers or untreated sewage. As a result, hypoxic environments are also know as dead zones, areas were fish and crustaceans are not able to live. Anoxia occurs when hypoxia is exacerbated by releasing hydrogen sulfide, then changing water acidity (pH). Management options include the reduction of nutrient inputs (Nitrogen and Phosphorous) i.e. by closing the nutrient cycle in agricultural systems and through waste-water treatment. 
-
-
-
+The critical variable in the hypoxia regime shift is dissolved oxygen in the water (DO).
+Different self-reinforcing regimes can be identified as normoxia, hypoxia and anoxia.
+Hypoxia is typically associated with eutrophication, and related to excess nutrient inputs from fertilizers or untreated sewage.
+As a result, hypoxic environments are also know as dead zones, areas were fish and crustaceans are not able to live.
+Anoxia occurs when hypoxia is exacerbated by releasing hydrogen sulfide, then changing water acidity (pH).
+Management options include the reduction of nutrient inputs (Nitrogen and Phosphorous) i.e. by closing the nutrient cycle in agricultural systems and through waste-water treatment.
 :::
 
-:::{style='width: 5%;'}
-
+::: {style="width: 5%;"}
 :::
 
-:::{style='width: 45%;'}
-
+::: {style="width: 45%;"}
 ```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
-
-
-
 library(htmltools)
 library(bsplus)
 
@@ -69,21 +61,17 @@ bs_append(
     caption = bs_carousel_caption(title = 'Hypoxia'))
 
 ```
-
 :::
-::::
+::::::
 
 ## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
-
-
-
 cs <- cases |> 
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -92,7 +80,9 @@ m <- leaflet(cs) |>
 m
 ```
 
-**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
+**Fig 1 \| Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world.
+Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift.
+You can learn more from each case by hovering and clicking on the case of interest.
 
 ## Analysis {.tabset .tabset-pills}
 
@@ -100,49 +90,97 @@ m
 
 #### Alternative regimes
 
-The hypoxia regime shift involves a radical change in oxygen concentration in aquatic ecosystems such as rivers, lakes and marine ecosystems. The severity and persistence of hypoxic conditions varies. Episodic oxygen depletion represents 17% of known hypoxia cases, and occurs infrequently with several years sometimes elapsing between events. Episodic oxygen depletion is the first signal that a system has reached a critical point of eutrophication, which in combination with physical processes that stratify the water column, tips the system into hypoxic conditions (Diaz and Rosenberg 2008). Seasonal hypoxia tends to occur periodically during the summer, after algal spring blooms have sunk to the bottom and are being decomposed. It lasts from days to weeks, represents half of the known dead zones, and typically abates in the autumn (Diaz and Rosenberg 2008). Boom-and-bust cycles of animal populations are frequent. Persistent hypoxia occurs when hypoxia becomes persistent due to the build-up of organic matter in the sediments over time, particularly in systems prone to persistent stratification. Persistent hypoxia accounts for 8% of reported hypoxia cases. Anoxia occurs when DO levels fall below 0.2 ml per litre. The accumulation of organic matter is exacerbated, and poisonous hydrogen sulphide (H2S) is released due to microbial metabolism.
+The hypoxia regime shift involves a radical change in oxygen concentration in aquatic ecosystems such as rivers, lakes and marine ecosystems.
+The severity and persistence of hypoxic conditions varies.
+Episodic oxygen depletion represents 17% of known hypoxia cases, and occurs infrequently with several years sometimes elapsing between events.
+Episodic oxygen depletion is the first signal that a system has reached a critical point of eutrophication, which in combination with physical processes that stratify the water column, tips the system into hypoxic conditions [@diaz2008].
+Seasonal hypoxia tends to occur periodically during the summer, after algal spring blooms have sunk to the bottom and are being decomposed.
+It lasts from days to weeks, represents half of the known dead zones, and typically abates in the autumn [@diaz2008].
+Boom-and-bust cycles of animal populations are frequent.
+Persistent hypoxia occurs when hypoxia becomes persistent due to the build-up of organic matter in the sediments over time, particularly in systems prone to persistent stratification.
+Persistent hypoxia accounts for 8% of reported hypoxia cases.
+Anoxia occurs when DO levels fall below 0.2 mL per litre.
+The accumulation of organic matter is exacerbated, and poisonous hydrogen sulphide (H~2~S) is released due to microbial metabolism.
 
- **Normoxia:** This regime is characterized by normal levels of dissolved oxygen, typically 5 to 8 ml per liter. Most aquatic organisms are adapted to survive under these conditions. Particularly important are the benthic organisms. Benthos are a community of organisms which live in sedimentary environments at the bottom of water bodies. They constitute an important key functional group (scavengers and detritivores) in the food web responsible for the decay of dead matter. Macrobenthos facilitate bioturbation processes, in other words, they displace and mix particles facilitating chemical exchange between sediments and the water column. This allows the sediments to ''capture'' phosphorous and nitrogen from the water column. By removing these nutrients from the water column, bioturbation therefore reduces algal growth and helps ensure that the water remains oxygenated and suitable for the survival of benthos - creating a reinforcing feedback that maintains normoxia conditions.
+**Normoxia:** This regime is characterized by normal levels of dissolved oxygen, typically 5 to 8 mL per liter.
+Most aquatic organisms are adapted to survive under these conditions.
+Particularly important are the benthic organisms.
+Benthos are a community of organisms which live in sedimentary environments at the bottom of water bodies.
+They constitute an important key functional group (scavengers and detritivores) in the food web responsible for the decay of dead matter.
+Macrobenthos facilitate bioturbation processes, in other words, they displace and mix particles facilitating chemical exchange between sediments and the water column.
+This allows the sediments to ''capture'' phosphorous and nitrogen from the water column.
+By removing these nutrients from the water column, bioturbation therefore reduces algal growth and helps ensure that the water remains oxygenated and suitable for the survival of benthos - creating a reinforcing feedback that maintains normoxia conditions.
 
- Normoxia regime is associated with the provision food for humans and wildlife in aquatic systems. Hence, healthy multi-level food webs are expected to inhabit environments with high oxygen concentration. This regime is also associated with cultural services like recreation and aesthetic values for communities living near by water bodies. Regulating services provided include water purification and pests regulation.
+Normoxia regime is associated with the provision food for humans and wildlife in aquatic systems.
+Hence, healthy multi-level food webs are expected to inhabit environments with high oxygen concentration.
+This regime is also associated with cultural services like recreation and aesthetic values for communities living near by water bodies.
+Regulating services provided include water purification and pests regulation.
 
- **Hypoxia:** The hypoxic regime is reached when dissolved oxygen level falls below 2 ml per liter (Diaz and Rosenberg 2008). Hypoxia is associated with so-called ''dead zones''. These are areas where dissolved oxygen levels are so low that most life is not able to persist and only very few specialized microorganisms survive. In the hypoxic state, accumulation of organic matter produced by eutrophic processes favors the growth of microbes who, by decomposing the organic matter, consume the oxygen in the water column.
+**Hypoxia:** The hypoxic regime is reached when dissolved oxygen level falls below 2 mL per liter [@diaz2008].
+Hypoxia is associated with so-called ''dead zones''.
+These are areas where dissolved oxygen levels are so low that most life is not able to persist and only very few specialized microorganisms survive.
+In the hypoxic state, accumulation of organic matter produced by eutrophic processes favors the growth of microbes who, by decomposing the organic matter, consume the oxygen in the water column.
 
- On the hypoxic regime fisheries productivity collapses; regulating services like water purification and pest control are lost while cultural services like recreation is substantially diminished. Decomposing fish from dead zones may bring bad odors and disease. Overabundance of jelly fish, high turbidity and odors during early stages (eutrophication) can discourage tourism.
+On the hypoxic regime fisheries productivity collapses; regulating services like water purification and pest control are lost while cultural services like recreation is substantially diminished.
+Decomposing fish from dead zones may bring bad odors and disease.
+Overabundance of jelly fish, high turbidity and odors during early stages (eutrophication) can discourage tourism.
 
- **Anoxia:** Anoxia occurs when hypoxia is exacerbated to DO levels under 0.2 ml per liter (Diaz and Rosenberg 2008). Under such conditions, benthic animals suffer from mass mortality and decay processes are carried out by microbial metabolism. As result, hydrogen sulfide is released changing water acidity (pH) and then further favoring bacteria habitat.
+**Anoxia:** Anoxia occurs when hypoxia is exacerbated to DO levels under 0.2 mL per liter [@diaz2008].
+Under such conditions, benthic animals suffer from mass mortality and decay processes are carried out by microbial metabolism.
+As result, hydrogen sulfide is released changing water acidity (pH) and then further favoring bacteria habitat.
 
 #### Drivers and causes of the regime shift
 
-Hypoxia is driven by increasing nutrients input, both natural and anthropogenic. Natural sources come from the bottom of the ocean transported by upwellings, water currents that flow vertically driven by the interaction of winds and the temperature gradient between the ocean surface and bottom. Anthropogenic sources are related mainly with the use of fertilizers in agriculture. However, growing urban settlements in coastal areas also increase the water storm runoff and sewage.
+Hypoxia is driven by increasing nutrients input, both natural and anthropogenic.
+Natural sources come from the bottom of the ocean transported by upwellings, water currents that flow vertically driven by the interaction of winds and the temperature gradient between the ocean surface and bottom.
+Anthropogenic sources are related mainly with the use of fertilizers in agriculture.
+However, growing urban settlements in coastal areas also increase the water storm runoff and sewage.
 
- The leakage of nutrients from agriculture is further exacerbated by rainfall variability and deforestation, since vegetation offers resistance to erosion and trap nutrients and moisture in the soil. Agriculture is driven in turn by increasing demand of food and fibers as well as population growth. Another important factor leading to hypoxic conditions is the stratification of the water column, which reduce the exchange of nutrients between the surface and the bottom. Water stratification is usually driven by anomalous increase in sea surface temperature. 
-
-
+The leakage of nutrients from agriculture is further exacerbated by rainfall variability and deforestation, since vegetation offers resistance to erosion and trap nutrients and moisture in the soil.
+Agriculture is driven in turn by increasing demand of food and fibers as well as population growth.
+Another important factor leading to hypoxic conditions is the stratification of the water column, which reduce the exchange of nutrients between the surface and the bottom.
+Water stratification is usually driven by anomalous increase in sea surface temperature. 
 
 #### Impacts on ecosystem services and human well-being
 
 **Shift from normoxia to hypoxia and anoxia**
 
- Dead zones due to hypoxia have been reported in more than 400 systems affecting more than 245,000 square kilometers and including important fisheries such as the Baltic Sea, Kattegat, Black Sea, Gulf of Mexico, and East China Sea (Diaz and Rosenberg 2008). A major impact on ecosystems is a change in the flux of matter and energy through trophic levels. Consequently, fisheries and hence ecosystem services such as food production are affected. For example, Diaz & Rosenberg (2008) report that biomass in the Baltic Sea has been reduced by approximately 264,000 metric tons of carbon due to hypoxic conditions. Assuming that ~40% of benthic energy passes up the food chain, 106,000 metric tons of carbon of food energy for fisheries has been lost(Diaz and Rosenberg 2008). This implies a reduction in yields and consequent impact on employment in fisheries communities. Another example of such effects is the lobster fishery collapse in Norway (Diaz and Rosenberg 2008).
+Dead zones due to hypoxia have been reported in more than 800 places affecting more than 245,000 square kilometers and including important fisheries such as the Baltic Sea, Kattegat, Black Sea, Gulf of Mexico, and East China Sea [@diaz2008].
+A major impact on ecosystems is a change in the flux of matter and energy through trophic levels.
+Consequently, fisheries and hence ecosystem services such as food production are affected.
+For example, Diaz & Rosenberg [-@diaz2008] report that biomass in the Baltic Sea has been reduced by approximately 264,000 metric tons of carbon due to hypoxic conditions.
+Assuming that \~40% of benthic energy passes up the food chain, 106,000 metric tons of carbon of food energy for fisheries has been lost [@diaz2008].
+This implies a reduction in yields and consequent impact on employment in fisheries communities.
+Another example of such effects is the lobster fishery collapse in Norway [@diaz2008].
 
- Besides its effect on fisheries and employment, hypoxia also affect the health and other cultural services of the people living near by dead zones. Decaying matter after mass mortality events create odors and risk of diseases. Recreation, aesthetic and touristic values are lost.
+Besides its effect on fisheries and employment, hypoxia also affect the health and other cultural services of the people living near by dead zones.
+Decaying matter after mass mortality events create odors and risk of diseases.
+Recreation, aesthetic and touristic values are lost.
 
- **Shift from Hypoxia to Normoxia**
+**Shift from Hypoxia to Normoxia**
 
- When hypoxia is not severe, the system is likely to return to normoxia regime. It implies the recovery of fisheries when species hasn't been extinct locally. However, food webs not always fully recover, and usually top predators are lost. With the recovery of the system, fishing, recreational and touristic activities recover too, although not necessary to the same configuration than before the regime shift.
+When hypoxia is not severe, the system is likely to return to normoxia regime.
+It implies the recovery of fisheries when species hasn't been extinct locally.
+However, food webs not always fully recover, and usually top predators are lost.
+With the recovery of the system, fishing, recreational and touristic activities recover too, although not necessary to the same configuration than before the regime shift.
 
 #### Management options
 
 **Options for enhancing resilience**
 
- Since one of the main drivers of hypoxia is eutrophication, Diaz & Rosenberg (2008) recommend managing the input of fertilizers on agricultural land. They recognize the necessity of developing new methods to close the nutrient cycle on farms, in order to avoid the drainage of nutrients to water sources. Nutrient reductions can also be achieved relatively cost-efficiently by improving waste-water treatment system in regions where this is applicable (e.g. Baltic Sea).
+Since one of the main drivers of hypoxia is eutrophication, Diaz & Rosenberg [-@diaz2008] recommend managing the input of fertilizers on agricultural land.
+They recognize the necessity of developing new methods to close the nutrient cycle on farms, in order to avoid the drainage of nutrients to water sources.
+Nutrient reductions can also be achieved relatively cost-efficiently by improving waste-water treatment system in regions where this is applicable (e.g. Baltic Sea).
 
- **Options for reducing resilience to encourage restoration or transformation**
+**Options for reducing resilience to encourage restoration or transformation**
 
- Only 4% of the reported cases of hypoxia have shown improvement, principally due to the reduction of organic and nutrient loading, stratification strength, and freshwater runoff(Diaz and Rosenberg 2008).
+Only 4% of the reported cases of hypoxia have shown improvement, principally due to the reduction of organic and nutrient loading, stratification strength, and freshwater runoff [@diaz2008].
 
- Managers could take advantage of windows of opportunity provided by these variables. For example, in the Baltic Sea the stratification of the water column is determined by input of saltwater from the North Sea(Conley et al. 2009). A policy of nutrient load reduction would therefore be more effective in years when saltwater input is low and it is a particularly rainy year. While nutrient loading is largely periodic and rain dependent, stratification and freshwater runoff rely more on physical processes and climate variability. Finally, it has been suggested that an appropriate goal is the reduction of nutrient loads to the level of the mid-1900s(Diaz and Rosenberg 2008).
+Managers could take advantage of windows of opportunity provided by these variables.
+For example, in the Baltic Sea the stratification of the water column is determined by input of saltwater from the North Sea [@conley2009].
+A policy of nutrient load reduction would therefore be more effective in years when saltwater input is low and it is a particularly rainy year.
+While nutrient loading is largely periodic and rain dependent, stratification and freshwater runoff rely more on physical processes and climate variability.
+An appropriate goal is the reduction of nutrient loads to the level of the mid-1900s [@diaz2008].
 
 ### In-depth analysis
 
@@ -171,156 +209,235 @@ if (rs$regime_shift_name %in% clds$regime_shift) {
 
 ```{r}
 
-load('assets/rs_analysis_text.Rda')
-
-if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
-    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+# load('assets/rs_analysis_text.Rda')
+# 
+# if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+#     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
+
+#### Feedback mechanisms
+
+The hypoxic regime is maintained by persistent stratification, changes in nitrogen cycle, phosphorous release, hydrogen sulfide release, and a change in foodweb structure related to the benthic fauna.
+Macrobenthos cannot survive under hypoxic conditions; DO levels below 0.5 mL per liter are typically associated with mass mortality of benthic animals.
+It creates a series of reinforcing feedbacks described below:
+
+##### Normoxia
+
+-   *Zooplakton feedback (local, well established):* abundant zooplankton controls micro algae populations, reducing their ability to consume DO and increase organic matter on the water column.
+    Hence, with high DO on the water, conditions are optimal for further zooplankton development.
+
+-   *Macrophyte feedback (local, well established)*: Macrophyte are a type of macro algae.
+    They perform the same function, however, they capture nutrients and carbon in their large bodies and soil, contrary to micro algae.
+    Thus, they control nutrients in the water column and reduce their availability for micro algae.
+    Low levels of micro algae allow clear water conditions that in turn are optimal conditions for further macrophyte development.
+
+-   *Nutrients feedback (local, well established):* When nutrients input are low and micro algae population are controlled, DO is high.
+    The later is a chemical conditions to allow nitrogen to be removed in its gas form N~2~.
+
+##### Hypoxia
+
+-   *Zooplakton feedback (local, well established):* Under hypoxia regime, the zooplakton feedback works the other way around.
+    As micro-algae abundance increase, DO decrease reducing in turn optimal conditions for zooplankton survival.
+    Lower zooplankton levels further reinforce micro-algae abundance.
+
+-   *Macrophyte feedback (local, well established):* Similarly, the macrophyte feedback also works the other way around.
+    Low macrophyte density increase nutrients in water by releasing the nutrients captured on their bodies and the soil.
+    With more nutrients available, micro-algae populations increase causing more turbidity which in turn reduces the ability of macrophyte to survive.
+
+-   *Organic matter feedback (local, well established):* Low levels of DO increase the mortality rate of different organism.
+    As they die organic matter content on the water increase, increasing the demand of oxygen required to decaying process.
+
+<!-- -->
+
+-   *Nutrients feedback (local, well established):* With more nutrients available in the water column and micro-algae metabolizing it, DO levels drop.
+    Hypoxia together with the loss of the benthic fauna alters sedimentary habitats through the disruption of nitrification and denitrification processes.
+    Instead of nitrogen being removed as N~2~, ammonia and ammonium together with phosphorous are released from the sediments.
+    This further stimulates the growth of algae, the deposition of organic matter, the growth of microbes, and the depletion of oxygen
+
+##### Anoxia
+
+-   *Hydrogen sulfide feedback (local, well-established):* Once DO levels drops below 0.5mL per liter hydrogen sulfide is released as a product of the decaying process carried out by microbes.
+    As a consequence, acidity level (pH) increase and life is further limited to few adapted microbial organisms.
+
+#### Drivers
+
+Stratification and flushing are important external drivers determined mainly by climate variation.
+Increased variability due to climate change could therefore have an important impact on the extent and severity of hypoxia.
+
+##### Shift from Normoxia to Hypoxia and Anoxia
+
+Important **shocks** (eg droughts, floods) that contribute to the regime shift include:
+
+-   *Floods (local, speculative):* Heavy rains and floods have a double impact on hypoxia.
+    On one hand, floods increase the amount of nutrients washed from the watershed, and consequently, turbidity in water.
+    On the other hand, floods can increase flushing with in turns increase DO in water.
+
+The main **external direct drivers** that contribute to the shift include:
+
+-   *Nutrients input (regional, well established):* The main anthropogenic driver of hypoxia is the delivery of large quantities of nutrients from agricultural systems, namely nitrogen and phosphorous, leading to eutrophication [@howarth2008].
+    Eutrophication is associated with algal blooms in the upper water layers, which leads to increased deposition of organic matter in the deeper water layers.
+    This promotes the growth of microbes that decompose the organic matter, and their respiration in turn consumes oxygen.
+
+-   *Water column stratification (local, well established):* Physical processes that stratify the water column make the oxygenation of water even more difficult and exacerbate the hypoxic conditions.
+    Lack of mixing reinforce depletion of oxygen in deep layers of water.
+
+-   *Upwellings (regional, well established):* In addition to agricultural sources, changes in frequency or intensity of upwellings, therefore in nutrient inputs, might synergistically destabilize hypoxia-prone marine areas.
+
+The main **external indirect drivers** that contribute to the shift:
+
+-   *Population growth (global, speculative):* Population growth leads to higher demand of food and densification of coastal settlements as well as upstream settlements.
+
+-   *Food demand (local-regional, speculative):* Food demand in turn stimulate more agricultural practices, especially the increase of efficiency; in other words more productivity in less area.
+
+-   *Agriculture (regional, well established):* Agriculture often requires the use of fertilizers.
+    When soils are eroded or washed, fertilizers run downstream to waterbodies.
+
+-   *Urban growth (global, well established):* Urban growth increase the production of sewage which is rich in nutrients.
+    It also increase the water runoff on the landscape.
+
+-   *Deforestation (regional, well established):* Deforestation increase landscape fragmentation and facilitates landscape conversion to agriculture.
+    Both reduce the capacity of the landscape to retain water in the soil, accelerating erosive processes and runoff of nutrients.
+
+-   *Rainfall variability (regional, speculative):* Rainfall variability is expected to change with climate change in some areas of the world.
+    Although it is not clear where or to what extent, it is definitely likely to influence the frequency of flood events, flushing and the exacerbate erosive processes.
+
+Slow **internal system changes** that contribute to the regime shift include:
+
+-   *Dissolved oxygen (local, well established):* Levels of DO is what determine the state of the system.
+    Low levels leads to mass mortality, excess of decaying matter that in turn increase DO consumption.
+
+##### Shift from hypoxia or anoxia to normoxia.
+
+Important **shocks** (eg droughts, floods) that contribute to the regime shift include:
+
+-   *Floods (local, speculative):* On the other hand, floods can increase flushing with in turns increase DO in water.
+
+The main **external direct drivers** that contribute to the shift include:
+
+-   *Flushing (regional, well established):* Flushing counteract the effect of water stratification and increase the levels of DO in the water column.
+
+#### Key thresholds
+
+-   Shift from Normoxia to Hypoxia: Dissolved oxygen below 2mL per liter
+
+-   Shift from Hypoxia to Anoxia: DO below 0.5 mL per liter
 
 ### Categorical summary
 
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 #### Impacts
 
 **Ecosystem type**:'
 
-- Marine & coastal
-- Freshwater lakes & rivers
-
+-   Marine & coastal
+-   Freshwater lakes & rivers
 
 **Key ecosystem processes**:
 
-- Primary production
-- Nutrient cycling
-
+-   Primary production
+-   Nutrient cycling
 
 **Biodiversity**:
 
-- Biodiversity
-
+-   Biodiversity
 
 **Provisioning services**:
 
-- Fisheries
-- Wild animal and plant products
-
+-   Fisheries
+-   Wild animal and plant products
 
 **Regulating services**:
 
-- Water purification
-
+-   Water purification
 
 **Cultural services**:
 
-- Recreation
-
+-   Recreation
 
 **Human well-being**:
 
-- Food and nutrition
-- Health (e.g. toxins or disease)
-- Livelihoods and economic activity
-
+-   Food and nutrition
+-   Health (e.g. toxins or disease)
+-   Livelihoods and economic activity
 
 **Links to other regime shifts**:
 
-- Freshwater eutrophication
-- Fisheries collapse
-- Marine food webs
-
-
+-   Freshwater eutrophication
+-   Fisheries collapse
+-   Marine food webs
 :::
 
-:::{style='width: 50%;'}
-
+::: {style="width: 50%;"}
 #### Drivers
 
 **Key drivers**:
 
-- External inputs (e.g. fertilizers or pest control and irrigation)
-- Global climate change
-
+-   External inputs (e.g. fertilizers or pest control and irrigation)
+-   Global climate change
 
 **Land use**:
 
-- Land use impacts are primarily off-site (e.g. dead zones)
-
+-   Land use impacts are primarily off-site (e.g. dead zones)
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake catchment or community)
-- Sub-continental (e.g. southern Africa or Amazon basin)
-
+-   Local/landscape (e.g. lake catchment or community)
+-   Sub-continental (e.g. southern Africa or Amazon basin)
 
 **Time scale**:
 
-- Months
-- Years
-- Decades
-
+-   Months
+-   Years
+-   Decades
 
 **Reversibility**:
 
-- Hysteretic (difficult to reverse)
-- Readily reversible
-
+-   Hysteretic (difficult to reverse)
+-   Readily reversible
 
 **Evidence**:
 
-- Models
-- Paleo-observation
-- Contemporary observations
-
+-   Models
+-   Paleo-observation
+-   Contemporary observations
 
 **Confidence: existence of the regime shift**
 
-- Well established – Wide agreement in the literature that the RS exists
-
+-   Well established – Wide agreement in the literature that the RS exists
 
 **Confidence: mechanisms underlying the regime shift**
 
-- Well established – Wide agreement on the underlying mechanism
-
-
+-   Well established – Wide agreement on the underlying mechanism
 :::
-
-::::
+:::::
 
 ### References
 
 ::: {#refs}
-
 :::
-### References old [Delete]
-
-<small>
-
-- Conley, D; .Björck, S; Bonsdorff, E; Cartensen, J; Destouni, G; Gustafsson, B.G; Hietanene, S; Kortekaas, M; Kuosa, H; Meier, H.E.M; Mueller-Karulis, B; Nordberg, K; Norkko, A; Nuernberg, G; Pitkanen, H; Rabalais, N.N; Rosenberg, R; Savchuk, O.P; Slomp, C.P; Voss, M; Wulff, F; Zillen, L. 2009. Hypoxia-Related Processes in the Baltic Sea. Environ Sci Technol 43(10); 3412-3420 
-- Díaz, Robert and Rosenberg, Rutger. 2008. Spreading Dead Zones and Consequences for Marine Ecosystems. Science 321: 926-29
-
-</small>
 
 ## Citation
+
 Acknowledge this review as:
 
-<tiny> 
-``` {style='color: gray;'}
-Juan Carlos Rocha, Rutger Rosenberg, Reinette (Oonsie) Biggs, Garry Peterson. Hypoxia. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-28
+<tiny>
+
+``` {style="color: gray;"}
+Juan Carlos Rocha, Reinette (Oonsie) Biggs, Garry Peterson, Rutger Rosenberg. Hypoxia. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-28
 ```
 
 </tiny>
 
 BibTeX citation:
 
-<tiny><tiny> 
-``` {style='color: gray;'}
+<tiny><tiny>
+
+``` {style="color: gray;"}
 @misc{
-  author = {Juan Carlos Rocha and Rutger Rosenberg and Reinette (Oonsie) Biggs and Garry Peterson},
+  author = {Juan Carlos Rocha and Reinette (Oonsie) Biggs and Garry Peterson and Rutger Rosenberg},
   title = {Hypoxia},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},
