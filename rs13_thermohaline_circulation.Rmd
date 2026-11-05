@@ -9,7 +9,6 @@ params:
   j: 13
 ---
 
-
 ```{r include = FALSE}
 library(tidyverse)
 library(leaflet)
@@ -24,30 +23,31 @@ rs <- dat |> filter(id== x)
 knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+:::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 # Thermohaline circulation
 
+-   **Main contributors**: Rolands Sadauskis, Juan Carlos Rocha
 
-- **Main contributors**: Juan Carlos Rocha, Rolands Sadauskis
+-   **Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
 
-- **Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson
+-   Last update: 2011-02-28
 
-- Last update: 2011-02-28
-
-A regime shift may be perceived in Thermohaline circulation (THC) as it might stop due to the increasing depletion of Arctic ice resulting in a catastrophic release of freshwater to the North Atlantic Ocean. This would balance out the differences in water salinity and density between Southern and Northern Atlantic Ocean. Therefore this would lead to collapse of water transport from tropical Atlantic to North Atlantic. Thus the high latitudes of the North Atlantic Ocean are perceived as key regions for triggering the collapse of THC. The regime shift is initiated by the main driver - input of Greenhouse gases in atmosphere. Particularly CO2 continues to increase the atmospheric temperatures thus leading to decrease in Arctic ice volumes. Therefore the amount of freshwater entering the ocean waters decline the salinity and density of the water which weakens the density driven water transport. Several essential mechanisms such as freshwater-overturning mechanism, water temperature-density mechanism and evaporation-salinity mechanism are proposed to weaken the THC. Current management strategies primarily relate to the decrease of greenhouse gas emissions on a global scale.
-
+A regime shift may occur in Thermohaline circulation (THC) as it might weaken due to the increasing depletion of Arctic ice resulting in a release of freshwater to the North Atlantic Ocean.
+This would balance out the differences in water salinity and density between Southern and Northern Atlantic Ocean.
+Therefore this would lead to collapse of water transport from tropical Atlantic to North Atlantic.
+Thus the high latitudes of the North Atlantic Ocean are perceived as key regions for triggering the collapse of THC, also known as the AMOC: the Atlantic Meridional Overturning Circulation.
+The regime shift is initiated by the main driver - input of Greenhouse gases in atmosphere.
+CO~2~ continues to increase the atmospheric temperatures leading to decrease in Arctic ice volumes.
+The amount of freshwater entering the ocean decline the salinity and density of the water, which weakens the density driven water transport.
+Several essential mechanisms such as freshwater-overturning mechanism, water temperature-density mechanism and evaporation-salinity mechanism are proposed to weaken the THC.
+Current management strategies primarily relate to the decrease of greenhouse gas emissions on a global scale.
 :::
 
-:::{style='width: 5%;'}
-
+::: {style="width: 5%;"}
 :::
 
-:::{style='width: 45%;'}
-
+::: {style="width: 45%;"}
 ```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
 
 
@@ -63,21 +63,17 @@ bs_append(
     caption = bs_carousel_caption(title = 'Thermohaline circulation'))
 
 ```
-
 :::
-::::
+::::::
 
 ## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
-
-
-
 cs <- cases |> 
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -86,7 +82,9 @@ m <- leaflet(cs) |>
 m
 ```
 
-**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
+**Fig 1 \| Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world.
+Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift.
+You can learn more from each case by hovering and clicking on the case of interest.
 
 ## Analysis {.tabset .tabset-pills}
 
@@ -94,34 +92,65 @@ m
 
 #### Alternative regimes
 
-Thermohaline circulation is complex, but can be summarised as a global scale deep overturning of water masses, with sinking motions occurring in the northern Atlantic and around Antarctica and a transport of relatively warm surface waters towards these sinking regions [Steffen et al. 2004]. The term thermohaline circulation thus refers to a particular driving mechanism; it is a physical, not an observational concept.
+Thermohaline circulation is complex, but can be summarised as a global scale deep overturning of water masses, with sinking motions occurring in the northern Atlantic and around Antarctica and a transport of relatively warm surface waters towards these sinking regions [@steffen2005].
+The term thermohaline circulation thus refers to a particular driving mechanism; it is a physical, not an observational concept.
 
- **Strong Thermohaline circulation** 
+**Strong Thermohaline circulation**
 
- THC regime can be characterized by:
+THC regime can be characterized by:
 
- * Deep water currents formation in the high latitudes of both hemispheres;
-* Spreading of deep waters mainly as deep western boundary currents.
-* Upwelling (or upwards movement) of deep waters. It is thought to take place mainly in the Antarctic Circumpolar Current region, possibly aided by the wind.
-* Near-surface currents: these are required to close the flow [Rahmstorf et al. 2006]
+-   Deep water currents formation in the high latitudes of both hemispheres;
+-   Spreading of deep waters mainly as deep western boundary currents.
+-   Upwelling (or upwards movement) of deep waters. It is thought to take place mainly in the Antarctic Circumpolar Current region, possibly aided by the wind.
+-   Near-surface currents: these are required to close the flow [@rahmstorf2007]
 
- **Collapse of the Thermohaline circulation**
+**Collapse of the Thermohaline circulation**
 
- This regime is characterized by weak formation of the dense and saline high latitude deep waters due to the increased influx of freshwater. The decreased salinity of the deep waters is weakening the density driven water movement towards south. The transport of less dense and saline waters from south towards north is decreased causing additional atmospheric temperature increase in tropical areas.
+This regime is characterized by weak formation of the dense and saline high latitude deep waters due to the increased influx of freshwater.
+The decreased salinity of the deep waters is weakening the density driven water movement towards the south.
+The transport of less dense and saline waters from south towards north is decreased causing additional atmospheric temperature increase in tropical areas [@zhang2005].
 
 #### Drivers and causes of the regime shift
 
-Increasing greenhouse gas concentration from anthropogenic sources is predicted to cause a rise in global mean temperatures [Cubasch et al. 2001]. One of the most common anthropogenic greenhouse gases is carbon dioxide (CO2). It is considered to be the main driver for this regime shift and is typically operating in global scale due to the global input of CO2 in the atmosphere. Increasing CO2 levels in atmosphere slowly enhance the mean atmospheric temperature. This results in weakening ice-albedo mechanism for the initial regime as a result of increased atmospheric temperatures and changes in albedo. The increasing freshwater influx from loss of ice is initiating the two main mechanisms for the new regime: freshwater-overturning mechanism and the precipitation-river runoff mechanism. Thus, new processes such as increased evaporation, river runoff, changes in water salinity and density are activated causing the system to shift to a new regime. The influence of this driver is well established. Another cause for the regime to shift is the burning of fossil fuels such as coal and natural gas. It is occurring regionally but has global impact and is well established in the literature.
+Increasing greenhouse gas concentration from anthropogenic sources is predicted to cause a rise in global mean temperatures [@houghton1998science].
+One of the most common anthropogenic greenhouse gases is carbon dioxide (CO~2~).
+It is considered to be the main driver for this regime shift and is typically operating in global scale due to the global input of CO~2~ in the atmosphere.
+Increasing CO~2~ levels in atmosphere slowly enhance the mean atmospheric temperature.
+This results in weakening ice-albedo mechanism for the initial regime as a result of increased atmospheric temperatures and changes in albedo [@stouffer2006].
+The increasing freshwater influx from loss of ice is initiating the two main mechanisms for the new regime: freshwater-overturning mechanism and the precipitation-river runoff mechanism.
+Thus, new processes such as increased evaporation, river runoff, changes in water salinity and density are activated causing the system to shift to a new regime.
+The influence of this driver is well established.
+Another cause for the regime to shift is the burning of fossil fuels such as coal and natural gas.
+It is occurring regionally but has global impact and is well established in the literature.
 
 #### Impacts on ecosystem services and human well-being
 
-The weakening of THC has influence on global water regulation as water circulations in Global scale are influenced by the changes in temperature, salinity and density. In response, climate regulation is altered and changed as the transport of heat is distributed in a different pattern. The water mass and heat circulation is not transporting the heat towards Northern latitudes. This could lead to increased hurricane activity, a southward shift of tropical rainfall belts with resulting agricultural impacts, and disruptions to marine ecosystems. Therefore fisheries, livestock and food crops as provisioning services are potentially affected.
+The weakening of THC has influence on global water regulation, as water circulations in the global scale are influenced by the changes in temperature, salinity and density.
+In response, climate regulation is altered and changed as the transport of heat is distributed in a different pattern.
+The water mass and heat circulation is not transporting the heat towards Northern latitudes.
+This could lead to increased hurricane activity, a southward shift of tropical rainfall belts with resulting agricultural impacts, and disruptions to marine ecosystems [@lu2008].
+Therefore fisheries, livestock and food crops as provisioning services are potentially affected.
 
- Food crisis and emigration are potential threats in the regions that are subjected to the loss of these services (Barnett and Adger, 2007). In addition to the above impacts, regional changes in sea level would project sea level rise of up to 80 cm in the North Atlantic [Knutti et al. 2002]. This could affect the coastlines of the United States, Canada, and Europe causing coastal erosion and affecting security of housing and infrastructure [Delworth et al. 2008]. The marine biodiversity of flora and fauna would change as the salinity and temperature would drive the introduction of new species that are able to live in the new environment. This would affect the livelihoods and economic activity of local fishermen as they would have to adapt to new circumstances. Schmittner et al. (2007) show that changes in Atlantic circulation can have large effects on marine ecosystems and biogeochemical cycles, even in areas remote from the Atlantic, such as the Indian and North Pacific Oceans. Although loss of THC could plunge Western Europe into conditions much colder than our current climate, on the basis of our current understanding of the climate system, such a scenario appears very unlikely. On the multidecadal to century time scale, it is very likely that Europe and North America will warm in response to increasing greenhouse gases (although natural variability and regional shifts could lead to periods of decadal-scale cooling in some regions) [Delworth et al. 2008]. A warmer and more stratified North Atlantic would also take up less anthropogenic CO2, thus adding to the climate warming [Clark et al. 2002]. Substantial warming would occur over the United States and Mexico, with weaker warming over Western Europe [Schmittner et al. 2007; Broecker et al. 1997].
+Food crisis and emigration are potential threats in the regions that are subjected to the loss of these services [@barnett2007].
+In addition to the above impacts, regional changes in sea level would project sea level rise of up to 80 cm in the North Atlantic [@knutti2002].
+This could affect the coastlines of the United States, Canada, and Europe causing coastal erosion and affecting security of housing and infrastructure [@delworth2008potential].
+The marine biodiversity of flora and fauna would change as the salinity and temperature would drive the introduction of new species that are able to live in the new environment.
+This would affect the livelihoods and economic activity of local fishermen as they would have to adapt to new circumstances.
+Schmittner et al. [-@oceanci2007] show that changes in Atlantic circulation can have large effects on marine ecosystems and biogeochemical cycles, even in areas remote from the Atlantic, such as the Indian and North Pacific Oceans [@rühlemann1999].
+Although loss of THC could temporarily plunge Western Europe into conditions much colder than our current climate, on the basis of our current understanding of the climate system, such a scenario appears very unlikely [@solomon2007climate; @drijfhout2025].
+However, more recent observational and evidence and model ensambles suggest that a tipping point is plausible in the 2100s [@drijfhout2025; @rahmstorf2015; @Rahmstorf2024].
+On the multidecadal to century time scale, it is very likely that Europe and North America will warm in response to increasing greenhouse gases (although natural variability and regional shifts could lead to periods of decadal-scale cooling in some regions) [@delworth2008potential].
+A warmer and more stratified North Atlantic would also take up less anthropogenic CO~2~, thus adding to the climate warming [@clark2002].
+Substantial warming would occur over the United States and Mexico, with weaker warming over Western Europe [@broecker1997; @oceanci2007].
 
 #### Management options
 
-The options for potentially preventing regime shift or restoring the desirable regime overlap. This potential regime shift mainly relate to the increase of greenhouse gas input (the main driver) in to the atmosphere at a global scale. Therefore decrease in CO2 emissions and other greenhouse gases has to be achieved in order to prevent further climate warming leading to large influx of freshwater from the depletion of Arctic ice. In the best-case scenario, it may be possible to avert a regime change in a situation where the underlying driver(s) of change are amenable to fast manipulation through management, and where there are not substantial lags in ecosystem response. In the case of the THC neither of these factors hold: the underlying causes of global warming appear very difficult to address through rapid changes in management, and there are substantial inertias in ecosystem response to changes in the driving factors. Therefore an early warning system primarily would be useful in providing advance warning of a substantial coming change in ecosystem conditions, but is unlikely to be useful in averting the regime change.
+The options for potentially preventing regime shift or restoring the desirable regime overlap.
+This potential regime shift mainly relate to the increase of greenhouse gas input (the main driver) in to the atmosphere at a global scale.
+Therefore decrease in CO~2~ emissions and other greenhouse gases has to be achieved in order to prevent further climate warming leading to large influx of freshwater from the depletion of Arctic ice.
+In the best-case scenario, it may be possible to avert a regime change in a situation where the underlying driver(s) of change are amenable to fast manipulation through management, and where there are not substantial lags in ecosystem response.
+In the case of the THC neither of these factors hold: the underlying causes of global warming appear very difficult to address through rapid changes in management, and there are substantial inertia in ecosystem response to changes in the driving factors.
+Therefore an early warning system primarily would be useful in providing advance warning of a substantial coming change in ecosystem conditions, but is unlikely to be useful in averting the regime change.
 
 ### In-depth analysis
 
@@ -150,47 +179,216 @@ if (rs$regime_shift_name %in% clds$regime_shift) {
 
 ```{r}
 
-load('assets/rs_analysis_text.Rda')
-
-if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
-    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+# load('assets/rs_analysis_text.Rda')
+# 
+# if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+#     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
+
+#### Feedback mechanisms
+
+##### Strong Thermohaline circulation
+
+-   *Freshwater-overturning mechanism (regional, well established):* This feedback mechanism is perceived as the key for the THC to exist.
+    In the deep ocean, the predominant driving force of movement of currents is differences in water density, caused by salinity and temperature: water is denser as salinity increase and temperature decrease.
+    This is why deep water is presently formed in the North Atlantic, which is salty, but not in the North Pacific, which is fresher.
+    Part of this mechanism relies on the ice-albedo feedback mechanism.
+    The optimal atmospheric temperatures that maintain sea surface temperature appropriate to avoid the loss of ice in Northern Hemisphere, is ensured by the ice-albedo mechanism.
+    This regulates the amount of freshwater entering the cold and saline waters of North Atlantic in particular.
+    As the amount of freshwater entering the system is kept in balance, the overturning is ensuring the vertical exchange of dense, sinking water with lighter water above.
+    As a result the salinity levels increase due to the income of salt transport from the south.
+    The cold and saline water of North Atlantic ensures that water density is increased in the deep-water formation region and vertically spread through water mass, therefore stratification doesn’t occur.
+    The formation of vertical stratification in the water column is a consequence of water masses with different densities.
+    Water density is strongly influenced by temperature and salinity; with less dense, warmer surface waters floating on top of denser, colder waters.
+    All this ensures that ocean waters act as CO~2~ sinks as the uptake of this greenhouse gas is transported and deposited in the sediments of the ocean basin.
+    Containing this green house gas allows the system to keep the CO~2~ levels in atmosphere at a level that keeps the atmospheric temperature in a certain amplitude that continues to maintain the ice volume in Northern Hemisphere.
+
+-   *The ice-albedo mechanism (regional, well established):* This mechanism is considered to add to the freshwater-overturning mechanism as it helps to maintain the desired atmospheric temperatures for the regime to exist.
+    The feedback mechanism can be described with low atmospheric temperatures at winter that increase the volume of ice sheet while the snow accumulates.
+    With the expanding ice sheet the dark open surface of bedrock and sea surface decline making the albedo rates to increase.
+    That results in decreased absorption of solar radiation as most of it is being reflected back to space.
+    This leads back to decreased atmospheric temperatures that will allow increasing the ice sheet volume, locking this reinforcing mechanism and therefore avoiding large freshwater influx in the system.
+
+##### Collapse of the Thermohaline circulation
+
+-   *Freshwater-overturning mechanism (regional, well established):* This mechanism is closely related to both the water temperature-density mechanism and the evaporation-salinity mechanism.
+    It is due to the fact that this mechanism has an important impact on the main variables – water salinity and density of the other two mechanisms.
+    The precipitation-river runoff mechanism is having an impact by altering the freshwater input.
+    This is key for the mechanism to continue functioning and maintain the new regime.
+    The certainty regarding this feedback mechanism is considered high.
+    It is well established and proved that the increasing amounts of freshwater affecting salinity is one of the key processes that affect the existing regime [@rahmstorf2000].
+    Nevertheless it is yet to be debated if this is the dominant mechanism that maintains the new regime.
+    This discussion is due to the important influence of water temperature-density mechanism due to the significance of water density variable for the existence of THC.
+    In the deep ocean, the predominant driving force of movement of currents is differences in density, caused by salinity and temperature (the more saline the denser and the colder the denser).
+    This is why deep water is presently formed in the North Atlantic, which is salty, but not in the North Pacific, which is fresher.
+    When the surface temperatures increase, the upper ocean warms and ice growth decreases.
+    This instead enhances the amount of warmer freshwater from melting ice entering the cold and saline waters of North Atlantic in particular [@rahmstorf2000].
+    The increased freshwater at high latitudes will decrease the overturning (vertical exchange of dense, sinking water with lighter water above) and a more sluggish surface flow is exposed longer to the freshwater forcing [@otterå2004].
+    As a result the salinity levels decrease as the salt transport from the south depletes [@rahmstorf2000].
+    Warmer and less saline water results in lower water density in the upper ocean.
+    With fresher, less dense, upper water there is now increased stratification of ocean layers thus altering the CO~2~ uptake of ocean waters through limiting the absorption.
+    The positive feedback mechanism continues as the CO~2~ concentrations continue to increase in atmosphere leading to further surface water temperature increase in oceans.
+
+-   *Water temperature – density mechanism (regional, well established):* This feedback mechanism is discussed as being key for the THC to switch to a regime where it has collapsed alongside the freshwater-overturning mechanism [@lenton2008].
+    The feedback strength depends on water temperature which in turn affect its density.
+    Water density is the key slow variable that also links to other feedback mechanisms of the THC regime.
+    The climate warming caused by increased concentrations of Greenhouse gases – particularly CO~2~ in the atmosphere, results in warming of sea surface temperatures.
+    The cold surface waters of the Earth’s oceans are dense enough to sink down to the abyss at only a few key locations.
+    These locations are formed at high latitudes because the density of seawater is strongly temperature dependent.
+    Therefore the warming of the surface temperatures decreases the density of the water resulting in less dense upper water.
+    This increase the stratification of ocean layers and slows the surface to deep transport of CO~2~ thus reducing the ocean CO~2~ uptake.
+    The weakening of one of the main global CO~2~ sinks would add to the continuing increase of CO~2~ in the atmosphere further increasing the atmospheric warming [@zickfeld2008].
+
+-   *Evaporation-salinity mechanism (regional, contested):* Increasing atmospheric temperatures and the following reduction of ice volume in Arctic determine that the space of ice-free water expands [@lindsay2005].
+    Thus, the evaporation from extended open water bodies increase, leading to decrease in salinity.
+    Less saline water results in lower water density in the upper ocean.
+    Furthermore this mechanism has the same pattern as freshwater-overturning mechanism and water temperature-density mechanism.
+    The decreased water density enhances stratification thus altering the CO2 uptake of ocean waters through limiting the absorption.
+    The positive feedback mechanism continues as the CO~2~ concentrations continue to increase in atmosphere leading to further surface water temperature increase in oceans.
+    This mechanism is contested as its presence can be argued at different times due to two potential event scenarios that influence the salinity of water.
+    If the evaporation dominates upon precipitation, then the salinity increases as salt is not evaporated into the atmosphere.
+    If there is more precipitation caused by the increased amount of water vapour in the atmosphere than evaporation then the salinity decreases.
+    Therefore the presence of this mechanism closely relates to the occurrence precipitation-river runoff mechanism.
+    The strength of this mechanism has still been discussed and depends on processes of other mechanisms.
+    For example on ice volume and ice-albedo mechanism for increased open water and evaporation to occur.
+
+-   *Precipitation-river runoff mechanism (regional, contested):* It is affected by ice-albedo mechanism as the increasing atmospheric temperature is initiating other processes in this mechanism to take place.
+    There are continuing discussions about the dominance of this mechanism for this regime to exist.
+    It is considered that this mechanism alongside freshwater-overturning mechanism are the two dominant mechanisms for the new regime.
+    This is determined by the main slow variables – water salinity and density that are affected mostly by these two mechanisms.
+    Increasing atmospheric temperatures and the following reduction of ice volume in Northern Hemisphere determine that the space of ice free water expands [@lindsay2005].
+    Thus the evaporation from extended open water bodies increase leading to precipitation increase.
+    If precipitation exceeds evaporation it leads to increased river runoff.
+    Evidence of increasing Arctic river discharge has been reported in several studies.
+    Total river inflow to the Arctic Ocean is dominated by contributions from Eurasia.
+    The average annual discharge is now about 128 km^3^/year greater than it was when routine measurements of discharge from the major Eurasian arctic rivers began in the 1930s.
+    The average annual discharge is an approximate 7% increase.
+    Increases in discharge from other Arctic rivers, net precipitation directly over the ocean, and meltwater from Greenland provide additional freshwater forcing [@peterson2002].
+    The increased freshwater at high latitudes will decrease the overturning and a more sluggish surface flow is exposed longer to the freshwater forcing [@otterå2004].
+    As a result the salinity levels decrease as the salt transport from the south depletes [@rahmstorf2000].
+    Warmer and less saline water results in lower water density in the upper ocean.
+    With, fresher, less dense upper water there is now increased stratification of ocean layers thus altering the CO~2~ uptake of ocean waters through limiting the absorption.
+    The positive feedback mechanism continues as the CO~2~ concentrations continue to increase in atmosphere leading to further surface water temperature increase in oceans.
+
+-   *Salinity-Convection mechanism (regional, well established):* This mechanism is initiated and closely linked to evaporation-salinity mechanism as water salinity decrease is driving this mechanism.
+    Water salinity decrease due to impact from evaporation-salinity mechanism results in water density decline.
+    Oceanic convection is driven by density differences and is of crucial importance in global ocean circulation.
+    Convection is more likely and/or more rapid with a greater variation in density between the two fluids [@bitz2006].
+    The decrease of water density and balance of the differences also affects convection.
+    In this case it is possible for relatively warm, saline water to sink, and colder, fresher water to rise, terminating the normal overturning.
+    This result in a more sluggish surface flow that is longer exposed to the freshwater forcing [@otterå2004].
+    As a result the salinity levels decrease as the salt transport from the south depletes.
+
+-   *The ice-albedo mechanism (regional, well established):* This mechanism typically operates in regional scale and the existence of it is well established amongst researchers thus regarded with high certainty.
+    By itself the mechanism is not strong enough to flip the system to a new regime as it has to enter other feedback mechanisms to achieve that.
+    There is near universal agreement that Arctic sea ice extent will decline through the 21st century in response to atmospheric green house gas loading [@zhang2006].
+    The resulting increase of surface air temperatures changes the ice thermodynamics.
+    This means that the heat exchange within the sea ice, as well as between the top and bottom of the ice is changed.
+    This leads to a decrease in sea ice volume.
+    The resulting increased amount of open water in summer decreases the albedo, as the dark ocean surface absorbs more solar radiation [@lindsay2005].
+    The annually integrated absorption of solar radiation is observed to increase when the surface albedo is relatively low [@rigor2002; @holland2006].
+    This increasingly accumulated amount of heat on the surface reinforces the initial warming.
+
+#### Drivers
+
+##### Strong Thermohaline circulation to collapse of the Thermohaline circulation
+
+The main **external direct drivers** that contribute to the shift include:
+
+-   *Greenhouse gas emissions (global; well established):* Increasing greenhouse gas concentration from anthropogenic sources is predicted to cause a rise in global mean temperatures [@solomon2007climate].
+    One of the most common anthropogenic greenhouse gases is carbon dioxide (CO~2~).
+    It is considered to be the main driver for this regime shift.
+    Increasing CO~2~ levels in atmosphere slowly enhance the mean atmospheric temperature.
+    This results in weakening ice-albedo mechanism for the initial regime as a result of increased atmospheric temperatures and changes in albedo.
+    The increasing freshwater influx from loss of ice is initiating the two main mechanisms for the new regime – freshwater-overturning mechanism and the precipitation-river runoff mechanism.
+    Therefore new variables (for example increased evaporation, river runoff, changes in water salinity and density) are activated and links established that cause the system to shift to a new regime.
+
+The main **external indirect drivers** that contribute to the shift include:
+
+-   *Burning of fossil fuels (global, well established):* Fossil fuels such as coal and natural gas increase the anthropogenic CO~2~ levels in atmosphere leading to climate warming.
+    This further contributes to the loss of sea ice and thus the changes in water salinity and density that are essential for thermohaline circulation.
+
+Slow **internal system changes** that contribute to the regime shift include:
+
+-   *Mean atmospheric temperature (global, well established):* It is expected that the changes will be more pronounced in high northern latitudes than in the global mean.
+    This is mainly due to the impact on positive feedback of reduced sea ice extent and snow cover on the ice-free landmasses, and consequently reduced albedo [@solomon2007climate].
+    The influence of this variable is important for the ice albedo mechanism and thus the main freshwater-overturning mechanism.
+    Slowly rising temperature cause the change in ice-albedo mechanism therefore causing change in variables that are also part of the main freshwater-overturning mechanism.
+    Increased depletion of ice volume in Northern Hemisphere generating freshwater runoff and precipitation increase eventually shifts the existing feedback mechanism towards different state.
+
+-   *Water salinity and density (regional, well established):* These two variables are very closely related as change in water salinity directly impact water density.
+    Both of these variables are exposed to slow change as freshwater input is increasing from ice melting and river runoff.
+    These changes originate from the slow variable of atmospheric temperature that initially changes the system behaviour.
+    These two variables depend on the region where the freshwater runoff takes place.
+
+##### Collapse of the Thermohaline circulation to strong Thermohaline circulation
+
+Important **shocks** includes:
+
+-   *Extreme droughts (regional, contested):* This event could indirectly decrease the risk of regime shift decreasing river runoff from lack of precipitation.
+    Therefore precipitation-river runoff mechanism is altered and further having an impact on the main freshwater-overturning mechanism as freshwater volume would be lowered.
+
+#### Key thresholds
+
+##### Strong Thermohaline circulation to collapse of the Thermohaline circulation
+
+-   Atmospheric temperature - threshold at which thermal balance is established for promoting ice depleting conditions that further lead to freshwater influx that affects the density driven water transport.
+
+-   Water salinity – threshold at which the density driven water transport weakens due to freshwater influx
+
+##### Collapse of the Thermohaline circulation to strong Thermohaline circulation
+
+-   Atmospheric temperature - threshold at which thermal balance is established for promoting ice maintaining conditions thus avoiding freshwater influx from ice melting
+
+-   Water salinity – threshold at which the density driven water transport is present as the freshwater influx is decreased.
+
+#### Leverage points
+
+-   *Atmospheric temperatures (global, well established):* It is essential to alter increasing atmospheric temperatures as this event is ensuring the other processes that occur in this regime shift.
+
+-   *CO~2~ concentrations in atmosphere (global, well established):* In order to alter temperature increase it is essential to decrease CO~2~ concentrations in atmosphere that directly affect temperature oscillations causing changes in the main feedback mechanisms that result in collapse of THC.
+
+-   *River runoff (regional, well established):* Altering river runoff would cause decrease in freshwater added from rivers that affect water salinity and density and lead to collapse of THC.
+
+-   *Albedo (local/regional, well established):* altering low albedo would decrease the absorbtion of solar radiation thus avoiding atmospheric temperature increase that would cause ice melting and changes in water density and salinity.
+
+#### Ecosystem service impacts
+
+THC is linked with climate regulation due to the current atmospheric regulation maintained by the water circulation.
+It links to atmospheric temperatures as the water masses regulate the heat transported around the World Ocean thus regulating the climate.
+Closely linked to this regulating service are the provisioning services of food crops, livestock and fisheries.
+This is due to the typical climate induced atmospheric processes that ensure the provision of these services.
+Biodiversity of local species as an ecosystem service is also recognized as the desired conditions are maintained by THC [@higgins2005].
+The biggest social groups that would benefit of maintaining this regime would be fishermen and farmers who could continue to extract resources from the particular source.
 
 ### Categorical summary
 
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 #### Impacts
 
 **Ecosystem type**:'
 
-- Marine & coastal
-
+-   Marine & coastal
 
 **Key ecosystem processes**:
 
-- Primary production
-- Water cycling
-
+-   Primary production
+-   Water cycling
 
 **Biodiversity**:
 
-- Biodiversity
-
+-   Biodiversity
 
 **Provisioning services**:
 
-- Food crops
-- Livestock
-- Fisheries
-
+-   Food crops
+-   Livestock
+-   Fisheries
 
 **Regulating services**:
 
-- Climate regulation
-
+-   Climate regulation
 
 **Cultural services**:
 
@@ -198,28 +396,23 @@ NA
 
 **Human well-being**:
 
-- Food and nutrition
-- Livelihoods and economic activity
-- Security of housing & infrastructure
-- Social conflict
-
+-   Food and nutrition
+-   Livelihoods and economic activity
+-   Security of housing & infrastructure
+-   Social conflict
 
 **Links to other regime shifts**:
 
-- Greenland ice sheet collapse
-- Monsoon
-
-
+-   Greenland ice sheet collapse
+-   Monsoon
 :::
 
-:::{style='width: 50%;'}
-
+::: {style="width: 50%;"}
 #### Drivers
 
 **Key drivers**:
 
-- Global climate change
-
+-   Global climate change
 
 **Land use**:
 
@@ -229,95 +422,57 @@ NA
 
 **Spatial scale**:
 
-- Sub-continental (e.g. southern Africa or Amazon basin)
-- Global
-
+-   Sub-continental (e.g. southern Africa or Amazon basin)
+-   Global
 
 **Time scale**:
 
-- Decades
-- Centuries
-
+-   Decades
+-   Centuries
 
 **Reversibility**:
 
-- Unknown
-
+-   Unknown
 
 **Evidence**:
 
-- Models
-- Paleo-observation
-
+-   Models
+-   Paleo-observation
 
 **Confidence: existence of the regime shift**
 
-- Speculative – Regime shift has been proposed, but little evidence as yet
-
+-   Speculative – Regime shift has been proposed, but little evidence as yet
 
 **Confidence: mechanisms underlying the regime shift**
 
-- Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
-
-
+-   Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
 :::
-
-::::
+:::::
 
 ### References
 
 ::: {#refs}
-
 :::
-### References old [Delete]
-
-<small>
-
-- Barnett J, Adger WN (2007) Climate change, human security and violent conflict. Journal of Experimental Marine Biology and Ecology 26:639u2013655. 
-- Bitz CM, Gent PR, Woodgate RA, Hall A, Holland MM, and Lindsay R. 2006. The influence of sea ice on ocean heat uptake in response to increasing CO2. J. Clim 20, 2437-2450. 
-- Bond G, Showers W, Elliot M, Evans M, Lotti R, Hajdas I, Bonani G, Johnsen SJ, 1999. The North Atlantic’s 1-2 kyr climate rhythm: Relation to Heinrich events, Dansgaard/Oescheger cycles and the Little Ice Age. In: Clark PU, Webb RS, Keigwin LD (eds) Mechanisms of global climate change at millennial time scales. American Geophysical Union, Washington. USA.35-58. 
-- Broecker WS. 1997. Thermohaline Circulation, the Achilles Heel of Our Climate System: Will Man-Made CO2 Upset the Current Balance? Science 278,1582 – 1588. 
-- Clark PU, Pisias NG, Stocker TF, Weaver AJ. 2002. The role of the thermohaline circulation in abrupt climate change. Nature 415,863-869. 
-- Cubasch U. et al. 2001. Projections of future climate change. Climate Change 2001: The Scientific Basis, Houghton JT, et al., Eds., Cambridge University Press. 525–582. 
-- Delworth TL, Clark PU, Holland M, Johns WE, Kuhlbrodt T, Lynch-Stieglitz J, Morrill C, Seager R, Weaver AJ, and Zhang R. 2008. The potential for abrupt change in the Atlantic Meridional Overturning Circulation. In: Abrupt Climate Change. A report by the U.S. Climate Change Science Program and the Subcommittee on Global Change Research. U.S. Geological Survey, Reston, VA, pp. 117–162. 
-- Higgins PAT. and Schneider SH. 2005. Long-term potential ecosystem responses to greenhouse gas-induced thermohaline circulation collapse. Global Change Biology 11,699-709. 
-- Holland MM, Bitz CM, and Tremblay B. 2006. Future abrupt reductions in the summer Arctic sea ice. Geophys. Res. Lett. 33. 
-- IPCC 2007. Climate Change 2007. The Physical Science Basis. Cambridge University Press, New York. 
-- Knutti R, Stocker TF. 2002. Limited predictability of the future thermohaline circulation close to an instability threshold. J Climate 15,179-186. 
-- Lenton, T. et al. 2008. Tipping elements in the Earth's climate system. Proceedings of the National Academy of Sciences 105, 1786 . 
-- Lindsay RW, and Zhang J. 2005. The thinning of Arctic sea ice, 1988– 2003: Have we passed a tipping point?, J. Clim., 18,4879– 4894. 
-- Lu RY, and Dong BW. 2008. Response of the Asian summer monsoon to a weakening of Atlantic thermohaline circulation. Adv. in Atmos. Sci. 25,723-736. 
-- Otterå OH, Drange H, Bentsen M, Kvamstø NG, and Jiang D. 2004. Transient response of the Atlantic meridional overturning circulation to enhanced freshwater input to the Nordic Seas-Arctic Ocean in the Bergen Climate Model. Tellus, 56A, 342-361. 
-- Peterson BJ, Holmes RM, McClelland JW, Vorosmarty CJ, Lammers RB, Shiklomanov AI, Shiklomanov IA, Rahmstorf S. 2002. Increasing river discharge to the Arctic Ocean. Science 298,2171-2173. 
-- Rahmstorf S. 2000. The thermohaline ocean circulation—A system with dangerous thresholds?, Clim. Change 46,247–256. 
-- Rahmstorf S. 2006. Thermohaline Ocean Circulation. In: Encyclopedia of Quaternary Sciences, Edited by Elias SA. Elsevier, Amsterdam. 
-- Rigor IG, Wallace JM, and Colony RL. 2002. Response of sea ice to the Arctic Oscillation. J. Climate 15,2648–2668. 
-- Ruhlemann C, Mulitza S, Muller PJ, Wefer G, Zahn R. 1999. Warming of the tropical Atlantic Ocean and slow down thermocline circulation during the last deglaciation. Nature 402,511-514. 
-- Schmittner A, Brook EJ, & Ahn J. 2007.  Ocean Circulation: Mechanisms and Impacts - Past and Future Changes of Meridional Overturning (eds Schmittner, A, Chiang JCH, & Hemming SR.) Geophysical Monograph Series, American Geophysical Union 173,209–246. 
-- Steffen W, Sanderson A, Jager J, Tyson PD, Moore B III, et al. 2004. Gloabl change and the Earth system: A Planet Under Pressure. Heidelberg: Springer-Verlag. 239-242. 
-- Stouffer RJ, Yin J, Gregory JM, Dixon KW, Spelman MJ, Hurlin W, Weaver AJ, Eby M, Flato GM, Hasumi H, Hu A, Jungclaus JH, Kamenkovich IV, Levermann A, Montoya M, Murakami S, Nawrath S, Oka A, Peltier WR, Robitaille DY, Sokolov A, Vettoretti G, Weber SL. 2006. Investigating the causes of the response of the thermohaline circulation to past and future climate changes. Journal of Climate 19,1365-1387. 
-- Zhang R, Delworth TL. 2005. Simulated tropical response to a substantial weakening of the Atlantic thermohaline circulation. Journal of Climate 18, 1853-1860. 
-- Zhang X, and Walsh JE. 2006. Towards a seasonally ice-covered Arctic Ocean: Scenarios from the IPCC AR4 simulations, Journal of Climate 19,1730– 1747. 
-- Zickfeld K, Eby M, and Weaver AJ. 2008. Carbon-cycle feedbacks of changes in the Atlantic meridional overturning circulation under future atmospheric CO2, Global Biogeochem. Cycles, 22.
-
-</small>
 
 ## Citation
+
 Acknowledge this review as:
 
-<tiny> 
-``` {style='color: gray;'}
-Juan Carlos Rocha, Rolands Sadauskis, Reinette (Oonsie) Biggs, Garry Peterson. Thermohaline circulation. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-28
+<tiny>
+
+``` {style="color: gray;"}
+Rolands Sadauskis, Juan Carlos Rocha, Reinette (Oonsie) Biggs, Garry Peterson. Thermohaline circulation. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2011-02-28
 ```
 
 </tiny>
 
 BibTeX citation:
 
-<tiny><tiny> 
-``` {style='color: gray;'}
+<tiny><tiny>
+
+``` {style="color: gray;"}
 @misc{
-  author = {Juan Carlos Rocha and Rolands Sadauskis and Reinette (Oonsie) Biggs and Garry Peterson},
+  author = {Rolands Sadauskis and Juan Carlos Rocha and Reinette (Oonsie) Biggs and Garry Peterson},
   title = {Thermohaline circulation},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},
