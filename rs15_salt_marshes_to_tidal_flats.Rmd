@@ -9,7 +9,6 @@ params:
   j: 15
 ---
 
-
 ```{r include = FALSE}
 library(tidyverse)
 library(leaflet)
@@ -24,36 +23,30 @@ rs <- dat |> filter(id== x)
 knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+:::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 # Salt marshes to tidal flats
 
+-   **Main contributors**: Steven Alexander
 
-- **Main contributors**: Steven Alexander
+-   **Other contributors**: Reinette (Oonsie) Biggs
 
-- **Other contributors**: Reinette (Oonsie) Biggs
+-   Last update: 2012-03-06
 
-- Last update: 2012-03-06
-
-The shift from a salt marsh to either a tidal flat or subtidal flat generates a loss of significant ecosystem services such as pollution filtration, storm protection, and fisheries enhancement. This regime shift is primarily driven by the rate of sea level rise and the rate of sediment delivery. Transitions to consumer control either through the overharvesting of predators or the introduction of invasive/ exotic species can also contribute to this regime shift.It has long been recognized that salt marshes have the capacity to regulate their platform elevation in response to rises in the sea level through a series of non-linear biophysical feedback mechanisms. However, thresholds exists in the rate of sea level rise (RSLR) and the rate of sediment delivery, where upon the mechanisms that effectively control the platform elevations are no longer able to keep up with sea level rise. Effective management options largely depend on the regional variables of the system. These options range from the reintroduction of top predators and removal of invasive/ exotic species to coordinated dam releases to provide necessary sediment pulses. 
-
-
-
+The shift from a salt marsh to either a tidal flat or subtidal flat generates a loss of significant ecosystem services such as pollution filtration, storm protection, and fisheries enhancement.
+This regime shift is primarily driven by the rate of sea level rise and the rate of sediment delivery.
+Transitions to consumer control either through the overharvesting of predators or the introduction of invasive/ exotic species can also contribute to this regime shift.
+It has long been recognized that salt marshes have the capacity to regulate their platform elevation in response to rises in the sea level through a series of non-linear biophysical feedback mechanisms.
+However, thresholds exists in the rate of sea level rise (RSLR) and the rate of sediment delivery, where upon the mechanisms that effectively control the platform elevations are no longer able to keep up with sea level rise.
+Effective management options largely depend on the regional variables of the system.
+These options range from the reintroduction of top predators and removal of invasive/ exotic species to coordinated dam releases to provide necessary sediment pulses.
 :::
 
-:::{style='width: 5%;'}
-
+::: {style="width: 5%;"}
 :::
 
-:::{style='width: 45%;'}
-
+::: {style="width: 45%;"}
 ```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
-
-
-
 library(htmltools)
 library(bsplus)
 
@@ -97,21 +90,17 @@ bs_append(
     caption = bs_carousel_caption(title = 'Salt marshes to tidal flats'))
 
 ```
-
 :::
-::::
+::::::
 
 ## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
-
-
-
 cs <- cases |> 
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -120,7 +109,9 @@ m <- leaflet(cs) |>
 m
 ```
 
-**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
+**Fig 1 \| Empirical evidence.** The database currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world.
+Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift.
+You can learn more from each case by hovering and clicking on the case of interest.
 
 ## Analysis {.tabset .tabset-pills}
 
@@ -128,37 +119,66 @@ m
 
 #### Alternative regimes
 
-Coastal ecosystems of the intertidal zone located in temperate/ mid-latitudes can shift between a salt marsh and either a tidal flat or subtidal flat. The alternate regimes (tidal flat or subtidal flat) vary regionally based on a number of different factors including tidal basin topography, climate, hydrology, vegetation, and sediment loading. The alternate regimes are:
+Coastal ecosystems of the intertidal zone located in temperate/ mid-latitudes can shift between a salt marsh and either a tidal flat or subtidal flat.
+The alternate regimes (tidal flat or subtidal flat) vary regionally based on a number of different factors including tidal basin topography, climate, hydrology, vegetation, and sediment loading.
+The alternate regimes are:
 
-  **Salt Marsh**
+**Salt Marsh**
 
- This regime is largely dominated by the growth and presence of Spartina alterniflora (Smooth Cordgrass) along the east coast of North America and Spartina anglica (Common Cordgrass) in continental northern Europe, halophytes adapted to saline and water logged environments (Marani et al. 2010). The high density, largely monoculture systems exist in the intertidal zone, experiencing daily inundation. While generally found between mean sea level and mean high tide, the range of Spartina and the optimum level for the marsh platform varies regionally based on tidal range, nutrient loading, vegetation, sediment loading, and climate (McKee & Patrick 1988; Morris et al. 2002).
+This regime is largely dominated by the growth and presence of *Spartina alterniflora* (Smooth Cordgrass) along the east coast of North America and *Spartina anglica* (Common Cordgrass) in continental northern Europe, halophytes adapted to saline and water logged environments [@marani2010].
+The high density, largely monoculture systems exist in the intertidal zone, experience daily inundation.
+While generally found between mean sea level and mean high tide, the range of *Spartina* and the optimum level for the marsh platform varies regionally based on tidal range, nutrient loading, vegetation, sediment loading, and climate [@mckee1988; @morris2002].
 
-  **Tidal Flat/ Subtidal Flat**
+**Tidal Flat/ Subtidal Flat**
 
- This regime is void of vegetation. Instead, it is characterized by microbial food chains, dominated by benthic macroorganisms and benthic microalgae (Alongi 1998). Existing below mean sea level (MSL), the surface is only exposed during the lowest tides (Fagherazzi et al. 2006; Defina et al. 2007). On the other hand, subtidal flats are permanently submerged.
+This regime is void of vegetation.
+Instead, it is characterized by microbial food chains, dominated by benthic macroorganisms and benthic microalgae [@alongi2020].
+Existing below mean sea level (MSL), the surface is only exposed during the lowest tides [@fagherazzi2006; @defina2007].
+On the other hand, subtidal flats are permanently submerged.
 
 #### Drivers and causes of the regime shift
 
 **Shift from Salt Marsh to Tidal Flat/ Subtidal Flat**
 
- One of the main drivers resulting in a shift from a salt marsh to tidal flat/subtidal flat is an increasing rate of sea level rise. The direct impact of climate change on an increasing rate of sea level rise and the resulting impact on marine coastal systems has been well established (UNEP 2006). Broadly speaking, mean global sea level changes through the dual processes of thermal expansion and shifts in the hydrologic budget (amount of water in the oceans vs. other reservoirs – i.e. atmosphere, glaciers, ice caps, ice sheets & terrestrial reservoirs). It has long been recognized that salt marshes have the capacity to regulate their platform elevation in response to rises in the sea level through a series of non-linear biophysical feedback mechanisms (Murray et al. 2008; Kirwan et al. 2010). However, a threshold exists in the rate of sea level rise (RSLR), where upon the mechanisms that effectively control the platform elevations are no longer able to keep up (Kirwan et al. 2010).
+One of the main drivers resulting in a shift from a salt marsh to tidal flat/subtidal flat is an increasing rate of sea level rise.
+The direct impact of climate change on an increasing rate of sea level rise and the resulting impact on marine coastal systems has been well established [@unep2006; @marani2007].
+Broadly speaking, mean global sea level changes through the dual processes of thermal expansion and shifts in the hydrologic budget (amount of water in the oceans vs. other reservoirs – i.e. atmosphere, glaciers, ice caps, ice sheets & terrestrial reservoirs).
+It has long been recognized that salt marshes have the capacity to regulate their platform elevation in response to rises in the sea level through a series of non-linear biophysical feedback mechanisms [@murray2008; @kirwan2010].
+However, a threshold exists in the rate of sea level rise (RSLR), where upon the mechanisms that effectively control the platform elevations are no longer able to keep up [@kirwan2010; @kirwan2007; @koppel2005].
 
- Another direct driver leading to a shift from a salt marsh to either a tidal flat or subtidal flat is changes in sediment delivery. Changes in the delivery rates have been linked to land use management and change throughout the watershed/ catchment basin (Pasternack et al. 2001; UNEP 2006; Kirwan et al. 2011). Reductions in the delivery rates of sediment from upstream inhibit the rate of soil accretion and the effective response of marsh platform elevation to rising sea level.
+Another direct driver leading to a shift from a salt marsh to either a tidal flat or subtidal flat is changes in sediment delivery.
+Changes in the delivery rates have been linked to land use management and change throughout the watershed/ catchment basin [@pasternack2001; @unep2006; @kirwan2011].
+Reductions in the delivery rates of sediment from upstream inhibit the rate of soil accretion and the effective response of marsh platform elevation to rising sea level.
 
- Furthermore, the tidal flat/ subtidal flat regime can be caused by an increase in consumer control – i.e. unchecked populations of herbivores (e.g. snails, crabs) govern ecosystem productivity and structure. Such an increase can result from either the overharvesting of predators or through the introduction of invasive and/or exotic species. In addition, it has been suggested that nitrogen loading and the weakening of plant defenses (increased salt stress due to climatic extremes) have also contributed to the shift to consumer control and resulting cascading effects leading to the tidal flat/ subtidal flat regime (Bertness & Silliman 2008).
+Furthermore, the tidal flat/ subtidal flat regime can be caused by an increase in consumer control – i.e. unchecked populations of herbivores (e.g. snails, crabs) govern ecosystem productivity and structure.
+Such an increase can result from either the overharvesting of predators or through the introduction of invasive and/or exotic species.
+In addition, it has been suggested that nitrogen loading and the weakening of plant defenses (increased salt stress due to climatic extremes) have also contributed to the shift to consumer control and resulting cascading effects leading to the tidal flat/ subtidal flat regime [@bertness2008].
 
 #### Impacts on ecosystem services and human well-being
 
 **Shift from Salt Marsh to Tidal Flat/ Subtidal Flat**
 
- Both salt marshes and tidal flats/ subtidal flats provide significant ecosystem services (UNEP 2006). In many cases, they provide similar services but in slightly different ways. For example, while salt marshes contribute to food through serving as nurseries for certain fish species, tidal flats provide important habitat for certain mollusks and crabs (UNEP 2006). However, it is worth noting that the shift from a salt marsh to either a tidal flat or subtidal flat generates a loss of significant ecosystem services in the form of pollution filtration, storm protection, and fisheries enhancement (Gedan et al. 2009). In addition, the loss of these particular ecosystem services draw attention to the impact on and connection to human wellbeing in the form of livelihoods (decrease in fisheries), health (loss of pollution filtration), and climate change vulnerability (decrease in adaptive capacity and loss of storm protection).
+Both salt marshes and tidal flats/ subtidal flats provide significant ecosystem services [@unep2006].
+In many cases, they provide similar services but in slightly different ways.
+For example, while salt marshes contribute to food through serving as nurseries for certain fish species, tidal flats provide important habitat for certain mollusks and crabs [@unep2006].
+However, it is worth noting that the shift from a salt marsh to either a tidal flat or subtidal flat generates a loss of significant ecosystem services in the form of pollution filtration, storm protection, and fisheries enhancement [@gedan2009].
+In addition, the loss of these particular ecosystem services draw attention to the impact on and connection to human wellbeing in the form of livelihoods (decrease in fisheries), health (loss of pollution filtration), and climate change vulnerability (decrease in adaptive capacity and loss of storm protection).
 
 #### Management options
 
-Addressing rates of sea level rise requires an international commitment to addressing climate change. In addition, the time frame for the global climate and in turn RSLR to respond to new policies necessitates a long-term outlook. However, there are a number of management actions or interventions that can be implemented on a more local/regional scale to effectively address issues directly related to sediment delivery rates and the process of consumer control. Mudd (2011) suggest that for those watersheds that have been impounded, scheduled dam releases could be coordinated to supply a sediment pulse to encourage marsh establishment and expansion. Restoration practices that reduce/ remove invasive/exotic species and/or the reestablishment of predator populations could effectively shift the community structure in such a manner that reduces the consumer control and allows for the establishment of a salt marsh (Gedan et al. 2009).
+Addressing rates of sea level rise requires an international commitment to addressing climate change.
+In addition, the time frame for the global climate and in turn RSLR to respond to new policies necessitates a long-term outlook.
+However, there are a number of management actions or interventions that can be implemented on a more local/regional scale to effectively address issues directly related to sediment delivery rates and the process of consumer control.
+Mudd [-@mudd2009] suggest that for those watersheds that have been impounded, scheduled dam releases could be coordinated to supply a sediment pulse to encourage marsh establishment and expansion [@mariotti2010].
+Restoration practices that reduce/ remove invasive/exotic species and/or the reestablishment of predator populations could effectively shift the community structure in such a manner that reduces the consumer control and allows for the establishment of a salt marsh [@gedan2009].
 
- Salt marshes exist within a heterogeneous coastal zone that is rapidly becoming human dominated - one third of the human population lives in coastal areas (UNEP 2006). This situation imposes certain constraints that must also be taken into consideration when thinking about the effective management and restoration of salt marshes. The long-term ability of a salt marsh to regulate its height in response to increased rates of sea level rise necessitates the flow of energy and materials into and out of the system. Tidal restrictions due to roads, railroad bridges, and their associated culverts can drastically change the dynamics in the system and have led to shifts in community composition (Gedan et al. 2009). A second key issue is the encroachment of development right up to the marsh's upland boundary. Such encroachment does not leave room for the marsh platform to migrate inland as it responds to increased rates of sea level rise. If the full suite of such pressures and drivers operating at various spatial and temporal scales both within and adjacent to the system are not taken into account, the long term resilience of the system may be compromised, and efforts at restoration may be undermined.
+Salt marshes exist within a heterogeneous coastal zone that is rapidly becoming human dominated - one third of the human population lives in coastal areas [@unep2006].
+This situation imposes certain constraints that must also be taken into consideration when thinking about the effective management and restoration of salt marshes.
+The long-term ability of a salt marsh to regulate its height in response to increased rates of sea level rise necessitates the flow of energy and materials into and out of the system.
+Tidal restrictions due to roads, railroad bridges, and their associated culverts can drastically change the dynamics in the system and have led to shifts in community composition [@gedan2009].
+A second key issue is the encroachment of development right up to the marsh's upland boundary.
+Such encroachment does not leave room for the marsh platform to migrate inland as it responds to increased rates of sea level rise.
+If the full suite of such pressures and drivers operating at various spatial and temporal scales both within and adjacent to the system are not taken into account, the long term resilience of the system may be compromised, and efforts at restoration may be undermined.
 
 ### In-depth analysis
 
@@ -187,164 +207,120 @@ if (rs$regime_shift_name %in% clds$regime_shift) {
 
 ```{r}
 
-load('assets/rs_analysis_text.Rda')
-
-if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
-    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+# load('assets/rs_analysis_text.Rda')
+# 
+# if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+#     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
 
 ### Categorical summary
 
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 #### Impacts
 
 **Ecosystem type**:'
 
-- Marine & coastal
-
+-   Marine & coastal
 
 **Key ecosystem processes**:
 
-- Soil formation
-- Primary production
-- Nutrient cycling
-
+-   Soil formation
+-   Primary production
+-   Nutrient cycling
 
 **Biodiversity**:
 
-- Biodiversity
-
+-   Biodiversity
 
 **Provisioning services**:
 
-- Fisheries
-- Fuel and fiber crops
-
+-   Fisheries
+-   Fuel and fiber crops
 
 **Regulating services**:
 
-- Climate regulation
-- Water purification
-- Regulation of soil erosion
-- Natural hazard regulation
-
+-   Climate regulation
+-   Water purification
+-   Regulation of soil erosion
+-   Natural hazard regulation
 
 **Cultural services**:
 
-- Recreation
-- Aesthetic values
-- Knowledge and educational values
-
+-   Recreation
+-   Aesthetic values
+-   Knowledge and educational values
 
 **Human well-being**:
 
-- Livelihoods and economic activity
-- Cultural
-- Aesthetic and recreational values
-
+-   Livelihoods and economic activity
+-   Cultural
+-   Aesthetic and recreational values
 
 **Links to other regime shifts**:
 
 NA
-
 :::
 
-:::{style='width: 50%;'}
-
+::: {style="width: 50%;"}
 #### Drivers
 
 **Key drivers**:
 
-- Vegetation conversion and habitat fragmentation
-- Infrastructure development (e.g. roads or pipelines)
-- Species introduction or removal
-- Soil erosion & land degradation
-- Global climate change
-
+-   Vegetation conversion and habitat fragmentation
+-   Infrastructure development (e.g. roads or pipelines)
+-   Species introduction or removal
+-   Soil erosion & land degradation
+-   Global climate change
 
 **Land use**:
 
-- Land use impacts are primarily off-site (e.g. dead zones)
-
+-   Land use impacts are primarily off-site (e.g. dead zones)
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake catchment or community)
-
+-   Local/landscape (e.g. lake catchment or community)
 
 **Time scale**:
 
-- Years
-- Decades
-
+-   Years
+-   Decades
 
 **Reversibility**:
 
-- Hysteretic (difficult to reverse)
-
+-   Hysteretic (difficult to reverse)
 
 **Evidence**:
 
-- Models
-- Paleo-observation
-- Contemporary observations
-- Experiments
-
+-   Models
+-   Paleo-observation
+-   Contemporary observations
+-   Experiments
 
 **Confidence: existence of the regime shift**
 
-- Contested – Reasonable evidence both for and against the existence of RS
-
+-   Contested – Reasonable evidence both for and against the existence of RS
 
 **Confidence: mechanisms underlying the regime shift**
 
-- Well established – Wide agreement on the underlying mechanism
-
-
+-   Well established – Wide agreement on the underlying mechanism
 :::
-
-::::
+:::::
 
 ### References
 
 ::: {#refs}
-
 :::
-### References old [Delete]
-
-<small>
-
-- Alongi, D. 1998. Coastal Ecosystem Processes. New York, New York: CRC Press. 
-- Bertness, M. & Silliman, B. 2008. Consumer control of salt marshes driven by human disturbance. Conservation Biology 22(3), 618 – 623.  
-- Defina, A., Carniello, L., Fagherazzi, S., & D’Alpaos, L. 2007. Self-organization of shallow basins in tidal flats and salt marshes. Journal of Geophysical Research 12, F03001.  
-- Fagherazzi, S., Carniello, L., D’Alpaos, L., & Defina, A. 2006. Critical bifurcation of shallow microtidal landforms in tidal flats and salt marshes. Proceedings of the National Academy of Sciences 103(22), 8337 - 8341.  
-- Gedan, K., Silliman, B., & Bertness, M. 2009. Centuries of human-driven change in salt marsh ecosystems. Annual Review of Marine Science 1, 117 -141.  
-- Kirwan, M. & Murray, A. 2007. A coupled geomorphic and ecological model of tidal marsh evolution. Proceedings of the National Academy of Sciences 104(15), 6118 – 6122.   
-- Kirwan, M., Guntenspergen, Gl, D’Alpaos, A., Morris, J., Mudd, S., & Temmerman, S. 2010. Limits on the adaptability of coastal marshes to rising sea level. Geophysical Research Letters 37, L23401.  
-- Kirwan, M., Murray, A., Donnelly, J., & Corbett, D. 2011. Rapid wetland expansion during European settlement and its implication for marsh survival under modern sediment delivery rates. Geology 39(5), 507-510.  
-- Marani, M., D’Alpaos, A., Lanzoni, S., Carniello, L., & Rinaldo, A. 2007. Biologically-controlled multiple equilibria of tidal landforms and the fate of the Venice lagoon. Geophysical Research Letters 34, L11402.  
-- Marani, M., D’Alpaos, A., Lanzoni, S., Carniello, L., & Rinaldo, A. 2010. The importance of being coupled: Stable states and catastrophic shifts in tidal biomorphodynamics. Journal of Geophysical Research 115, F04004.  
-- Mariotti, G., Fagherazzi, S., Wiberg, P., McGlathery, K., Carniello, L., & Defina, A. 2010. Influence of storm surges and sea level on shallow tidal basin erosive processes. Journal of Geophysical Research 115, C11012.  
-- McKee, K. & Patrick, W. 1988. The relationship of Smooth Cordgrass (Spartina alterniflora) to tidal datums: A review. Estuaries 11(3), 143-151.   
-- Morris, J., Sundareshwar, P., Nietch, C., Kjerfve, B., & Cahoon, D. 2002. Responses of coastal wetlands to rising sea level. Ecology 83(10), 2869 – 2877.  
-- Mudd, S., Howell, S., & Morris, J. 2009. Impact of dynamic feedbacks between sedimentation, sea-level rise, and biomass production on near-surface stratigraphy and caron accumulation. Estuarine, Coastal and Shelf Science 82, 377 – 389.  
-- Murray, A., Knaapen, M., Tal, M., & Kirwan, M. 2008. Biomorphodynamics: Physical-biological feedbacks that shape landscapes. Water Resources Research 44, W11301.  
-- Pasternack, G., Brush, G., & Hilgartner, W. 2001. Impact of historic land-use change on sediment delivery to a Chesapeake Bay subestuarine delta. Earth Surface Processes and Landforms 26, 409-427.  
-- UNEP. 2006. Marine and coastal ecosystems and human well-being: A synthesis report based on the findings of the Millennium Ecosystem Assessment. UNEP.   
-- van de Koppel J, van der Wal D, Bakker JP, & Herman PM. 2005. Self-organization and vegetation collapse in salt marsh ecosystems. American Naturalist 165, 1-12.
-
-</small>
 
 ## Citation
+
 Acknowledge this review as:
 
-<tiny> 
-``` {style='color: gray;'}
+<tiny>
+
+``` {style="color: gray;"}
 Steven Alexander, Reinette (Oonsie) Biggs. Salt marshes to tidal flats. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2012-03-06
 ```
 
@@ -352,8 +328,9 @@ Steven Alexander, Reinette (Oonsie) Biggs. Salt marshes to tidal flats. In: Regi
 
 BibTeX citation:
 
-<tiny><tiny> 
-``` {style='color: gray;'}
+<tiny><tiny>
+
+``` {style="color: gray;"}
 @misc{
   author = {Steven Alexander and Reinette (Oonsie) Biggs},
   title = {Salt marshes to tidal flats},
