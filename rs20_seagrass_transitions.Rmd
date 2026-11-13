@@ -9,7 +9,6 @@ params:
   j: 20
 ---
 
-
 ```{r include = FALSE}
 library(tidyverse)
 library(leaflet)
@@ -24,36 +23,28 @@ rs <- dat |> filter(id== x)
 knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+:::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 # Seagrass transitions
 
+-   **Main contributors**: Dayana Hernández Vivas, Johanna Källén, Alba Juárez Bourke, Kerstin Hultman-Boye
 
-- **Main contributors**: Dayana Hernández Vivas, Johanna Källén, Alba Juárez Bourke, Kerstin Hultman-Boye
+-   **Other contributors**: Örjan Bodin, Reinette (Oonsie) Biggs, Juan Carlos Rocha, Albert Norström
 
-- **Other contributors**: Örjan Bodin, Reinette (Oonsie) Biggs, Juan Carlos Rocha, Albert Norström
+-   Last update: 2013-09-09
 
-- Last update: 2013-09-09
-
-Regime shifts in seagrass beds are characterised by a collapse of seagrass beds and a transition into either an algae dominated regime or a barren sediment regime. The key drivers are nutrient loading/eutrophication from e.g. agricultural run-off, and overfishing, which both cause slow changes in the system that eventually lead to a sudden collapse of the seagrass regime; or more abrupt shocks like physical disturbance, both anthropogenic and natural, and disease outbreaks that cause direct seagrass decline. Seagrass ecosystems provide valuable ecosystem services such as fishing grounds and coastal protection, which are lost when a shift occurs. Once the system has shifted into a new regime it is difficult or even impossible to restore it to its previous seagrass dominated state. Therefore ecosystem management should be focused on enhancing resilience in order to avoid a regime shift, e.g. limit nutrient input, reduce physical disturbance and prevent overfishing.
-
-
-
+Regime shifts in seagrass beds are characterised by a collapse of seagrass beds and a transition into either an algae dominated or a barren sediment regimes.
+The key drivers are nutrient loading/eutrophication from e.g. agricultural run-off, and overfishing, which both cause slow changes in the system that eventually lead to a sudden collapse of the seagrass; or more abrupt shocks like physical disturbance, both anthropogenic and natural, and disease outbreaks that cause direct seagrass decline.
+Seagrass ecosystems provide valuable ecosystem services such as fishing grounds and coastal protection, which are lost when a shift occurs.
+Once the system has shifted into a new configuration it is difficult or even impossible to restore it to its previous seagrass dominated state.
+Therefore ecosystem management should be focused on enhancing resilience in order to avoid a regime shift, e.g. by limiting nutrient input, reducing physical disturbance and preventing overfishing.
 :::
 
-:::{style='width: 5%;'}
-
+::: {style="width: 5%;"}
 :::
 
-:::{style='width: 45%;'}
-
+::: {style="width: 45%;"}
 ```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
-
-
-
 library(htmltools)
 library(bsplus)
 
@@ -73,9 +64,8 @@ bs_append(
     caption = bs_carousel_caption(title = 'Seagrass transitions'))
 
 ```
-
 :::
-::::
+::::::
 
 ## Evidence
 
@@ -87,7 +77,7 @@ cs <- cases |>
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -96,7 +86,9 @@ m <- leaflet(cs) |>
 m
 ```
 
-**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
+**Fig 1 \| Empirical evidence.** The database currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world.
+Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift.
+You can learn more from each case by hovering and clicking on the case of interest.
 
 ## Analysis {.tabset .tabset-pills}
 
@@ -104,55 +96,100 @@ m
 
 #### Alternative regimes
 
-Seagrass beds are marine ecosystems that can be found in the subtidal and intertidal zones in the majority of oceans worldwide (Orth et al. 2006). Regime shifts in these systems have been identified as a transition to either an algae dominated regime (Valentine and Duffy 2006; Burkholder et al. 2007; Nyström et al. 2012) or a barren sediment regime (van der Heide et al. 2007 and 2011; Nyström et al. 2012),although most literature interchangeably describes these phenomena as seagrass decline and not regime shifts. Although this review uses a social-ecological systems lens, the focus lies on the shift in the ecosystem, and humans are considered as beneficiaries of ecosystem services and as drivers of system change.
+Seagrass beds are marine ecosystems that can be found in the subtidal and intertidal zones in the majority of oceans worldwide [@orth2006].
+Regime shifts in these systems have been identified as a transition to either an algae dominated regime [@valentine; @burkholder2007; @nyström2012] or a barren sediment regime [@vanderheide2011; @vanderheide2007; @nyström2012], although most literature interchangeably describes these phenomena as seagrass decline and not regime shifts.
+Although this review uses a social-ecological systems lens, the focus lies on the shift in the ecosystem, and humans are considered as beneficiaries of ecosystem services and as drivers of system change.
 
-  **Seagrass dominated regime**
+##### Seagrass dominated regime
 
- Healthy seagrasses form large beds, usually dominated by one seagrass species. They are considered ecosystem engineers as theysignificantly modify the abiotic conditions of their ecosystem to benefit their own success, by reducing current speed, stabilising sediments and creating oligotrophic conditions by trapping inorganic and organic material (Duarte 2002; Orth et al. 2006; Burkholder et al. 2007). Together with epiphytic algae seagrasses form the basis of complex food webs, making these systems highly productive (Valentine and Duffy 2006). Seagrass beds also support high biodiversity and provide important habitats, refuges and nursery grounds for a variety of species, many of which are commercially and ecologically important (Orth et al. 2006).
+Healthy seagrasses form large beds, usually dominated by one seagrass species.
+They are considered ecosystem engineers as they significantly modify the abiotic conditions of their ecosystem to benefit their own success, by reducing current speed, stabilising sediments and creating oligotrophic conditions by trapping inorganic and organic material [@duarte2002; @orth2006; @burkholder2007].
+Together with epiphytic algae, seagrasses form the basis of complex food webs, making these systems highly productive [@valentine].
+Seagrass beds also support high biodiversity and provide important habitats, refuges and nursery grounds for a variety of species, many of which are commercially and ecologically important [@orth2006].
 
-  **Algae dominated regime** 
+##### Algae dominated regime
 
- This regime is characterised by dominance of macroalgae (algae attached to the bottom sediments that can form extensive beds), phytoplankton (free-living, planktonic algae) or epiphytic algae (algae growing on the surface of seagrass leaves), or a combination thereof (Cardoso et al. 2004; Burkholder et al. 2007). They are inherently superior competitors to seagrass, particularly in high nutrient conditions such as eutrophication (Valentine and Duffy 2006), which is a characteristic of this regime. Under such conditions seagrasses are prone to smothering by epiphytes and encroachment by opportunistic macroalgae that can form beds that are resistant to seagrass recolonisation (Valentine and Duffy 2006). Shallow waters tend to be dominated by macroalgae and epiphytes, while deeper areas are dominated by phytoplankton (Burkholder et al. 2007). In general this regime supports lower biodiversity as the variety of habitats associated with seagrass beds are not provided (Duarte et al. 2006).
+This regime is characterised by dominance of macroalgae (algae attached to the bottom sediments that can form extensive beds), phytoplankton (free-living, planktonic algae) or epiphytic algae (algae growing on the surface of seagrass leaves), or a combination thereof [@cardoso2004; @burkholder2007].
+They are inherently superior competitors to seagrass, particularly in high nutrient conditions such as eutrophication [@valentine], which is a characteristic of this regime.
+Under such conditions seagrasses are prone to smothering by epiphytes and encroachment by opportunistic macroalgae that can form beds that are resistant to seagrass recolonisation [@valentine].
+Shallow waters tend to be dominated by macroalgae and epiphytes, while deeper areas are dominated by phytoplankton [@burkholder2007].
+In general this regime supports lower biodiversity as the variety of habitats associated with seagrass beds are not provided [@duarte].
 
-  **Bare sediment regime** 
+##### Bare sediment regime
 
- A third alternate regime is that of a barren sediment landscape (van der Heide et al. 2007 and 2011; Nyström et al. 2012). The shift can occur due to extensive removal of seagrasses or sudden disease outbreaks causing large seagrass die-off (van der Heide et al. 2007 and 2011). In this regime sediments can easily be re-suspended, causing high turbidity and light attenuation due to a reduction in, or depletion of, the seagrass engineering function (van der Heide et al. 2011). The benthic sediments are coarse in comparison to the seagrass regime and can seasonally host macroalgal beds. Biodiversity is low and the community structure different compared to seagrass beds, as the seagrass habitats are removed (Cardoso et al. 2004).
+A third alternate regime is that of a barren sediment landscape [@vanderheide2011; @vanderheide2007; @nyström2012].
+The shift can occur due to extensive removal of seagrasses or sudden disease outbreaks causing large seagrass die-off [@vanderheide2007; @vanderheide2011].
+In this regime sediments can easily be re-suspended, causing high turbidity and light attenuation due to a reduction in, or depletion of, the seagrass engineering function [@vanderheide2011].
+The benthic sediments are coarse in comparison to the seagrass regime and can seasonally host macroalgal beds.
+Biodiversity is low and the community structure different compared to seagrass beds, as the seagrass habitats are removed [@cardoso2004].
 
 #### Drivers and causes of the regime shift
 
-**Regime shift #1: seagrass beds to algae dominated regime**
+##### From seagrass beds to algae dominated regime
 
- The shift from seagrass beds to algal dominated state is driven by multiple stressors, but nutrient loading and overfishing stand out as key drivers (Burkholder et al. 2007). Seagrasses are dependent on high influx of light, oligotrophic conditions and sediment bottoms (Eklöf 2008). In coastal waters eutrophication causes an increase of epiphytic or macroalgal biomass, while in shallow parts it will cause phytoplankton blooms, reducing light penetration to a level that will no longer sustain seagrasses but promote algal dominance (Orth et al. 2006; Burkholder et al. 2007). The drivers of eutrophication are anthropogenic, such as nutrient input from agriculture, aquaculture and sewage (Duarte 2002; Burkholder et al. 2011).
+The shift from seagrass beds to algal dominated state is driven by multiple stressors, but nutrient loading and overfishing stand out as key drivers [@burkholder2007].
+Seagrasses are dependent on high influx of light, oligotrophic conditions and sediment bottoms [@eklöf2009].
+In coastal waters eutrophication causes an increase of epiphytic or macroalgal biomass, while in shallow parts it will cause phytoplankton blooms, reducing light penetration to a level that will no longer sustain seagrasses but promote algal dominance [@orth2006; @burkholder2007].
+The drivers of eutrophication are anthropogenic, such as nutrient input from agriculture, aquaculture and sewage [@duarte2002; @burkholder2007].
 
- There is evidence that altering food webs through overfishing has similar effects, or can further augment the effects of eutrophication, by reducing herbivory, thus releasing algae from the pressure of grazing which can lead to a shift in regimes (Heck Jr and Valentine 2007). Changes in food webs are in turn linked to increased coastal migration, tourism, increased unemployment rates and increased population in coastal areas (Eklöf 2008).
+There is evidence that altering food webs through overfishing has similar effects, or can further augment the effects of eutrophication, by reducing herbivory, thus releasing algae from the pressure of grazing which can lead to a shift in regimes [@heck2007].
+Changes in food webs are in turn linked to increased coastal migration, tourism, increased unemployment rates and increased population in coastal areas [@eklöf2008].
 
- Another important driver is the sediment load in the water column since it contributes to turbidity, i.e. decreases light penetration. Erosion, coastal development and deforestation are the main drivers of increased sediment loading in the water column (Duarte 2002; de Boer 2007). Activities such as boating, anchoring, dredging and trawling can also affect seagrass beds negatively throughout a long period of time. They all cause water turbidity and resuspension of sediments as well as physical damage to the seagrasses. Resuspension of sediments can also lead to a release of nutrients, promoting algal growth (de Boer 2007).
+Another important driver is the sediment load in the water column since it contributes to turbidity, i.e. decreases light penetration.
+Erosion, coastal development and deforestation are the main drivers of increased sediment loading in the water column [@duarte2002; @deboer2007].
+Activities such as boating, anchoring, dredging and trawling can also affect seagrass beds negatively throughout a long period of time.
+They all cause water turbidity and resuspension of sediments as well as physical damage to the seagrasses.
+Resuspension of sediments can also lead to a release of nutrients, promoting algal growth [@deboer2007]
 
-  **Regime shift #2: seagrass beds to barren sediment regime** 
+##### From seagrass beds to barren sediment regime
 
- Another shift that can occur is from seagrass beds to a barren sediment regime with increased turbidity and where seasonal macroalgae take over (Cardoso 2003). Drivers of this shift are mainly physical disturbances such as actual removal of beds from e.g. beach replenishment or dredging, and a wasting disease that can cause extensive seagrass die-off (Duarte 2002; Cardoso et al. 2004). These drivers are shocks to the system, thus it appears that the shift is more abrupt than the shift to the algae dominated state. Physical disturbance could either be anthropogenic, such as dredging, boating activities, trawling and various coastal developments; or natural, such as storms (Duarte 2002). Eutrophication can also be a driver for this shift, as in the Mondego estuary in Portugal, where the loss of seagrasses and their ability to bind sediments also resulted in a bare, coarse sediment regime (Cardoso et al. 2004).
+Another shift that can occur is from seagrass beds to a barren sediment regime with increased turbidity and where seasonal macroalgae take over [@cardoso2004].
+Drivers of this shift are mainly physical disturbances such as actual removal of beds from e.g. beach replenishment or dredging, and a wasting disease that can cause extensive seagrass die-off [@duarte2002; @cardoso2004].
+These drivers are shocks to the system, thus it appears that the shift is more abrupt than the shift to the algae dominated state.
+Physical disturbance could either be anthropogenic, such as dredging, boating activities, trawling and various coastal developments; or natural, such as storms [@duarte2002].
+Eutrophication can also be a driver for this shift, as in the Mondego estuary in Portugal, where the loss of seagrasses and their ability to bind sediments also resulted in a bare, coarse sediment regime [@cardoso2004].
 
 #### Impacts on ecosystem services and human well-being
 
-Seagrass beds play a significant role in providing habitats and nursery grounds for marine organisms targeted for human consumption e.g. scallops, shrimps, crabs and juvenile fish (Duarte 2002; Terrados et al. 2004; Eklöf 2008; Barbier et al. 2011).  Thus, they are important habitats which enhance the welfare of people who directly are dependent on its resources (De la Torre-Castro et al. 2004).  If seagrass beds are lost due to a regime shift, its provisioning ecosystem services may diminish, which can be detrimental for the well-being of dependent people, especially affecting provision of food and livelihood. Fishermen, whose main source of income comes from seagrass-associated species, may be the user group most affected by the regime shift (De la Torre-Castro et al. 2004).
+Seagrass beds play a significant role in providing habitats and nursery grounds for marine organisms targeted for human consumption e.g. scallops, shrimps, crabs and juvenile fish [@duarte2002; @eklöf2009; @barbier2011]. 
+Thus, they are important habitats which enhance the welfare of people who directly are dependent on its resources [@delatorre-castro2004].
+If seagrass beds are lost, its provisioning ecosystem services may diminish, which can be detrimental for the well-being of dependent people, especially affecting provision of food and livelihood.
+Fishermen, whose main source of income comes from seagrass-associated species, may be the user group most affected by the regime shift [@delatorre-castro2004].
 
- In turn, fishing activity associated with seagrass beds benefit consumers by meeting food demand at local but also distant locations. In terms of access to enough nutritious food as a constituents of well-being (Reid et al. 2005), a regime shift may impact the adequacy of material for a good life of especially coastal communities. In addition, although in a limited way, some communities benefit from seagrass in that it is used as raw material and as food, as well as a fertilizer in some other regions (De la Torre-Castro et al. 2004; Barbier et al. 2011).
+In turn, fishing activity associated with seagrass beds benefit consumers by meeting food demand at local but also distant locations.
+In terms of access to enough nutritious food as a constituents of well-being [@barbier2011], a regime shift may impact the adequacy of material for a good life of especially coastal communities.
+In addition, although in a limited way, some communities benefit from seagrass in that it is used as raw material and as food, as well as a fertilizer in some other regions [@delatorre-castro2004; @barbier2011].
 
- Seagrass beds play an important regulating role by capturing carbon dioxide and transforming it into organic carbon (Duarte, 2002; Orth et al. 2006; Barbier et al. 2011). It has been suggested that the carbon stored in living seagrasses globally is on average 2.52±0.48 Mg C ha -1 (Fourqurean et al. 2012). Seagrass bed decline could lead to a significant loss in the CO2 sequestration capacity and reduction in carbon storage, with potential negative effects at the global scale associated with climate change.
+Seagrass beds play an important regulating role by capturing carbon dioxide and transforming it into organic carbon [@duarte2002; @orth2006; @barbier2011].
+The carbon stored in living seagrasses globally is on average 2.52±0.48 Mg C ha^-1^ [@fourqurean2012].
+Seagrass bed decline could lead to a significant loss in the CO~2~ sequestration capacity and reduction in carbon storage, with potential negative effects at the global scale associated with climate change.
 
- Seagrass beds attenuate waves and stabilize sediments and in doing so reduce coastal erosion and erosion of bottom substrates (Duarte 2002; Orth et al. 2006; Eklöf 2008; Barbier et al. 2011). They also can reduce the effects of storms and extreme weather events like hurricanes, providing a coastal protection service. It can be assumed that the lack of this service may affect the sense of security as material security of coastal populations and socio-economic activities in place such as fisheries, tourism, marine transport and aquaculture.
+Seagrass beds attenuate waves and stabilize sediments and in doing so reduce coastal erosion and erosion of bottom substrates [@duarte2002; @orth2006; @eklöf2009; @barbier2011].
+They also can reduce the effects of storms and extreme weather events like hurricanes, providing a coastal protection service.
+It can be assumed that the lack of this service may affect the sense of security as material security of coastal populations and socio-economic activities in place such as fisheries, tourism, marine transport and aquaculture.
 
- Non-material services related to the aesthetic and cultural values of seagrass beds that benefits some traditional groups (Kenworthy et al. 2006; Barbier et al. 2011) could be lost if a regime shift takes place. Although tourism may threaten seagrass beds (Ochieng et al. as cited in Eklöf 2008) they could have an overall positive effect on the tourist industry (Duarte 2002) by providing an aesthetic setting with high water clarity and habitats for diverse species (Barbier et al. 2011). Therefore, as regime shift resulting in a reduction of these services could have a potential negative effect on the tourism industry.
+Non-material services related to the aesthetic and cultural values of seagrass beds that benefits some traditional groups [@kenworthy; @barbier2011] could be lost if a regime shift takes place.
+Although tourism may threaten seagrass beds [@eklöf2009] they could have an overall positive effect on the tourist industry [@duarte2002] by providing an aesthetic setting with high water clarity and habitats for diverse species [@barbier2011].
+Therefore, as regime shift resulting in a reduction of these services could have a potential negative effect on the tourism industry.
 
 #### Management options
 
-Once seagrass ecosystems have shifted into a new state, recovery can be difficult or even irreversible in human time scale (Duarte 2002; van der Heide et al. 2007). Therefore, it is preferable to maintain or to build the resilience of these systems to prevent a regime shift, as restoring them once a shift has occurred can prove difficult if not impossible (Orth et al. 2006).
+Once seagrass ecosystems have shifted into a new state, recovery can be difficult or even irreversible in human time scale [@duarte2002; @vanderheide2007].
+Therefore, it is preferable to maintain or to build the resilience of these systems to prevent a regime shift, as restoring them once a shift has occurred can prove difficult if not impossible [@orth2006].
 
- One of the most crucial management actions is to limit nutrient input. Important measures for doing this are limiting the use of fertilizers in agriculture; protecting marsh areas, as they can act as a buffer against nutrient loading; treating wastewater (Duarte 2002) and regulating its disposal so that it is discharged in areas with efficient water exchange. These measures are also effective for reducing organic matter loading. Human-provoked physical disturbance should also be controlled. For example, management should limit dredging and marine constructions to areas outside seagrass beds when possible, and should limit dredging and sand reclamation to short periods that seagrasses can overcome (Borum et al. 2004).Management should also regulate fishing activity in order to avoid overfishing on top-predators and prevent cascading effects in the food-web, which otherwise can lead to algal dominance (Eklöf 2008). Efforts should also be made at an international scale to mitigate climate change (Borum et al. 2004). For an effective implementation of these measures, it would be necessary to increase public awareness about the ecological functions seagrass beds carry out and the services they provide to society (Duarte 2002; Orth et al. 2006; Eklöf 2008). 
+One of the most crucial management actions is to limit nutrient input.
+Important measures for doing this are limiting the use of fertilizers in agriculture; protecting marsh areas, as they can act as a buffer against nutrient loading; treating wastewater [@duarte2002] and regulating its disposal so that it is discharged in areas with efficient water exchange.
+These measures are also effective for reducing organic matter loading.
+Human-provoked physical disturbance should also be controlled.
+For example, management should limit dredging and marine constructions to areas outside seagrass beds when possible, and should limit dredging and sand reclamation to short periods that seagrasses can overcome [@duarte].
+Management should also regulate fishing activity in order to avoid overfishing on top-predators and prevent cascading effects in the food-web, which otherwise can lead to algal dominance [@eklöf2008].
+Efforts should also be made at an international scale to mitigate climate change [@duarte].
+For an effective implementation of these measures, it would be necessary to increase public awareness about the ecological functions seagrass beds carry out and the services they provide to society [@duarte2002; @orth2006; @eklöf2008]. 
 
- In the event of a regime shift it is possible to return to a seagrass-dominated regime by resorting to seagrass transplantations. However these techniques have high costs and the success rates are low (Duarte 2002; van der Heide et al. 2007) therefore regime shifts are best prevented (Orth et al. 2006).
+In the event of a regime shift it is possible to return to a seagrass-dominated regime by resorting to seagrass transplantations.
+However these techniques have high costs and the success rates are low [@duarte2002; @vanderheide2007] therefore regime shifts are best prevented [@orth2006].
 
- In order for these management actions to be effective it is necessary to develop a better knowledge of the causes of seagrass decline and to develop predictive models. (Duarte 2002; Orth et al. 2006).
+In order for these management actions to be effective it is necessary to develop a better knowledge of the causes of seagrass decline and to develop predictive models [@duarte2002; @orth2006].
 
 ### In-depth analysis
 
@@ -181,183 +218,328 @@ if (rs$regime_shift_name %in% clds$regime_shift) {
 
 ```{r}
 
-load('assets/rs_analysis_text.Rda')
-
-if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
-    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+# load('assets/rs_analysis_text.Rda')
+# 
+# if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+#     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
+
+#### Feedback mechanisms
+
+Seagrass bed dynamics are characterised by a set of positive feedback loops that reinforce seagrass dominance.
+However, external drivers can reverse some of these feedbacks, leading to a decline in seagrass and a possible regime shift (van der Heide et al. 2011).
+Such feedback loops are common in marine ecosystems that are dominated by an engineering species, as they create optimal environmental conditions for their own growth (van der Heide et al. 2011).
+
+##### Seagrass dominated regime
+
+-   *Seagrass-turbidity (local, well established):* Seagrasses are ecosystem engineers and have the ability to promote their own growth by modifying the abiotic environment.
+    They attenuate currents and trap suspended sediments and nutrients, which reduce turbidity and enhance light penetration [@duarte2002; @vanderheide2007; @vanderheide2011; @nyström2012].
+    This reinforcing feedback plays an important role in maintaining seagrass dominance [@deboer2007; @vanderheide2011] as seagrass have, compared to other plants, unusually high requirements for good light conditions for photosynthesis and growth [@burkholder2007].
+    This feedback is particularly important in shallow areas that can easily become turbid due to strong wave action [@vanderheide2011].
+    Additionally, lowered current velocities and fine bottom sediment enables root attachment for new shoots, thus seagrass facilitate for their own expansion [@cardoso2004].
+    With greater seagrass biomass the engineering function is augmented [@vanderheide2011], which further reinforces seagrass dominance.
+
+-   *Seagrass-algae competition feedback (local, well established):* Seagrasses compete with algae for space, light and nutrients [@duarte].
+    The ability of seagrass beds to reduce nutrient levels in the water column prevents the proliferation of algae [@valentine; @vanderheide2007].
+    Thus, they prevent high turbidity levels from phytoplankton blooms, shading from benthic macroalgae and fouling by epiphytes [@burkholder2007].
+    In this way they ensure sufficient light uptake for seagrass growth, and therefore, by maintaining oligotrophic conditions seagrasses reinforce their own dominance.
+
+-   *Seagrass-herbivore feedback loop (local, well-established):* The structural complexity of seagrass beds provides algal herbivores with important habitats and refuges from predators [@duarte2002; @valentine].
+    Mesograzers such as small gastropods and crustaceans prevent seagrasses from being smothered by epiphytic algae by maintaining low algal cover through high grazing pressure [@valentine]; and planktivores and filter feeders are important in keeping phytoplankton abundance low [@burkholder2007].
+    Seagrass beds with sufficient herbivory function are more resilient to nutrient input as algae are kept in low abundance [@valentine].
+    As such, algal herbivores are important for keeping the beds healthy and to facilitate further seagrass expansion, which in turn will provide more habitats for herbivore communities.
+
+##### Algae dominated regime
+
+-   *Algae-seagrass feedback (local, well established):* An increase in algal abundance, through nutrient loading or reduction in algal herbivores, can shift the feedback dynamics into favouring algae instead of seagrass dominance as algae are inherently better competitors under high nutrient conditions [@valentine].
+    In deeper coastal waters added nutrients facilitate phytoplankton blooms while in shallower waters blooms of macroalgae and epiphytes are favoured where greater wave action prevents phytoplankton blooms [@burkholder2007].
+    The former increase turbidity and reduce light penetration [@valentine] and as such alter the seagrass-turbidity feedback to undermine seagrass growth instead of enhancing it.
+    Macroalgae rapidly develop thick canopies that shade seagrasses and epiphytes directly obstruct light from reaching the seagrass leaves [@burkholder2007].
+    All three scenarios cause a decline in seagrass cover through light reduction and consequently will reduce seagrass engineering function, which further facilitates algal blooms as nutrients can be resuspended into the water column [@burkholder2007].
+    Additionally, algal blooms can cause significant reduction of oxygen (hypoxia) in the water column and oxygen depletion (anoxia) in the sediments, causing an increase in hydrogen sulphide concentration which is directly toxic to seagrasses [@burkholder2007; @nyström2012].
+    Hypoxia can also cause a decline in herbivore populations [@burkholder2007] and with a reduction in herbivory the algal dominance is further reinforced.
+
+-   *Grazer-Epiphytic algae feedback (local, well established):* If the grazing pressure is reduced (as a result of e.g. overfishing) epiphytic algae is allowed to proliferate and will outcompete seagrass for light and nutrients [@valentine].
+    With a reduction in seagrass cover grazer habitats and refuges are reduced making grazers more vulnerable to predation.
+    Furthermore, recolonizing seagrasses have low shoot density and provide poor refuges for grazer populations, leaving them exposed to predation.
+    With low grazing pressure epiphytic algae is favoured and will prevent seagrass re-growth [@valentine].
+
+##### Barren sediment regime
+
+-   *Turbidity feedback (local, well established):* The barren sediment regime is primarily maintained by the reversed seagrass-turbidity feedback as the seagrass engineering function is reduced due to little or no seagrass biomass.
+    Without dense seagrass cover currents are no longer attenuated, sediments and nutrients can readily be resuspended into the water column and coarse sediments constitute the bottom substrate [@vanderheide2007; @vanderheide2011].
+    This causes an increase in turbidity, so light levels may drop below seagrass tolerance [@deboer2007], which inhibits seagrass recolonisation.
+    Recolonisation is further constrained as new shoots are exposed to currents and can easily be uprooted, especially since the coarse sediments provide little hold for the roots [@cardoso2004].
+
+-   *Grazer-epiphytic algae feedback (local, well established):* Even if abiotic conditions allow for seagrass recolonisation, success in bed establishment may be impaired by low algal grazing pressure.
+    New seagrass patches have low shoot density and provide poor refuges for grazer populations, which leaves the grazers exposed to predation.
+    With low grazing pressure epiphytic algae is favoured and will prevent seagrass re-growth through out-competition for light [@valentine].
+    Without dense seagrass patches their engineering function is not re-established and this reinforces the sediment regime [@vanderheide2007].
+
+#### Drivers
+
+Important **shocks**
+
+-   *Storms (local to regional, well established):* Since seagrasses have a high requirement for light and inhabit depths of 0-30 m, they are sensitive to strong storms, as these can cause increased turbidity and physical damage to the beds.
+    This could mean a shift from seagrass to algal dominance, since algae are better competitors for light than seagrasses are [@duarte2002; @orth2006].
+
+-   *Disease (local, well established):* Seagrass cover can be decreased by sudden disease outbreaks.
+    An example of this is the wasting disease, which is caused by the slime mould *Labyrinthula zosterae* and which can wipe out extensive seagrass beds, leaving a barren sediment regime.
+    However, outbreaks of wasting disease is most commonly known to cause these large die-offs of seagrasses when they are already under some other form of stress, such as temperature increase, sea level rise or turbid water [@duarte2002].
+
+-   *Human induced physical disturbance (local, well established):* Physical disturbance is an important driver of seagrass loss, both as an external driver and as a human induced shock, such as the actual removal of beds in the case of e.g. port constructions or other forms of coastal developments.
+
+Main external **direct drivers**
+
+-   *Nutrient loading (local to regional, well established):* A shift between seagrass to algal dominance occurs when light instead of nutrients becomes the limiting factor.
+    Seagrasses are slow growing, very light-dependent organisms.
+    They recycle much of their nutrients internally, whilst algae are more efficient in taking up excess nutrients from their surroundings.
+    The direct effects of a higher nutrient load are an increase in fast growing macroalgae and a decrease in seagrasses due to the toxic effect that nitrates have on seagrasses.
+    Indirectly, nutrient loading affects seagrasses by reducing light through the increase of phytoplankton in the water column [@duarte1995].
+    The decomposing of algae and seagrasses further fuels the phytoplankton blooms by releasing nutrients [@eklöf2009].
+    Hypoxia also causes both stress to seagrasses and a decline in herbivorous fish, leading to further algal dominance [@burkholder2007; @eklöf2009].
+    Eutrophication is mainly driven by anthropogenic actions and land use, such as the extensive use of fertilizers in agriculture, aquaculture and sewage coming from the growing human population in coastal areas which are tightly linked to the export rate of nitrogen and contribute heavily to the nutrient input to oceans globally [@duarte2002; @duarte1995].
+
+-   *Overfishing (local to regional, well established):* Overfishing has been linked to market demand leading to an increase in commercial fishing pressure.
+    It also often the result of poverty traps, increased human population, increased unemployment and coastal migration which in turn further increase the unsustainable use of fish stocks [@eklöf2009].
+    The effects of overfishing vary from grazers overgrazing seagrasses to loss of grazing pressure altogether.
+    When predator pressure on grazers is released due to overfishing, the result is an increase in seagrass grazing, causing a decline and paving the way for algae dominance.
+    However, most commonly overfishing results in a total loss of algal herbivory altogether due to cascading effects of removal of top predators that cause an increase in meso-predator populations which will reduce herbivore populations due to higher predation pressure.
+    A reduction in herbivores releases algae from grazing pressure, which leads to algal overgrowth on seagrasses.
+    This eventually suffocates them and since seagrasses engineer their own habitat, the loss will make the environment less suitable for a recolonisation, due to resuspension of sediments [@heck2006; @duarte2002].
+    Seagrass beds are dependent on grazers to feed on algae before they get too thick to be eaten.
+    If this grazing pressure is released, algae will grow thick and eventually prevent seagrass growth by reducing light conditions [@heck2006].
+
+-   *Physical disturbance (local to regional, well established):* Physical disturbance is a strong driver as well as a shock of loss of seagrass beds, as mentioned above.
+    The slow processes of boating, anchoring, dredging and trawling affect seagrass beds negatively throughout a long period of time.
+    They all cause water turbidity and resuspension of sediments as well as physical damage to the seagrasses.
+    The greater part of these disturbances will result in an opportunity for algae to move in and shift the system from seagrass dominance to algal dominance.
+    Levels of physical disturbance is related to human population growth and our increased activity in coastal and marine areas [@duarte2002].
+
+-   *Siltation/Sediment loading (local to regional, well established):* Soil erosion and in particular siltation (fine grain mud and clay particles suspended in the water column) increase turbidity, hence light conditions will no longer be optimal for seagrasses, which creates an opportunity for algal growth [@eklöf2009].
+
+-   *Aquaculture (local, well established):* Aquaculture, today the fastest-growing food industry, is preferably placed close to the highly productive seagrass beds [@duarte2002].
+    They have significant impact on the shift from seagrasses to algal dominance by shading and deteriorating sediment condition.
+    Since algae have less demand for light, a decrease in seagrass due to this deterioration enhances the risk for a shift of regimes.
+    Fish cages also contribute to excess nutrient and organic matter which will further the decrease in seagrasses.
+    Once the seagrasses start to decline, sediment stability in the area will decrease, thus creating a positive feedback loop speeding up seagrass loss and algal growth [@duarte2002].
+
+Main **external indirect drivers**
+
+-   *Coastal development and Deforestation (local to regional, well established):* Land use changes and practices upstream result in soil erosion that carries sediments downstream to the oceans, affecting water quality and turbidity.
+    Coastal development leads to an additional input of nutrients and organic matter from sewage.
+    Seagrasses are negatively affected both by the decrease in light penetration and by the increase in nutrients caused by this development, and can often result in a regime shift from seagrass to algae dominated regimes [@duarte2002].
+
+-   *Climate change (global, well established – contested):* Climate change may have severe effects on seagrass beds and some aspects of it can result in more favourable conditions for algae than for seagrasses.
+    The aspects that have been shown to affect regime shifts in seagrasses are sea level rise, increased CO~2~ and temperature rise [@short1999; @duarte2002].
+    But the connection to actual regime shifts remains speculative [@short1999]; climate change is correlated with other anthropogenic activities in marine areas and most effects will vary spatially and depend on species in question.
+    Temperature rise will affect photosynthesis in both algae and seagrasses and will depend on species thermal preference, but it has been shown that epiphytes growing on eelgrass will be favoured by higher sea temperatures [@short1999].
+    Sea level rise will result in seagrasses losing their habitat and being forced to move in order to regain the light conditions needed and in addition the sea level rise will cause erosion that further will decrease light conditions for seagrasses [@short1999].
+    An increase in CO~2~ levels might lead to an advantage for seagrass over algae since they are more CO~2~ limited, but this is contested.
+    Most significantly, climate change will increase the risk for more extreme weather with more frequent and bigger storms which will cause sediment resuspension decreasing light conditions together with physical disturbance [@short1999; @duarte2002].
+    It has been speculated that this in synergy with other anthropogenic and natural stressors can cause a decline in seagrasses [@short1999] and it is plausible to assume that this could cause a future regime shift.
+    Further research is needed in order to establish what effects climate change will have on seagrass bed [@short1999].
+
+Slow internal system change
+
+-   *Loss of connectivity (local to regional, contested):* Connectivity between seagrass beds is important since the loss of extensive beds can cause a decline in other species and functional groups that migrate between patches of seagrasses i.e. grazers.
+    Loss of these groups will cause a shift from a seagrass dominated regime to an algae dominated one, since loss of grazers will release algae from grazing pressure.
+    The loss of seagrass patches can potentially negatively affect other nearby patches, due to the resulting increase in water turbidity, since they are sensitive to decreased light conditions as well as changes in water quality due to nutrients released from resuspension of sediments [@vanderheide2011].
+
+#### Key thresholds
+
+##### Shift from seagrass to algal dominance
+
+-   *Light availability.* Seagrasses require unusually high levels of light for their growth.
+    However, the specific level of light required has not been determined, as it is case-specific [@burkholder2007; @vanderheide2011].
+    Reduction in light is related to turbidity, to shading by macroalgae and fouling by epiphytic algae [@burkholder2007].
+
+-   *Nutrient levels.* Seagrasses require oligotrophic conditions.
+    However, it is difficult to determine a critical threshold at which concentrations are detrimental for seagrasses, as it depends on other factors, such as current velocity and herbivory [@valentine; @burkholder2007].
+    This threshold is related to light availability, as nutrient input can lead to an increase in turbidity due to eutrophication, to shading by macroalgae or to fouling by epiphytic algae [@orth2006; @burkholder2007].
+
+-   *Herbivory levels.* It is difficult to identify the threshold, but it can be reduced to the same threshold associated with light conditions, as the lack of herbivores can lead to shading by macroalgae, fouling by epiphytes and eutrophication [@burkholder2007].
+
+##### Shift from seagrass to a barren sediment state
+
+-   *Seagrass density.* Seagrasses need a certain density of shoots in meadows, below which they will not be able to modify the abiotic conditions of their ecosystem to benefit their own success [@vanderheide2011]
+
+#### Leverage points
+
+Seagrass beds are often hysteretic systems; once they shift into an alternative state, bringing them back to the state dominated by seagrasses can require more than re-establishing the previous environmental conditions [@duarte2002; @vanderheide2007].
+Therefore, it is preferable to maintain or to build the resilience of these systems to prevent a regime shift, as trying to restore them once a shift has occurred can prove difficult if not impossible [@orth2006].
+Maintaining a high resilience in the system will allow it to overcome drivers that cannot be easily controlled or managed locally, such as the effects of climate change (Waycott 2008) [@waycott2009].
+
+Management plans should act at a scale that includes not only the seagrass beds themselves, but the processes and factors that affect them, such as water quality and land use in surrounding watersheds [@orth2006].
+Because many drivers affect seagrass meadows in synergy, the management of these ecosystems require an integrated approach.
+Although the literature reviewed does not discuss the actors involved in these leverage points, it can be assumed that the agents involved in most of the management policies are policy makers, for the creation of legislation and local governments for the enforcement of these regulations.
+In each of the leverage points there would be specific actors, such as farmers in the case of nutrient loading, fishers in the case overfishing and tourism-related agents and coastal population in the case of physical disturbance.
+
+-   *Limitation of the input of nutrients and other pollutants (local to regional, well established):* Reducing the input of nutrients would favour seagrass dominance, as they thrive in oligotrophic conditions, while algae are stronger competitors in conditions of high nutrient concentrations [@duarte].
+    There are few documented examples of degraded seagrass meadows recovering following a reduction in the input of nutrients [@burkholder2007], therefore this should be a preventive measure, rather than a corrective one.
+    Because it is difficult to identify point-sources of nutrient loading, the possibility of assigning legal responsibility for the loss of seagrasses associated with this driver is limited [@duarte2002].
+    Further, as nutrients travel with the currents, regulating policies should affect not only the areas to be protected, but should act at a larger scale, ranging from regional to international [@kenworthy].
+    Actions that should be implemented to reduce the input of nutrients from surrounding watersheds are the following: treatment of urban and industrial sewage; reduction of fertilizers in agriculture; and protection of wetlands to intercept and reduce agricultural runoff [@duarte2002].
+    Where sewage treatment is not possible, it should be disposed in areas with an efficient water exchange for the dilution of the nutrients.
+    Many management actions and policies for regulating nutrient loading can also be useful for reducing other types of pollution, such as organic loading, which can also lead to seagrass decline.
+    For instance, sewage treatment plants also remove organic waste through mechanical treatments.
+
+-   *Management of fisheries (local to regional, well established):* Controlling fishing activity is important to prevent overfishing, which can lead to a reduction in herbivores, through trophic cascades from the removal of top predators [@scheffer2005].
+    As herbivores control the population of algae [@duarte1995; @duarte2002; @eklöf2008; @waycott2009], maintaining the grazers in the trophic web can improve the capacity of seagrass beds to handle high levels of nutrients, enhancing their resilience to nutrient loading [@duarte2002].
+    Consequently, it is possible that controlling fishing activity is a more effective measure for avoiding a regime shift than reducing nutrient input [@valentine].
+    Due to the mobility of fish, seagrass beds can be affected by the lack of regulating policies in other geographic areas [@kenworthy].
+    One way of controlling overfishing is the creation of marine protected areas.
+    However, this can lead to socio-economic problems related to the coastal societies that depend on fishing activities.
+    Management should take into account the social drivers e.g. poverty, food demand; that lead to overfishing [@eklöf2009; @delatorre-castro2004].
+    It has also been proposed to reintroduce top predators as a way of restoring the food web, in order to break the reinforcing feedbacks that maintain the dominance of algae [@munkes2005].
+
+-   *Limitation of physical disturbance (local, well-established):* Limiting and regulating human activities related to physical disturbances of the coastal area is important to reduce damages produced by direct removal or fragmentation of seagrass beds, and by the reduction of water transparency caused by siltation.
+    For instance, activities such as sand reclamation, dredging, trawling and the construction of coastal infrastructures such as bridges and piers should not be carried out on seagrass meadows.
+    These activities should be carried out with appropriate equipment to minimize siltation.
+    Dredging and sand reclamation should be limited to short periods, as seagrasses cannot survive high turbidity levels for longer periods.
+
+-   *Climate change mitigation (global, speculative):* Mitigating climate change would limit the increase of the sea level and storms, reducing coastal erosion, to which seagrass beds are very sensitive [@duarte1995; @duarte2002].
+    It would also reduce thermal and saline stress on seagrasses, thus reducing the loss of resilience to other stressors and shocks.
+    Given the global nature of climate change, measures to mitigate it should be tackled at an international scale.
+    Furthermore, the effects of this driver are not easy to control locally, therefore it is important to maintain a high resilience in the system, so as to be able to overcome the effects of climate change [@waycott2009].
+
+-   *Public awareness (local to regional, well-established):* The ecosystem services provided by seagrass meadows are under-appreciated, hence their protection is not considered a priority.
+    An increase in awareness of the ecological functions they carry out and of the services they provide to society would create a new paradigm in society, ensuring a more effective implementation of conservation policies [@duarte2002; @orth2006; @eklöf2009].
+    An example of this paradigm change can be seen in tourism, which can act as a driver of degradation but which is now becoming a promoter for the protection of coastal ecosystems [@duarte2002; @eklöf2009].
+
+-   *Transplantation (local, well-established):* Once a regime shift has taken place, it is possible to resort to methods for transplanting seagrasses to encourage and speed up their recolonisation.
+    For transplantations to be successful in recolonizing a non-vegetated area, the areas treated must be big enough so as to modify the environmental conditions and re-initiate a positive feedback that will maintain the population [@vanderheide2007].
+    However, the success rate of these techniques is not high [@duarte2002; @orth2006] and can cause damage to the donor populations [@duarte2002].
+    Furthermore, these methods are economically costly, which is an important drawback, particularly as it is expected that much of the seagrass decline will occur in developing countries [@duarte2002].
+    In order to be able to develop effective management plans it is necessary to increase knowledge of seagrass processes and their response to different drivers.This would help develop a forecast of the future state of these ecosystems and of the future threats they will endure, and to develop indicators of decline [@duarte2002; @orth2006].
+
+#### Uncertainties and unresolved issues
+
+In order to reduce uncertainties it would be necessary to improve our knowledge on seagrass processes and on their response to natural and anthropogenic drivers.
+Developing a worldwide monitoring network would allow to detect declines in these ecosystems in response to stressors and to forecast the synergistic effects of present and future drivers [@duarte2002; @orth2006].
+A large uncertainty regarding the regime shifts between seagrass and algae or barren sediment regimes are climate change and its potential function as a driver.
+It is established that there are aspects that affect seagrass beds, such as increased temperature, CO~2~-levels and UV-radiation as well as changes in salinity and sea level rise.
+But how much is dependent on species and on geographic location.
+In addition, the effects are changing dependent on actions taken to mediate them.
+More research is needed to build understanding on how climate will affect seagrasses and the potential shift between regimes [@short1999].
 
 ### Categorical summary
 
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 #### Impacts
 
 **Ecosystem type**:'
 
-- Marine & coastal
-
+-   Marine & coastal
 
 **Key ecosystem processes**:
 
-- Primary production
-- Nutrient cycling
-
+-   Primary production
+-   Nutrient cycling
 
 **Biodiversity**:
 
-- Biodiversity
-
+-   Biodiversity
 
 **Provisioning services**:
 
-- Fisheries
-- Wild animal and plant products
-
+-   Fisheries
+-   Wild animal and plant products
 
 **Regulating services**:
 
-- Climate regulation
-- Water purification
-- Regulation of soil erosion
-
+-   Climate regulation
+-   Water purification
+-   Regulation of soil erosion
 
 **Cultural services**:
 
-- Recreation
-- Aesthetic values
-
+-   Recreation
+-   Aesthetic values
 
 **Human well-being**:
 
-- Food and nutrition
-- Livelihoods and economic activity
-- Security of housing & infrastructure
-- Cultural
-- Aesthetic and recreational values
-
+-   Food and nutrition
+-   Livelihoods and economic activity
+-   Security of housing & infrastructure
+-   Cultural
+-   Aesthetic and recreational values
 
 **Links to other regime shifts**:
 
-- Hypoxia
-- Coral Transitions
-- Fisheries collapse
-- Marine food webs
-- Marine eutrophication
-
-
+-   Hypoxia
+-   Coral Transitions
+-   Fisheries collapse
+-   Marine food webs
+-   Marine eutrophication
 :::
 
-:::{style='width: 50%;'}
-
+::: {style="width: 50%;"}
 #### Drivers
 
 **Key drivers**:
 
-- Vegetation conversion and habitat fragmentation
-- Harvest and resource consumption
-- External inputs (e.g. fertilizers or pest control and irrigation)
-- Infrastructure development (e.g. roads or pipelines)
-- Species introduction or removal
-- Disease
-- Soil erosion & land degradation
-- Environmental shocks (e.g. fire or floods and droughts)
-
+-   Vegetation conversion and habitat fragmentation
+-   Harvest and resource consumption
+-   External inputs (e.g. fertilizers or pest control and irrigation)
+-   Infrastructure development (e.g. roads or pipelines)
+-   Species introduction or removal
+-   Disease
+-   Soil erosion & land degradation
+-   Environmental shocks (e.g. fire or floods and droughts)
 
 **Land use**:
 
-- Fisheries
-- Tourism
-- Land use impacts are primarily off-site (e.g. dead zones)
-
+-   Fisheries
+-   Tourism
+-   Land use impacts are primarily off-site (e.g. dead zones)
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake catchment or community)
-
+-   Local/landscape (e.g. lake catchment or community)
 
 **Time scale**:
 
-- Weeks
-- Months
-- Years
-
+-   Weeks
+-   Months
+-   Years
 
 **Reversibility**:
 
-- Irreversible (on 100 year time scale)
-- Hysteretic (difficult to reverse)
-
+-   Irreversible (on 100 year time scale)
+-   Hysteretic (difficult to reverse)
 
 **Evidence**:
 
-- Models
-- Contemporary observations
-- Experiments
-
+-   Models
+-   Contemporary observations
+-   Experiments
 
 **Confidence: existence of the regime shift**
 
-- Well established – Wide agreement in the literature that the RS exists
-
+-   Well established – Wide agreement in the literature that the RS exists
 
 **Confidence: mechanisms underlying the regime shift**
 
-- Well established – Wide agreement on the underlying mechanism
-
-
+-   Well established – Wide agreement on the underlying mechanism
 :::
-
-::::
+:::::
 
 ### References
 
 ::: {#refs}
-
 :::
-### References old [Delete]
-
-<small>
-
-- Barbier E. B., Hacker S.D., Kennedy C., Koch E. W., Stier A.C., Silliman B.R., 2011. The value of estuarine and coastal ecosystem services. Ecological Monographs, 81(2), pp. 169u2013193. rn 
-- Boer de W. F. 2007. Seagrassu2013sediment interactions, positive feedbacks and critical thresholds for occurrence: a review. Hydrobiologia, (591), pp. 5u201324.   
-- Borum J., Greve T. M., Binzer T., Santos R. 2004. What can be done to prevent seagrass loss? (In: European seagrasses: an introduction to monitoring and management), pp. 67-71. Online found: http://www.seagrasses.org    
-- Burkholder J.M., Tomasko D.A., Touchette B.W., 2007. Seagrasses and eutrophication. Journal of Experimental Marine Biology and Ecology (350), pp. 46u201372.  
-- Cardoso P.G., Pardala M.A., Lillebu00f8a A.I., Ferreiraa S.M., Raffaellib D., Marquesa J.C.,  2004. Dynamic changes in seagrass assemblages under eutrophication and implications for recovery. Journal of Experimental Marine Biology and Ecology, (302), pp.  233u2013 248.  
-- De la Torre-Castro M., Ru00f6nnbu00e4ck P. 2004. Links between humans and seagrassesu2014an example from tropical East Africa. Ocean & Coastal Management (47), pp. 361u2013387.   
-- Duarte C. M., Fourqurean J.W., Krause-Jensen D., Olesen B., 2006. Dynamics of seagrass stability and change. (In: Seagrasses: Biology, Ecology and Conservation, Larkum A.W.D., Orth R.J, Duarte C. M. (eds.), pp. 271-294)   
-- Duarte C.M. 1995. Submerged aquatic vegetation in relation to different nutrient regimes. Ophelia, Vol 41, (I), pp. 87-112.  
-- Duarte C.M. 2002. The future of seagrass meadows.  Environmental Conservation, Vol 29, Issue 02, pp. 192 206.  http://journals.cambridge.org/abstract_S0376892902000127 
-- Duarte C.M.2000. Marine biodiversity and ecosystem services: an elusive link.  Journal of Experimental Marine Biology and Ecology, (25), pp. 117u2013131.  
-- Duffy, J.E., Valentine, J.F., 2006. The central role of grazing in seagrass ecology. (In: Seagrasses: Biology, Ecology and Conservation, Larkum A.W.D., Orth R.J, Duarte C. M. (eds.), pp. 463-501)    
-- Eklu00f6f J.S. 2008.  Anthropogenic Disturbances and Shifts in Tropical Seagrass Ecosystems. Doctoral Thesis in Marine Ecotoxicology, Stockholm University. su.diva-portal.org/smash/get/diva2:197989/FULLTEXTO1 
-- Fourqurean J.W.,Duarte C.M., Kennedy H., Marbu00e0 N., Holmer M.,Mateo M. A.,  Apostolaki E. T., Kendrick G. A., Krause-Jensen D., McGlathery K. J., Serrano O.  2012. Seagrass ecosystems as a globally significant carbon stock. Nature Geosience, Vol 5. Online found www.nature.com/naturegeoscience   
-- Heck Jr K.L., Valentine J.F 2006. Plantu2013herbivore interactions in seagrass meadows. Journal of Experimental Marine Biology and Ecology Vol (330), pp. 420u2013436.  
-- Heck Jr K.L., Valentine J.F., 2007. The primacy of top-down effects in shallow benthic eco- systems. Estuaries and Coasts Vol (30), pp. 371-381 
-- Kenworthy W.J., Coles R.G., Wyllie-Echeverria S., Pergent G., Pergent-Martini C., 2006. Seagrass conservation biology: an interdisciplinary science for protection of the seagrass biome. (In: Seagrasses: Biology, Ecology and Conservation, Larkum A.W.D., Orth R.J, Duarte C. M. (eds.), pp. 595-623)    
-- Munkes B. 2005. Eutrophication, phase shift, the delay and the potential return in the Greifswalder Bodden, Baltic Sea. Aquat Sci (67), pp. 372u201381. 
-- Nystru00f6m M., Norstru00f6m A.V., Blenckner T., de la Torre-Castro, M. Eklu00f6f, J.S., Folke C., u00d6sterblom H., Steneck R.S., Thyresson M., Troell M., 2012. Confronting Feedbacks of Degraded Marine Ecosystems. Ecosystems (10), pp. 1311-1322. 
-- Orth R.J., Carruthers T. J.B., Dennison W.C., Duarte C.M., Fourqurean J.W., kenneth L.H., Hughes R., Kendrick G.A., Kenworth W.J., Olyarnik S., Short F.T., Waycott M., Williams S.I. 2006.  A Global Crisis for Seagrass Ecosystems. BioScience, 56(12), pp. 987-996. 
-- Reid W.V., Mooney H.A., Cropper A., Capistrano D., Carpenter S.R., Chopra K.,Dasgupta P., Dietz T., Duraiappah A. K., Hassan R., Kasperson R., Leemans R., May R. M., McMichael T. (A.J.), Pingali P., Samper C., Scholes R., Watson R.T., Zakri A.H., Shidong Z., Ash N. J., Bennett E., Kumar P., Lee M., Raudsepp-Hearne C., Henk S., Thonell J., and Zurek M.B., 2005. Ecosystems and Human Well-Being: Synthesis. Millennium Ecosystem Assessment. Island Press, Washington, DC.  
-- Scheffer, M., Carpenter, S., de Young, B. 2005. Cascading effects of overfishing marine systems. TRENDS in Ecology and Evolution. 20 (11), pp. 579u2013581.  
-- Short F.T. and Neckles H.A. 1999. The effects of global climate change on seagrasses. Aquatic Botany V: (63), pp. 169-196 
-- Terados J., Borum, J. 2004. Why are seagrasses important? u2013 Goods and services provided by seagrass meadows. (In: European seagrasses: an introduction to monitoring and management), pp. 8-10.  Online found: http://www.seagrasses.org    
-- Van Katwijk, M.M., Vergeer, L.H.T., Schmitz, G.H.W. & Roelofs, J.G.M. 1997. Ammonium toxicity in eelgrass Zostera marina. Marine Ecology Progress Series 157, pp- 159u201373. 
-- Van der Heide T., van Nes EH., van Katwijk M.M., Olff H., Smolders AJP., 2011. Positive Feedbacks in Seagrass Ecosystems u2013 Evidence from Large-Scale Empirical Data. PLoS ONE 6(1): e16504. doi:10.1371/journal.pone.0016504 
-- Van der Heide, T., van Nes, E. H., Geerling, G. W., Smolders, A. J. P., Bouma, T. J., van Katwijk M. M. 2007. Positive feedbacks in seagrass ecosystems: implications for success in conservation and restoration. Ecosystems 10, pp. 1311-1322.  
-- Waycott, M., Duarte, C.M., Carruthers, T. J. B., Orth, R. J., Dennison, W. C., Olyarnik, S., Calladine, A., Fourqurean, J. W., Heck, K. L., Hughes, A. R., Kendrick, G. A. Kenworthy, W. J., Short, F. T. Williams, S. L. 2008. Accelarating loss of seagrasses across the glove threatens coastal ecosystems. PNAS. Vol 106. No. 30. 1281.
-
-</small>
 
 ## Citation
+
 Acknowledge this review as:
 
-<tiny> 
-``` {style='color: gray;'}
+<tiny>
+
+``` {style="color: gray;"}
 Dayana Hernández Vivas, Johanna Källén, Alba Juárez Bourke, Kerstin Hultman-Boye, Örjan Bodin, Reinette (Oonsie) Biggs, Juan Carlos Rocha, Albert Norström. Seagrass transitions. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2013-09-09
 ```
 
@@ -365,8 +547,9 @@ Dayana Hernández Vivas, Johanna Källén, Alba Juárez Bourke, Kerstin Hultman-
 
 BibTeX citation:
 
-<tiny><tiny> 
-``` {style='color: gray;'}
+<tiny><tiny>
+
+``` {style="color: gray;"}
 @misc{
   author = {Dayana Hernández Vivas and Johanna Källén and Alba Juárez Bourke and Kerstin Hultman-Boye and Örjan Bodin and Reinette (Oonsie) Biggs and Juan Carlos Rocha and Albert Norström},
   title = {Seagrass transitions},
