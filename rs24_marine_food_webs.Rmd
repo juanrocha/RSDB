@@ -9,7 +9,6 @@ params:
   j: 24
 ---
 
-
 ```{r include = FALSE}
 library(tidyverse)
 library(leaflet)
@@ -24,36 +23,29 @@ rs <- dat |> filter(id== x)
 knitr::opts_chunk$set(echo = FALSE, results = 'asis')
 ```
 
-
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+:::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 # Marine food webs
 
+-   **Main contributors**: Susa Niiranen, Juan Carlos Rocha
 
-- **Main contributors**: Susa Niiranen, Reinette (Oonsie) Biggs, Garry Peterson, Juan Carlos Rocha
+-   **Other contributors**: Reinette (Oonsie) Biggs, Garry Peterson, Henrik Österblom
 
-- **Other contributors**: Henrik Österblom
+-   Last update: 2014-10-14
 
-- Last update: 2014-10-14
-
-A characteristic regime shift in aquatic systems involves an abrupt increase in the dominance of lower trophic level groups within aquatic food webs. This regime shift involves a change from an ecosystem with high numbers of predatory fish to one dominated by pelagic planktivores. The shift is often initiated by high fishing pressure on top-predators followed by a trophic cascade, but can also be brought about by other environmental factors like global warming and upwellings increase. In extreme cases the food web is shortened due to disappearance of top predators and the carbon transfer pathways is dominated by microbial webs instead of the classic trophic chain. The new regime can be enforced and maintained by biological mechanisms including minimum population biomass, competition and dietary relations, or environmental conditions. Despite there is some mechanism that often dissipate the trophic cascade, food web regime shifts do have substantial impacts on commercial fisheries, as well as increase the vulnerability of an ecosystem to eutrophication, hypoxia and invasion by non-native species.
-
-
-
+A characteristic regime shift in aquatic systems involves an abrupt increase in the dominance of lower trophic level groups within aquatic food webs.
+This regime shift involves a change from an ecosystem with high numbers of predatory fish to one dominated by pelagic planktivores.
+The shift is often initiated by high fishing pressure on top-predators followed by a trophic cascade, but can also be brought about by other environmental factors like global warming and upwellings increase.
+In extreme cases the food web is shortened due to disappearance of top predators and the carbon transfer pathways is dominated by microbial webs instead of the classic trophic chain.
+The new regime can be enforced and maintained by biological mechanisms including minimum population biomass, competition and dietary relations, or environmental conditions.
+Despite there is some mechanism that often dissipate the trophic cascade, food web regime shifts do have substantial impacts on commercial fisheries, as well as increase the vulnerability of an ecosystem to eutrophication, hypoxia and invasion by non-native species.
 :::
 
-:::{style='width: 5%;'}
-
+::: {style="width: 5%;"}
 :::
 
-:::{style='width: 45%;'}
-
+::: {style="width: 45%;"}
 ```{r carousel, out.width='500px', out.height='100px', results = 'asis'}
-
-
-
 library(htmltools)
 library(bsplus)
 
@@ -65,21 +57,17 @@ bs_append(
     caption = bs_carousel_caption(title = 'Marine food webs'))
 
 ```
-
 :::
-::::
+::::::
 
 ## Evidence
 
 ```{r map, out.width='100%', out.height='300px', results = 'markup'}
-
-
-
 cs <- cases |> 
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -88,7 +76,9 @@ m <- leaflet(cs) |>
 m
 ```
 
-**Fig 1 | Empirical evidence.** The databse currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world. Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift. You can learn more from each case by hovering and clicking on the case of interest.
+**Fig 1 \| Empirical evidence.** The database currently documents `r nrow(cs)` cases of `r str_to_lower(rs$regime_shift_name)` around the world.
+Each dot in the map is coded from a scientific article documenting a place undergoing this regime shift.
+You can learn more from each case by hovering and clicking on the case of interest.
 
 ## Analysis {.tabset .tabset-pills}
 
@@ -96,45 +86,87 @@ m
 
 #### Alternative regimes
 
-This regime shift involves an abrupt reorganization of an aquatic food web due to a decrease in top predators or increase in environmental factors like temperature. Trophic cascades play a central role in these regime shifts. During these cascades groups in adjacent trophic levels often show inverse patterns in their abundance (Carpenter 2003). In other words, every other trophic level displays an increase in biomass, which leads to increased predation pressure and biomass decrease on every other trophic level. Most trophic cascades are described in ecosystems with low species diversity and/or simple food webs and/or small size(Frank et al. 2005). The magnitude of a trophic cascade varies depending on species diversity, regional oceanography, local physical disturbance, habitat complexity and fishery practices(Salomon et al. 2010). Food webs with more trophic levels and biodiversity show less trophic cascades that simpler systems(Salomon et al. 2010); due in part to omnivory and the variation on trophic interaction strength(Bascompte et al. 2005). However some documented examples includes subtidal reefs in New Zealand(Shears and Babcock 2002), Caribbean coral reefs(Bellwood et al. 2004), the Gulf of Maine(Steneck et al. 2004), and the North Atlantic(Kirby et al. 2009).
+This regime shift involves an abrupt reorganization of an aquatic food web due to a decrease in top predators or increase in environmental factors like temperature.
+Trophic cascades play a central role in these regime shifts.
+During these cascades groups in adjacent trophic levels often show inverse patterns in their abundance [@carpenter2003].
+In other words, every other trophic level displays an increase in biomass, which leads to increased predation pressure and biomass decrease on every other trophic level.
+Most trophic cascades are described in ecosystems with low species diversity and/or simple food webs and/or small size [@frank2005].
+The magnitude of a trophic cascade varies depending on species diversity, regional oceanography, local physical disturbance, habitat complexity and fishery practices [@salomon2010].
+Food webs with more trophic levels and biodiversity show less trophic cascades that simpler systems [@salomon2010]; due in part to omnivory and the variation on trophic interaction strength [@bascompte2005].
+However some documented examples includes subtidal reefs in New Zealand [@shears2002], Caribbean coral reefs [@bellwood2004], the Gulf of Maine [@steneck2004], and the North Atlantic [@kirby2009].
 
- **Predator-dominated food web.** 
+**Predator-dominated food web.**
 
- Ecosystems in this regime are characterized by high predatory fish, low planktivorous fish, high zooplankton and low phytoplankton abundance. Such ecosystems can be subject to human influence, such as intensive fishery, but exhibit so called “natural compensation” e.g. via species richness and omnivory(Pace et al. 1999) that maintain the regime. Despite high productivity, such ecosystems are less likely to suffer from eutrophication due to high grazing pressure on phytoplankton. Ecosystem services associated with predator-dominated food webs includes food provision, higher biodiversity, better disease and pest control, as well as cultural services like recreation and aesthetic values (e.g. diving, sport fishing).
+Ecosystems in this regime are characterized by high predatory fish, low planktivorous fish, high zooplankton and low phytoplankton abundance.
+Such ecosystems can be subject to human influence, such as intensive fishery, but exhibit so called “natural compensation” e.g. via species richness and omnivory [@pace1999] that maintain the regime.
+Despite high productivity, such ecosystems are less likely to suffer from eutrophication due to high grazing pressure on phytoplankton.
+Ecosystem services associated with predator-dominated food webs includes food provision, higher biodiversity, better disease and pest control, as well as cultural services like recreation and aesthetic values (e.g. diving, sport fishing).
 
- **Planktivore-dominated food web.** 
+**Planktivore-dominated food web.**
 
- Ecosystems in this regime are characterized by low predatory fish, high planktivorous fish, low zooplankton and high phytoplankton abundance. In extreme cases the actual number of trophic levels (TLs) can decrease. Ecosystems with lower trophic level dominance are more vulnerable to eutrophication due to lowered grazing pressure on phytoplankton, as well as invasion of planktivore organisms like jellyfish. A planktivore-dominated food web can affect the fluxes of carbon, transforming aquatic systems -coastal and lakes- from sinks to sources of green house gases(Bakun et al. 2010, Estes et al. 2011). Other ecosystem services like fisheries and recreation are expected to be significantly reduced.
+Ecosystems in this regime are characterized by low predatory fish, high planktivorous fish, low zooplankton and high phytoplankton abundance.
+In extreme cases the actual number of trophic levels (TLs) can decrease.
+Ecosystems with lower trophic level dominance are more vulnerable to eutrophication due to lowered grazing pressure on phytoplankton, as well as invasion of planktivore organisms like jellyfish.
+A planktivore-dominated food web can affect the fluxes of carbon, transforming aquatic systems -coastal and lakes- from sinks to sources of green house gases [@bakun2010; @estes2011].
+Other ecosystem services like fisheries and recreation are expected to be significantly reduced.
 
 #### Drivers and causes of the regime shift
 
-Trophic cascades are usually initiated by fishing pressure that have direct or indirect impacts on the abundance of top predators. The response time to these drivers varies across ecosystems. In the case of coastal areas it has been found that the ecosystem response time to overfishing can vary from decades to centuries where multiple predators exist(Jackson et al. 2001).
+Trophic cascades are usually initiated by fishing pressure that have direct or indirect impacts on the abundance of top predators.
+The response time to these drivers varies across ecosystems.
+In the case of coastal areas it has been found that the ecosystem response time to overfishing can vary from decades to centuries where multiple predators exist [@jackson2001].
 
- Other factors that affect the regime shift are global warming and demand of food and fiber. Global warming have effects on upwelling, water circulatory systems that bring nutrients from the bottom of the sea towards the surface. By altering upwellings, food webs receive either too much or too little nutrients. In both cases the energy transferred towards higher trophic levels diminish as nutrients input variability increase. Demand of food strongly drives fishing, being the main cause of lost of top predators over the world.
+Other factors that affect the regime shift are global warming and demand of food and fiber.
+Global warming have effects on upwelling, water circulatory systems that bring nutrients from the bottom of the sea towards the surface.
+By altering upwellings, food webs receive either too much or too little nutrients.
+In both cases the energy transferred towards higher trophic levels diminish as nutrients input variability increase.
+Demand of food strongly drives fishing, being the main cause of lost of top predators over the world.
 
 #### Impacts on ecosystem services and human well-being
 
 **Shift from predators to planktivore dominated food webs**
 
- Commercial fish stocks that are locked into a regime where they are maintained at low levels of abundance has obvious economic consequences on fisheries industry. However, these fisheries related shifts are not always negative, as for example a decrease in top predators can increase the catches of mid-level prey (e.g. shrimps and clupeids) (Frank et al. 2005). When an ecosystem-wide regime shift occurs it affects not only targeted groups, such as commercial fish(Daskalov et al. 2007) but also impacts other ecosystem functions. Biodiversity as well as ecosystem resilience may be reduced by a shift from an ecosystem with high top predator diversity and dominance to a system with lower trophic level dominance. This means that ecosystem may become more vulnerable to both climatic and anthropogenic change. Such ecosystems may more easily suffer from eutrophication, hypoxia and invasion by non-native species. Eutrophication and hypoxia in turn lead to increased algal blooms and decrease the recreational values of water bodies.
+Commercial fish stocks that are locked into a regime where they are maintained at low levels of abundance has obvious economic consequences on fisheries industry.
+However, these fisheries related shifts are not always negative, as for example a decrease in top predators can increase the catches of mid-level prey (e.g. shrimps and clupeids) [@frank2005].
+When an ecosystem-wide regime shift occurs it affects not only targeted groups, such as commercial fish [@daskalov2007] but also impacts other ecosystem functions.
+Biodiversity as well as ecosystem resilience may be reduced by a shift from an ecosystem with high top predator diversity and dominance to a system with lower trophic level dominance.
+This means that ecosystem may become more vulnerable to both climatic and anthropogenic change.
+Such ecosystems may more easily suffer from eutrophication, hypoxia and invasion by non-native species.
+Eutrophication and hypoxia in turn lead to increased algal blooms and decrease the recreational values of water bodies.
 
- Predators and commercial fisheries stocks have remained at under 10% of their previous sizes even after decades of fishing closure(Ainley and Blight 2009). Food production, primary productivity, pest regulation, and cultural services are the ecosystem services most affected by the reduction of food webs, which in turn increase the risk of fisheries collapse. Depletion of fish stocks has been estimated to have affected the employment of roughly 14 million fishermen, 12 million of which correspond to artisanal fisheries(M Hassan et al. 2005). Fish catches are projected to further decrease in the 21st century affecting protein sources for people, especially in poor regions(M Hassan et al. 2005). The estimated current contribution of fisheries to human protein consumption is 29 million tons produced industrially and 24 million tons in small-scale fisheries(M Hassan et al. 2005).
+Predators and commercial fisheries stocks have remained at under 10% of their previous sizes even after decades of fishing closure [@ainley2009].
+Food production, primary productivity, pest regulation, and cultural services are the ecosystem services most affected by the reduction of food webs, which in turn increase the risk of fisheries collapse.
+Depletion of fish stocks has been estimated to have affected the employment of roughly 14 million fishermen, 12 million of which correspond to artisanal fisheries [@assessment2005ecosystems].
+Fish catches are projected to further decrease in the 21^st^ century affecting protein sources for people, especially in poor regions [@assessment2005ecosystems].
+The estimated current contribution of fisheries to human protein consumption is 29 million tons produced industrially and 24 million tons in small-scale fisheries [@assessment2005ecosystems].
 
 #### Management options
 
 **Options for enhancing resilience**
 
- In food webs that exhibit strong top-down control, decreasing the fishing pressure on top predators is an obvious strategy(Scheffer et al. 2001, Frank et al. 2005). However, due to the hysteresis effect, return to a predator-dominated food web may often require substantially lower fishing levels than that which induced the regime shift, together with additional measures. Hence, restoration is usually costly, especially to fisherman(Moellmann et al. 2009). As mentioned above, environmental factors can play an important role in maintaining alternative food web regimes. Nutrient loading is one of the key parameters controlling processes such as eutrophication and hypoxia. However, decreasing nutrient loads in marine environments requires large scale actions and often collaboration at international level (e.g. Helsinki Commission Baltic Sea Action Plan in the Baltic Sea). Hence, the time-frame of these actions in addition to time-lag in ecosystem response is often long. Climatic variation cannot be directly controlled by human actions. However, climate impacts can be mediated by employing other management measures that contribute to maintaining healthy marine ecosystems with high biodiversity and resilience, which then can compensate for changes in climate.
+In food webs that exhibit strong top-down control, decreasing the fishing pressure on top predators is an obvious strategy [@scheffer2001; @frank2005].
+However, due to the hysteresis, return to a predator-dominated food web may often require substantially lower fishing levels than that which induced the regime shift, together with additional measures.
+Hence, restoration is usually costly, especially to fisherman [@möllmann2009].
+As mentioned above, environmental factors can play an important role in maintaining alternative food web regimes.
+Nutrient loading is one of the key parameters controlling processes such as eutrophication and hypoxia.
+However, decreasing nutrient loads in marine environments requires large scale actions and often collaboration at international level (e.g. Helsinki Commission Baltic Sea Action Plan in the Baltic Sea).
+Hence, the time-frame of these actions in addition to time-lag in ecosystem response is often long.
+Climatic variation cannot be directly controlled by human actions.
+However, climate impacts can be mediated by employing other management measures that contribute to maintaining healthy marine ecosystems with high biodiversity and resilience, which then can compensate for changes in climate.
 
- **Options for reducing resilience to encourage restoration or transformation** 
+**Options for reducing resilience to encourage restoration or transformation**
 
- In addition, in small closed food webs systems (3 to 4 trophic levels), biomanipulation has been suggested to manage one of the symptoms of degraded marine environments, namely eutrophication. This involves increasing the population of predatory fish such as bass, pike and walleye through stocking or reduced angling quotas. Increased populations of these predators leads to a decrease in the level of zooplanktivores. This in turn allows an increase in the population of planktivores that graze on the algae and zooplanckton, helping to reduce the algal density and phytoplankton respectively(Smith and Schindler 2009). This option, however, has limited reach when it comes to open marine foodwebs, where seasonal migrations and metapopulation dynamics are common.
+In addition, in small closed food webs systems (3 to 4 trophic levels), biomanipulation has been suggested to manage one of the symptoms of degraded marine environments, namely eutrophication.
+This involves increasing the population of predatory fish such as bass, pike and walleye through stocking or reduced angling quotas.
+Increased populations of these predators leads to a decrease in the level of zooplanktivores.
+This in turn allows an increase in the population of planktivores that graze on the algae and zooplanckton, helping to reduce the algal density and phytoplankton respectively [@smith2009].
+This option, however, has limited reach when it comes to open marine foodwebs, where seasonal migrations and metapopulation dynamics are common.
 
 ### In-depth analysis
 
-```{r cld, error = FALSE, message = FALSE, out.width='80%'}
+```{r cld, error = FALSE, message = FALSE, out.width='80%', fig.cap = '**Fig 2 | Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'}
 
-#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
+#| 
 
 library(ggiraph)
 library(htmlwidgets)
@@ -157,177 +189,199 @@ if (rs$regime_shift_name %in% clds$regime_shift) {
 
 ```{r}
 
-load('assets/rs_analysis_text.Rda')
-
-if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
-    rs_analysis[[rs$regime_shift_name]] |> writeLines()
+# load('assets/rs_analysis_text.Rda')
+# 
+# if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
+#     rs_analysis[[rs$regime_shift_name]] |> writeLines()
 ```
+
+#### Feedback mechanisms
+
+##### Predator-dominated food web
+
+-   *Biotic mechanisms (local, contested):* Biotic mechanisms occur at the species level through biotic interactions such as predation and competition both inter and intra species.
+    In figure 2 for example, each link between two species A (predator) and B (prey) may be thought as a balancing feedback where the higher the abundance of A the lowest the abundance of B, reducing in turn the abundance of A who depends in B as resource.
+    Food webs are characterized by many weak interactions and few strong interactions given that species usually prey on more than one resource.
+    The strength of the links as well as feeding strategies like omnivory determines the vulnerability of the system to undergoes trophic cascades [@bascompte2005].
+    In general, a system dominated by predators and with many weak interactions is less likely to undergo trophic cascades.
+    However, selective fishing, particularly on top predators, can reduce its resilience [@bascompte2005; @estes2011].
+
+##### Planktivore-dominated food web
+
+-   *Biotic mechanisms (local, contested):* Once the system has shifted into the planktivore dominated regime, the high abundance of planktivores and low abundance of zooplankton may prevent the recovery of the predator population, even if fishing pressure is reduced substantially.
+    Food webs are prone to trophic cascades when fishing pressure is high in species which have strong interactions, particularly top predators [@bascompte2005].
+    Given that in marine food webs the average path distance between top predators and primary producers is generally short, disturbances as over-fishing may spread faster than previously thought [@dunne2004].
+    For example, in the Central Baltic Sea, the lack of cod stock recovery has been partially accounted for by the decrease in abundance of a zooplankton species (*Pseudocalanus acuspes*) considered as an important dietary source for cod larvae [@hinrichsen2002].
+    The biomass of *P. acuspes* is on the other hand considered to be controlled by the abruptly increased planktivorous sprat [@mollmann2002] that additionally prey on cod eggs, further suppressing cod recruitment.
+    Consequently, it is hard to generalize feedback mechanism based in inter species interactions, given these foodweb links can vary in strength from place to place.
+
+-   *Climate-carbon mechanism (regional, proposed):* Abiotic factors like climatic forces can also have a significant role in maintaining and enforcing a regime characterized by high dominance of lower trophic level groups.
+    Global warming, both natural and anthropogenic, is expected to increase sea surface temperature (SST) and lead to more frequent ENSO events.
+    An increasing frequency and intensity of warm events accentuates the density contrast in the water column, inhibiting nutrient exchange through vertical mixing [@behrenfeld2006], and thereby reducing the productivity of marine food webs.
+    Roughly half the biosphere’s net primary production is synthesized by phytoplankton in the oceans.
+    These microscopic plants daily fix more than a hundred million tons of carbon dioxide, which in turn supports marine food webs that consume the total phytoplankton biomass every two to six days [@behrenfeld2006].
+    Hence, inhibited mixing due to an increase in SST may substantially reduce fishery productivity by directly affecting net oceanic primary production.
+    This phenomena has already been observed in the South American Pacific coast through satellite measurements of chlorophyll production during warm events [@behrenfeld2006].
+
+-   *Upwelling-high nutrients mechanism (regional, proposed):* A parallel mechanism involving atmospheric dynamics may explain an increase in upwellings, although not necessarily an increase in fisheries productivity [@bakun2010].
+    Increased temperatures associated with climate change promote the release of water vapor generating higher thermal low pressure cells.
+    In other words, the difference in temperature between the air over the continental shelf and the air over the ocean increases.
+    This physical difference increases wind stress perpendicular to the coast which in turns generates more intense upwelling [@bakun2010].
+    However, it does not necessarily translate to higher biological productivity.
+    In fact, nutrient-enriched food webs may become trapped in states where phytoplankton is overabundant and less mobile zooplanktivores like jellyfish becomes their main predatory control.
+    Under such scenario, poisonous gases like methane and sulfide are release due to dominance of microbial metabolism, being potential greenhouse-gases [@bakun2010].
+
+#### Drivers
+
+##### Shift from predators to planktivore dominated food webs
+
+Important **shocks** that contribute to the regime shift include:
+
+-   *Warm events (local, proposed):* Warm events have been reported to increase SST and hence reduce nutrient exchange [@behrenfeld2006] through the climate-nutrients feedback mechanism.
+    Changes in climate can also influence top predator abundance or distribution.
+    In the North Sea, it has been suggested that the decrease in cod stock since 1987 was brought about by a decrease in their preferred larval food *C. finmarchicus* due to increase in water temperature [@beaugrand2004].
+
+The main **external direct drivers** that contribute to the shift include:
+
+-   *Fishing (local, well established):* Fishing of top predators is a particularly important driver of tropic cascades [@estes2011; @pace1999; @pauly1998].
+    Fishing pressure change the link strength of food webs and activates the biotic mechanism.
+    Balancing feedbacks from predation and competition aggregate and express favoring the abundance of different functional groups.
+
+The main **external indirect drivers** that contribute to the shift:
+
+-   *Global warming (global, proposed):* Global warming can affect food webs in two ways.
+    First by inducing higher frequency of warm events that in turn increase SST, water density contrast and as result less nutrients exchange (locally) in the water column.
+    With less nutrient inputs, food webs are expected to be less productive.
+    Second, by increasing SST, water vapor also increase air temperature contrast which in turn increase upwellings and nutrients inputs regionally.
+    High nutrient income can also trap food webs in planktivore dominated regimes.
+    It is not clear to what extend both effects cancel each other.
+    However, it is worth noting that the first happens in the local scale and while the second on the regional one.
+    It seems that both extremes of high or low nutrients input driven by global warming results in reduced productivity and biodiversity of food webs.
+
+-   *Demand of food (Local to regional, well established):* Food demand is thought to drive fishing pressure.
+    As market mechanism and trade facilitate the commerce of fish, more fishing effort is encouraged and stocks are depleted faster, having less time to recover [@berkes2006].
+
+Slow **internal system changes** that contribute to the regime shift include:
+
+-   *Biodiversity (regional, well established):* Biodiversity loss, both in the sense of species richness and functional group is a slow internal variable.
+    Models indicate that food webs are robust to loss of species [@dunne2004].
+    However the extinction of key species can trigger in turn extinction cascades [@allesina2009].
 
 ### Categorical summary
 
-::::{style='display: flex;'}
-
-:::{style='width: 50%;'}
-
+::::: {style="display: flex;"}
+::: {style="width: 50%;"}
 #### Impacts
 
 **Ecosystem type**:'
 
-- Marine & coastal
-
+-   Marine & coastal
 
 **Key ecosystem processes**:
 
-- Primary production
-
+-   Primary production
 
 **Biodiversity**:
 
-- Biodiversity
-
+-   Biodiversity
 
 **Provisioning services**:
 
-- Fisheries
-
+-   Fisheries
 
 **Regulating services**:
 
-- Pest & disease regulation
-
+-   Pest & disease regulation
 
 **Cultural services**:
 
-- Recreation
-- Aesthetic values
-
+-   Recreation
+-   Aesthetic values
 
 **Human well-being**:
 
-- Food and nutrition
-- Livelihoods and economic activity
-- Cultural
-- Aesthetic and recreational values
-- Cultural identity
-
+-   Food and nutrition
+-   Livelihoods and economic activity
+-   Cultural
+-   Aesthetic and recreational values
+-   Cultural identity
 
 **Links to other regime shifts**:
 
-- Fisheries collapse
-- Hypoxia
-- Forest to Savannas
-
-
+-   Fisheries collapse
+-   Hypoxia
+-   Forest to Savannas
 :::
 
-:::{style='width: 50%;'}
-
+::: {style="width: 50%;"}
 #### Drivers
 
 **Key drivers**:
 
-- Harvest and resource consumption
-- External inputs (e.g. fertilizers or pest control and irrigation)
-- Global climate change
-
+-   Harvest and resource consumption
+-   External inputs (e.g. fertilizers or pest control and irrigation)
+-   Global climate change
 
 **Land use**:
 
-- Fisheries
-
+-   Fisheries
 
 #### Key attributes
 
 **Spatial scale**:
 
-- Local/landscape (e.g. lake catchment or community)
-- National (country)
-- Sub-continental (e.g. southern Africa or Amazon basin)
-
+-   Local/landscape (e.g. lake catchment or community)
+-   National (country)
+-   Sub-continental (e.g. southern Africa or Amazon basin)
 
 **Time scale**:
 
-- Years
-
+-   Years
 
 **Reversibility**:
 
-- Hysteretic (difficult to reverse)
-
+-   Hysteretic (difficult to reverse)
 
 **Evidence**:
 
-- Models
-- Contemporary observations
-- Experiments
-
+-   Models
+-   Contemporary observations
+-   Experiments
 
 **Confidence: existence of the regime shift**
 
-- Speculative – Regime shift has been proposed, but little evidence as yet
-
+-   Speculative – Regime shift has been proposed, but little evidence as yet
 
 **Confidence: mechanisms underlying the regime shift**
 
-- Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
-
-
+-   Contested – Multiple proposed mechanisms, reasonable evidence both for and against different mechanisms
 :::
-
-::::
+:::::
 
 ### References
 
 ::: {#refs}
-
 :::
-### References old [Delete]
-
-<small>
-
-- Ainley, D. G., and L. K. Blight. 2009. Ecological repercussions of historical fish extraction from the Southern Ocean. Fish And Fisheries 10:13–38. 
-- Allesina, S., and M. Pascual. (n.d.). Googling Food Webs: Can an Eigenvector Measure Species’ Importance for Coextinctions? PLoS Computational Biology. 
-- Bakun, A., D. Field, A. Redondo-Rodriguez, and S. Weeks. 2010. Greenhouse gas, upwelling-favorable winds, and the future of coastal ocean upwelling ecosystems. Global Change Biology 16:1213–1228. 
-- Bascompte, J., C. Melian, and E. Sala. 2005. Interaction strength combinations and the overfishing of a marine food web. Proceedings Of The National Academy Of Sciences Of The United States Of America 102:5443–5447. 
-- Beaugrand, G. 2004. The North Sea regime shift: evidence, causes, mechanisms and consequences. Progress in Oceanography 60:245–262. 
-- Behrenfeld, M. J., R. T. O'Malley, D. A. Siegel, C. R. Mcclain, J. L. Sarmiento, G. C. Feldman, A. J. Milligan, P. G. Falkowski, R. M. Letelier, and E. S. Boss. 2006. Climate-driven trends in contemporary ocean productivity. Nature 444:752–755. 
-- Bellwood, D., T. Hughes, C. Folke, and M. Nyström. 2004. Confronting the coral reef crisis. Nature 429:827–833. 
-- Berkes, F., T. Hughes, R. Steneck, J. Wilson, D. Bellwood, B. Crona, C. Folke, L. Gunderson, H. Leslie, J. Norberg, M. Nystrom, P. Olsson, H. Osterblom, M. Scheffer, and B. Worm. 2006. Ecology - Globalization, roving bandits, and marine resources. Science 311:1557–1558. 
-- Carpenter, S. R. 2003. Regime shifts in lake ecosystems. Ecology Institute. 
-- Daskalov, G. M., A. N. Grishin, S. Rodionov, and V. Mihneva. 2007. Trophic cascades triggered by overfishing reveal possible mechanisms of ecosystem regime shifts. Proceedings Of The National Academy Of Sciences Of The United States Of America 104:10518–10523. 
-- Dunne, J., and R. Williams. 2004. Network structure and robustness of marine food webs. Marine Ecology Progress Series. 
-- Estes, J., J. Terborgh, J. Brashares, and M. Power. 2011. Trophic Downgrading of Planet Earth. Science. 
-- Frank, K. T., B. Petrie, J. S. Choi, and W. C. Leggett. 2005. Trophic Cascades in a Formerly Cod-Dominated Ecosystem. Science 308:1621–1623. 
-- Jackson, J., M. Kirby, W. Berger, K. Bjorndal, L. Botsford, B. Bourque, R. Bradbury, R. Cooke, J. Erlandson, J. Estes, T. Hughes, S. Kidwell, C. Lange, H. Lenihan, J. Pandolfi, C. Peterson, R. Steneck, M. Tegner, and R. Warner. 2001. Historical Overfishing and the Recent Collapse of Coastal Ecosystems. Science 293:629–637. 
-- Kirby, R. R., G. Beaugrand, and J. A. Lindley. 2009. Synergistic Effects of Climate and Fishing in a Marine Ecosystem. Ecosystems 12:548–561. 
-- M Hassan, R., R. Scholes, and N. Ash. 2005. Ecosystems and human well-being: current state and trends, Volume 1 1:917. 
-- Moellmann, C., R. Diekmann, B. Muller-Karulis, G. Kornilovs, M. Plikshs, and P. Axe. 2009. Reorganization of a large marine ecosystem due to atmospheric and anthropogenic pressure: a discontinuous regime shift in the Central Baltic Sea. Global Change Biology 15:1377–1393. 
-- Pace, M., J. Cole, S. Carpenter, and J. Kitchell. 1999. Trophic cascades revealed in diverse ecosystems. Trends in Ecology & Evolution 14:483–488. 
-- Pauly, D., V. Christensen, J. Dalsgaard, R. Froese, and F. Torres. 1998. Fishing down marine food webs. Science 279:860–863. 
-- Salomon, A. K., S. K. Gaichas, N. T. Shears, J. E. Smith, E. M. P. Madin, and S. D. Gaines. 2010. Key Features and Context-Dependence of Fishery-Induced Trophic Cascades. Conservation Biology 24:382–394. 
-- Scheffer, M., S. Carpenter, J. Foley, C. Folke, and B. Walker. 2001. Catastrophic shifts in ecosystems. Nature 413:591–596. 
-- Shears, N., and R. Babcock. 2002. Marine reserves demonstrate top-down control of community structure on temperate reefs. Oecologia 132:131–142. 
-- Smith, V. H., and D. W. Schindler. 2009. Eutrophication science: where do we go from here? Trends in Ecology & Evolution 24:201–207. 
-- Steneck, R., J. Vavrinec, and A. Leland. 2004. Accelerating trophic-level dysfunction in kelp forest ecosystems of the  western North Atlantic. Ecosystems 7:323–332.
-
-</small>
 
 ## Citation
+
 Acknowledge this review as:
 
-<tiny> 
-``` {style='color: gray;'}
-Susa Niiranen, Reinette (Oonsie) Biggs, Garry Peterson, Juan Carlos Rocha, Henrik Österblom. Marine food webs. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2014-10-14
+<tiny>
+
+``` {style="color: gray;"}
+Susa Niiranen, Juan Carlos Rocha,Reinette (Oonsie) Biggs, Garry Peterson, Henrik Österblom. Marine food webs. In: Regime Shift Database, www.regimeshifts.org. Last revised: 2014-10-14
 ```
 
 </tiny>
 
 BibTeX citation:
 
-<tiny><tiny> 
-``` {style='color: gray;'}
+<tiny><tiny>
+
+``` {style="color: gray;"}
 @misc{
-  author = {Susa Niiranen and Reinette (Oonsie) Biggs and Garry Peterson and Juan Carlos Rocha and Henrik Österblom},
+  author = {Susa Niiranen and Juan Carlos Rocha and Reinette (Oonsie) Biggs and Garry Peterson  and Henrik Österblom},
   title = {Marine food webs},
   url = {www.regimeshifts.org},
   howpublished = {Regime Shifts Database},
