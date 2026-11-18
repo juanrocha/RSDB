@@ -14,5 +14,6 @@ site_libs
 _site/site_libs
 *.css
 *.html
-assets/
 cs*
+*html
+assets/img/

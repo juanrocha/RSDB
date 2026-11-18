@@ -26,9 +26,11 @@ To-Dos:
 [] Discover a bug on my code: the section "How the regime shift works?" is missing from all RS on the database. Exist on my back up of the previous online version. Need to correct manually all.
 [] Only 2 cases of soil salinizaiton!! Needs updating
 [] Update Arctic Sea ice, would be nice to have a polar coords map.
-[] Monsoon and soil salinizaiton are missing RS analysis, CLD exist
+[] Monsoon, saltmarshers to tidal flats, peatlands, arctic benthos, primary productivity arctic ocean, and soil salinizaiton are missing RS analysis, CLD exist
 [] There is an error (extra `=`) on the url with api key for carto-maps. Correcting as I do bibliographies
 [] expand cases for Greenland, Monsoon, WAIS, or Arctic in a way that reflect local possible shifts. So the map will also collect papers with evidence for it, currently only the generic case study which is outdated from 2011
+[] urban sprawl is a low quality review, it needs redoing or delete
+* Several drafts on my old computer were more complete that the ones on the old website. But deserve major updates, e.g floating plants
 
 Idea: Change maps to have large dots if regional tipping (e.g. Monsoon) versus local.
 Idea: Change the default projection of Leaflet for a equal area. But this could mess up the coordinages. You can do it with `leaflet(map, options = leafletOptions(crs = leafletCRS( crsClass = "L.CRS.EPSG4326")))` for example.

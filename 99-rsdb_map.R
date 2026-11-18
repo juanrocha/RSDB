@@ -89,6 +89,18 @@ dat6 <- dat6 |> select(-where(fn = function (x) all(is.na(x))))
 ## correct col names
 #names(dat6)[15:20] <- names(dat0)[17:22]
 #names(dat7)[17:22]
+tibble(
+wrong=names(dat7)[which((!names(dat7) %in% names(dat0)))] ,
+correct = c("timestamp", names(dat0)[c(5,7,8,10:16)], "error_ecotype", names(dat0)[c(17,21:27,33,35,36,40,39,2)],
+"error_introduction", "diagrams_and_photos", "observations", "regime_shift_type_other")
+) |> select(correct, wrong) |>  print(n=50)
+
+names(dat7)[which((!names(dat7) %in% names(dat0)))] <- c(
+    "timestamp", names(dat0)[c(5,7,8,10:16)], "error_ecotype",
+    names(dat0)[c(17,21:27,33,35,36,40,39,2)],
+    "error_introduction", "diagrams_and_photos", "observations", "regime_shift_type_other")
+names(dat6)[!names(dat6) %in% names(dat0)] <- "reference_links"
+
 
 # Now working
 names(dat0)[!names(dat0) %in% names(dat7)]
@@ -175,10 +187,10 @@ dat <- dat |> rename(type = regime_shift_type_value) |>
     )) |>
     mutate(type = str_to_sentence(type)) 
 
-write_csv(dat, file = "assets/rsdb_clean_260625.csv")
+write_csv(dat, file = "assets/rsdb_clean_261113.csv")
 
 ## correct the link to netlify so it does not go to the hacked server:
-dat <- read_csv("assets/rsdb_clean_260625.csv")
+dat <- read_csv("assets/rsdb_clean_261113.csv")
 
 world + 
     geom_point(data = rs_types, aes(x = long, y = lat, color = type),
