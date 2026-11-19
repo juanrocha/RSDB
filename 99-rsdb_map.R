@@ -253,7 +253,7 @@ dat <- dat |> select(-id) |>
         )
     ) |> 
     mutate(
-        links = paste0("https://regimeshifts.netlify.app/", links)
+        links = paste0("https://regimeshifts.org/", links)
     )
 
 
@@ -262,7 +262,7 @@ dat <- dat |> select(-id) |>
 
 ## there are RS for which we do not have case studies
 ## add links to RS generic cases:
-rs_dat <- read_csv("assets/generic_types_RSDB_new.csv") |> 
+rs_dat <- read_csv2("assets/generic_types_RSDB_new.csv") |> 
     janitor::clean_names()
 
 unique(dat$type)[!unique(dat$type) %in% rs_dat$regime_shift_name]
@@ -280,7 +280,7 @@ rs_dat <- rs_dat |>
     mutate(filename = str_replace(filename, "\\.Rmd", "\\.html")) |> 
     # create links here, so there is links for RS without cases
     mutate(link_rs = paste0(
-        "<a href=", "'", "https://regimeshifts.netlify.app/", filename, "'",
+        "<a href=", "'", "https://regimeshifts.org/", filename, "'",
         " target='_blank'",">", regime_shift_name, "</a>"))
 
 rs_dat$regime_shift_name |> levels()
@@ -313,7 +313,7 @@ dat <- dat |>
     mutate(type_link = case_when(
         is.na(filename) ~ type, 
         .default = paste0(
-            "<a href=", "'", "https://regimeshifts.netlify.app/", filename, "'",
+            "<a href=", "'", "https://regimeshifts.org/", filename, "'",
             " target='_blank'", ">", type, "</a>"))) 
 
 names(dat)
@@ -368,7 +368,7 @@ pal <- colorFactor(
 
 
 map_rsdb <- leaflet(dat, options = labelOptions(textsize = "8px")) |> 
-    addTiles(paste0("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=", keyring::key_get("carto-maps"))) |>
+    addTiles(paste0("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?key=", keyring::key_get("carto-maps"))) |>
     setView(0,0, zoom = 2) |> 
     addCircleMarkers(~long, ~lat, radius = 1, popup = ~popups, color = ~pal(type_link)) |> 
     addLegend("topright", pal = pal, values = ~type_link, title = "Regime shift", group = ~type_link) 

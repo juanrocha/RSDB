@@ -10,9 +10,38 @@ library(fs)
 # fls |> str_subset(pattern = "^rs") |> 
 #     file_delete()
 
-
+## Old RS generic
 rs_dat <- read_csv2("assets/generic_types_RSDB_new.csv") |> 
     janitor::clean_names()
+
+## If needed to add new RS generic from google form:
+rs_new <- googlesheets4::read_sheet(
+    "https://docs.google.com/spreadsheets/d/1fA1Ly42OVBoo_raeGlA_wbyvTk2oDiySfE0J1JDJ-rY/edit?gid=927344494#gid=927344494",
+    sheet = 1, col_types = "c") |> # Carla and others
+    janitor::clean_names()
+
+rs_new <- rs_new |> 
+    select(-timestamp, -impacts_sustainable_development_goals_sd_gs ) |> 
+    filter(regime_shift_name != "Coral transitions") |> 
+    rownames_to_column(var = "id") |> 
+    mutate(id = as.numeric(id) + nrow(rs_dat))
+
+
+## correct names:
+tibble(
+    nams = names(rs_new),
+    out = !names(rs_new) %in% names(rs_dat)
+) |> rownames_to_column(var = "idx") |> filter(out == TRUE) |> print(n=23)
+
+names(rs_new)[!names(rs_new) %in% names(rs_dat)] <- 
+    c(names(rs_dat)[c(4,6,23,24,25,26,27,28,29,7,8,9,10,15,16,17,18,19,20,21)],
+      "diagrams_and_photos", "observations_or_comments")
+
+rs_dat <- bind_rows(
+    rs_dat, rs_new |> mutate(date = dmy(date))
+)
+
+rs_dat |> print(n=50)
 
 # pblm <- c("key_attributes_typical_spatial_scale", "drivers_key_direct_drivers", "drivers_land_use",
 #           "impacts_human_well_being")
@@ -29,15 +58,29 @@ rs_dat <- rs_dat |>
     mutate(regime_shift_name = case_when(
         regime_shift_name == "Moonson" ~ "Indian summer monsoon",
         regime_shift_name == "Floating plants" ~ "Submerged to floating plants", 
+        regime_shift_name == "Tropical Forest Sink to Source" ~ "Tropical forest sink to source",
+        regime_shift_name == "River Delta Accretion and Recession" ~ "River deltas",
+        regime_shift_name == "Dryland Degradation" ~ "Dryland degradation",
+        regime_shift_name == "Groundwater depletion-driven stream drying" ~ "River drying",
+        regime_shift_name == "From recurring ice-dammed lakes to freely draining catchments" ~
+            "Ice-dams transitions",
         .default = regime_shift_name
     )) |> # the following should be CS of floating plants
-    filter(regime_shift_name != "Invasive floating to invasive submerged plant dominance")
+    filter(regime_shift_name != "Invasive floating to invasive submerged plant dominance") |>
+    mutate(filename = str_replace(filename, "\\.Rmd", "\\.html")) |> 
+    # create links here, so there is links for RS without cases
+    mutate(href = paste0("https://regimeshifts.org/", filename))
 
 ## change name so the rest of the scipt works:
 dat <- rs_dat
 
-## function to produce carousel code
-img <- read_csv("assets/rs_images.csv")
+## function to produce carousel code: Problem here needs to be solved later
+## add new figures, remove old CLDs, and move all img files to root folder
+img <- read_csv("assets/rs_images_261119.csv")
+img <- img |> 
+    mutate(file = case_when(
+        str_starts(file, "img/") == FALSE ~ str_c("img/", file),
+        .default = file)) 
 
 txt_img <- function(i, dat, img){
     img <- img |> filter(type == dat$regime_shift_name[i])
@@ -50,6 +93,7 @@ txt_img <- function(i, dat, img){
 
 }
 ## TODO: Fix attribution later, it's not consistently reported, so I need to edit img manually.
+w <- 'https://www.regimeshifts.org/assets/'
 txt_img(3, dat,img)
 
 rs_txt <- function(i, dat, img){
@@ -98,12 +142,12 @@ dat$summary[i], "\n\n",
 ":::\n\n:::{style='width: 45%;'}\n\n",
 
 ## Carousel
-"```{r carousel, out.width='500px', out.height='100px', results = 'asis'}\n\n
+"```{r carousel, out.width='500px', out.height='100px', results = 'asis'}\n
 
 library(htmltools)
 library(bsplus)
 
-w <- 'https://www.juanrocha.se/'
+w <- 'https://www.regimeshifts.org/assets/'
 bs_carousel(id = 'rs",i, "', use_indicators = TRUE)", txt_img(i, dat,img),
 "\n\n",
 
@@ -114,14 +158,13 @@ bs_carousel(id = 'rs",i, "', use_indicators = TRUE)", txt_img(i, dat,img),
 
 
 ## Map
-"```{r map, out.width='100%', out.height='300px', results = 'markup'}\n
-
+"```{r map, out.width='100%', out.height='300px', results = 'markup'}
 
 cs <- cases |> 
     filter(type == rs$regime_shift_name) 
 
 m <- leaflet(cs) |> 
-    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?=key=', keyring::key_get('carto-maps'))) |> 
+    addTiles(paste0('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png?key=', keyring::key_get('carto-maps'))) |> 
     addCircleMarkers(
         lng = ~long, lat=~lat, radius = 2, 
         color = 'orange', 
@@ -149,9 +192,7 @@ dat$management_options[i], "\n\n",
 
 
 ## cld
-"```{r cld, error = FALSE, message = FALSE, out.width='80%'}\n
-#| fig.cap = '**Fig 2| Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'
-
+"```{r cld, error = FALSE, message = FALSE, out.width='80%', fig.cap = '**Fig 2 | Causal diagram.** Hover over the variables to see their names, orange dots are drivers, blue dots are variables inside feedback mechanisms. Red arrows represent positive causal relationships while blue arrows represent negative ones. Key feedbacks are described below.'}\n
 library(ggiraph)
 library(htmlwidgets)
 source('tools.R')
@@ -172,7 +213,7 @@ if (rs$regime_shift_name %in% clds$regime_shift) {
 ```\n\n",
 
 # rs analysis
-"```{r}\n
+"```{r}
 load('assets/rs_analysis_text.Rda')
 
 if (is.null(rs_analysis[[rs$regime_shift_name]]))  'This regime shift does not have a feedback analysis yet' else 
@@ -240,7 +281,6 @@ dat$key_attributes_confidence_mechanism_underlying_rs[i]  %>% str_c("- ", . , "\
 # "{.tabset}\n--------------------------------------------------\n\n",
 
 
-
 "### References\n\n",
 "::: {#refs}\n
 :::\n",
@@ -287,7 +327,7 @@ str_c(dat$main_contributors[i] |> str_replace_all(", ", " and "), " and ",
 txt2 <- rs_txt(1, dat, img)
 
 ## Create suitable file names
-dat <- dat |> 
+rs_dat <- rs_dat |> 
     arrange(date) |> 
     mutate(id = row_number()) |> 
     mutate(
@@ -299,14 +339,14 @@ dat <- dat |>
         )
     ) 
 
-dat$filename
+rs_dat$filename
 
-#write_csv(dat, file = "assets/generic_types_RSDB_new.csv")
+# write_csv(dat, file = "assets/generic_types_RSDB_261119.csv")
 
 ## Create one markdown file for every regime shift
 
 tic()
-for (i in seq_along(dat)){
+for (i in seq_along(dat |> filter(id>30))){ # filter to avoid modifying old files
     txt <- rs_txt(i, dat, img)
     capture.output(
         cat(txt, sep = ""),
